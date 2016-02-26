@@ -1,0 +1,4 @@
+[17-Feb-2016 12:22:42 UTC] PHP Warning:  PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/spectrumiq/public_html/admin/includes/database/database.inc on line 307
+[17-Feb-2016 12:24:01 UTC] PHP Warning:  PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/spectrumiq/public_html/admin/includes/database/database.inc on line 307
+[17-Feb-2016 12:26:08 UTC] PHP Warning:  PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/spectrumiq/public_html/admin/includes/database/database.inc on line 307
+[18-Feb-2016 07:39:04 Indian/Antananarivo] PHP Fatal error:  Call to undefined method SelectQuery::left_join() in /home/spectrumiq/public_html/admin/sites/all/modules/finder/finder.module on line 143
