@@ -84,7 +84,7 @@ body{ background:#fff;}
 
 .skin-blue .sidebar-menu > li.header {
     background: #d5dbd2;
-    color: #333; font-size:16px; font-weight: bold;;
+    color: #333; font-size:16px; font-weight: bold;
 }
 
 
@@ -181,4 +181,5 @@ body{ background:#fff;}
 
  .selectboxnew *{text-decoration: none; outline: none;}
  .error_msg1{color: red;}
+
 

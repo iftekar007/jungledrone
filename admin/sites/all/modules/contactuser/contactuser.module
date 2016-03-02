@@ -157,6 +157,7 @@ function contactuserlist()
 
     $queryu = db_select('contactuser', 'cu');
      $queryu->fields('cu', array('id','fname', 'lname', 'email', 'phone','country','city', 'gender','drone','dron_race', 'message', 'create_time'));
+     $queryu->orderBy('id','DESC');
     $resultu = $queryu->execute();
 
 

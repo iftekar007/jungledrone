@@ -53,7 +53,7 @@ function contact_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
-   $items['contact1updatestatus'] = array(
+    $items['contact1updatestatus'] = array(
         'title' => 'status Change',
         'page callback' => 'contact1updatestatus',
         'access callback' => TRUE,
@@ -61,7 +61,7 @@ function contact_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
-   $items['deletecontact'] = array(
+    $items['deletecontact'] = array(
         'title' => 'contact Delete',
         'page callback' => 'deletecontact',
         'access callback' => TRUE,
@@ -69,7 +69,7 @@ function contact_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
-   $items['contactdetails'] = array(
+    $items['contactdetails'] = array(
         'title' => 'contact details',
         'page callback' => 'contactdetails',
         'access callback' => TRUE,
@@ -103,7 +103,7 @@ function contactdetails(){
 
     $queryu = db_select('users', 'u');
     $queryu->join('contact', 'f', 'f.user_id = u.uid');
-     $queryu->fields('u', array('uid','created','status','login','mail'));
+    $queryu->fields('u', array('uid','created','status','login','mail'));
     $queryu->fields('f',array('fname','lname','phone_no','mobile_no','address','contact_time','refferal_code','bname'))
         ->condition('u.uid', $_POST['uid'], '=');
 
@@ -114,9 +114,9 @@ function contactdetails(){
 
     while($recordu = $resultu->fetchAssoc()) {
         $thisuser = user_load($recordu['uid']);
-         $picture=$thisuser->picture;
-         if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
-         else $picture='';
+        $picture=$thisuser->picture;
+        if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+        else $picture='';
 
         $userlist['uid'] = $recordu['uid'];
         $userlist['created'] = $recordu['created'];
@@ -147,7 +147,8 @@ function contactlist()
     $userlist = array();
 
     $queryu = db_select('contact', 'cu');
-     $queryu->fields('cu', array('id','name', 'email', 'phone', 'subject', 'message', 'create_time'));
+    $queryu->fields('cu', array('id','name', 'email', 'phone', 'subject', 'message', 'create_time'));
+    $queryu->orderBy('id','DESC');
     $resultu = $queryu->execute();
 
 
@@ -163,8 +164,8 @@ function contactlist()
             $userlist[$i]['create_time'] = date('Y-m-d',$recordu['create_time']);
             $i++;
 
+        }
     }
-}
     //  $records['user']=$userlist;
 
 
@@ -183,18 +184,18 @@ function addcontact(){
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
-        $query = db_insert('contact')->fields(array('name','email','subject','phone','message','create_time'));
-        //foreach ($values as $record) {
-        $query->values(array(@$_POST['name'],$_POST['email'],@$_POST['subject'],@$_POST['phone'],@$_POST['message'],time()));
-        //}
-        $query->execute();
+    $query = db_insert('contact')->fields(array('name','email','subject','phone','message','create_time'));
+    //foreach ($values as $record) {
+    $query->values(array(@$_POST['name'],$_POST['email'],@$_POST['subject'],@$_POST['phone'],@$_POST['message'],time()));
+    //}
+    $query->execute();
 
 
-  //  $op = 'register_pending_approval';
-   // $status = _user_mail_notify($op, $account);
-   // drupal_mail('contact', 'register_contact_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+    //  $op = 'register_pending_approval';
+    // $status = _user_mail_notify($op, $account);
+    // drupal_mail('contact', 'register_contact_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
     $data['status'] = 'success';
-     echo json_encode($data);
+    echo json_encode($data);
     return;
 }
 function contactupdates(){
@@ -206,7 +207,7 @@ function contactupdates(){
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
-     $roles = array(
+    $roles = array(
         DRUPAL_AUTHENTICATED_RID => 'authenticated user',
         // 5 => 'General Users',
     );
@@ -221,7 +222,7 @@ function contactupdates(){
 
             'address'=>@$_POST['address'],'phone_no'=>@$_POST['phone_no'],'mobile_no'=>@$_POST['mobile_no']))
         ->condition('userid', intval($_POST['uid']))
-         ->execute();
+        ->execute();
 }
 
 function contact1updatestatus(){

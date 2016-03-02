@@ -13,7 +13,7 @@ header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
 
-function event_init() // init function called by defaulted when this module loaded by system
+function employement_init() // init function called by defaulted when this module loaded by system
 {
 
     //echo $GLOBALS['theme'];
@@ -32,19 +32,19 @@ function event_init() // init function called by defaulted when this module load
 
 }
 
-function event_menu()
+function employement_menu()
 {
     $items = array();
 
-    $items['addevent'] = array(
+    $items['addemployement'] = array(
         'title' => 'Add event',
-        'page callback' => 'addevent',
+        'page callback' => 'addemployement',
         'access callback' => TRUE,
         'access arguments' => array('Anonymous Actions.'),
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
-    $items['eventlist'] = array(
+    $items['employementlist'] = array(
         'title' => 'event List',
         'page callback' => 'eventlist',
         'access callback' => TRUE,
@@ -52,49 +52,10 @@ function event_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
-   $items['updateeventstatus'] = array(
-        'title' => 'status Change',
-        'page callback' => 'updateeventstatus',
-        'access callback' => TRUE,
-        'access arguments' => array('Anonymous Actions.'),
-        'expanded' => TRUE,
-        //'type'=>MENU_NORMAL_ITEM,
-    );
-   $items['deleteevent'] = array(
-        'title' => 'event Delete',
-        'page callback' => 'deleteevent',
-        'access callback' => TRUE,
-        'access arguments' => array('Anonymous Actions.'),
-        'expanded' => TRUE,
-        //'type'=>MENU_NORMAL_ITEM,
-    );
-   $items['eventdetails'] = array(
-        'title' => 'event details',
-        'page callback' => 'eventdetails',
-        'access callback' => TRUE,
-        'access arguments' => array('Anonymous Actions.'),
-        'expanded' => TRUE,
-        //'type'=>MENU_NORMAL_ITEM,
-    );
-    $items['eventupdates'] = array(
+
+    $items['uploadresume'] = array(
         'title' => 'event Updates',
-        'page callback' => 'eventupdates',
-        'access callback' => TRUE,
-        'access arguments' => array('Anonymous Actions.'),
-        'expanded' => TRUE,
-        //'type'=>MENU_NORMAL_ITEM,
-    );
-    $items['uploadeventbanner'] = array(
-        'title' => 'event Updates',
-        'page callback' => 'uploadeventbanner',
-        'access callback' => TRUE,
-        'access arguments' => array('Anonymous Actions.'),
-        'expanded' => TRUE,
-        //'type'=>MENU_NORMAL_ITEM,
-    );
-    $items['eventlistfrontlisting'] = array(
-        'title' => 'Event',
-        'page callback' => 'eventlistfrontlisting',
+        'page callback' => 'uploadresume',
         'access callback' => TRUE,
         'access arguments' => array('Anonymous Actions.'),
         'expanded' => TRUE,
@@ -102,11 +63,12 @@ function event_menu()
     );
 
 
-     return $items;
+
+    return $items;
 }
 
 
-function eventdetails(){
+function employementdetails(){
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
     header("Access-Control-Allow-Credentials: true");
@@ -145,7 +107,7 @@ function eventdetails(){
 }
 
 
-function eventlist()
+function employementlist()
 {
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -159,20 +121,19 @@ function eventlist()
     $queryu = db_select('event', 'ev');
 
     $queryu->fields('ev', array('id','event_name','event_description','event_image','event_status', 'event_daterange', 'event_timerange','event_create_time'));
-        // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
-       // ->condition('ur.rid', 5, '=');
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    // ->condition('ur.rid', 5, '=');
     //->condition('u.uid', 74, '=');
     //->range(0, 20);
-    $queryu->orderBy('event_daterange','DESC');
     $resultu = $queryu->execute();
 
 
     if ($resultu->rowCount() > 0) {
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
-           // $picture=$recordu['event_image'];
-           // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
-           // else $picture='';
+            // $picture=$recordu['event_image'];
+            // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            // else $picture='';
 
             $eventlist[$i]['id'] = $recordu['id'];
             $eventlist[$i]['user_id'] = $recordu['user_id'];
@@ -193,12 +154,12 @@ function eventlist()
 
             $i++;
 
+        }
     }
-}
     echo json_encode(@$eventlist);
 
 }
-function eventlistfrontlisting()
+function employementlistfrontlisting()
 {
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -232,7 +193,7 @@ function eventlistfrontlisting()
             $eventlist[$i]['event_name'] = $recordu['event_name'];
             $eventlist[$i]['event_description'] = $recordu['event_description'];
             if($recordu['event_image']=='Null' ||  $recordu['event_image']==''){
-               // $eventlist[$i]['event_image'] =  'images/user2-160x160.jpg';
+                // $eventlist[$i]['event_image'] =  'images/user2-160x160.jpg';
                 $eventlist[$i]['event_image'] =  'images/event_de.png';
             }
             else{
@@ -254,7 +215,7 @@ function eventlistfrontlisting()
 }
 
 
-function addevent(){
+function addemployement(){
 
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -264,24 +225,23 @@ function addevent(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
     $user = user_load_by_mail(trim(@$_POST['email']));
 
-    //print_r($_POST);
+    print_r($_POST);
     ///exit;
-    if($_POST['event_status']) $_POST['event_status']=1;
-    else $_POST['event_status']=0;
 
 
-        $query = db_insert('event')->fields(array('user_id','event_name','event_description','event_image','event_status', 'event_daterange', 'event_timerange','event_create_time'));
-        //foreach ($values as $record) {
-        $query->values(array(1,@$_POST['event_name'],@$_POST['event_description'],@$_POST['event_image'],@$_POST['event_status'],@$_POST['event_daterange'],@$_POST['timer'], time()));
-        //}
-        $query->execute();
+
+    $query = db_insert('employement')->fields(array('fname','lname','email','phone', 'country','city','resume'));
+    //foreach ($values as $record) {
+    $query->values(array(@$_POST['fname'],@$_POST['lname'],@$_POST['email'],@$_POST['phone'],@$_POST['country']['s_name'],@$_POST['city'],@$_POST['resume']));
+    //}
+    $query->execute();
 
 
     $data['status'] = 'success';
-     echo json_encode($data);
+    echo json_encode($data);
     return;
 }
-function eventupdates(){
+function employementupdates(){
 
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -290,31 +250,24 @@ function eventupdates(){
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
-   /*  $roles = array(
+    $roles = array(
         DRUPAL_AUTHENTICATED_RID => 'authenticated user',
         // 5 => 'General Users',
     );
     $roles[5]='event';
     $user_fields = user_load(@intval($_POST['uid']));
     $user_fields->roles=$roles;
-    user_save($user_fields);*/
+    user_save($user_fields);
 
 
-    if($_POST['event_status']) $_POST['event_status']=1;
-    else $_POST['event_status']=0;
     db_update('event')
         //->expression('weight', 'weight + :weight', array(':weight' => 1))
-
-            //$query = db_insert('event')->fields(array('user_id','event_name','event_description','event_image','event_status', 'event_daterange', 'event_timerange','event_create_time'));
-        //foreach ($values as $record) {
-       // $query->values(array(1,@$_POST['event_name'],@$_POST['event_description'],@$_POST['event_image'],@$_POST['event_status'],@$_POST['event_daterange'],@$_POST['timer'], time()));
-        //}
-        ->fields(array( 'user_id'=>1, 'event_name'=>@$_POST['event_name'], 'event_description'=>$_POST['event_description'],'event_image'=>@$_POST['event_image'],'event_status'=>@$_POST['event_status'],'event_daterange'=>@$_POST['event_daterange'],'event_timerange'=>@$_POST['timer']))
-        ->condition('id', intval($_POST['id']))
-         ->execute();
+        ->fields(array( 'fname'=>@$_POST['fname'], 'lname'=>@$_POST['lname'], 'bname'=>$_POST['bname'],'address'=>@$_POST['address'],'phone_no'=>@$_POST['phone_no'],'mobile_no'=>@$_POST['mobile_no'],'contact_time'=>@$_POST['contact_time']))
+        ->condition('user_id', intval($_POST['uid']))
+        ->execute();
 }
 
-function updateeventstatus(){
+function updateemployementstatus(){
 
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -332,7 +285,7 @@ function updateeventstatus(){
     echo "true";
 }
 
-function deleteevent(){
+function deleteemployement(){
 
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -347,7 +300,7 @@ function deleteevent(){
 
 }
 
- function uploadeventbanner(){
+function uploadresume(){
 
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -355,55 +308,55 @@ function deleteevent(){
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
-     set_time_limit(0);
+    set_time_limit(0);
 
-     $target_dir = realpath(dirname(__FILE__))."/uploads/";
-     $path_parts = pathinfo($_FILES['Filedata']['name']);
-     $filename = rand().'_'.time().'.'.$path_parts['extension'];
+    $target_dir = realpath(dirname(__FILE__))."/uploads/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+    $filename = rand().'_'.time().'.'.$path_parts['extension'];
 
-     $profile_url = '';
+    $profile_url = '';
 
-     if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
-         //$account = user_load($_POST['userid']);
+    if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
+        //$account = user_load($_POST['userid']);
 
-         $filepath = ($target_dir.$filename);
+        $filepath = ($target_dir.$filename);
 
-         $file = (object) array(
-             'uid' => 1,
-             'uri' => $filepath,
-             'filemime' => file_get_mimetype($filepath),
-             'status' => 1,
-         );
-         if ($file) {
+        $file = (object) array(
+            'uid' => 1,
+            'uri' => $filepath,
+            'filemime' => file_get_mimetype($filepath),
+            'status' => 1,
+        );
+        if ($file) {
 // Move the file, into the Drupal file system
-             if ($file = file_move($file, 'public://')) {
-                 $file->status = FILE_STATUS_PERMANENT;
-                 // $file->file_display = 1;
-                 $file = file_save($file);
-                 //set the extra values needed to make node_save work
-                 $file->display = 1;
-                 $file->description = "";
-             }
+            if ($file = file_copy($file, 'public://')) {
+                $file->status = FILE_STATUS_PERMANENT;
+                // $file->file_display = 1;
+                $file = file_save($file);
+                //set the extra values needed to make node_save work
+                $file->display = 1;
+                $file->description = "";
+            }
 
-             /* db_update('ideas')
-                  //->expression('weight', 'weight + :weight', array(':weight' => 1))
-                  ->fields(array( 'logo'=>@$file->uri))
-                  ->condition('id', intval($_POST['id']))
-                  //->condition('type', 'module')
-                  ->execute();*/
-         }
+            /* db_update('ideas')
+                 //->expression('weight', 'weight + :weight', array(':weight' => 1))
+                 ->fields(array( 'logo'=>@$file->uri))
+                 ->condition('id', intval($_POST['id']))
+                 //->condition('type', 'module')
+                 ->execute();*/
+        }
 
-         /*$file = file_copy($file, 'public://');
-         $edit['picture'] = $file;
-         user_save($account, $edit);
+        /*$file = file_copy($file, 'public://');
+        $edit['picture'] = $file;
+        user_save($account, $edit);
 
-         $filepath = $file->uri;
-         $profile_url = image_style_url('thumbnail', $filepath);*/
-     }
+        $filepath = $file->uri;
+        $profile_url = image_style_url('thumbnail', $filepath);*/
+    }
 
-     $data['image_url']= image_style_url('thumbnail',(@$file->uri));
-     $data['image_name']= (@$file->uri);
-     echo json_encode(@$data) ;
+    $data['image_url']= file_create_url((@$file->uri));
+    $data['image_name']= (@$_FILES['Filedata']['name']);
+    echo json_encode(@$data) ;
 
 }
 

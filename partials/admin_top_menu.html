@@ -18,7 +18,7 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-              <li class="dropdown messages-menu">
+             <!-- <li class="dropdown messages-menu">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <span class="label label-success">4</span>
@@ -26,9 +26,9 @@
                 <ul class="dropdown-menu">
                   <li class="header">You have 4 messages</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
+                    &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
                     <ul class="menu">
-                      <li><!-- start message -->
+                      <li>&lt;!&ndash; start message &ndash;&gt;
                         <a href="javascript:void(0)">
                           <div class="pull-left">
                             <img src="images/user2-160x160.jpg" class="img-circle" alt="User Image">
@@ -39,7 +39,7 @@
                           </h4>
                           <p>Why not buy a new awesome theme?</p>
                         </a>
-                      </li><!-- end message -->
+                      </li>&lt;!&ndash; end message &ndash;&gt;
                       <li>
                         <a href="javascript:void(0)">
                           <div class="pull-left">
@@ -93,7 +93,7 @@
                   <li class="footer"><a href="javascript:void(0)">See All Messages</a></li>
                 </ul>
               </li>
-              <!-- Notifications: style can be found in dropdown.less -->
+              &lt;!&ndash; Notifications: style can be found in dropdown.less &ndash;&gt;
               <li class="dropdown notifications-menu">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-bell-o"></i>
@@ -102,7 +102,7 @@
                 <ul class="dropdown-menu">
                   <li class="header">You have 10 notifications</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
+                    &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
                     <ul class="menu">
                       <li>
                         <a href="javascript:void(0)">
@@ -134,7 +134,7 @@
                   <li class="footer"><a href="javascript:void(0)">View all</a></li>
                 </ul>
               </li>
-              <!-- Tasks: style can be found in dropdown.less -->
+              &lt;!&ndash; Tasks: style can be found in dropdown.less &ndash;&gt;
               <li class="dropdown tasks-menu">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-flag-o"></i>
@@ -143,9 +143,9 @@
                 <ul class="dropdown-menu">
                   <li class="header">You have 9 tasks</li>
                   <li>
-                    <!-- inner menu: contains the actual data -->
+                    &lt;!&ndash; inner menu: contains the actual data &ndash;&gt;
                     <ul class="menu">
-                      <li><!-- Task item -->
+                      <li>&lt;!&ndash; Task item &ndash;&gt;
                         <a href="javascript:void(0)">
                           <h3>
                             Design some buttons
@@ -157,8 +157,8 @@
                             </div>
                           </div>
                         </a>
-                      </li><!-- end task item -->
-                      <li><!-- Task item -->
+                      </li>&lt;!&ndash; end task item &ndash;&gt;
+                      <li>&lt;!&ndash; Task item &ndash;&gt;
                         <a href="javascript:void(0)">
                           <h3>
                             Create a nice theme
@@ -171,8 +171,8 @@
 
                           </div>
                         </a>
-                      </li><!-- end task item -->
-                      <li><!-- Task item -->
+                      </li>&lt;!&ndash; end task item &ndash;&gt;
+                      <li>&lt;!&ndash; Task item &ndash;&gt;
                         <a href="javascript:void(0)">
                           <h3>
                             Some task I need to do
@@ -184,8 +184,8 @@
                             </div>
                           </div>
                         </a>
-                      </li><!-- end task item -->
-                      <li><!-- Task item -->
+                      </li>&lt;!&ndash; end task item &ndash;&gt;
+                      <li>&lt;!&ndash; Task item &ndash;&gt;
                         <a href="javascript:void(0)">
                           <h3>
                             Make beautiful transitions
@@ -197,19 +197,19 @@
                             </div>
                           </div>
                         </a>
-                      </li><!-- end task item -->
+                      </li>&lt;!&ndash; end task item &ndash;&gt;
                     </ul>
                   </li>
                   <li class="footer">
                     <a href="javascript:void(0)">View all tasks</a>
                   </li>
                 </ul>
-              </li>
+              </li>-->
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu user-manu-dropdown"  ng-click="toggledropdown()">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="images/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">{{userfullname}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -221,7 +221,7 @@
                     </p>
                   </li>
                   <!-- Menu Body -->
-                  <li class="user-body">
+                 <!-- <li class="user-body">
                     <div class="col-xs-4 text-center">
                       <a href="javascript:void(0)">Followers</a>
                     </div>
@@ -231,14 +231,14 @@
                     <div class="col-xs-4 text-center">
                       <a href="javascript:void(0)">Friends</a>
                     </div>
-                  </li>
+                  </li>-->
                   <!-- Menu Footer-->
                   <li class="user-footer">
-                    <div class="pull-left">
+                    <!--<div class="pull-left">
                       <a href="javascript:void(0)" class="btn btn-default btn-flat">Profile</a>
-                    </div>
+                    </div>-->
                     <div class="pull-right">
-                      <a href="javascript:void(0)" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="javascript:void(0)" ng-click="logout()" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -252,3 +252,6 @@
 
         </nav>
       </header>
+
+
+ <div id="mydiv" ng-show='stateIsLoading'></div>

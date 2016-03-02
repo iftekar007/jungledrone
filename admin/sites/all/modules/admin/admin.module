@@ -381,14 +381,14 @@ function login(){
         $userlist['id']=$user->uid;
         $userlist['roles']=$user->roles;
         $userlist['username']=$user->name;
-        $userlist['status'] = 'success';
+        $data['status'] = 'success';
         $data['userdetails'] = $userlist;
         echo json_encode($data);
         return;
 
     }
     else {
-        if($user_check>0 && $user->statsu==0) {
+        if($user_check>0 && $user->status==0) {
             $data['status'] = 'error';
             $data['msg'] = 'User is either not activated by admin yet or blocked !';
             echo json_encode($data);

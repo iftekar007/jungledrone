@@ -75,7 +75,7 @@ Come and work for an incredible company that is bringing a breaking industry to 
 
 
 
-        <form>
+        <form angular-validator-submit="employmentsubmit()" id="employment"   name="employmentform"   novalidate angular-validator>
 
             <div class="formblock">
 
@@ -192,7 +192,7 @@ Come and work for an incredible company that is bringing a breaking industry to 
 
 				<div class="form-group">
                                 <label class="labeltext1"> Country</label>
-                    <select id="country" name="country" class = "input1 form-control" validate-on="blur" ng-model = "form.country" required-message="'Select your country.'" required ng-options="item.s_name for item in countrylist" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;">
+                    <select id="country" name="country" class = "input1 form-control" validate-on="blur" ng-model = "form.country" required-message="'Select your country.'" required ng-options="item.s_name for item in countrylist" style="background:#fff none repeat scroll 0 0 !important;  padding: 0 0 0 0px!important;"  >
 
                         <option value="" style="padding-left:5px; ">SELECT YOUR COUNTRY</option>
 
@@ -209,7 +209,7 @@ Come and work for an incredible company that is bringing a breaking industry to 
 
                     <input type="city" class="input1 form-control" name="city"
 
-                           ng-model="form.email"
+                           ng-model="form.city"
 
                            required-message="'Email can not be blank.'"
 
@@ -230,9 +230,9 @@ Come and work for an incredible company that is bringing a breaking industry to 
 		
 			  <div class="form-group uploadbtn_main">
                                
-                               <input type="button"  value="Upload Resume" class="uploadbtn">
+                               <input type="button" name="resume"  value="Upload Resume" class="uploadbtn"  ngf-drop ngf-select ng-model="event_imgupload" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'*'" ngf-drop-available="dropAvailable" ngf-capture="camera">
                                 
-                                
+                                <span class="clearfix resumefilename" >{{form.event_image}}</span>
                                     <div class="clearfix"></div>
 
 
@@ -269,6 +269,27 @@ Come and work for an incredible company that is bringing a breaking industry to 
    </div>
         </div>
 
+
+    </div>
+</div>
+
+
+<div id="employmentmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <!--<h4 class="modal-title">Thank You For Your Interest In The Jungle Drone! </h4>-->
+            </div>
+            <div class="modal-body">
+                <h2><img  alt="#" src="images/logo.png"></h2>
+                <p>Thank You For Your Interest In Jungle Drone Employment.  We will contact you within 48 Hours</p>
+            </div>
+
+        </div>
 
     </div>
 </div>

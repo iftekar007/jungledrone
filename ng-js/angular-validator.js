@@ -44,8 +44,8 @@ angular.module('angularValidator').directive('angularValidator',
                     // Clear all the form values
                     for (var i = 0; i < DOMForm.length; i++) {
                         if (DOMForm[i].name){
-                            scopeForm[DOMForm[i].name].$setViewValue("");
-                            scopeForm[DOMForm[i].name].$render();
+                            if(typeof(scopeForm[DOMForm[i].name] )!='undefined')scopeForm[DOMForm[i].name].$setViewValue("");
+                            if(typeof(scopeForm[DOMForm[i].name] )!='undefined')scopeForm[DOMForm[i].name].$render();
                         }
                     }
 

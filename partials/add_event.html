@@ -70,10 +70,11 @@
                       <img ng-if="event_img!=false" src="{{event_img}}">
                       <div class="clearfix"></div>
 
-                      <input type="button" class="uploadbtn btn  btn-md" value="Upload" ngf-drop ngf-select ng-model="event_imgupload" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'*'" ngf-drop-available="dropAvailable" ngf-capture="camera">
+                      <input type="button" class="uploadbtn btn btn-primary" value="Upload" ngf-drop ngf-select ng-model="event_imgupload" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'*'" ngf-drop-available="dropAvailable" ngf-capture="camera">
                       <!--<input type="button"  value="Upload" class="uploadbtn"/>-->
 
 
+                      <p class="text-muted">Please upload a image sized 1200X256 for best resolution</p>
 
 
                       <div class="form-group hidden">

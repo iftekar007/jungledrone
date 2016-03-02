@@ -10,7 +10,7 @@
             <small></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="javascript:void(0)"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a ui-sref="index"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
         </section>
@@ -23,7 +23,7 @@
           <!-- Info boxes -->
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
+              <div class="info-box" ui-sref="index">
                 <span class="info-box-icon bg-aqua"> <img src="images/aicon1.png" alt="#" style="display:block; margin:23px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
@@ -34,22 +34,22 @@
         
         
         <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
+              <div class="info-box" ui-sref="admin-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon2.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
-                   <span class="info-box-number">Finder table</span>
+                   <span class="info-box-number">Manage Admin</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div>
             
             
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
+              <div class="info-box" ui-sref="signupuser-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon3.png" alt="#" style="display:block; margin:29px auto; width:50px;"></span>
                 <div class="info-box-content">
                   
-                   <span class="info-box-number">Lead</span>
+                   <span class="info-box-number">Member Signup Leads</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div>
@@ -57,45 +57,45 @@
             
             
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
+              <div class="info-box" ui-sref="contact-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon4.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
-                    <span class="info-box-number">Commission table</span>
+                    <span class="info-box-number">Contact Leads </span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div>
             
             
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
+              <div class="info-box" ui-sref="event-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon5.png" alt="#" style="display:block; margin:24px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
-                  <span class="info-box-number">Create Finder</span>
+                  <span class="info-box-number">Manage Events</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div>
             
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
+              <div class="info-box" uisref="event-rsvp">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon6.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
-                  <span class="info-box-number">Edit content of finder page</span>
+                  <span class="info-box-number">Event Rsvp</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div>
             
             
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <!--<div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon7.png" alt="#" style="display:block; margin:27px auto; width:54px;"></span>
                 <div class="info-box-content">
                   
                    <span class="info-box-number">upload banner</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div>&lt;!&ndash; /.info-box-content &ndash;&gt;
+              </div>&lt;!&ndash; /.info-box &ndash;&gt;
             </div>
             
             
@@ -105,8 +105,8 @@
                 <div class="info-box-content">
                   
                    <span class="info-box-number">configure mail</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div>&lt;!&ndash; /.info-box-content &ndash;&gt;
+              </div>&lt;!&ndash; /.info-box &ndash;&gt;
             </div>
             
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -115,11 +115,21 @@
                 <div class="info-box-content">
                   
                   <span class="info-box-number" >log out</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div>&lt;!&ndash; /.info-box-content &ndash;&gt;
+              </div>&lt;!&ndash; /.info-box &ndash;&gt;
             </div>
          
+-->
 
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box" ui-sref="logout">
+                      <span class="info-box-icon bg-aqua"><img src="images/aicon9.png" alt="#" style="display:block; margin:24px auto; width:48px;"></span>
+                      <div class="info-box-content">
+
+                          <span class="info-box-number" >log out</span>
+                      </div>
+                  </div>
+              </div>
             
           </div>
 
