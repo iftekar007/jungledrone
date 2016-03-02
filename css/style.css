@@ -222,7 +222,7 @@ a:focus {
 
 .top_menu_block{ background:#fff;}
 
-.top_menu_block .menuwrapper{ width:1180px; margin:0 auto; display:block;}
+.top_menu_block .menuwrapper{ width:1250px; margin:0 auto; display:block;}
 
 .top_menu_block .navbar-default{ background:none!important; border:none!important; border-radius:0px!important; padding:0; margin:0;}
 
@@ -298,7 +298,7 @@ a:focus {
 .containblock1 .img1{ display:none;}
 
 .containblock1 .textblock1{ width:500px;}
-.containblock1 .textblock1 h2{   font-family: 'gobold_italicitalic'; font-size:48px; color:#1e1e1e; border-bottom:solid 4px #ed1c24; display:inline-block; margin:0; padding:0 0 8px 0;}
+.containblock1 .textblock1 h2{   font-family: 'gobold_italicitalic'; font-size:40px; color:#1e1e1e; border-bottom:solid 4px #ed1c24; display:inline-block; margin:0; padding:0 0 8px 0;}
 
 .containblock1 .textblock1 label{ font-size:30px; color:#1e1e1e; font-weight:normal; 	font-family:'MyriadPro-Semibold'; display:block; margin:0; padding:0;}
 
@@ -333,7 +333,7 @@ a:focus {
 
 .containblock1 .part7{ position:absolute; left:430px; top:346%;}
 
-.containblock2{ background:url(../images/videobg1.png) no-repeat center top; height:auto; margin-top:35px; padding:26px 0 48px 0;}
+.containblock2{ background:url(../images/videobg1.png) no-repeat center top; height:auto; margin-top:1px; padding:26px 0 48px 0;}
 
 
 
@@ -407,7 +407,7 @@ a:focus {
 .partblock2 .formwrapper .form-group .input2{ width:330px; float:right; height:90px; resize:none; padding:0 4px; color:#333; border:none; border-radius:0;}
 
 
-.form-group .radiobox{ width:330px; float:right; padding: 7px 0 0 0;}
+.form-group .radiobox{ width:330px; float:right; padding: 10px 0 0 0;}
 
 .form-group .radiobox section{ display:inline-block; padding-right:10px;}
 
@@ -608,6 +608,12 @@ a:focus {
 .event_top_block .bannerbgred{width: 53%; position: absolute; top: 44%; z-index: 4;}
 .event_top_block .logo{left: 13%; position: absolute; top: 27%; width: 19%; z-index: 6;}
 .event_top_block .event_bannerdrone{position: absolute; right: 18%; top: 43%; width: 34%;}
+
+
+.event_top_block .event_bannerdronetour{ position: absolute;
+    right: 18%;
+    top: 73%;
+    width: 25%;}
 
 .event_body_container{ margin-top: 10%; padding:0!important;}
 
@@ -821,6 +827,8 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 .contact_body_container{ margin-top:10%;}
 
 .contact_bannertext{position: absolute; left: 23%; top:83%; z-index: 5; width: 23.5%;}
+
+.contact_bannertext2{position: absolute; left: 23%; top:83%; z-index: 5; width: auto; max-width:100%;}
 
 .contacttop_heading{ text-align:center; margin:0; padding:0 0 30px 0; }
 
@@ -1118,3 +1126,167 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 			
 			
 					#contactmodal .modal-dialog .modal-content h2{ text-align:center; margin:0; padding:5px 0;}
+					
+					
+					
+.watermark1{ position:absolute;  left:0%; top:0%; display:table!important;}
+
+.watermark1 img{  width:70%!important;}
+
+
+
+#gallerymodal .modal-dialog{  text-align:center; display:inline-block; width:100%;} 
+
+#gallerymodal .modal-content{  display:inline-block; text-align:center; border: solid 5px #ed1c24; border-radius:6px; max-width:90%; margin-left:auto; margin-right:auto;   } 
+
+#gallerymodal .modal-body h2{ padding:0!important; margin:0!important;}
+
+#gallerymodal .modal-body{ padding:0; position:relative;}
+
+#gallerymodal .modal-body .close {
+    opacity: 1;
+    position: absolute;
+    right: -19px;
+    top: -15px;
+}
+.watermark2{ position:absolute; width:100%; height:100%; left:0; top:0; background:  url(../images/watermark2.png) repeat left top;}
+
+
+
+
+
+#employmentmodal .modal-dialog{ border: solid 4px #ed1c24; border-radius:10px; text-align:center;} 
+		
+		
+		#employmentmodal .modal-dialog .modal-content{border-radius:6px;  box-shadow: 0 0 8px #333 inset; font-family: "OpenSans-Semibold"; font-size:14px; color:#333;}
+		
+		
+			#employmentmodal .modal-dialog .modal-title{font-family: "OpenSans-Semibold"; color:#ed1c24; text-align:center;}
+			
+			
+					#employmentmodal .modal-dialog .modal-content h2{ text-align:center; margin:0; padding:5px 0;}
+					
+.modal-header .close {
+    margin-top: -10px;
+}
+
+
+.event_body_banner_white .eventdetail{ color:#ef0202!important; cursor:pointer;}
+
+
+
+
+#eventdetailpopup .modal-dialog{ border: solid 4px #ed1c24; border-radius:10px; text-align:center;} 
+		
+		
+#eventdetailpopup .modal-dialog .modal-content{border-radius:6px;  box-shadow: 0 0 8px #333 inset; font-family: "OpenSans-Semibold"; font-size:14px; color:#333;}
+		
+		
+#eventdetailpopup .modal-dialog .modal-title{font-family: "OpenSans-Semibold"; color:#ed1c24; text-align:center;}
+			
+			
+			.eventdetail-body{ width:96%; margin:0px auto; text-align:left; font-family:'OpenSans-Regular'; } 
+			
+				.eventdetail-body img{ width:100%; margin:0 auto; border:solid 1px #ccc;}
+				
+					.eventdetail-body h3{   font-size: 26px;
+    line-height: 30px; color:#ef0202!important; font-family:'MyriadPro-Semibold';}
+					
+					.eventdetail-body h4{ font-size:14px; color:#000!important; font-family: "OpenSans-Semibold";}
+					
+					
+					.eventdetail-body  p{font-size:14px; line-height:24px; font-family:'OpenSans-Regular'; color:#111;}
+					
+					
+					
+					  #mydiv {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+       /* background: url('images/ajax-loader.gif') 50% 50% no-repeat rgba(0,0,0,0.3);*/
+	   
+	   background:  url(../images/ajax-loader.gif) 50% 50% no-repeat rgba(0,0,0,0.3);
+	   
+    }
+			
+			
+			
+	.newbannerblock{ width:100%; position:relative;}		
+
+	.newbannerblock .bannerimg{ width:100%;}
+	
+		.newbannerblock .bannernewtext{ width:auto; padding:25px; background:#f30100; text-align:center; margin-top:-100px;}
+		
+		
+			.newbannerblock .bannernewtext h2{ margin:0; padding:0 0 0 0; font-size:40px; color:#fffefe; font-family:'MyriadPro-Bold';} 
+			
+				.newbannerblock .bannernewtext p{ padding:10px 0; margin:0; font-family:'MyriadPro-Regular'; font-size:20px; color:#ffffff;}
+				
+				
+						
+							.newbannerblock .bannernewtext  .viewlinknew {  font-family:'OpenSans-Semibold'; font-size:14px; color:#fff; width:140px; background:#2f2f2f; border:none; cursor:pointer;text-transform:uppercase; margin:0 auto; display:block; padding:9px 2px 8px 2px; margin-top:10px;}
+							
+							.bannerlogo{ display:inline-block; margin:0 auto; max-width:100%;}
+
+
+
+
+
+#eventconatctModal .modal-dialog{ border: solid 4px #ed1c24; border-radius:10px; text-align:center;} 
+		
+		
+		#eventconatctModal .modal-dialog .modal-content{border-radius:6px;  box-shadow: 0 0 8px #333 inset; font-family: "OpenSans-Semibold"; font-size:14px; color:#333;}
+		
+		
+			#eventconatctModal .modal-dialog .modal-title{font-family: "OpenSans-Semibold"; color:#ed1c24; text-align:center;}
+			
+			
+					#eventconatctModal .modal-dialog .modal-content h2{ text-align:center; margin:0; padding:5px 0;}
+
+
+
+.tourism_text_contain{ margin:0 auto; margin-top:2px;   color: #343434;
+    font-family: "OpenSans-Regular";
+    font-size: 16px;
+    line-height: 25px; width:100%; background:#f2f5f8; padding:25px; }
+	
+	
+	.tourism_text_contain .tourimg1{ width:308px; float:left; margin:0px 25px 5px 0; }
+	
+	
+		.tourism_text_contain .tourimg2{ width:612px; float:right; margin:0px 0 5px 25px; }
+		
+		
+			.tourism_text_contain .tourimg3{ width:441px; float:left; margin:0px 25px 5px 0; }
+			
+			
+			.loginbtn{background: #f30100 !important; background-image:none!important;
+    border:  none!important;
+    color: #fff;
+    cursor: pointer;
+  
+    font-family: "OpenSans-Semibold"!important;
+    font-size: 20px;
+    height: 46px;
+    
+    text-transform: uppercase;
+    }
+	
+	.login-box-body .form-control{ height:40px!important;}
+	
+	
+		.login-box-body .form-horizontal .has-feedback .form-control-feedback {
+    right: 6px!important;
+    top: 4px!important;
+}
+
+
+.login-box-body  .alert { background:none!important; border:none!important; color:#ff0000!important; padding:0!important; margin-bottom:5px!important; border:none!important;  font-family: "OpenSans-Semibold"!important; font-size:14px; text-align:center;}
+
+
+.login-box-msg{font-family: 'gobold_italicitalic'; color:#333;}
+
+.login-box-body .validationMessage{ font-family:Arial, Helvetica, sans-serif; font-size:14px;}
