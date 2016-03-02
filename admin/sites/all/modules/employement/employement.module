@@ -46,7 +46,7 @@ function employement_menu()
     );
     $items['employementlist'] = array(
         'title' => 'event List',
-        'page callback' => 'eventlist',
+        'page callback' => 'employementlist',
         'access callback' => TRUE,
         'access arguments' => array('Anonymous Actions.'),
         'expanded' => TRUE,
@@ -118,9 +118,11 @@ function employementlist()
 
     $userlist = array();
 
-    $queryu = db_select('event', 'ev');
+    $queryu = db_select('employement', 'ev');
 
-    $queryu->fields('ev', array('id','event_name','event_description','event_image','event_status', 'event_daterange', 'event_timerange','event_create_time'));
+    //'fname','lname','email','phone', 'country','city','resume'
+
+    $queryu->fields('ev', array('id','fname','lname','email','phone', 'country', 'city','resume'));
     // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
     // ->condition('ur.rid', 5, '=');
     //->condition('u.uid', 74, '=');
@@ -136,20 +138,15 @@ function employementlist()
             // else $picture='';
 
             $eventlist[$i]['id'] = $recordu['id'];
-            $eventlist[$i]['user_id'] = $recordu['user_id'];
-            $eventlist[$i]['event_name'] = $recordu['event_name'];
-            $eventlist[$i]['event_description'] = $recordu['event_description'];
-            if($recordu['event_image']=='Null' ||  $recordu['event_image']==''){
-                $eventlist[$i]['event_image'] =  'images/user2-160x160.jpg';
-            }
-            else{
-                $eventlist[$i]['event_image'] =  image_style_url('thumbnail',(@$recordu['event_image']));
+            $eventlist[$i]['fname'] = $recordu['fname'];
+            $eventlist[$i]['lname'] = $recordu['lname'];
+            $eventlist[$i]['email'] = $recordu['email'];
+            $eventlist[$i]['phone'] = $recordu['phone'];
 
-            }
-            $eventlist[$i]['event_status'] = $recordu['event_status'];
-            $eventlist[$i]['event_daterange'] = $recordu['event_daterange'];
-            $eventlist[$i]['event_timerange'] = $recordu['event_timerange'];
-            $eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
+            $eventlist[$i]['city'] = $recordu['city'];
+            $eventlist[$i]['country'] = $recordu['country'];
+            $eventlist[$i]['resume'] = $recordu['resume'];
+            //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
 
 
             $i++;

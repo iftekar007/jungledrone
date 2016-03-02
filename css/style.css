@@ -268,7 +268,7 @@ a:focus {
   
     .bannerbgred img{ width:100%;}
 
-.logo{    left: 20%;
+.top_slider_block .logo{    left: 20%;
     position: absolute;
     top: 49%;
     width: 16%;
@@ -1290,3 +1290,20 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 .login-box-msg{font-family: 'gobold_italicitalic'; color:#333;}
 
 .login-box-body .validationMessage{ font-family:Arial, Helvetica, sans-serif; font-size:14px;}
+
+
+
+.contactlink{  background: #f30100;
+    border: 1px solid #d50e0d;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-family: "OpenSans-Semibold" !important;
+    font-size: 22px;
+    margin: 40px auto 0;
+    max-width: 85%;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;}
+
+.contactlink:hover{ color:#fff;}

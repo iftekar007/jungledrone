@@ -415,13 +415,13 @@
 .bannerbgwhite{ display:none;}
 .bannerbgred{ position:inherit; width:100%; height:5px; background:#f30100; }
 .bannerbgred img{ display:none;}
-.logo{  left: 0%;
+.top_slider_block  .logo{  left: 0%;
     position: relative;
     top: 0%;
     width: 100%; height:auto;
     z-index: 8; margin-top:20px; } 
 
-.logo img{ width:330px; display:block; margin:0 auto;}
+.top_slider_block  .logo img{ width:330px; display:block; margin:0 auto;}
 .top_slider_block { border-top:solid 2px #e7e7e7; }
 .bannertext{ position:inherit; display:block; margin:0 auto; width:985px; max-width:96%; left:0; top:0;}
 .top_slider_block .carouselindicators{ position:inherit; right:0; top:0%; z-index:10; width:100%; }
@@ -747,7 +747,7 @@
 }
 @media(max-width:480px){
 
-.logo img{ width:280px; display:block; margin:0 auto;}
+.top_slider_block .logo img{ width:280px; display:block; margin:0 auto;}
 
 .formmain{ width:80%; }
 

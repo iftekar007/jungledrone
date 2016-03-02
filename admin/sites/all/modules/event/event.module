@@ -100,6 +100,14 @@ function event_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['admineventrsvp'] = array(
+        'title' => 'Event',
+        'page callback' => 'admineventrsvp',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
      return $items;
@@ -249,6 +257,40 @@ function eventlistfrontlisting()
 
         }
     }
+    echo json_encode(@$eventlist);
+
+}
+function admineventrsvp()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $query = db_select('event', 'ev');
+    $query->join('eventrsvp', 'evrsvp', 'ev.id = evrsvp.event_id');
+    $query->fields('ev', array('event_name'));
+    $query->fields('evrsvp',array('fname','lname','email','phone','gender','id'));
+    $query->orderBy('evrsvp.id','DESC');
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    //->condition('de.domain_id', 25, '=')
+    //->range(0, 20);
+    $result = $query->execute();
+    if ($result->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $result->fetchAssoc()) {
+            // $picture=$recordu['event_image'];
+            // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            // else $picture='';
+
+            $eventlist[$i] = $recordu;
+            $i++;
+        }
+    }
+
     echo json_encode(@$eventlist);
 
 }
