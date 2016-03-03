@@ -269,7 +269,7 @@ function addeventrsvp(){
         //$_POST['event_id']=1;
         $eventid=1;
         $query = db_insert('eventrsvp')->fields(array('event_id','fname','lname','email','phone', 'gender'));
-        $query->values(array(@$eventid,@$_POST['fname'],@$_POST['lname'],@$_POST['email'],@$_POST['phone'],@$_POST['gender']));
+        $query->values(array(@@$_POST['event_id'],@$_POST['fname'],@$_POST['lname'],@$_POST['email'],@$_POST['phone'],@$_POST['gender']));
         //}
         $query->execute();
 

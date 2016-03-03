@@ -596,6 +596,8 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
     //return
     // $rootScope.stateIsLoading = true;
 
+    if( typeof ($rootScope.userid)!='undefined')$rootScope.userid=0;
+
     $scope.form={};
 
     $scope.form.fname='';
@@ -623,7 +625,8 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
 
         setTimeout(function(){
 
-            $scope.form.country=20;
+            $scope.form.country={};
+            $scope.form.country.s_name='Belize';
             $('#country').val(20);
 
         },500);
@@ -715,8 +718,10 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
 
             setTimeout(function(){
 
-                $scope.form.country=20;
+                $scope.form.country={};
+                $scope.form.country.s_name='Belize';
                 $('#country').val(20);
+                $('#myModal').modal('hide');
 
             },500);
 
@@ -858,6 +863,8 @@ jungledrone.controller('contactus', function($scope,$state,$http,$cookieStore,$r
 jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieStore,$rootScope) {
     //$state.go('home');
     //return
+    $scope.form={};
+    $scope.form.country={};
 
     setTimeout(function(){
         $('#country').val(20);
@@ -870,7 +877,8 @@ jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieSto
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
     }) .success(function(data) {
         console.log(data);
-        $scope.form.country=20;
+        $scope.form.country={};
+        $scope.form.country.s_name='Belize';
         $('#country').val(20);
         $scope.countrylist=data;
     });
@@ -895,7 +903,8 @@ jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieSto
 
             setTimeout(function(){
 
-                $scope.form.country=20;
+                $scope.form.country={};
+                $scope.form.country.s_name='Belize';
                 $('#country').val(20);
 
             },3000);
@@ -996,6 +1005,20 @@ jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieSto
 
 
 jungledrone.controller('header', function($scope,$state,$http,$cookieStore,$rootScope,Upload) {
+
+
+    $rootScope.logout = function () {
+        $cookieStore.remove('userid');
+        $cookieStore.remove('username');
+        $cookieStore.remove('useremail');
+        $cookieStore.remove('userfullname');
+
+        console.log('in logout');
+        $rootScope.userid=0;
+        $state.go('index');
+    }
+
+
     $scope.gotosignup=function(){
 		
         $('html, body').animate({
@@ -1054,7 +1077,8 @@ jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$
         setTimeout(function(){
             //$scope.signupForm.reset();
 
-            $scope.form.country=20;
+            $scope.form.country={};
+            $scope.form.country.s_name='Belize';
             $('#country').val(20);
 
         },3000);
@@ -1137,7 +1161,8 @@ jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$
 
 
     setTimeout(function(){
-        $scope.form.country=20;
+        $scope.form.country={};
+        $scope.form.country.s_name='Belize';
         $('#country').val(20);
     },2000);
 
@@ -1162,7 +1187,8 @@ jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$
             setTimeout(function(){
 
 
-                $scope.form.country=20;
+                $scope.form.country={};
+                $scope.form.country.s_name='Belize';
                 $('#country').val(20);
                 $('#employmentmodal').modal('hide');
 
@@ -1971,6 +1997,7 @@ jungledrone.controller('addevent',function($scope,$state,$http,$cookieStore,$roo
 });
 jungledrone.controller('event',function($scope,$state,$http,$cookieStore,$rootScope){
 
+    $scope.form={};
 
     $scope.showdetails=function(ev){
 
@@ -1998,6 +2025,7 @@ jungledrone.controller('event',function($scope,$state,$http,$cookieStore,$rootSc
         }) .success(function(data) {
             $('#event-rsvp').modal('hide');
             $('#eventconatctModal').modal('show');
+            $scope.eventrsvp.reset();
             //$rootScope.stateIsLoading = false;
             //console.log(data);
             // $scope.eventlist=data;
@@ -2077,9 +2105,21 @@ jungledrone.controller('event',function($scope,$state,$http,$cookieStore,$rootSc
 
     }
 
-    $scope.openmodal=function(){
+    $scope.openmodal=function(ev1){
+
+        console.log('in rsvp modal');
+
+        var target1 = ev1.target || ev1.srcElement || ev1.originalTarget;
+        console.log($(target1));
+        console.log($(target1).attr('class'));
+        console.log($(target1).html());
+
+        $scope.form.event_id=$(target1).attr('event-id');
 
         $('#event-rsvp').modal('show');
+
+        var evval=$(target1).attr('event-id');
+        console.log($(target1).attr('event-id'));
     }
 
 
@@ -2532,15 +2572,19 @@ jungledrone.controller('admin_header', function($scope,$state,$http,$cookieStore
         $cookieStore.remove('username');
         $cookieStore.remove('useremail');
         $cookieStore.remove('userfullname');
+
+        console.log('in logout');
         $state.go('index');
     }
 
     if (typeof($cookieStore.get('userid')) != 'undefined' && $cookieStore.get('userid') > 0) {
 
         $rootScope.userfullname=$cookieStore.get('userfullname');
+        $rootScope.userid=$cookieStore.get('userid');
         console.log($rootScope.userfullname);
     }
     else{
+        $rootScope.userid=0;
         $state.go('login');
     }
 

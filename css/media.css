@@ -150,7 +150,27 @@
 .partblock2 .formwrapper .form-group .labeltext2{ width:148px;}
 }
 
+@media(max-width:1400px){
+.virtualrealityimgdiv{ position:relative; top:-60px; width:100%;}
+.virtualrealityimg1{ display:block; margin:0 auto; width:100%;}
+}
+
+
 @media(max-width:1366px){
+
+.contact_mainbody .contactright .contactform{ width:840px; background:#6c7375; margin-top:16px; border:solid 1px #d9dadb;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup1{ width:350px; float:left; margin-bottom:30px;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup2{ width:350px; float:right; margin-bottom:30px;}
+
+.contactform_wrapper .forminput1{ width:248px;}
+
+.contactform_wrapper .forminput2{ width:656px;}
+
+
+
+.contact_mainbody .contactright .contactform .contactform_wrapper{ padding:40px;}
 
 .partblock2 .formwrapper .form-group .labeltext1{ width:140px;}
 .partblock2 .formwrapper .form-group .labeltext2{ width:140px;}
@@ -251,6 +271,13 @@
 }
 
 @media(max-width:1280px){
+
+
+.contact_mainbody .contactright .contactform{ width:800px; background:#6c7375; margin-top:16px; border:solid 1px #d9dadb;}
+.contactform_wrapper .forminput2 {
+    width: 615px;
+}
+
 
 .partblock2 .formwrapper .form-group .labeltext1{ width:100%; float:none; text-align:left;   font-size: 16px; font-weight:normal;}
 .partblock2 .formwrapper .form-group .labeltext2{ width:100%; float:none; text-align:left; font-size: 16px; font-weight:normal;}
@@ -384,6 +411,8 @@
 
 
 .top_menu_block .dropdown-menu{ display:block; width:100%; position:inherit; top:0; margin-top:5px; padding:0;}
+
+.contact_bannertext2{position: absolute; left: 23%; top:83%; z-index: 5; width: 280px; max-width:100%;}
 }
 
 @media(max-width:1200px){
@@ -408,10 +437,37 @@
 .containblock1 .part3 .viewlink{ display:inline-block; float:none; margin:0 auto; margin-top:20px;}
 .containblock1 .textblock2  .viewlink{ display:inline-block; float:none; margin:0 auto; margin-top:20px;}
 
-}
+.tourism_text_contain{ width:96%; margin:1px auto; text-align:center;}
+
+	.tourism_text_contain .tourimg1{ width:auto; float:none; margin:0 auto; margin-bottom:10px; max-width:100%; display:block;}
+		.tourism_text_contain .tourimg2{ width:auto; float:none; margin:0 auto; margin-bottom:10px; max-width:100%; display:block;}
+.tourism_text_contain .tourimg3{ width:auto; float:none; margin:0 auto; margin-bottom:10px; max-width:100%; display:block;}
+
+
+.droneracing_middleblock{ width:96%; margin:30px auto;}
+
+
+.droneracing_video{ width:600px; float:none; margin:0 auto; background:url(../images/dronarac_shadow.png) no-repeat center bottom; padding-bottom:44px;}
+.droneracing_text{ width:100%; text-align:center; float:none; margin-top:25px;}
+.droneracing_text img{ display:block; margin:0 auto; max-width:100%;}
+
+
+.virtualrealitytextdiv{ width:98%; margin-top:20px; padding:0;}
+
+.virtualrealitytextdiv .v_text_left{ width:100%; float:none; padding:0; text-align:center; padding:25px; }
+
+.virtualrealitytextdiv .v_text_left img{ display:block; margin:0 auto; max-width:100%; margin-bottom:25px;}
+
+	.virtualreality_formmain{ float:none; margin:0 auto; margin-top:30px;}
+} 
 
 
 @media(max-width:1199px){
+
+.virtualrealitytextdiv .v_text1{ padding-top:20px;}
+.virtualrealityimgdiv{ position:relative; top:0px;}
+
+.virtualrealitytextdiv{ margin-top:0px;}
 .bannerbgwhite{ display:none;}
 .bannerbgred{ position:inherit; width:100%; height:5px; background:#f30100; }
 .bannerbgred img{ display:none;}
@@ -562,7 +618,14 @@
     width: auto; max-width:90%; }
 	
 	
-	
+	.contact_bannertext2{   bottom: 0;
+    display: block;
+    left: 0;
+    margin: 0 auto;
+    position: inherit;
+    right: 0;
+    top: 0;
+    width: auto; max-width:90%; }
 
 
 
@@ -581,6 +644,26 @@
 
 .services_blog .servicesimg {
     width: 96%;
+}
+
+
+.contact_mainbody .contactleft .contact_left_top_block2{  width:80%; margin:20px auto; }
+
+
+.contact_mainbody .contactleft .contact_left_top_block2{  width:100%; margin:20px auto; }
+.contact_mainbody .contactright .contactform{ width:100%;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper{ width:800px; padding:0; margin:25px auto;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup1{ width:390px;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup2{ width:390px;}
+
+.contactform_wrapper .forminput1 {
+    width: 288px;
+}
+.contactform_wrapper .forminput2 {
+    width: 696px;
 }
 }
 
@@ -641,11 +724,45 @@
 .event_body_container_block_even .event_body_bottom .event_dateblock span{ float:none; display:block; margin:0 auto; margin-top:10px;}
 
 .product_body_container{ width:80%; margin:25px auto;}
+
+
+.contact_mainbody .contactright .contactform .contactform_wrapper{ width:700px; padding:0; margin:25px auto;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup1{ width:340px;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup2{ width:340px;}
+
+.contactform_wrapper .forminput1 {
+    width: 238px;
+}
+.contactform_wrapper .forminput2 {
+    width: 598px;
+}
 }
 
 
 
 @media(max-width:767px){
+
+
+		.newbannerblock .bannernewtext{ width:auto; padding:25px; background:#f30100; text-align:center; margin-top:0px;}
+		
+		.newbannerblock .bannernewtext h2{ font-size:28px; }
+
+.contact_mainbody .contactright .contactform .contactform_wrapper{ width:90%; padding:0; margin:25px auto;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup1{ width:100%; float:none;}
+
+.contact_mainbody .contactright .contactform .contactform_wrapper .formgroup2{ width:100%; float:none;}
+
+.contactform_wrapper .forminput1 {
+    width: 100%; float:none;
+}
+.contactform_wrapper .forminput2 {
+    width: 100%; float:none;
+}
+.contact_mainbody .contactright .contactform .contactform_wrapper label{ width:100%; float:none; text-align:left;}
+
 .row{ padding-left:0; padding-right:0px; margin:0;  }
 
 
@@ -667,6 +784,22 @@
 .part2textmenu span{ display:block; background:none; padding:5px; text-align:center; margin:0 ; border-bottom:solid 1px #ccc;}
 
 .part2textmenu span:last-child{ border:none;}
+
+
+	.virtualreality_formmain{ float:none; margin:0 auto; margin-top:30px; width:100%; margin-bottom:20px; padding-bottom:10px;}
+	
+	.virtualreality_formmain .formwrapper{ width:480px; margin:0 auto; margin-top:20px;}
+	
+	.virtualreality_formmain h3{ width:280px; margin:0 auto;}
+	
+	.virtualreality_formmain .formwrapper .form-group .labeltext1{ width:100%; margin:0 auto; float:none; text-align:left;}
+	
+	.virtualreality_formmain .formwrapper .form-group .input1{ width:100%; float:none;}
+	
+	
+	.virtualreality_formmain .subbtn{ float:none; margin:0 auto; display:block;}
+	
+	.uploadbtn_main .uploadbtn{ margin-left:0px;}
 }
 
 @media(max-width:640px){
@@ -730,7 +863,7 @@
 
 .moretext .more_img{ float:none; margin:0 auto; margin-bottom:20px; display:block;}
 
-
+.droneracing_video{ width:100%; background-size:100%; padding-bottom:20px;}
 }
 
 @media(max-width:580px){
@@ -743,6 +876,9 @@
     width: 5%;}
 	
 .gellary_bannertext2{ max-width:90%;}
+
+
+.virtualreality_formmain .formwrapper{ width:90%; margin:0 auto; margin-top:20px;}
 
 }
 @media(max-width:480px){
@@ -954,6 +1090,11 @@
 
 
     .block4part1text h2{ padding:0 20px; font-size:40px; line-height:44px;}
+	
+	.resumefilename2 {
+    margin-left: 0;
+    display: block;
+}
 }
 
 @media(max-width:480px){
@@ -999,6 +1140,32 @@
     .gellary_top_block .logo img{width: 100%;}
     .gellary_bannertext{width: 80%; margin: 0 auto;}
 
+	.services_heading div{ padding:0 5px;}
+	
+	.services_heading div label {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;}
+	
+	.services_heading div h3 {
 
-    /*-----------------------------------end-gellary---------------------*/
+	padding: 18px 5px;
 }
+
+
+
+
+
+
+
+.moretext .more_img{ max-width:100%;}
+
+#event-rsvp .subbtn{width: 230px;}
+
+
+.contact_mainbody .contactleft .contact_left_top_block1 img {
+    margin: 0 14px;
+}
+.contacttop_heading label{padding: 0 10px 0 12px;}
+}
+
+
