@@ -320,6 +320,33 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         }
     )
+
+
+        .state('pilot-list',{
+            url:"/pilot-list",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                    //  controller: 'admin_left'
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/pilot_list.html' ,
+                    controller: 'pilotlist'
+                },
+
+            }
+        }
+    )
+
+
         .state('add-event', {
             url: "/add-event",
             views: {
@@ -391,6 +418,26 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
         }
     )
 
+.state('pilot-registration',{
+            url:"/pilot-registration",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/header.html' ,
+                    controller: 'header'
+                },
+                
+                'footer': {
+                    templateUrl: 'partials/footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/pilot-registration.html' ,
+                    controller: 'pilotregistration'
+                },
+
+            }
+        }
+    )
 
 
         .state('login',
@@ -1253,6 +1300,10 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
                 console.log($cookieStore.get('useremail'));
                 console.log($cookieStore.get('userfullname'));
 
+                $rootScope.userrole=$cookieStore.get('userrole');
+
+                console.log($rootScope.userrole);
+
                 $state.go('dashboard');
 
                 /*
@@ -1617,6 +1668,69 @@ jungledrone.controller('employementlist', function($scope,$state,$http,$cookieSt
 
     //console.log('in add admin form ');
 });
+
+jungledrone.controller('pilotlist', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.currentPage=1;
+    $scope.perPage=4;
+    $scope.begin=0;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function(){
+        console.log($scope.currentPage);
+        $scope.begin=parseInt($scope.currentPage-1)*$scope.perPage;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+    }
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     : $scope.adminUrl+'pilotlist',
+        // data    : $.param($scope.form),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        $rootScope.stateIsLoading = false;
+        console.log(data);
+        $scope.userlist=data;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( (item.fname.indexOf($scope.searchkey) != -1) || (item.lname.indexOf($scope.searchkey) != -1) ||(item.phone.indexOf($scope.searchkey) != -1)||(item.email.indexOf($scope.searchkey) != -1)||(item.country.indexOf($scope.searchkey) != -1)||(item.city.indexOf($scope.searchkey) != -1) ){
+            return true;
+        }
+        return false;
+    };
+    $scope.delcontact = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.userlist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'deletecontact',
+            data    : $.param({id: $scope.userlist[idx].id}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.userlist.splice(idx,1);
+            $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+        });
+    }
+
+
+
+
+
+
+    //console.log('in add admin form ');
+});
+
 
 
 jungledrone.controller('eventrsvplist', function($scope,$state,$http,$cookieStore,$rootScope) {
@@ -2581,6 +2695,7 @@ jungledrone.controller('admin_header', function($scope,$state,$http,$cookieStore
 
         $rootScope.userfullname=$cookieStore.get('userfullname');
         $rootScope.userid=$cookieStore.get('userid');
+        $rootScope.userrole=$cookieStore.get('userrole');
         console.log($rootScope.userfullname);
     }
     else{
@@ -2651,6 +2766,155 @@ jungledrone.controller('dashboard', function($scope,$state,$http,$cookieStore,$r
 
 });
 
+jungledrone.controller('pilotregistration', function($scope,$state,$http,$cookieStore,$rootScope) {
+    // $state.go('login');
+
+   /* $scope.logout = function () {
+        $cookieStore.remove('userid');
+        $cookieStore.remove('username');
+        $cookieStore.remove('useremail');
+        $cookieStore.remove('userfullname');
+        $state.go('index');
+    }*/
+
+
+    $scope.form={};
+    $scope.form.country={};
+
+    setTimeout(function(){
+        $('#country').val(20);
+    },2000);
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     :     $scope.adminUrl+'countryList',
+        data    : $.param({'uid':$scope.userid}),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        console.log(data);
+        $scope.form.country={};
+        $scope.form.country.s_name='Belize';
+        $('#country').val(20);
+        $scope.countrylist=data;
+    });
+
+    $scope.form={};
+    $scope.drone_error= false;
+    $scope.gender_error= false;
+    $scope.dronerace_error= false;
+
+    $scope.sub1 = function(){
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'addpilot',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $('#myModal').modal('show');
+            $scope.signupForm.reset();
+
+
+            setTimeout(function(){
+
+                $scope.form.country={};
+                $scope.form.country.s_name='Belize';
+                $('#country').val(20);
+
+            },3000);
+            //$scope.signupForm={fname:'',lname:''};
+
+
+        });
+
+
+
+
+
+
+    }
+
+    $scope.droneValidator=function(){
+
+
+        //console.log('in drone validator');
+        //console.log($scope.signupForm.$submitted);
+        //console.log($("input[name='drone']:checked").val());
+
+        if($scope.signupForm.$submitted){
+
+            if(typeof ($("input[name='drone']:checked").val()) != 'undefined' )
+            {
+                $scope.drone_error=false;
+                //console.log('in true');
+                return true ;
+            }
+            else {
+                //console.log('in false');
+                $scope.drone_error=true;
+                return '';
+
+            }
+
+        }
+
+    }
+
+    $scope.genderValidator=function(){
+
+
+        //console.log('in drone validator');
+        //console.log($scope.signupForm.$submitted);
+        //console.log($("input[name='drone']:checked").val());
+
+        if($scope.signupForm.$submitted){
+
+            if(typeof ($("input[name='gender']:checked").val()) != 'undefined' )
+            {
+                $scope.gender_error=false;
+                //console.log('in true');
+                return true ;
+            }
+            else {
+                //console.log('in false');
+                $scope.gender_error=true;
+                return '';
+
+            }
+
+        }
+
+    }
+    $scope.dronraceeValidator=function(){
+
+
+        //console.log('in drone validator');
+        //console.log($scope.signupForm.$submitted);
+        //console.log($("input[name='drone']:checked").val());
+
+        if($scope.signupForm.$submitted){
+
+            if(typeof ($("input[name='dron_race']:checked").val()) != 'undefined' )
+            {
+                $scope.dronerace_error=false;
+                //console.log('in true');
+                return true ;
+            }
+            else {
+                //console.log('in false');
+                $scope.dronerace_error=true;
+                return '';
+
+            }
+
+        }
+
+    }
+
+
+
+});
 
 
 

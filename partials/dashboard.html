@@ -33,7 +33,7 @@
             </div>
         
         
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box" ui-sref="admin-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon2.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
@@ -44,7 +44,7 @@
             </div>
             
             
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box" ui-sref="signupuser-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon3.png" alt="#" style="display:block; margin:29px auto; width:50px;"></span>
                 <div class="info-box-content">
@@ -56,7 +56,7 @@
             
             
             
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box" ui-sref="contact-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon4.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
@@ -67,7 +67,7 @@
             </div>
             
             
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box" ui-sref="event-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon5.png" alt="#" style="display:block; margin:24px auto; width:48px;"></span>
                 <div class="info-box-content">
@@ -77,8 +77,8 @@
               </div><!-- /.info-box -->
             </div>
             
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box" uisref="event-rsvp">
+            <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box" ui-sref="event-rsvp">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon6.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
@@ -86,7 +86,17 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div>
-            
+
+            <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box" ui-sref="pilot-list">
+                <span class="info-box-icon bg-aqua"><img src="images/aicon6.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
+                <div class="info-box-content">
+
+                  <span class="info-box-number">Pilot List</span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div>
+
             
             <!--<div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">

@@ -1,6 +1,12 @@
 @charset "utf-8";
 /* CSS Document */
 
+@media(max-width:1920px){
+
+	.pilotregistration_body_bottom{padding-top:13%;}
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:30px;}
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-size:18px;}
+}
 
 @media(max-width:1900px){
 
@@ -22,7 +28,20 @@
     width: auto;
 }
 
+
+
 }
+
+@media(max-width:1850px){
+
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:28px;}
+	
+}
+
+@media(max-width:1700px){
+
+	.pilotregistration_body_bottom{padding-top:11%;}
+
 
 @media(max-width:1680px){
 
@@ -80,6 +99,8 @@
 }
 
 .block4part1text h2{	 font-size:80px; line-height:86px; }
+
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:26px;}
 
 }
 
@@ -150,11 +171,27 @@
 .partblock2 .formwrapper .form-group .labeltext2{ width:148px;}
 }
 
+@media(max-width:1560px){
+	.pilotregistration_body_bottom{padding-top:11%;}
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content{padding-bottom:20px;}
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:24px;}
+}
+
+@media(max-width:1480px){
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:22px;}
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-size:14px;}
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content{padding-bottom:3%;}
+}
+	
 @media(max-width:1400px){
 .virtualrealityimgdiv{ position:relative; top:-60px; width:100%;}
 .virtualrealityimg1{ display:block; margin:0 auto; width:100%;}
 }
 
+@media(max-width:1356px){
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:21px;}	
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content{padding-bottom:1%;}
+}
 
 @media(max-width:1366px){
 
@@ -415,6 +452,12 @@
 .contact_bannertext2{position: absolute; left: 23%; top:83%; z-index: 5; width: 280px; max-width:100%;}
 }
 
+@media(max-width:1245px){
+	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:20px;}	
+	
+}
+
+
 @media(max-width:1200px){
 
 .containblock1{ height:auto; background:  none;  position:relative; z-index:12; padding-bottom:0px; margin-bottom:0px;}
@@ -665,6 +708,23 @@
 .contactform_wrapper .forminput2 {
     width: 696px;
 }
+
+
+.pilotregistration_body_section_left{float:none; width:100%; text-align:center; padding:0 15px; margin-bottom:15px;}
+.pilotregistration_body_section_left img{width:auto;}
+.pilotregistration_body_section_left label{width:100%; display:block; text-align:center; margin:6px auto; margin-top:10px;}
+.pilotregistration_body_section_right{float:none; width:100%;}
+.pilotregistration_registration_top h1{background:  url(../images/pilotregistration_body_registrationicon.png) no-repeat top center; padding:56px 0 0 0; line-height:32px; text-align:center!important;}
+.pilotregistration_registration_bottom form label{width:100%; display:block; text-align:center; padding:0px; margin:4px auto;}
+.pilotregistration_registration_bottom form .pilotregistration_input{width:100%; display:block; text-align:center; padding:0px;}
+.pilotregistration_registration_bottom form .errmsg{text-align:center; margin:0 auto; margin-bottom:9px;}
+.pilotregistration_submit{margin:0px auto; float:none; display:block; margin-top:36px!important;}
+
+.pilotregistration_body_bottom{background:none; padding:0px;}
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content{width:100%; background:#f30100; padding:30px; text-align:center; height:auto}
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:25px; padding:0px; line-height:30px;}
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-size:18px; padding:0; text-align:center; width:100%;}
+
 }
 
 
@@ -864,6 +924,8 @@
 .moretext .more_img{ float:none; margin:0 auto; margin-bottom:20px; display:block;}
 
 .droneracing_video{ width:100%; background-size:100%; padding-bottom:20px;}
+
+.pilotregistration_registration_bottom form{padding-left:20px; padding-right:20px;}
 }
 
 @media(max-width:580px){
@@ -981,6 +1043,9 @@
     width: 5%;}
 	
 	.formmain{ width:90%; }
+	
+.pilotregistration_submit{width:80%;}	
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:22px;}
 }
 
 
@@ -1004,6 +1069,17 @@
         position: absolute;
         top: 80%;
         z-index: 5;}
+		
+	.pilotregistration_top_block .bannerbgred{ position: absolute;
+        top: 43%;
+        width: 52%;
+        z-index: 4;}
+    .pilotregistration_top_block .logo{
+        left: 13%;
+        position: absolute;
+        top: 26%;
+        width: 18%;
+        z-index: 6;}		
 }
 @media(max-width:1666px){
     .event_bannertext{left: 23%; top: 79%;}
@@ -1021,6 +1097,16 @@
     .event_top_block .event_bannerdrone{position: absolute; right: 18%; top: 43%; width: 34%;}
 	
 	 .event_top_block .event_bannerdronetour{position: absolute; right: 18%; top: 73%; width: 25%;}
+	 
+	 .pilotregistration_top_block{position: relative;}
+    .event_bannersloderbox{position: relative;}
+    .pilotregistration_top_block .event_bannertext{width: 28%;}
+    .event_bannerbg img{width: 100%;}
+    .pilotregistration_top_block .bannerbgred{width: 53%; position: absolute; top: 44%; z-index: 4;}
+    .pilotregistration_top_block .logo{left: 13%; position: absolute; top: 27%; width: 19%; z-index: 6;}
+    .pilotregistration_top_block .event_bannerdrone{position: absolute; right: 18%; top: 43%; width: 34%;}
+	
+	 .pilotregistration_top_block .event_bannerdronetour{position: absolute; right: 18%; top: 73%; width: 25%;}
 }
 
 @media(max-width:1199px){
@@ -1045,6 +1131,19 @@
     .event_body_container_block_odd .event_body_container_block_bottom{padding-right: 20px;}
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_left{width: 92%;}
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_right{width: 7%;}
+	
+	
+	.pilotregistration_top_block .bannerbgred img{display: none;}
+    .pilotregistration_top_block .bannerbgred{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; width: 100%; background: #ff0000; height: 5px;}
+    .pilotregistration_top_block .logo{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
+    .pilotregistration_top_block .logo img{ width:330px; display:block; margin:0 auto;}
+    .pilotregistration_top_block .event_bannertext{width: auto;}
+    .pilotregistration_top_block .event_bannerdrone{display: none;}
+	
+	.pilotregistration_top_block .event_bannerdronetour{display: none;}
+	
+	.pilotregistration_body_container{margin-top:3%;}
+	.pilotregistration_body_container .pilotregistration_body_container_section{padding:0 15px;}
 }
 
 
@@ -1097,11 +1196,20 @@
 }
 }
 
+
+@media(max-width:660px){
+
+	.pilotregistration_top_block .event_bannertext{width: 80%; margin: 0 auto;}
+}
+
 @media(max-width:480px){
 
     .event_top_block .logo{width: 90%; margin: 0 auto;}
     .event_top_block .logo img{width: 100%;}
     .event_bannertext{width: 80%; margin: 0 auto;}
+	
+	.pilotregistration_top_block .logo{width: 90%; margin: 0 auto;}
+    .pilotregistration_top_block .logo img{width: 100%;}
 }
 
 

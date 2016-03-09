@@ -1312,3 +1312,48 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 
 .resumefilename2{ margin-left: 156px;
     display: inline-block;}
+	
+	
+	
+/*---------------------------------------------------pilot-registration--------------------------------------------------------*/
+.pilotregistration_top_block{position: relative;}
+.event_bannersloderbox{position: relative;}
+.event_bannertext{position: absolute; left: 23%; top:83%; z-index: 5; width: 20%;}
+.event_bannerbg img{width: 100%;}
+.pilotregistration_top_block .bannerbgred{width: 53%; position: absolute; top: 44%; z-index: 4;}
+.pilotregistration_top_block .logo{left: 13%; position: absolute; top: 27%; width: 19%; z-index: 6;}
+.pilotregistration_top_block .event_bannerdrone{position: absolute; right: 18%; top: 43%; width: 34%;}
+
+
+.pilotregistration_top_block .event_bannerdronetour{ position: absolute;
+    right: 18%;
+    top: 73%;
+    width: 25%;}
+	
+.pilotregistration_body_container{margin-top:8%; padding:0!important;}
+.pilotregistration_body_container .pilotregistration_body_container_section	{width:100%;}
+.pilotregistration_body_container .pilotregistration_body_container_section	h1{color: #323131; font-family: "OpenSans-Bold"; font-size: 48px; letter-spacing: 1px; margin: 10px 0 0 0; text-align: center; text-transform: uppercase;}
+.pilotregistration_body_container .pilotregistration_body_container_section	h1 span{ color: #f30100;}
+.pilotregistration_body_container .pilotregistration_body_container_section	h2{color: #323131; font-family: "OpenSans-Bold"; font-size: 30px; letter-spacing: 1px; margin: 0px 0 18px 0; text-align: center; text-transform: uppercase;}
+.pilotregistration_body_container .pilotregistration_body_container_section	h2 span{color:#f30100;}
+
+.pilotregistration_body_section{background:#e7edef; width:100%; padding:25px 20px;}
+.pilotregistration_body_section_left{width:486px; float:left; padding-left:30px;}
+.pilotregistration_body_section_left img{width:100%;}
+.pilotregistration_body_section_left label{font-family:Arial, Helvetica, sans-serif; font-size:24px; color:#dc0101; font-weight:normal; margin:10px 0;}
+.pilotregistration_body_section_left p{font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#303030; font-weight:normal; margin:0; line-height:24px;}
+.pilotregistration_body_section_right{width:620px; float:right;}
+.pilotregistration_registration_top{background:#444b4d; padding:16px 26px;}
+.pilotregistration_registration_top h1{font-family:'MyriadPro-Semibold'!important; font-size:36px!important; color:#fff!important; margin:0px!important; text-align:left!important; background:  url(../images/pilotregistration_body_registrationicon.png) no-repeat left center; padding-left:70px; line-height:50px;}
+.pilotregistration_registration_bottom{background:#6c7375;}
+.pilotregistration_registration_bottom form{padding:36px 60px; padding-bottom:0px;}
+.pilotregistration_registration_bottom form label{font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#fff; font-weight:normal; display:inline-block; text-align:right; width:30%; float:left; margin:18px 0; padding-right:2%;}
+.pilotregistration_registration_bottom form .pilotregistration_input{width:70%; height:40px; background:#fff; border-radius:0px; display:inline-block; float:left; border:none; margin:9px 0; padding-left:7px;}
+.pilotregistration_registration_bottom form .errmsg{margin-left:30%; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#ff0000; display:block; margin-bottom:9px;}
+.pilotregistration_submit{width:248px; height:54px; background:#f30100;	font-family: "OpenSans-Semibold"; font-size:20px; color:#fff; text-transform:uppercase; text-align:center; padding:13px; float:right; border:none; margin-top:36px;}
+
+.pilotregistration_body_bottom{background:  url(../images/pilotregistration_body_img2.png) no-repeat bottom center; background-size:100%; padding:12% 0 0 0; margin-top:42px;}
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content{background:  url(../images/pilotregistration_body_img3.png) no-repeat bottom left; background-size:100%; width:74%; padding:90px 24px 40px 30px; height:185px;}
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-family: "OpenSans-Bold"; font-size:25px; color:#fff; text-transform:uppercase; margin:0px; padding:24px 0 8px 0;}
+.pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-family: "OpenSans-Semibold"; font-size:16px; color:#fff; line-height:24px; margin:0px; width:90%;}
+/*--------------------------------------------------end-pilot-registration--------------------------------------------------------*/		
