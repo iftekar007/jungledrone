@@ -345,10 +345,14 @@ function login(){
     $user_check=user_authenticate($user->name,@$_POST['password']);
     if($user_check>0 && $user->status==1){
 
+        //print_r($user->roles);
+
         $queryu = db_select('users', 'u');
-        $queryu->join('admin', 'a', 'a.user_id = u.uid');
+        if($user->roles[4]=='siteadmin')$queryu->join('admin', 'a', 'a.user_id = u.uid');
+        if($user->roles[6]=='pilot')$queryu->join('pilot', 'p', 'p.user_id = u.uid');
         $queryu->fields('u', array('uid','created','status','login','mail'));
-        $queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'))
+        if($user->roles[4]=='siteadmin')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        if($user->roles[6]=='pilot')$queryu->fields('p',array('fname','lname'))
             ->condition('u.uid', $user->uid, '=');
 
         //->range(0, 20);
@@ -357,10 +361,14 @@ function login(){
 
 
         while($recordu = $resultu->fetchAssoc()) {
+            //echo 5435;
             $thisuser = user_load($recordu['uid']);
             $picture=$thisuser->picture;
             if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
             else $picture='';
+
+            //print_r($recordu);
+            //exit;
 
             /*            $userlist['uid'] = $recordu['uid'];
                         $userlist['created'] = $recordu['created'];

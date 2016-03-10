@@ -1356,4 +1356,17 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content{background:  url(../images/pilotregistration_body_img3.png) no-repeat bottom left; background-size:100%; width:74%; padding:90px 24px 40px 30px; height:185px;}
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-family: "OpenSans-Bold"; font-size:25px; color:#fff; text-transform:uppercase; margin:0px; padding:24px 0 8px 0;}
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-family: "OpenSans-Semibold"; font-size:16px; color:#fff; line-height:24px; margin:0px; width:90%;}
+
+
+/*--------------------popup-----------------------*/
+
+
+
+#pilotsuccess .modal-dialog{ border: solid 4px #ed1c24; border-radius:10px; text-align:center;} 
+#pilotsuccess .modal-dialog .modal-content{border-radius:6px;  box-shadow: 0 0 8px #333 inset; font-family: "OpenSans-Semibold"; font-size:14px; color:#333;}
+#pilotsuccess .modal-dialog .modal-title{font-family: "OpenSans-Semibold"; color:#ed1c24;}
+#pilotsuccess .modal-dialog .modal-content h2{ text-align:center; margin:0; padding:5px 0;}
+#pilotsuccess .modal-dialog .modal-content .loginlink{color:#ff0b16;}
+
 /*--------------------------------------------------end-pilot-registration--------------------------------------------------------*/		
+

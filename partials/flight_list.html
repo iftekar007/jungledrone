@@ -1,0 +1,99 @@
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+           Flight Manager
+
+          </h1>
+          <ol class="breadcrumb">
+            <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <!--<li><a href="#">Tables</a></li>-->
+            <li class="active">Flight List</li>
+          </ol>
+            <div class="newblock1">
+<a ui-sref="add-flight" class="addfrinderbtn">Add Flight</a>
+            <input type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search Flight">
+                
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Flight List</h3>
+                </div><!-- /.box-header -->
+
+
+               <table ng-if="eventlist.length > 0" id="example1" class="table table-bordered table-striped">
+                   <thead>
+                   <tr>
+
+                       <th style="cursor: pointer" ng-click="order('fflight')">First Flight</th>
+                       <th style="cursor: pointer" ng-click="order('lflight')">Last Flight</th>
+                       <th style="cursor: pointer"  ng-click="order('realdatef')" >Flight Date</th>
+                       <th style="cursor: pointer" ng-click="order('timef')" >Flight Time</th>
+                       <th>Aircraft</th>
+                       <th>Manoeuvre</th>
+                       <th>Notes</th>
+                       <th>Action</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+
+                   <tr ng-repeat=" item in eventlist | filter:search | orderBy:predicate:reverse">
+                       <td>{{item.fflight}}</td>
+                       <td>
+
+                           {{item.lflight}}
+                       </td>
+                       <td>{{item.datef}}</td>
+                       <td>{{item.timef}}</td>
+                       <td> {{item.aircraft}}</td>
+                       <td> {{item.manoeuvre}}</td>
+                       <td> {{item.notes}}</td>
+
+
+
+
+
+
+                        <td> <a href="javascript:void(0)" ng-click="delflight(item)" >Delete</a></td>
+                      </tr>
+
+                    </tbody>
+                    
+                  </table>
+
+                 <!-- <div ng-show="eventlist.length > perPage" class="paginationblock">
+                  <uib-pagination total-items="eventlist.length" ng-model="currentPage" items-per-page="perPage" max-size="4" ng-change="pageChanged()"></uib-pagination>
+                  </div>-->
+<!--
+                  <div ng-if="userlist.length == null" class="paginationblock">
+                    <span class="error_msg1">No Records Found!</span>
+                  </div>
+-->
+
+                  <div ng-if="eventlist.length == 0" class="callout callout-danger">
+                      <h4>Sorry</h4>
+
+                      <p>No event exists in system right now !!.</p>
+                  </div>
+
+
+              </div><!-- /.box -->
+
+
+
+            </div>
+           
+          </div>   <!-- /.row -->
+        </section><!-- /.content -->
+      </div>

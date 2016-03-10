@@ -62,6 +62,7 @@
                   <ul class="treeview-menu">-->
 
               <li ng-if="userrole==4"><a ui-sref="contact-list"><i class="fa fa-link"></i> <span>Contact Leads</span></a></li>
+              <li ng-if="userrole==4"><a ui-sref="flight-list"><i class="fa fa-link"></i> <span>Flight List</span></a></li>
                   <!--</ul>
               </li>-->
               <li class="treeview" ng-if="userrole==4">
@@ -71,7 +72,14 @@
                       <li><a ui-sref="event-list">Event List</a></li>
                   </ul>
               </li>
-              
+              <li class="treeview" ng-if="userrole==6">
+                  <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Flight Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                      <li><a ui-sref="add-flight">Add Flight</a></li>
+                      <li><a ui-sref="flight-list">Flight List</a></li>
+                  </ul>
+              </li>
+
                  <li ng-if="userrole==4" ><a ui-sref="eventrsvplist"><i class="fa fa-link"></i> <span>Event RSVP</span></a></li>
                  
                   <li><a style="cursor: pointer" ui-sref="logout" ng-click="logout()"><i class="fa fa-link"></i> <span>Logout</span></a></li>
