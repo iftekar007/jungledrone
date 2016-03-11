@@ -690,7 +690,8 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
     //return
     // $rootScope.stateIsLoading = true;
 
-    if( typeof ($rootScope.userid)!='undefined')$rootScope.userid=0;
+    /*if( typeof ($rootScope.userid)!='undefined')
+        $rootScope.userid=0;*/
 
     $scope.form={};
 
@@ -715,7 +716,7 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
 
         $scope.countrylist=data;
 
-        $scope.signupForm.reset();
+        //$scope.signupForm.reset();
 
         setTimeout(function(){
 
@@ -1101,11 +1102,35 @@ jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieSto
 jungledrone.controller('header', function($scope,$state,$http,$cookieStore,$rootScope,Upload) {
 
 
+    $rootScope.userrole=0;
+    $rootScope.userfullname=0;
+    $rootScope.userid=0;
+    $rootScope.userrole=0;
+
+    if(typeof ($cookieStore.get('userrole')!='undefined'))
+        $rootScope.userrole=$cookieStore.get('userrole');
+    $rootScope.userfullname=$cookieStore.get('userfullname');
+    if(typeof ($cookieStore.get('userid'))!='undefined'){
+
+        $rootScope.userid=$cookieStore.get('userid');
+
+    }
+
+    $rootScope.userrole=$cookieStore.get('userrole');
+
+    console.log($rootScope.userid+'--userid');
     $rootScope.logout = function () {
         $cookieStore.remove('userid');
         $cookieStore.remove('username');
         $cookieStore.remove('useremail');
         $cookieStore.remove('userfullname');
+
+        $rootScope.userrole=0;
+        $rootScope.userfullname=0;
+        $rootScope.userid=0;
+        $rootScope.userrole=0;
+
+        console.log($rootScope.userid+'userid');
 
         console.log('in logout');
         $rootScope.userid=0;
@@ -1328,12 +1353,13 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
             data    : $.param($scope.form),  // pass in data as strings
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
         }) .success(function(data) {
-            $rootScope.stateIsLoading = false;
+            //$rootScope.stateIsLoading = false;
             if(data.status == 'success'){
                 $cookieStore.put('userid',data.userdetails.id);
                 $cookieStore.put('useremail',data.userdetails.email);
                 $cookieStore.put('userfullname',data.userdetails.fname+' '+data.userdetails.lname);
                 $cookieStore.put('username',data.userdetails.username);
+                $cookieStore.put('userrole',data.userdetails.userrole);
 
                 if(typeof (data.userdetails.roles[4]) != 'undefined')
                     $cookieStore.put('userrole',4);
@@ -1347,9 +1373,9 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
                 console.log($cookieStore.get('useremail'));
                 console.log($cookieStore.get('userfullname'));
 
-                $rootScope.userrole=$cookieStore.get('userrole');
 
-                console.log($rootScope.userrole);
+
+                //console.log($rootScope.userrole);
 
                 $state.go('dashboard');
 
@@ -3094,8 +3120,14 @@ jungledrone.controller('admin_header', function($scope,$state,$http,$cookieStore
     $rootScope.logout = function () {
         $cookieStore.remove('userid');
         $cookieStore.remove('username');
+        $cookieStore.remove('userrole');
         $cookieStore.remove('useremail');
         $cookieStore.remove('userfullname');
+
+        $rootScope.userrole=0;
+        $rootScope.userfullname=0;
+        $rootScope.userid=0;
+        $rootScope.userrole=0;
 
         console.log('in logout');
         $state.go('index');
