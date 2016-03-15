@@ -130,7 +130,7 @@ function flightlist()
 
     //'fname','lname','email','phone', 'country','city','resume'
 
-    $queryu->fields('ev', array('id','fflight','lflight','user_id','datef', 'timef', 'aircraft','manoeuvre','notes'));
+    $queryu->fields('ev', array('id','fflight','lflight','user_id','datef', 'timef', 'aircraft','manoeuvre','notes','createdtime'));
     // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
     // ->condition('ur.rid', 5, '=');
     if($_REQUEST['role']==6) $queryu->condition('ev.user_id', @$_REQUEST['userid'], '=');
@@ -157,6 +157,7 @@ function flightlist()
             $eventlist[$i]['aircraft'] = $recordu['aircraft'];
             $eventlist[$i]['manoeuvre'] = $recordu['manoeuvre'];
             $eventlist[$i]['notes'] = $recordu['notes'];
+            $eventlist[$i]['createdtime'] = date('m/d/Y',$recordu['createdtime']);
             //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
 
 
@@ -210,8 +211,8 @@ function employemsdfentlistfrontlisting()
             }
             $eventlist[$i]['event_status'] = $recordu['event_status'];
             $eventlist[$i]['event_daterange'] = $recordu['event_daterange'];
-            $eventlist[$i]['event_timerange'] = $recordu['event_timerange'];
-            $eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
+            $eventlist[$i]['event_timerange'] = $recordu['event_timerange']/60;
+            $eventlist[$i]['createdtime'] = date('m/d/Y',$recordu['createdtime']);
 
 
             $i++;
@@ -238,9 +239,9 @@ function addflight(){
 
 
 
-    $query = db_insert('flight')->fields(array('fflight','lflight','datef','timef', 'aircraft','manoeuvre','notes','user_id'));
+    $query = db_insert('flight')->fields(array('fflight','lflight','datef','timef', 'aircraft','manoeuvre','notes','user_id','createdtime'));
     //foreach ($values as $record) {
-    $query->values(array(@$_POST['first_flight'],@$_POST['last_flight'],@$_POST['flight_daterange'],@$_POST['timer'],@$_POST['aircraft'],@$_POST['manoeuvre'],@$_POST['notes'],@$_POST['user_id']));
+    $query->values(array(@$_POST['first_flight'],@$_POST['last_flight'],@$_POST['flight_daterange'],@$_POST['timer'],@$_POST['aircraft'],@$_POST['manoeuvre'],@$_POST['notes'],@$_POST['user_id'],time()));
     //}
     $query->execute();
 

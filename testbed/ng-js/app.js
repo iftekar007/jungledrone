@@ -2195,6 +2195,8 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
         $scope.opened = true;
     };
 
+    $scope.tdif=3600;
+
 
     $scope.addanother=function(){
         $scope.isaddanother=true;
@@ -2399,9 +2401,10 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
             return true;
         }
         if($scope.timediff()>0){
-            $scope.form.timer=angular.element('input[ng-model="hours"]').eq(0).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(0).val()) +" to "+angular.element('input[ng-model="hours"]').eq(1).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(1).val());
+            //$scope.form.timer=angular.element('input[ng-model="hours"]').eq(0).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(0).val()) +" to "+angular.element('input[ng-model="hours"]').eq(1).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(1).val());
 
-            angular.element('#timeval').val(angular.element('input[ng-model="hours"]').eq(0).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(0).val()) +" to "+angular.element('input[ng-model="hours"]').eq(1).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(1).val()));
+            $scope.form.timer=$scope.timediff();
+            angular.element('#timeval').val($scope.timediff());
             return true ;
         }
 
@@ -2415,6 +2418,12 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
 
     $scope.timediff= function () {
 
+
+
+
+        console.log($scope.endtime+'et'+
+        $scope.starttime+'st');
+
         /*console.log('td-'+parseInt($scope.endtime.getHours()-$scope.starttime.getHours()));
          console.log('md-'+parseInt($scope.endtime.getMinutes()-$scope.starttime.getMinutes()));*/
 
@@ -2427,9 +2436,9 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
         var totalet=parseInt(parseInt(angular.element('input[ng-model="hours"]').eq(1).val()*60)+parseInt(angular.element('input[ng-model="minutes"]').eq(1).val()));
 
 
-        console.log('timediff'+parseInt(totalet-totalst));
+        console.log('timediff'+$scope.tdif);
 
-        return parseInt(totalet-totalst);
+        return $scope.tdif;
 
         //
         /* console.log('td1-'+angular.element('input[ng-model="minutes"]').eq(0).val());
@@ -2465,7 +2474,7 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    $scope.ismeridian = false;
+    $scope.ismeridian = true;
     $scope.toggleMode = function() {
         $scope.ismeridian = ! $scope.ismeridian;
     };
@@ -2479,12 +2488,16 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
         d.setMinutes( 0 );
         $scope.endtime = d;
 
-        console.log('st'+$scope.starttime);
-        console.log('et'+$scope.endtime);
+        console.log('st changed'+$scope.starttime);
+        console.log('et changed'+$scope.endtime);
     };
 
-    $scope.changed = function () {
-        $log.log('Time changed to: ' + $scope.starttime);
+    $scope.changed = function (s,e) {
+        $log.log('ST changed to: ' + $scope.starttime);
+        $log.log('ET changed to: ' + $scope.endtime);
+        $log.log('ET changed to: ' +s+'====--=='+e);
+
+        $scope.tdif=parseInt(convert(e)-convert(s));
     };
 
     $scope.clear = function() {
@@ -3044,6 +3057,13 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
     };
 
 
+    $scope.resetdaterange=function(){
+
+        $scope.edate=null;
+        $scope.sdate=null;
+        $('input[name="edate"]').val('');
+        $('input[name="sdate"]').val('');
+    }
 
     $scope.currentPage=1;
     $scope.perPage=3;

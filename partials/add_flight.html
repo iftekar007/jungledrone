@@ -37,21 +37,21 @@
                   <div class="box-body">
 
                     <div class="form-group">
-                      <label >First Flight * :</label>
-                      <input type="text" class="form-control" placeholder="First Flight " name="first_flight"
+                      <label >First Name * :</label>
+                      <input type="text" class="form-control" placeholder="First Name " name="first_flight"
 
                              ng-model="form.first_flight"
-                             required-message="'First Flight can not be blank.'"
+                             required-message="'First Name can not be blank.'"
                              required>
 
                       <!-- <span class="errormsg">erroe msg</span>-->
                     </div>
                       <div class="form-group">
-                          <label >Last Flight * :</label>
-                          <input type="text" class="form-control" placeholder="Last Flight " name="last_flight"
+                          <label >Last Name * :</label>
+                          <input type="text" class="form-control" placeholder="Last Name " name="last_flight"
 
                                  ng-model="form.last_flight"
-                                 required-message="'Last Flight can not be blank.'"
+                                 required-message="'Last Name can not be blank.'"
                                  required>
 
                           <!-- <span class="errormsg">erroe msg</span>-->
@@ -90,7 +90,7 @@
                       </div>
 
                      <div class="form-group">
-                      <label >Event Date Range* :</label>
+                      <label >Date of Flight(s)* :</label>
                          <div class="input-group">
                              <div class="input-group-addon">
                                  <i class="glyphicon glyphicon-calendar"></i>
@@ -115,8 +115,8 @@
                     </div>
 
 
-                      <div class="form-group">
-                          <label >Flight Time Range* :</label>
+                      <div class="form-group flightgrp">
+                          <label >Start Flight* :</label>
 
                           <div class="input-group">
                               <!--<div class="input-group-addon">
@@ -157,6 +157,8 @@
                                   <pre class="alert alert-info">Time is: {{starttime | date:'shortTime' }}</pre>
 
 
+
+                                      <label class="endlabel" >End  Flight* :</label>
                                   <uib-timepicker ng-model="endtime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
 
                                   <pre class="alert alert-info">Time is: {{endtime | date:'shortTime' }}</pre>
@@ -233,20 +235,46 @@
 
                       <div class="form-group">
                           <label >Aircraft :</label>
-                          <input type="text" class="form-control" placeholder="Aircraft " name="last_flight"
+
+
+
+                          <select class="form-control" ng-model="form.aircraft">
+                              <option value="">Select An Aircraft</option>
+                              <option value="Phantom 3 Pink">Phantom 3 Pink</option>
+                              <option value="Inspire Pro White">Inspire Pro White</option>
+                              <option value="Phantom 3 Blue">Phantom 3 Blue</option>
+                              <option value="Phantom 3 Silver">Phantom 3 Silver</option>
+                              <option value="Blade Nano">Blade Nano</option>
+                              <option value="Proto">Proto</option>
+                              <option value="Vista">Vista</option>
+
+                          </select>
+                          <!--<input type="text" class="form-control" placeholder="Aircraft " name="last_flight"
 
                                  ng-model="form.aircraft"
-                                >
+                                >-->
 
                           <!-- <span class="errormsg">erroe msg</span>-->
                       </div>
 
                       <div class="form-group">
                           <label >Manoeuvre :</label>
-                          <input type="text" class="form-control" placeholder="Manoeuvre " name="last_flight"
+
+                          <select class="form-control" ng-model="form.manoeuvre">
+                              <option value="">Select An Manoeuvre </option>
+                              <option value="Walk the dog">Walk the dog</option>
+                              <option value="Figure 8">Figure 8</option>
+                              <option value="Basic Hover">Basic Hover</option>
+                              <option value="Basic Hover - tail facing">Basic Hover - Tail facing</option>
+                              <option value="Basic Hover - Nose facing">Basic Hover - Nose facing</option>
+
+
+                          </select>
+
+                         <!-- <input type="text" class="form-control" placeholder="Manoeuvre " name="manoeuvre"
 
                                  ng-model="form.manoeuvre"
-                                >
+                                >-->
 
                           <!-- <span class="errormsg">erroe msg</span>-->
                       </div>
@@ -267,7 +295,8 @@
                   </div><!-- /.box-body -->
 
                   <div class="box-footer" style="background:none; height:auto; padding-bottom:0px; padding-top:0px;">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" ng-click="psubmit()">Submit</button> or
+                    <button type="submit" class="btn btn-primary" ng-click="addanother()">Add Another Flight</button>
                   </div>
                 </form>
               </div><!-- /.box -->

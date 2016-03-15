@@ -116,9 +116,9 @@
 
 
                       <div class="form-group flightgrp">
-                          <label >Start Flight* :</label>
 
-                          <div class="input-group">
+
+                          <div class="input-group" style="width: 100%;">
                               <!--<div class="input-group-addon">
                                   <i class="fa fa-clock-o"></i>
                               </div>-->
@@ -150,18 +150,23 @@
                                   </div>
 
                               <div ng-controller="admin_header" ng-show="!allday" >
+                                  <div style="float: left; width: 180px">
+                                      <label >Start Flight* :</label>
 
+                                      <uib-timepicker ng-model="starttime" ng-change="changed(starttime,endtime)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
 
-                                  <uib-timepicker ng-model="starttime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-
-                                  <pre class="alert alert-info">Time is: {{starttime | date:'shortTime' }}</pre>
+                                      <pre class="alert alert-info">Time is: {{starttime | date:'shortTime' }}</pre>
+                                  </div>
+                                  <div style="float: left; width: 180px; margin-left: 30px;">
 
 
 
                                       <label class="endlabel" >End  Flight* :</label>
-                                  <uib-timepicker ng-model="endtime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                                      <uib-timepicker ng-model="endtime" ng-change="changed(starttime,endtime)" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
 
-                                  <pre class="alert alert-info">Time is: {{endtime | date:'shortTime' }}</pre>
+                                      <pre class="alert alert-info">Time is: {{endtime | date:'shortTime' }}</pre>
+
+                                  </div>
                               </div>
 
                           </div>

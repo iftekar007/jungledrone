@@ -39,7 +39,7 @@
                        show-weeks="false" close-text="Close"
                        >
 
-<button class="clear_datebtn">Clear</button>
+<button class="clear_datebtn" ng-click="resetdaterange()">Clear</button>
 
 
             <input style="float: right;clear: none" type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search Flight">
@@ -69,10 +69,11 @@
                        <th style="cursor: pointer" ng-click="order('fflight')">First Name</th>
                        <th style="cursor: pointer" ng-click="order('lflight')">Last Name</th>
                        <th style="cursor: pointer"  ng-click="order('realdatef')" >Flight Date</th>
-                       <th style="cursor: pointer" ng-click="order('timef')" >Flight Time</th>
+                       <th style="cursor: pointer" ng-click="order('timef')" >Flight Time(In Minutes)</th>
                        <th>Aircraft</th>
                        <th>Manoeuvre</th>
                        <th>Notes</th>
+                       <th>Added On</th>
                        <th>Action</th>
                    </tr>
                    </thead>
@@ -89,6 +90,7 @@
                        <td> {{item.aircraft}}</td>
                        <td> {{item.manoeuvre}}</td>
                        <td> {{item.notes}}</td>
+                       <td> {{item.createdtime}}</td>
 
 
 
@@ -114,7 +116,7 @@
                   <div ng-if="eventlist.length == 0" class="callout callout-danger">
                       <h4>Sorry</h4>
 
-                      <p>No event exists in system right now !!.</p>
+                      <p>No Flight exists in system right now !!.</p>
                   </div>
 
 

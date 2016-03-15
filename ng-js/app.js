@@ -1358,6 +1358,8 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
                 $cookieStore.put('userid',data.userdetails.id);
                 $cookieStore.put('useremail',data.userdetails.email);
                 $cookieStore.put('userfullname',data.userdetails.fname+' '+data.userdetails.lname);
+                $cookieStore.put('userfname',data.userdetails.fname);
+                $cookieStore.put('userlname',data.userdetails.lname);
                 $cookieStore.put('username',data.userdetails.username);
                 $cookieStore.put('userrole',data.userdetails.userrole);
 
@@ -2194,7 +2196,29 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
     };
 
 
+    $scope.addanother=function(){
+        $scope.isaddanother=true;
+    }
+    $scope.psubmit=function(){
+        $scope.isaddanother=false;
+    }
+
     $scope.form={};
+    $scope.form.first_flight= $cookieStore.get('userfname');
+    $scope.form.last_flight= $cookieStore.get('userlname');
+
+    setTimeout(function(){
+
+        $('input[name="first_flight"]').val($cookieStore.get('userfname'));
+        $('input[name="last_flight"]').val($cookieStore.get('userlname'));
+
+
+        console.log( $('input[name="first_flight"]').val()+'f val');
+        console.log( $('input[name="last_flight"]').val()+'l val');
+
+    },1500);
+
+
     $scope.event_status=false;
     $scope.form.user_id=$rootScope.userid;
     $scope.event_img=false;
@@ -2305,6 +2329,8 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
 
     $scope.addeventsForm=function(){
 
+
+        $scope.form.flight_daterangeorg=($scope.form.flight_daterange);
         $scope.form.flight_daterange=convert($scope.form.flight_daterange);
 
         console.log($.param($scope.form));
@@ -2317,7 +2343,26 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
         }) .success(function(data) {
             //$rootScope.stateIsLoading = false;
-            $state.go('flight-list');
+            if($scope.isaddanother){
+
+
+                $scope.df=$scope.form.flight_daterangeorg;
+                $scope.add_event.reset();
+                $scope.form.flight_daterange=$scope.df;
+                $('input[name="flight_daterange"]').val($scope.df);
+
+                $scope.form.first_flight= $cookieStore.get('userfname');
+                $scope.form.last_flight= $cookieStore.get('userlname');
+
+
+
+                $('input[name="first_flight"]').val($cookieStore.get('userfname'));
+                $('input[name="last_flight"]').val($cookieStore.get('userlname'));
+
+                $('select').val('');
+            }else{
+                $state.go('flight-list');
+            }
             console.log(data);
             /* if(data.status == 'error'){
              console.log(data);
@@ -2983,7 +3028,20 @@ jungledrone.controller('eventlist',function($scope,$state,$http,$cookieStore,$ro
 
 
 
-jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$rootScope){
+jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$rootScope,uibDateParser){
+
+
+
+
+
+    $scope.format = 'yyyy/MM/dd';
+    $scope.date = new Date();
+    $scope.open = function(opened) {
+        //$event.preventDefault();
+        //$event.stopPropagation();
+
+        $scope[opened] = true;
+    };
 
 
 
@@ -3032,6 +3090,38 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
             return true;
         }
         return false;
+    };
+
+
+    $scope.setdata = function(item){
+
+        /*console.log('daterange'+item);
+
+        console.log('in set data ');
+        console.log($scope.sdate+'in set data s');
+        console.log($scope.edate+'in set data  e');*/
+
+        $scope.nedate=convert($scope.edate);
+        $scope.nsdate=convert($scope.sdate);
+        if(typeof ($scope.edate)!='undefined' && typeof ($scope.sdate)!='undefined' && $scope.edate!=null && $scope.sdate!=null) {
+
+            console.log($scope.nedate + 'ed');
+            console.log($scope.nsdate + 'sd');
+            console.log(item.realdatef + 'red');
+            //if ($scope.edate.lenght > 0 && $scope.sdate.length > 0) {
+
+
+
+                if (item.realdatef <= $scope.nedate && item.realdatef >= $scope.nsdate)
+                    return true;
+                else return false;
+          //  }
+
+            //return false;
+        }
+        else{
+            return true;
+        }
     };
 
     $scope.delflight = function(item){
