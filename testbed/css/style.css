@@ -250,11 +250,12 @@ a:focus {
 	z-index:2;
 }
 .bannerbgwhite img {
-	width:100%;
+	width:99%;
 }
 .bannerbgred {
 	width:50%;
 	position:absolute;
+
 	top:60%;
 	z-index:4;
 }
@@ -2599,6 +2600,7 @@ opacity:1;
 .contactlink {
 	background: #f30100;
 	border: 1px solid #d50e0d;
+
 	border-radius: 5px;
 	color: #fff;
 	display: block;
@@ -2872,9 +2874,74 @@ opacity:1;
 }
 
 
+
+/*-------------------index------------------*/
+
+
+.go_dashboard{position:absolute; z-index:9999; top:20%; position:fixed;}
+
+.bannersloderbox .carousel-control{display:none;}
+
+@media screen and (max-width:1024px){
+.bannersloderbox .carousel-control{display:block;}
+.go_dashboard{top:30%;}
+}
 /*----http://testbed.jungledrones.com/flight-list------*/
 
+.main-header .logo img{width:56%;}
 
-.newblock1{width:80%; margin:0 auto; float:none; margin-top:10px;}
-.newblock1 .addfrinderbtn{float:none; display:block; margin:0 auto; margin-bottom:15px;}
-.newblock1 input{width:31.333%!important; float:left!important; margin-right:2%; padding:6px 12px!important;}
+.newblock1{width:100%; margin:0 auto; float:none; margin-top:10px;}
+.newblock1 .addfrinderbtn{ margin-bottom:15px;}
+.newblock1 input{width:25.333%!important; float:left!important; margin-right:1%; padding:6px 12px!important; height:34px!important;}
+.newblock1 label{width:10%; float:left; margin-right:1%; color:#151515; height:30px; line-height:30px; font-size:18px; text-align:center;}
+.newblock1 .clear_datebtn{width:9%; background:#848484; height:34px; text-align:center; display:inline-block; margin-right:1%; color:#fff; border:none; float:left;}
+
+.tohome{float:left; margin-left:15px; margin-top:20px;}
+.tohome span{font-family: "OpenSans-Regular"; font-size:14px;}
+.tohome img{display:inline-block; margin-right:6px;}
+
+
+.skin-blue .main-header .navbar{background:#d5dbd2!important; color:#151515;}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side{background: #d5dbd2!important; border-right:none!important;}
+.main-header .sidebar-toggle{padding:20px 15px!important;}
+.skin-blue .main-header .navbar .sidebar-toggle:hover{background:#949694!important;}
+.skin-blue .sidebar a{color:#1e1e1e!important;}
+.skin-blue .sidebar a:hover{color:#fff!important;}
+
+.user-panel > .info > a{color:#fff!important;}
+
+.control-sidebar-dark .control-sidebar-menu > li > a:hover {
+  background: #f30100!important;
+}
+.skin-blue .sidebar-menu > li > a{border-left:none!important;}
+
+
+.sidebar-mini.sidebar-collapse .sidebar-menu > li:hover a{background-color:#f30100!important;}
+.sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span{color:#fff!important; margin-left:0px!important;}
+.treeview-menu{background:#c20100!important; padding:0px!important;}
+.skin-blue .sidebar-menu > li > .treeview-menu li a{background:#9c0404!important;}
+.skin-blue .sidebar-menu > li > .treeview-menu li:last-child{border-bottom:none;}
+.skin-blue .sidebar-menu > li > .treeview-menu a{color:#fff!important;}
+.skin-blue .sidebar-menu > li > .treeview-menu a:hover{color:#fff!important;}
+
+
+  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .left_treemenu {display: block!important; position: absolute; width: 180px; left: 50px;}
+    .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .left_treemenu li a{background:#9c0404!important; padding-right:0px!important; border-bottom:1px solid #ed0909!important;}
+.left_treemenu li a{background:#9c0404!important; padding-right:0px!important; border-bottom:1px solid #ed0909!important;}
+
+
+.info-box-icon{background:none!important; float:right!important;}
+
+
+.content-header > h1{color:#ff0000!important;}
+
+
+.small-box{cursor:pointer;}
+.small-box .icon{top:10px!important; right:15px!important;}
+.bg-gray:hover .icon img{width:90%!important; transition:0.9s;}
+
+.inner h3{display: block; font-size: 18px!important; font-weight: bold!important; color: #1e1e1e; display: table-cell; font-size: 16px; height: 80px; margin: 0 auto; text-transform: uppercase; vertical-align: middle; width: 180px;}
+.small-box > .small-box-footer{color:rgba(255, 255, 255, 0.8)!important; background:#d60000!important;}
+
+.bg-gray{background:#2f2f2f;}
+

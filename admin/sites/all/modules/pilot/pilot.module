@@ -379,9 +379,9 @@ function addpilot(){
         $query->execute();
 
 
-        $op = 'register_pending_approval';
+        $op = 'register_admin_created';
         $status = _user_mail_notify($op, $account);
-        drupal_mail('user', 'register_pending_approval', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@jungledrones.com'));
+        drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@jungledrones.com'));
 
     }
 

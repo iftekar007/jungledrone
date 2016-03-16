@@ -3150,7 +3150,7 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
         $http({
             method  : 'POST',
             async:   false,
-            url     : $scope.adminUrl+'delflight',
+            url     : $scope.adminUrl+'delflight?role='+$rootScope.userrole,
             data    : $.param({id: $scope.eventlist[idx].id}),  // pass in data as strings
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
         }) .success(function(data) {

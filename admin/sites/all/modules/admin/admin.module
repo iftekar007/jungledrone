@@ -14,7 +14,7 @@ header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
 
-function finder_init() // init function called by defaulted when this module loaded by system
+function admin_init() // init function called by defaulted when this module loaded by system
 {
 
     //echo $GLOBALS['theme'];

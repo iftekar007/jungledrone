@@ -9,7 +9,7 @@
               <img src="images/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>{{}userfullname}</p>
+              <p>{{userfullname}}</p>
               <!-- Status -->
               <a href="javascript:void(0)"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -34,9 +34,9 @@
  <li><a ui-sref="dashboard"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
             <li class="treeview" ng-if="userrole==4">
               <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Admin Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
-              <ul class="treeview-menu">
-                <li><a ui-sref="add-admin">Add Admin</a></li>
-                <li><a ui-sref="admin-list">Admin List</a></li>
+              <ul class="treeview-menu left_treemenu">
+                <li><a style="background:#9c0404!important;" ui-sref="add-admin">Add Admin</a></li>
+                <li><a style="background:#9c0404!important;" ui-sref="admin-list">Admin List</a></li>
               </ul>
             </li>
  <!--             <li class="treeview">
@@ -67,14 +67,14 @@
               </li>-->
               <li class="treeview" ng-if="userrole==4">
                   <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Event Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
+                  <ul class="treeview-menu left_treemenu">
                       <li><a ui-sref="add-event">Add Event</a></li>
                       <li><a ui-sref="event-list">Event List</a></li>
                   </ul>
               </li>
               <li class="treeview" ng-if="userrole==6">
                   <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Flight Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
+                  <ul class="treeview-menu left_treemenu">
                       <li><a ui-sref="add-flight">Add Flight</a></li>
                       <li><a ui-sref="flight-list">Flight List</a></li>
                   </ul>

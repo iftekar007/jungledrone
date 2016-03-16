@@ -7,7 +7,7 @@
         <section class="content-header">
           <h1>
             Dashboard
-            <small></small>
+            <small>Control Panel</small>
           </h1>
           <ol class="breadcrumb">
             <li><a ui-sref="index"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -22,59 +22,175 @@
        
           <!-- Info boxes -->
           <div class="row">
+          <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray">
+            <div class="inner">
+              <h3>HOME</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon1.png" alt="#" style="display:block; margin:18px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          
+          <div class="small-box bg-gray" ui-sref="admin-list">
+            <div class="inner">
+              <h3>Manage Admin</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon2.png" alt="#" style="display:block; margin:21px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="signupuser-list">
+            <div class="inner">
+              <h3>Member Signup Leads</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon3.png" alt="#" style="display:block; margin:29px auto; width:50px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="signupuser-list">
+            <div class="inner">
+              <h3>Contact Leads</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon4.png" alt="#" style="display:block; margin:21px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+         <!---./col--->
+          <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="event-list">
+            <div class="inner">
+              <h3>Manage Events</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon5.png" alt="#" style="display:block; margin:24px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="event-rsvp">
+            <div class="inner">
+              <h3>Event Rsvp</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon6.png" alt="#" style="display:block; margin:21px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="pilot-list">
+            <div class="inner">
+              <h3>Pilot List</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon6.png" alt="#" style="display:block; margin:21px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="flight-list">
+            <div class="inner">
+              <h3>Flight  Manager</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon6.png" alt="#" style="display:block; margin:21px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-gray" ui-sref="logout">
+            <div class="inner">
+              <h3>log out</h3>
+            </div>
+            <div class="icon">
+              <img src="images/aicon9.png" alt="#" style="display:block; margin:24px auto; width:48px;">
+            </div>
+            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+<!----------------------------16-03-2016--changes-------------------------------> 
+<!---       
             <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box" ui-sref="index">
-                <span class="info-box-icon bg-aqua"> <img src="images/aicon1.png" alt="#" style="display:block; margin:23px auto; width:48px;"></span>
+              <div class="info-box bg-aqua" ui-sref="index">
+                <span class="info-box-icon"> <img src="images/aicon1.png" alt="#" style="display:block; margin:23px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
                   <span class="info-box-number">HOME</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
-        
-        
-        <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box" ui-sref="admin-list">
-                <span class="info-box-icon bg-aqua"><img src="images/aicon2.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
+        	<div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
+              <div class="info-box bg-aqua" ui-sref="admin-list">
+                <span class="info-box-icon"><img src="images/aicon2.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
                    <span class="info-box-number">Manage Admin</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box
             </div>
-            
-            
             <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box" ui-sref="signupuser-list">
-                <span class="info-box-icon bg-aqua"><img src="images/aicon3.png" alt="#" style="display:block; margin:29px auto; width:50px;"></span>
+              <div class="info-box bg-aqua" ui-sref="signupuser-list">
+                <span class="info-box-icon"><img src="images/aicon3.png" alt="#" style="display:block; margin:29px auto; width:50px;"></span>
                 <div class="info-box-content">
                   
                    <span class="info-box-number">Member Signup Leads</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
-            
-            
-            
             <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box" ui-sref="contact-list">
-                <span class="info-box-icon bg-aqua"><img src="images/aicon4.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
+              <div class="info-box bg-aqua" ui-sref="contact-list">
+                <span class="info-box-icon"><img src="images/aicon4.png" alt="#" style="display:block; margin:21px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
                     <span class="info-box-number">Contact Leads </span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
             
-            
+        
             <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box" ui-sref="event-list">
                 <span class="info-box-icon bg-aqua"><img src="images/aicon5.png" alt="#" style="display:block; margin:24px auto; width:48px;"></span>
                 <div class="info-box-content">
                   
                   <span class="info-box-number">Manage Events</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
             
             <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
@@ -83,8 +199,8 @@
                 <div class="info-box-content">
                   
                   <span class="info-box-number">Event Rsvp</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
 
             <div ng-if="userrole==4" class="col-md-3 col-sm-6 col-xs-12">
@@ -93,8 +209,8 @@
                 <div class="info-box-content">
 
                   <span class="info-box-number">Pilot List</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
 
             <div  class="col-md-3 col-sm-6 col-xs-12">
@@ -103,10 +219,20 @@
                 <div class="info-box-content">
 
                   <span class="info-box-number">Flight  Manager</span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
+                </div><!-- /.info-box-content 
+              </div><!-- /.info-box 
             </div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box" ui-sref="logout">
+                      <span class="info-box-icon bg-aqua"><img src="images/aicon9.png" alt="#" style="display:block; margin:24px auto; width:48px;"></span>
+                      <div class="info-box-content">
 
+                          <span class="info-box-number" >log out</span>
+                      </div>
+                  </div>
+              </div>
+              
+<!----------------------------16-03-2016--end-changes------------------------------->
 
             <!--<div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
@@ -141,15 +267,7 @@
          
 -->
 
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                  <div class="info-box" ui-sref="logout">
-                      <span class="info-box-icon bg-aqua"><img src="images/aicon9.png" alt="#" style="display:block; margin:24px auto; width:48px;"></span>
-                      <div class="info-box-content">
-
-                          <span class="info-box-number" >log out</span>
-                      </div>
-                  </div>
-              </div>
+              
             
           </div>
 

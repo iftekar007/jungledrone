@@ -74,6 +74,7 @@
                        <th>Manoeuvre</th>
                        <th>Notes</th>
                        <th>Added On</th>
+                       <th ng-if="userrole!=6">Added On</th>
                        <th>Action</th>
                    </tr>
                    </thead>
@@ -91,6 +92,7 @@
                        <td> {{item.manoeuvre}}</td>
                        <td> {{item.notes}}</td>
                        <td> {{item.createdtime}}</td>
+                       <td ng-if="userrole!=6"> {{(item.status==1) ? 'Active' : 'Deleted'}}</td>
 
 
 

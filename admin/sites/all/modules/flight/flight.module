@@ -130,10 +130,13 @@ function flightlist()
 
     //'fname','lname','email','phone', 'country','city','resume'
 
-    $queryu->fields('ev', array('id','fflight','lflight','user_id','datef', 'timef', 'aircraft','manoeuvre','notes','createdtime'));
+    $queryu->fields('ev', array('id','fflight','lflight','user_id','datef', 'timef', 'aircraft','manoeuvre','notes','createdtime','status'));
     // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
     // ->condition('ur.rid', 5, '=');
-    if($_REQUEST['role']==6) $queryu->condition('ev.user_id', @$_REQUEST['userid'], '=');
+    if($_REQUEST['role']==6) {
+        $queryu->condition('ev.user_id', @$_REQUEST['userid'], '=');
+        $queryu->condition('ev.status', 1, '=');
+    }
     $queryu->orderBy('id', 'DESC');
     $resultu = $queryu->execute();
 
@@ -153,10 +156,11 @@ function flightlist()
             $eventlist[$i]['realdatef'] = $recordu['datef'];
 
 
-            $eventlist[$i]['timef'] = $recordu['timef'];
+            $eventlist[$i]['timef'] = $recordu['timef']/60;
             $eventlist[$i]['aircraft'] = $recordu['aircraft'];
             $eventlist[$i]['manoeuvre'] = $recordu['manoeuvre'];
             $eventlist[$i]['notes'] = $recordu['notes'];
+            $eventlist[$i]['status'] = $recordu['status'];
             $eventlist[$i]['createdtime'] = date('m/d/Y',$recordu['createdtime']);
             //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
 
@@ -213,6 +217,7 @@ function employemsdfentlistfrontlisting()
             $eventlist[$i]['event_daterange'] = $recordu['event_daterange'];
             $eventlist[$i]['event_timerange'] = $recordu['event_timerange']/60;
             $eventlist[$i]['createdtime'] = date('m/d/Y',$recordu['createdtime']);
+            $eventlist[$i]['status'] = $recordu['status'];
 
 
             $i++;
@@ -303,9 +308,20 @@ function delflight(){
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
-    $num_deleted = db_delete('flight')
-        ->condition('id', @$_POST['id'])
-        ->execute();
+    if($_REQUEST['role']!=6) {
+        $num_deleted = db_delete('flight')
+            ->condition('id', @$_POST['id'])
+            ->execute();
+    }
+
+    if($_REQUEST['role']==6) {
+        db_update('flight')
+            //->expression('weight', 'weight + :weight', array(':weight' => 1))
+            ->fields(array('status' => 0))
+            ->condition('id', intval($_POST['id']))
+            ->execute();
+    }
+
 
 }
 

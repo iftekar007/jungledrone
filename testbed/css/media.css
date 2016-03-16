@@ -1270,3 +1270,12 @@
 }
 
 
+@media screen and (max-width:767px){
+
+.main-header .logo .logo-lg{width:160px; margin:0 auto;}
+.content-wrapper{margin-top:20px;}
+.newblock1 label{display:block; text-align:center; width:100%; margin:0 auto; margin-bottom:10px; float:none;}
+.newblock1 input{width:90%!important; margin:0 auto; display:block; margin-bottom:6px; float:none!important;}
+.newblock1 .clear_datebtn{width:120px; margin:0 auto; display:block; float:none; margin-bottom:6px;}
+
+}

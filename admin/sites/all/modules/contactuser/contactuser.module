@@ -209,6 +209,11 @@ function addcontactuser(){
   //  $op = 'register_pending_approval';
    // $status = _user_mail_notify($op, $account);
    // drupal_mail('contactuser', 'register_contactuser_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+    $account = user_load_by_mail(trim('rahul@gmail.com'));
+
+    drupal_mail('user', 'register_pending_approval', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@jungledrones.com'));
+
+
     $data['status'] = 'success';
      echo json_encode($data);
     return;
