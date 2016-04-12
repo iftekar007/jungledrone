@@ -2945,3 +2945,9 @@ opacity:1;
 
 .bg-gray{background:#2f2f2f;}
 
+
+
+#add_Admin .uploadbtn_main{  color: #000000 !important;}
+
+
+#add_Admin .form-group section{ display: block; width: 52px; float: left;}

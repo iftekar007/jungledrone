@@ -108,11 +108,34 @@ function event_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['backup'] = array(
+        'title' => 'backup',
+        'page callback' => 'backup',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
      return $items;
 }
 
+function backup(){
+
+    echo 5;
+
+    $dbhost = 'localhost';
+    $dbuser = 'debasis';
+    $dbpass = 'P@ss7890';
+    $dbname='jungledrone_drupal';
+
+    $backup_file = $dbname . date("Y-m-d-H-i-s") . '.gz';
+    $command = "mysqldump --opt -h $dbhost -u $dbuser -p $dbpass ". "test_db | gzip > $backup_file";
+
+    $x=system($command);
+    print_r($x);
+}
 
 function eventdetails(){
     header('Content-type: text/html');

@@ -54,7 +54,7 @@ function contact_schema() {
 
             'create_time' => array(
                 'description' => 'create time',
-                 'type' => varchar,
+                 'type' => 'varchar',
                 'length' => '255',
                  'default' => '',
             ),

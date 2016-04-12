@@ -7,20 +7,122 @@
 
 /* App Module */
 
-var jungledrone = angular.module('jungledrone', ['ui.router','ngCookies','ui.bootstrap','angularValidator','ngFileUpload']);
+var jungledrone = angular.module('jungledrone', ['ui.router','ngCookies','ui.bootstrap','angularValidator','ngFileUpload','ui.tinymce']);
 
-jungledrone.run(['$rootScope', '$state',function($rootScope, $state){
+
+
+jungledrone.service('contentservice', function($http, $log, $q) {
+// this.data='';
+    var d;
+
+    this.getcontent= function(url) {
+        //var deferred = $q.defer();
+        $http.get(url)
+            .success(function(data) {
+                /* deferred.resolve({
+                 content: data,
+                 val:0
+                 });*/
+                //this.data=data;
+                d= data;
+                //return data;
+            }).error(function(msg, code) {
+                //deferred.reject(msg);
+                $log.error(msg, code);
+            });
+        return d;
+    }
+
+
+
+    /*return {
+     getcontent: function(url){
+
+     $http.get(url)
+     .success(function(data) {
+     /!*deferred.resolve({
+     content: data
+     });*!/
+     //this.data=data;
+     d=data;
+     //return data;
+     }).error(function(msg, code) {
+     /!*deferred.reject(msg);
+     $log.error(msg, code);*!/
+     });
+     console.log('d-'+url);
+     return url;
+     },
+     sayGoodbye: function(text){
+     return "Factory says \"Goodbye " + text + "\"";
+     }
+     }*/
+});
+
+
+
+jungledrone.run(['$rootScope', '$state','contentservice',function($rootScope, $state,contentservice,$timeout){
+
+
 
     $rootScope.$on('$stateChangeStart',function(){
+        $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
         $rootScope.stateIsLoading = true;
     });
 
 
-    $rootScope.$on('$stateChangeSuccess',function(){
-        $rootScope.stateIsLoading = false;
+    $rootScope.$on('$stateChangeSuccess',function($timeout){
+        setTimeout(function(){
+
+            $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
+            $rootScope.stateIsLoading = false;
+
+        },20);
+
+
+        $(document).scrollTop(0);
     });
 
 }]);
+
+
+
+
+jungledrone.directive('content', function() {
+    var directive = {};
+    directive.restrict = 'E';
+    directive.template = "name: <b>{{student.name}}</b> , desc : <b>{{(student.description)}}</b> , type: <b>{{student.ctype}}</b> , content: <b>{{student.content}}</b>";
+
+    directive.scope = {
+        student : "=name"
+    }
+    var contentw='';
+    var x;
+
+    directive.compile = function(element, attributes) {
+        element.css("border", "1px solid #cccccc");
+
+        var linkFunction = function($scope, element, attributes) {
+           // console.log('content'+student.content);
+            //console.log('ctype'+student.ctype);
+            for (x in student.content){
+                contentw+=student.content[x];
+            }
+
+            element.html("name: <b>"+$scope.student.name +"</b> , desc: <b>"+(student.description)+"</b>,type :<b>"+$scope.student.ctype+"</b> ,content :<b>"+$scope.student.contentw+"</b><br/>");
+            element.css("background-color", "#ff00ff");
+        }
+        return linkFunction;
+    }
+
+    return directive;
+});
+
+
+
+
+
+
 
 jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider) {
 
@@ -132,6 +234,26 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         })
 
+ .state('packagedelivery',{
+            url:"/package-delivery",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/footer.html' ,
+                    //controller: 'footer'
+                },
+                'content': {
+                    templateUrl: 'partials/package-delivery.html' ,
+                    //controller: 'packagedelivery'
+                },
+
+            }
+        })
+
 
         .state('dashboard',{
             url:"/dashboard",
@@ -151,6 +273,30 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 'content': {
                     templateUrl: 'partials/dashboard.html' ,
                      controller: 'dashboard'
+                },
+
+            }
+        }
+    )
+
+        .state('addcontent',{
+            url:"/add-content",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                    //  controller: 'admin_left'
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/add_content.html' ,
+                     controller: 'addcontent'
                 },
 
             }
@@ -1339,6 +1485,615 @@ jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$
 
 });
 
+jungledrone.controller('addcontent', function($compile,$scope,contentservice,$state,$http,$cookieStore,$rootScope,Upload) {
+
+
+
+    //console.log(contentservice.getcontent($scope.adminUrl+'contentlist'));
+   // $scope.contentdata=(contentservice.getcontent($scope.adminUrl+'contentlist'));
+
+    setTimeout(function(){
+
+
+        //console.log($rootScope.contentdata);
+        var x;
+        var y;
+
+        for (x in $rootScope.contentdata ){
+            var contentw='';
+            console.log($rootScope.contentdata[x]);
+            console.log(angular.fromJson($rootScope.contentdata[x].content));
+
+            for (y in $rootScope.contentdata[x].content){
+                contentw+=$rootScope.contentdata[x].content[y];
+            }
+            $rootScope.contentdata[x].content=contentw;
+
+            $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+        console.log('----'+$scope);
+
+
+    },21);
+
+
+   /* console.log($scope.contentdata.$$state.status);
+    console.log($scope.contentdata.$$state);
+    console.log(Object.keys($scope.contentdata).length);
+    console.log(Object.keys($scope.contentdata.$$state).length);
+    console.log($scope.contentdata.$$state.value);
+    var x;
+    for(x in $scope.contentdata.$$state){
+
+        console.log(x+'===='+$scope.contentdata.$$state[x]);
+
+    }*/
+    $scope.Mahesh = {};
+    $scope.Mahesh.name = "Mahesh Parashar";
+    $scope.Mahesh.id  = 1;
+    $scope.Mahesh.content  = 4;
+
+    $scope.Piyush = {};
+    $scope.Piyush.name = "Piyush Parashar";
+    $scope.Piyush.id  = 2;
+    $scope.Piyush.content  = 2;
+
+    $scope.tinymceOptions = {
+        trusted: true,
+        theme: 'modern',
+        plugins: [
+            'advlist autolink link  lists charmap   hr anchor pagebreak spellchecker',
+            'searchreplace wordcount visualblocks visualchars code  insertdatetime  nonbreaking',
+            'save table contextmenu directionality  template paste textcolor'
+        ],
+        // toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+        toolbar: ' undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link  |   media fullpage | forecolor backcolor',
+    };
+
+    $scope.form={};
+    $scope.form.resume = '';
+    $scope.form.resumearrn = new Array();
+    $scope.form.resumearrp = new Array();
+    $scope.form.resume = null;;
+
+
+    $scope.caclismultiple=function(){
+
+        if($scope.form.ismultiple=='yes'){
+
+            $scope.ismultipleval=true;
+        }
+        else   $scope.ismultipleval=false;
+
+    }
+
+    $scope.delcopy=function(ev){
+
+        console.log('test ...');
+
+        var target = ev.target || ev.srcElement || ev.originalTarget;
+
+        if($scope.cimage==true) {
+
+            var spval = ($('.imgc').find('.delb').index(target));
+            $scope.form.resumearrn.splice(spval, 1);
+            $scope.form.resumearrp.splice(spval, 1);
+            $(target).parent().remove();
+        }
+
+        if($scope.ctext==true || $scope.chtml==true){
+            console.log($(target).prev().prev().attr('indexval'));
+           // $scope.form.ctext.splice($(target).prev().attr('indexval'),1);
+           // /delete $scope.form.ctext.$(target).prev().attr('indexval');
+            var key = $(target).prev().prev().attr('indexval');
+            if(key!=0){
+               ;
+                if($scope.ctext==true) $scope.form.ctext[key]=null;
+                if($scope.chtml==true) $scope.form.chtml[key]=null;
+                var res= $(target).parent().parent();
+                $(target).parent().remove()
+                $compile(res)($scope);
+
+            }else{
+                alert('You can not delete default content area' );
+            }
+
+        }
+
+
+
+
+
+
+
+
+    }
+    $scope.addcopy=function(ev){
+
+
+
+        var target = ev.target || ev.srcElement || ev.originalTarget;
+
+
+
+
+
+        //console.log($( target).parentsUntil('.copyarea').html());
+        if($scope.cimage!=true) {
+            if ($scope.ctext == true ) {
+
+                var addedval =parseInt(parseInt($(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('indexval'))+1);
+                if(isNaN(addedval)) addedval=1;
+
+                var res=$(target).prev().prev().clone().appendTo($(target).parent().find('.clearfix1').last());
+
+                /*console.log($(target).parent().find('.clearfix1').last().find('.copyarea').last().index());
+                console.log($(target).prev().find('.copyarea').last().html());
+                console.log($(target).prev().html());
+                console.log($(target).prev().attr('class'));
+*/
+                $(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('indexval',addedval);
+                $(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('ng-model','form.ctext['+addedval+']');
+                $(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('name','ctext['+addedval+']');
+                //$compile(res)($scope);
+                $compile($(target).prev().find('.copyarea').last())($scope);
+                $(target).prev().find('.copyarea').last().find('button').removeClass('delb');
+
+                $scope.add_Admin.$setDirty(true);
+
+            }
+            if ($scope.chtml == true) {
+                var addedval =parseInt(parseInt($('div[ng-show="chtml"]').find('textarea').last().attr('indexval'))+1);
+                if(isNaN(addedval)) addedval=1;
+
+               /* $(target).parent().find('.clearfix1').last().html("<div class='form-group' ng-show='chtml'>\
+            <label >Put Html Content  :</label>\
+            \<div class='copyarea'>\
+                \<textarea ui-tinymce='tinymceOptions'   name='chtml["+addedval+"]'  indexval ="+addedval+"  \
+             \ ng-model='form.chtml["+addedval+"]'  required-message='content can not be blank' \
+                \ required\
+              \  ></textarea>\
+        \<div class='clearfix'></div>\
+               \ <button type='button' ng-click='delcopy($event)' class='btn btn-primary'>Delete</button>\
+               \ </div>\
+                \<div class='clearfix clearfix1'></div>\
+               \</div>");*/
+
+
+
+                $(target).parent().find('.clearfix1').last().append("\<div class='copyarea'>\
+                \<textarea ui-tinymce='tinymceOptions'   name='chtml["+addedval+"]'  indexval ="+addedval+"  \
+             \ ng-model='form.chtml["+addedval+"]'   \
+                \ required\
+              \  ></textarea>\
+        \<div class='clearfix'></div>\
+               \ <button type='button' ng-click='delcopy($event)' class='btn btn-primary'>Delete</button>\
+               \ </div>\
+                \<div class='clearfix'></div>");
+
+
+                /*$(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('indexval',addedval);
+                $(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('ng-model','form.ctext['+addedval+']');
+                $(target).parent().find('.clearfix1').last().find('.copyarea').last().find('textarea').attr('name','ctext['+addedval+']');*/
+
+                //var res=$('form').find('div[ng-show="chtml"]').html();
+                //$('div[ng-show="chtml"]').find('textarea').last().attr('ui-tinymce',$scope.tinymceOptions);
+                var res=$(target).parent().find('.copyarea').last();
+
+                $compile(res)($scope || $rootScope);
+                //$rootScope.$digest();
+
+
+            }
+        }
+        else {
+            $('input.uploadbtn').click();
+            console.log($('button.uploadbtn').text());
+        }
+
+
+
+        //$( target).appendTo($( target).parentsUntil(".form-group" ))
+        //$( target).parentsUntil('.copyarea').after(chtml);
+
+
+
+        if($scope.chtml==true) {
+            $('.add-content').last().wysihtml5({
+                toolbar: {
+                    "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+                    "emphasis": true, //Italics, bold, etc. Default true
+                    "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+                    "html": true, //Button which allows you to edit the generated HTML. Default false
+                    "link": true, //Button to insert a link. Default true
+                    "image": true, //Button to insert an image. Default true,
+                    "color": true, //Button to change color of font
+                    "blockquote": true, //Blockquote
+                }
+            });
+        }
+    }
+    $scope.form.ismultiple='no';
+    $scope.cimage=false;
+    $scope.chtml=false;
+    $scope.ctext=false;
+
+
+    $scope.ctype=function(ctype){
+
+        //console.log(ev);
+
+        $scope.cimage=false;
+        $scope.chtml=false;
+        $scope.ctext=false;
+
+        //$('textarea').removeAttr('required');
+
+        if(ctype=='html') {
+
+           // $('textarea[name^="chtml"]').attr('required','');
+            $scope.chtml=true;
+        }
+        if(ctype=='text') {
+            //$('textarea[name^="ctext"]').attr('required','');
+            $scope.ctext=true;
+        }
+        if(ctype=='image') $scope.cimage=true;
+
+        //$compile($('.chtml'))($scope);
+        //$compile($('.ctext'))($scope);
+
+
+
+    }
+
+
+
+
+
+
+
+
+    /*file upload part start */
+
+
+    setTimeout(function(){
+
+        $('.add-content').wysihtml5({
+            toolbar: {
+                "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+                "emphasis": true, //Italics, bold, etc. Default true
+                "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+                "html": true, //Button which allows you to edit the generated HTML. Default false
+                "link": true, //Button to insert a link. Default true
+                "image": true, //Button to insert an image. Default true,
+                "color": true, //Button to change color of font
+                "blockquote": true, //Blockquote
+            }
+        });
+
+    },2000);
+
+
+    $scope.$watch('event_imgupload', function (files) {
+        $scope.formUpload = false;
+        if (files != null) {
+            for (var i = 0; i < files.length; i++) {
+                $scope.errorMsg = null;
+                (function (file) {
+                    upload(file);
+                })(files[i]);
+            }
+        }
+    });
+
+    $scope.getReqParams = function () {
+        return $scope.generateErrorOnServer ? '?errorCode=' + $scope.serverErrorCode +
+        '&errorMessage=' + $scope.serverErrorMsg : '';
+    };
+
+    function upload(file) {
+        $scope.errorMsg = null;
+        uploadUsingUpload(file);
+    }
+
+    function uploadUsingUpload(file) {
+        $rootScope.stateIsLoading = true;
+        file.upload = Upload.upload({
+            url: $scope.adminUrl+'uploadcontent' + $scope.getReqParams(),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            fields: {'id':$rootScope.createIdeaId},
+            file: file,
+            fileFormDataName: 'Filedata'
+        });
+
+        file.upload.then(function (response) {
+            $('.progress').removeClass('ng-hide');
+            file.result = response.data;
+
+            if($scope.form.ismultiple=='yes'){
+
+                $scope.form.resumearrn.push(response.data.image_name);
+                $scope.form.resumearrp.push(response.data.image_url);
+
+                $scope.form.resume = null;
+                $scope.form.event_image = null;
+
+            }
+            else {
+
+                $scope.form.resume = response.data.image_url;
+                $scope.form.event_image = response.data.image_name;
+
+                $scope.form.resumearrn.length=0;
+                $scope.form.resumearrp.length=0;
+            }
+            $rootScope.stateIsLoading = false;
+
+            //$('#loaderDiv').addClass('ng-hide');
+
+
+        }, function (response) {
+            if (response.status > 0)
+                $scope.errorMsg = response.status + ': ' + response.data;
+        });
+
+        file.upload.progress(function (evt) {
+            // Math.min is to fix IE which reports 200% sometimes
+            // $('#loaderDiv').removeClass('ng-hide');
+
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
+        });
+
+        file.upload.xhr(function (xhr) {
+            // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+        });
+    }
+
+
+
+    /*file upload end */
+
+
+    setTimeout(function(){
+        $scope.form.country={};
+        $scope.form.country.s_name='Belize';
+        $('#country').val(20);
+    },2000);
+
+
+
+    $scope.contentValidator=function(){
+
+
+       // console.log('in gender validator');
+        //console.log($scope.signupForm.$submitted);
+        //console.log($("input[name='drone']:checked").val());
+
+
+
+        if($scope.add_Admin.$submitted){
+
+            /*if(typeof ($("input[name='gender']:checked").val()) != 'undefined' )
+            {
+                $scope.gender_error=false;
+                //console.log('in true');
+                return true ;
+            }
+            else {
+                //console.log('in false');
+                $scope.gender_error=true;
+                return '';
+
+            }*/
+
+
+           // if()
+
+
+
+
+            if($scope.form.ismultiple=='yes'){
+
+
+
+                //console.log($scope.chtml);
+
+
+
+                $scope.ismultipleval=true;
+            }
+            else   $scope.ismultipleval=false;
+
+
+
+            //console.log($scope.form.ismultiple);
+
+            if(typeof ($scope.form.ismultiple)!='undefined') return true;
+
+            else return 'Required !' ;
+
+        }
+
+    }
+    $scope.contenetv=function(){
+
+
+       // console.log('in gender validator');
+        //console.log($scope.signupForm.$submitted);
+        //console.log($("input[name='drone']:checked").val());
+
+
+
+        if($scope.add_Admin.$submitted){
+
+            /*if(typeof ($("input[name='gender']:checked").val()) != 'undefined' )
+            {
+                $scope.gender_error=false;
+                //console.log('in true');
+                return true ;
+            }
+            else {
+                //console.log('in false');
+                $scope.gender_error=true;
+                return '';
+
+            }*/
+            console.log($scope.form.ctext);
+            if(typeof ($scope.form.ctext)!='undefined')
+                console.log(Object.keys($scope.form.ctext).length);
+            console.log($('textarea[name^="ctext"]').length);
+
+
+           // if()
+
+            console.log('in cont validator');
+
+
+
+
+
+
+        }
+
+    }
+
+    $scope.submitadminForm=function(){
+
+
+        if($scope.chtml == true ){
+
+            var chtmlarr= new Array();
+            chtmlarr=[];
+            //$scope.form.chtml=null;
+
+            /*$('textarea[name^="chtml"]').each(function(){
+
+                console.log($(this).val());
+
+                //chtmlarr.push($(this).val());
+
+
+            });
+
+            $scope.form.chtml = JSON.stringify(chtmlarr);*/
+
+
+        }
+        /*if($scope.ctext == true ){
+
+            var chtmlarr= new Array();
+            chtmlarr=[];
+            $scope.form.ctext=null;
+
+            $('textarea[name="ctext"]').each(function(){
+
+                //console.log($(this).val());
+
+                chtmlarr.push($(this).val());
+
+
+            });
+
+            $scope.form.ctext = JSON.stringify(chtmlarr);
+
+
+        }*/
+
+        console.log($scope.form);
+        console.log($.param($scope.form));
+
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'addcontent',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            //$('#employmentmodal').modal('show');
+            console.log(data);
+           // $scope.employmentform.reset();
+           // $scope.form={};
+
+            // $('#employmentmodal').modal('show');
+            setTimeout(function(){
+
+
+              //  $scope.form.country={};
+              //  $scope.form.country.s_name='Belize';
+              //  $('#country').val(20);
+               // $('#employmentmodal').modal('hide');
+
+            },3000);
+
+
+
+    });
+
+    }
+
+    $scope.employmentsubmit=function(){
+
+
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'addemployement',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $('#employmentmodal').modal('show');
+            //console.log($scope.signupForm)
+            $scope.employmentform.reset();
+            $scope.form={};
+
+            // $('#employmentmodal').modal('show');
+            setTimeout(function(){
+
+
+                $scope.form.country={};
+                $scope.form.country.s_name='Belize';
+                $('#country').val(20);
+                $('#employmentmodal').modal('hide');
+
+            },3000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+
+
+    }
+
+
+
+
+});
+
 
 
 
@@ -1396,9 +2151,10 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
                 // }
 
             }else{
+                $rootScope.stateIsLoading = false;
                 $scope.errormsg = data.msg;
 
-                console.log('in error');
+                console.log('in error'+$rootScope.stateIsLoading );
             }
 
         });
