@@ -52,6 +52,14 @@ function contentmanager_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['contentlistbyid'] = array(
+        'title' => 'event List',
+        'page callback' => 'contentlistbyid',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
     $items['uploadcontent'] = array(
         'title' => 'event Updates',
@@ -151,6 +159,59 @@ function contentlist()
             $recordu['content']=json_decode($recordu['content']);
 
             $eventlist[$i]=$recordu;
+
+
+            $i++;
+
+        }
+    }
+    echo json_encode(@$eventlist);
+
+}
+function contentlistbyid()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $userlist = array();
+
+    $queryu = db_select('contentmanager', 'ev');
+
+    //'fname','lname','email','phone', 'country','city','resume'
+
+    $queryu->fields('ev', array('id','cname','content','description','ctype','parentid'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    // ->condition('ur.rid', 5, '=');
+    $queryu->condition('ev.id', $_POST['id'], '=');
+    //->range(0, 20);
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            // $picture=$recordu['event_image'];
+            // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            // else $picture='';
+
+           /* $eventlist[$i]['id'] = $recordu['id'];
+            $eventlist[$i]['fname'] = $recordu['fname'];
+            $eventlist[$i]['lname'] = $recordu['lname'];
+            $eventlist[$i]['email'] = $recordu['email'];
+            $eventlist[$i]['phone'] = $recordu['phone'];
+
+            $eventlist[$i]['city'] = $recordu['city'];
+            $eventlist[$i]['country'] = $recordu['country'];
+            $eventlist[$i]['resume'] = $recordu['resume'];*/
+            //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
+            $recordu['name']=$recordu['id'];
+            $recordu['content']=json_decode($recordu['content']);
+
+            $eventlist=$recordu;
 
 
             $i++;
