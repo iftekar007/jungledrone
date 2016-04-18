@@ -30,15 +30,15 @@
      
      <div class="gallerytopleftsearch2">
      <div class="stockphoto_selectoption2">
-     <select>
-     <option>Images</option>
-      <option>Videos</option>
+     <select ng-model="type" name="type">
+     <option value="Stock Image">Images</option>
+      <option value="Stock Video">Videos</option>
      </select>
       
      </div>
      
      <div class="stockphoto_inputoption2">
-     <input type="text" placeholder="Lorem Ipsum"  class="stockphotosearch2"/>
+     <input type="text" placeholder="Search Category" ng-model="searchkey" class="stockphotosearch2"/>
     <input type="button"  class="stockphotobtn2"/> 
           <div class="clear"></div>
      </div>
@@ -67,16 +67,16 @@
 <div class="container-fluid  category_mainwrapper">
    <div class="row">
    
-       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock" ng-repeat="item in categorylist">
+       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 categoryblock" ng-repeat="item in categorylist | filter:searchkey">
        
-       <div class="category_blockheading">{{item.cat_name}}</div>
+       <div ng-if="item.type==type" class="category_blockheading">{{item.cat_name}}</div>
        
-       <div class="category_bigimg"><img src="{{item.image_url}}" alt="#">
+       <div ng-if="item.type==type" ui-sref="stock-photo({id:item.id})"  class="category_bigimg"><img src="{{item.image_url}}" alt="#">
        <!--<div class="category_bigimg"><img src="images/categoryblockimg.png" alt="#">-->
 
        </div>
        
-          <div class="category_smallimg">
+          <div ng-if="item.type==type"  class="category_smallimg">
           
           <div class="smallimgblock"><img src="images/categoryimg_th1.png" alt="#"></div>
              <div class="smallimgblock"><img src="images/categoryimg_th2.png" alt="#"></div>

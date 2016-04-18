@@ -222,13 +222,17 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             url:"/imagesizeadd",
             views: {
 
-                'header': {
-                    templateUrl: 'partials/admin_header.html' ,
-                    controller: 'header'
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
                 },
-                'footer': {
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                    //  controller: 'admin_left'
+                },
+                'admin_footer': {
                     templateUrl: 'partials/admin_footer.html' ,
-                    //controller: 'footer'
                 },
                 'content': {
                     templateUrl: 'partials/imagesizeadd.html' ,
@@ -281,7 +285,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
         })
 
         .state('stock-category',{
-            url:"/stock-category",
+            url:"/stock-category/:type",
             views: {
 
                 'header': {
@@ -475,6 +479,28 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         }
     )
+        .state('edit-imagesize',{
+            url:"/edit-imagesize/:id",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/edit_imagesize.html' ,
+                    controller: 'editimagesize'
+                },
+
+            }
+        }
+    )
         .state('edit-content',{
             url:"/edit-content/:userId",
             views: {
@@ -518,6 +544,29 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 'content': {
                     templateUrl: 'partials/admin_list.html' ,
                     controller: 'adminlist'
+                },
+
+            }
+        }
+    )
+        .state('imagesize-list',{
+            url:"/imagesize-list",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                    //  controller: 'admin_left'
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/imagesize_list.html' ,
+                    controller: 'imagesizetlist'
                 },
 
             }
@@ -973,7 +1022,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
 
 
         .state('stock-photo',{
-            url:"/stock-photo",
+            url:"/stock-photo/:id",
             views: {
 
                 'header': {
@@ -3304,6 +3353,41 @@ jungledrone.controller('addadmin', function($scope,$state,$http,$cookieStore,$ro
 
     //console.log('in add admin form ');
 });
+jungledrone.controller('imagesizeadd', function($scope,$state,$http,$cookieStore,$rootScope) {
+    // $state.go('login');
+    //$scope.contact=['Anytime','Early morning','Mid morning','Afternoon','Early evening','Late evening'];
+    $scope.submitadminForm = function(){
+
+        console.log($scope.adminUrl+'imagesizeadd');
+
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'imagesizeadd',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            //$rootScope.stateIsLoading = false;
+            if(data.status == 'error'){
+                console.log(data);
+                $('.email_div').append('<label class="control-label has-error validationMessage">This email already exists.</label>');
+            }else{
+                $state.go('imagesize-list');
+                return;
+            }
+
+
+
+        });
+
+
+    }
+
+    //console.log('in add admin form ');
+});
+
+
 jungledrone.controller('editadmin', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams){
 
     $scope.userid=$stateParams.userId;
@@ -3341,6 +3425,46 @@ jungledrone.controller('editadmin', function($scope,$state,$http,$cookieStore,$r
         }) .success(function(data) {
             $rootScope.stateIsLoading = false;
             $state.go('admin-list');
+            return
+        });
+    }
+
+
+})
+jungledrone.controller('editimagesize', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams){
+
+    $scope.id=$stateParams.id;
+
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     :     $scope.adminUrl+'imagesizedetails',
+        data    : $.param({'id':$scope.id}),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        console.log(data);
+        $scope.form = {
+            id: data.id,
+            sizename: data.sizename,
+            height: data.height,
+            width: data.width,
+            priority: data.priority,
+            status: data.status
+
+        }
+    });
+    $scope.update = function () {
+
+        $rootScope.stateIsLoading = true;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'imagesizeupdates',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $state.go('imagesize-list');
             return
         });
     }
@@ -3423,6 +3547,82 @@ jungledrone.controller('adminlist', function($scope,$state,$http,$cookieStore,$r
 
     //console.log('in add admin form ');
 });
+jungledrone.controller('imagesizelist', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.currentPage=1;
+    $scope.perPage=3;
+    $scope.begin=0;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function(){
+        console.log($scope.currentPage);
+        $scope.begin=parseInt($scope.currentPage-1)*$scope.perPage;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+    }
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     : $scope.adminUrl+'imagesizelist',
+        // data    : $.param($scope.form),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        $rootScope.stateIsLoading = false;
+        console.log(data);
+        $scope.userlist=data;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( (item.sizename.indexOf($scope.searchkey) != -1) || (item.height.indexOf($scope.searchkey) != -1) ||(item.width.indexOf($scope.searchkey) != -1)||(item.mobile_no.indexOf($scope.searchkey) != -1)||(item.phone_no.indexOf($scope.searchkey) != -1) ||(item.address.indexOf($scope.searchkey) != -1)){
+            return true;
+        }
+        return false;
+    };
+    $scope.deladmin = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.userlist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'deleteimagesizeupdate',
+            data    : $.param({id: $scope.userlist[idx].id}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.userlist.splice(idx,1);
+            $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+        });
+    }
+
+    $scope.changeStatus = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.userlist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'imagesizeupdatestatus',
+            data    : $.param({id: $scope.userlist[idx].id,status:$scope.userlist[idx].status}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.userlist[idx].status = 1-$scope.userlist[idx].status;
+        });
+    }
+
+
+
+
+    //console.log('in add admin form ');
+});
+
+
 jungledrone.controller('signupuserlist', function($scope,$state,$http,$cookieStore,$rootScope) {
     $scope.currentPage=1;
     $scope.perPage=2;
@@ -5151,9 +5351,13 @@ jungledrone.controller('services', function($scope,$state,$http,$cookieStore,$ro
 });
 
 
-jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope) {
+jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
     // $state.go('login');
    //  $scope.categorylist=[];
+
+    $scope.categoryid={};
+    $scope.categoryid.id=$stateParams.id;
+
     $scope.type='Stock Image';
     $http({
         method:'POST',
@@ -5164,7 +5368,15 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     }).success(function(data){
         $scope.categorylist=data;
-       // console.log($scope.categorylist);
+
+        $scope.categorylist[0]=
+        {
+            id: 0,
+            cat_name: 'All'
+        };
+
+        //$scope.categorylist[0].category_id='All';
+        console.log($scope.categorylist);
 /*
         angular.forEach(data, function(value, key){
             console.log(value.type);
@@ -5174,7 +5386,9 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         });
         console.log($scope.categorylist);
 */
-    })
+    });
+
+
 
     $http({
         method:'POST',
@@ -5185,7 +5399,16 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     }).success(function(data){
         $scope.productlist=data;
-    })
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( ((item.product_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) || ((item.product_desc.indexOf($scope.searchkey) != -1) && item.type==$scope.type)|| ((item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ) {
+            return true;
+        }
+        return false;
+    };
 
 
 
@@ -5221,8 +5444,22 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
 
     }).success(function(data){
         $scope.productlist=data;
+        $scope.pname=($scope.productlist[$scope.id].product_name);
     });
 
+
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     : $scope.adminUrl+'imagesizelist',
+        // data    : $.param($scope.form),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        $scope.imagesizelist=data;
+        $rootScope.stateIsLoading = false;
+
+
+    });
     $('script[src="ng-js/ui-bootstrap-tpls-0.14.3.min.js"]').remove();
 
     setTimeout(function(){
@@ -5250,15 +5487,20 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
 
 
 });
-jungledrone.controller('stockcategory', function($scope,$state,$http,$cookieStore,$rootScope) {
+jungledrone.controller('stockcategory', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
     // $state.go('login');
     //  $scope.categorylist=[];
+
+    if($stateParams.type=='image')
     $scope.type='Stock Image';
+    if($stateParams.type=='video')
+    $scope.type='Stock Video';
+
     $http({
         method:'POST',
         async:false,
         url:$scope.adminUrl+'junglecategorylist',
-        data    : $.param({'type':$scope.type}),
+        //data    : $.param({'type':$scope.type}),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
@@ -5276,6 +5518,15 @@ jungledrone.controller('stockcategory', function($scope,$state,$http,$cookieStor
     })
 
 
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( (item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) {
+            return true;
+        }
+        return false;
+    };
 
 
  /*   $scope.showmodal=function($ev){
@@ -5889,6 +6140,8 @@ jungledrone.controller('editcategoryjungle', function($scope,$state,$http,$cooki
 
 
         }
+
+        $scope.cat_img_src=data.image_url;
     });
     $scope.tinymceOptions = {
         trusted: true,

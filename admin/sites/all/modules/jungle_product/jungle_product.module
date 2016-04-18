@@ -140,6 +140,36 @@ function imguploadproduct(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
     set_time_limit(0);
 
+    $x=arg();
+    //print_r($x[1]);
+
+    $queryu = db_select('jungleproduct', 'ca');
+    $queryu->fields('ca');
+    $queryu->condition('ca.id',$x[1],'=');
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+             $filePath = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
+
+            $jungleproductlist[$i]= $temparray;
+            $i++;
+
+            /*            $jungleproductlist[$i]['cat_name'] = $recordu['cat_name'];
+                        $jungleproductlist[$i]['id'] = $recordu['id'];
+                        $jungleproductlist[$i]['parent_cat'] = $recordu['parent_cat'];
+                        $jungleproductlist[$i]['status'] = $recordu['status'];
+                        $i++;*/
+
+        }
+    }
+
+
+    //print_r($filePath);
+    //exit;
 
 
 
@@ -148,8 +178,14 @@ function imguploadproduct(){
 
 
     // Load the stamp and the photo to apply the watermark to
-    $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/icon5copy.png');
-    $im = imagecreatefrompng('http://admin.jungledrones.com/sites/default/files/styles/large/public/1409592420_1460628545.png');
+    $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/icon_1.png');
+    if(strpos($filePath,'.png')>0)$im = imagecreatefrompng($filePath);
+    if(strpos($filePath,'.jpg')>0) $im = imagecreatefromjpeg($filePath);
+    if(strpos('.jpeg',$filePath)>0) $im = imagecreatefromjpeg($filePath);
+
+    //list($current_width, $current_height) = getimagesize($filePath);
+
+
 
 // Set the margins for the stamp and get the height/width of the stamp image
     $marge_right = 0;
@@ -165,7 +201,7 @@ function imguploadproduct(){
 // width to calculate positioning of the stamp.
     //imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
     //imagecopy($im, $stamp, $centerX, $centerY, 0, 0, imagesx($stamp), imagesy($stamp));
-    imagecopy($im, $stamp, 0, -250,85, 0, imagesx($stamp), imagesy($stamp));
+    imagecopy($im, $stamp, 0, -100,0, 0, imagesx($stamp), imagesy($stamp));
 
 // Output and free memory
     header('Content-type: image/png');

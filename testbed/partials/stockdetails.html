@@ -71,7 +71,7 @@
   
    <span ng-repeat="itemphoto  in productlist">
    
-   <img style="max-height:338px" src="{{itemphoto.image_url}}" ng-if="itemphoto.id==id" alt="#">
+   <img style="max-height:338px" src="http://admin.jungledrones.com/imguploadproduct/{{itemphoto.id}}" ng-if="itemphoto.id==id" alt="#">
    
   </span>
    
@@ -80,7 +80,7 @@
    
    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 details_text">
    
-   <label>Quisque posuere elementum varius. Aenean sit amet nunc a nisl rhoncus mollis. Aenean sodales hendrerit mi non pellentesque.</label>
+   <label class="pname">{{productlist[id].product_name}}</label>
    
    <span>Stock Photo ID : <strong>2569887</strong></span>
    
@@ -151,7 +151,7 @@
   
 </table>
 
-      <a href="javascript:void(0)" class="tabdownloadbtn">Download</a>
+        <a target="_blank"  href="http://admin.jungledrones.com/filedownload/id/{{id}}" class="tabdownloadbtn">Download</a>
     </div>
     <div id="menu3" class="tab-pane fade">
      <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -160,38 +160,20 @@
     <td align="center" valign="middle"><a href="javascript:void(0)">px</a> | <a href="javascript:void(0)">in</a> | <a href="javascript:void(0)">cm</a></td>
        <td align="right" valign="middle">Credits</td>
   </tr>
-  
-  <tr>
-   <td align="left" valign="middle"><b>Small</b> </td>
-    <td align="center" valign="middle">900 x 600</td>
-    <td align="right" valign="middle"><strong>1</strong></td>
-  </tr>
-  <tr>
-   <td align="left" valign="middle"><b>Medium </b> </td>
-    <td align="center" valign="middle">1600 x 1066</td>
-    <td align="right" valign="middle"><strong>2</strong></td>
-  </tr>
 
-  <tr>
-   <td align="left" valign="middle"><b> Large  </b> </td>
-    <td align="center" valign="middle">2800 x 1866</td>
-    <td align="right" valign="middle"><strong>4</strong></td>
-  </tr>
-  
-  <tr>
-   <td align="left" valign="middle"><b> X-Large   </b> </td>
-    <td align="center" valign="middle">5616 x 3744</td>
-    <td align="right" valign="middle"><strong>6</strong></td>
-  </tr>
-  
-    <tr>
-   <td align="left" valign="middle"><b> Extended License 	 </b> </td>
-    <td align="center" valign="middle">5616 x 3744</td>
-    <td align="right" valign="middle"><strong>50</strong></td>
-  </tr>
-  
-  
-</table>
+
+         <tbody ng-repeat="imgsize  in imagesizelist ">
+         <tr>
+
+             <td align="left" valign="middle"><b> <a target="_blank"  href="http://admin.jungledrones.com/filedownload/id/{{id}}" class="tabdownloadbtn"> {{imgsize.sizename}}</a></b> </td>
+             <td align="center" valign="middle"> <a target="_blank"  href="http://admin.jungledrones.com/filedownload/id/{{id}}" class="tabdownloadbtn">{{imgsize.width}} x {{imgsize.height}}</a></td>
+             <td align="right" valign="middle"><strong> <a target="_blank"  href="http://admin.jungledrones.com/filedownload/id/{{id}}" class="tabdownloadbtn">{{$index}}</a></strong></td>
+         </tr>
+         </tbody>
+
+
+     </table>
+        <a target="_blank"  href="http://admin.jungledrones.com/filedownload/id/{{id}}" class="tabdownloadbtn">Download</a>
 
 <h3>Sizes apply to subscriptions and credits</h3>
     </div>

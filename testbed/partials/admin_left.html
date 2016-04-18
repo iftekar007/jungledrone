@@ -94,6 +94,13 @@
                       <li><a ui-sref="product-list">Product List</a></li>
                   </ul>
               </li>
+              <li class="treeview" ng-if="userrole==4">
+                  <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Image Size Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu left_treemenu">
+                      <li><a ui-sref="imagesizeadd">Add Image Size</a></li>
+                      <li><a ui-sref="imagesize-list">Image Size List</a></li>
+                  </ul>
+              </li>
 
                  <li ng-if="userrole==4" ><a ui-sref="eventrsvplist"><i class="fa fa-link"></i> <span>Event RSVP</span></a></li>
                  

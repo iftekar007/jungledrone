@@ -42,7 +42,7 @@
      </div>
      
      <div class="stockphoto_inputoption">
-     <input type="text" placeholder="Find Your Picture Image…"  class="stockphotosearch"/>
+     <input type="text" ng-model="searchkey" placeholder="Find Your Picture Image…"  class="stockphotosearch"/>
     <input type="button"  class="stockphotobtn"/> 
           <div class="clear"></div>
      </div>
@@ -74,9 +74,9 @@
      <label>Category</label>
     <!-- <select ng-options="item.cat_name for item in categorylist track by item.id">-->
 
-         <select    ng-repeat="item in categorylist"  >
-             <option value="" >All</option>
-             <option value="item.id" >{{item.cat_name}}</option>
+         <select  ng-model="categoryid"   ng-options="item as item.cat_name for item in categorylist track by item.id"  >
+             <!--<option value="" >All</option>-->
+             <!--<option value="item.id" >{{item.cat_name}}</option>-->
 
          </select>
 
@@ -202,20 +202,30 @@
    
    
     <div class="galleryrow1">
-     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-repeat="itemphoto  in productlist">
-      <div class="galleryblocksrc">
-    <!-- <img  src="images/demoimg.jpg" alt="#" class="gallerysrcimg" >-->
-     <img  src="{{itemphoto.image_url}}" imgsrc="{{itemphoto.image_url}}" alt="#" ng-click="showmodal($event)" class="gallerysrcimg" >
 
-     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
-  <tr>
-    <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event)" imgsrc="{{itemphoto.image_url}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
-     <td align="left" valign="middle"> <a href="javascript:void(0)"><img ui-sref="stock-details({id:itemphoto.id})"  src="images/stockphoto_hovericon2.png" alt="#"></a></td>
-  </tr>
-</table>
 
-     </div>
-     </div>
+        <span ng-repeat="itemphoto  in productlist | filter:searchkey" >
+
+            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-if="itemphoto.category_id==categoryid.id || (categoryid.id==0) "  >
+                <div class="  galleryblocksrc" >
+                    <!-- <img  src="images/demoimg.jpg" alt="#" class="gallerysrcimg" >-->
+                    <img  src="http://admin.jungledrones.com/imguploadproduct/{{itemphoto.id}}" imgsrc="{{itemphoto.image_url}}" alt="#" ng-click="showmodal($event)" class="gallerysrcimg" >
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+                        <tr>
+                            <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event)" imgsrc="{{itemphoto.image_url}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+                            <td align="left" valign="middle"> <a href="javascript:void(0)"><img ui-sref="stock-details({id:itemphoto.id})"  src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </span>
+
+
+
 <!--
      <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
       <div class="galleryblocksrc">
