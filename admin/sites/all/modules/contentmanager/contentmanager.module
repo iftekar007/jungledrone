@@ -156,7 +156,10 @@ function contentlist()
             $eventlist[$i]['resume'] = $recordu['resume'];*/
             //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
             $recordu['name']=$recordu['id'];
-            $recordu['content']=json_decode($recordu['content']);
+            if($recordu['ctype']!='image') $recordu['content']=json_decode($recordu['content']);
+            else $recordu['content']="<img src= ".file_create_url($recordu['content'])." />";
+
+
 
             $eventlist[$i]=$recordu;
 
@@ -209,7 +212,62 @@ function contentlistbyid()
             $eventlist[$i]['resume'] = $recordu['resume'];*/
             //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
             $recordu['name']=$recordu['id'];
-            $recordu['content']=json_decode($recordu['content']);
+            //$recordu['content']=json_decode($recordu['content']);
+            if($recordu['parentid']==0)$recordu['parentid']=json_decode($recordu['id']);
+            if($recordu['ctype']!='image')$recordu['content']=json_decode($recordu['content']);
+            else{
+                $recordu['content']=($recordu['content']);
+                $recordu['contenturl']=file_create_url($recordu['content']);
+            }
+
+            $eventlist=$recordu;
+            //echo $recordu['content'];
+            //echo "<br/>";
+
+
+            $i++;
+
+        }
+    }
+
+    $queryu = db_select('contentmanager', 'ev');
+
+    //'fname','lname','email','phone', 'country','city','resume'
+
+    $queryu->fields('ev', array('id','cname','content','description','ctype','parentid'));
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    // ->condition('ur.rid', 5, '=');
+    $queryu->condition('ev.parentid', $_POST['id'], '=');
+    //->range(0, 20);
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            // $picture=$recordu['event_image'];
+            // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            // else $picture='';
+
+            /* $eventlist[$i]['id'] = $recordu['id'];
+             $eventlist[$i]['fname'] = $recordu['fname'];
+             $eventlist[$i]['lname'] = $recordu['lname'];
+             $eventlist[$i]['email'] = $recordu['email'];
+             $eventlist[$i]['phone'] = $recordu['phone'];
+
+             $eventlist[$i]['city'] = $recordu['city'];
+             $eventlist[$i]['country'] = $recordu['country'];
+             $eventlist[$i]['resume'] = $recordu['resume'];*/
+            //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
+            $recordu['name']=$recordu['parentid'];
+            $recordu['id']=$recordu['parentid'];
+            //$recordu['content']=json_decode($recordu['content']);
+            if($recordu['parentid']==0)$recordu['parentid']=json_decode($recordu['id']);
+
+            if($recordu['ctype']!='image')$recordu['content']=json_decode($recordu['content']);
+            else $recordu['content']=file_create_url($recordu['content']);
+
+
 
             $eventlist=$recordu;
 
@@ -292,13 +350,25 @@ function addcontent(){
 
     if($_POST['ctype']=='text') $content = json_encode(array_filter($_POST['ctext']));
     if($_POST['ctype']=='html') $content = json_encode(array_filter($_POST['chtml']));
-    if($_POST['ctype']=='image') $content = json_encode(array_filter($_POST['resumearrp']));
+    if($_POST['ctype']=='image'){
+
+       // print_r(strlen(@$_POST['resume']));
+        if(strlen(@$_POST['resume'])>0){
+            $_POST['resume'][0]=$_POST['resume'];
+            $content = $_POST['resume'];
+        }
+        if(count(@$_POST['resumearrp'])>0)$content = json_encode(array_filter($_POST['resumearrp']));
+       // print_r($content);
+        //print_r($_POST['resume'][0]);
+
+    }
 
 
+    if(!isset($_POST['parentid'])) $_POST['parentid']=0;
 
     $query = db_insert('contentmanager')->fields(array('cname','content','description','ctype','parentid'));
     //foreach ($values as $record) {
-    $query->values(array(@$_POST['cname'],$content,@$_POST['description'],@$_POST['ctype'],0));
+    $query->values(array(@$_POST['cname'],$content,@$_POST['description'],@$_POST['ctype'],@$_POST['parentid']));
     //}
     $query->execute();
 
@@ -420,7 +490,8 @@ function uploadcontent(){
         $profile_url = image_style_url('thumbnail', $filepath);*/
     }
 
-    $data['image_url']= file_create_url((@$file->uri));
+    $data['image_url']= ((@$file->uri));
+    $data['image_url_url']= file_create_url((@$file->uri));
     $data['image_name']= (@$_FILES['Filedata']['name']);
     echo json_encode(@$data) ;
 

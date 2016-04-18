@@ -80,6 +80,21 @@
                   </ul>
               </li>
 
+              <li class="treeview" ng-if="userrole==4">
+                  <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Category Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu left_treemenu">
+                      <li><a ui-sref="add-category">Add Category</a></li>
+                      <li><a ui-sref="category-list">Category List</a></li>
+                  </ul>
+              </li>
+              <li class="treeview" ng-if="userrole==4">
+                  <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Product Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu left_treemenu">
+                      <li><a ui-sref="add-product">Add Product</a></li>
+                      <li><a ui-sref="product-list">Product List</a></li>
+                  </ul>
+              </li>
+
                  <li ng-if="userrole==4" ><a ui-sref="eventrsvplist"><i class="fa fa-link"></i> <span>Event RSVP</span></a></li>
                  
                   <li><a style="cursor: pointer" ui-sref="logout" ng-click="logout()"><i class="fa fa-link"></i> <span>Logout</span></a></li>

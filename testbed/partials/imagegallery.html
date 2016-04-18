@@ -13,7 +13,7 @@
                     <a href="javascript:void(0)"><img src="images/logo.png" alt="#" ></a>
                 </div>
 
-                <img src="images/newgallerytext.png" alt="#" class="gellary_bannertext2">
+                <img src="images/newgalleryheading.png" alt="#" class="gellary_bannertextnew">
 
                 <img src="images/gellary_banner_drone.png" alt="#" class="event_bannerdrone">
 
@@ -25,263 +25,442 @@
 
 <div class="clear"></div>
 
-<div class="gallerybody">
 
 
-<div class="services_heading"><div><label><h3  style="font-size:22px;"><span>Get instant access to specialized images exclusively taken by</span> JungleDrones.</h3></label></div></div>
 
-<div class="gallery_search_body">
+<div class="container newgalleryblocktop">
+   <div class="row">
+     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+     
+     <div class="gallerytopleftsearch">
+     <div class="stockphoto_selectoption">
+     <select>
+     <option>Images</option>
+      <option>Videos</option>
+     </select>
+     
+     </div>
+     
+     <div class="stockphoto_inputoption">
+     <input type="text" placeholder="Find Your Picture Image…"  class="stockphotosearch"/>
+    <input type="button"  class="stockphotobtn"/> 
+          <div class="clear"></div>
+     </div>
+     
+   
+     <div class="clear"></div>
+     </div>
+     
+     
+     <a href="javascript:void(0)" class="filter_results">Filter Results</a>
+     
+
+<div class="clear"></div>
+
+     </div>
+        
+     <div class="clear"></div>
+     <div class="stock-photo_topblock2">
+     
+     <div class="sptop2_block1">
+     
+     <div class="divclass1">
+     <label>Orientation</label>
+     <img src="images/stockphoto_icon2.png" alt="#">
+     
+     </div>
+     
+     <div class="divclass2">
+     <label>Category</label>
+    <!-- <select ng-options="item.cat_name for item in categorylist track by item.id">-->
+
+         <select    ng-repeat="item in categorylist"  >
+             <option value="" >All</option>
+             <option value="item.id" >{{item.cat_name}}</option>
+
+         </select>
+
+
+<!--         <select    ng-options="item.cat_name for item in categorylist track by item.id"  >
+             <option value="" >All</option>
+
+         </select>
+
+     <option>All</option>
+     <option>All</option>
+-->
+
+
+     
+     </div>
+     
+     <div class="clear"></div>
+     </div>
+     
+     
+     
+       <div class="sptop2_block2">
+     
+     <div class="divclass3">
+     <label>Exclude a Keyword</label>
+     <input type="text" />
+     
+     </div>
+     
+     <div class="divclass4">
+     <label>Contributor</label>
+     <input type="text" />
+     
+     </div>
+     
+     <div class="clear"></div>
+     </div>
+     
+     
+     <div class="sptop2_block3">
+     <label>Image Type</label>
+     
+     
+     <a href="javascript:void(0)" class="activeimgtype">Photos</a>
+     
+      <a href="javascript:void(0)">Vectors</a>
+       <a href="javascript:void(0)">Illustrations</a>
+     
+          <div class="clear"></div>
+     <div class="clear"></div>
+     </div>
+     
+     
+     
+     <div class="sptop2_block4">
+     <label>Number of People</label>
+     
+     
+     <a href="javascript:void(0)" class="activeimgnumber">1</a>
+     
+      <a href="javascript:void(0)">2</a>
+       <a href="javascript:void(0)">+</a>
+     
+          <div class="clear"></div>
+     <div class="clear"></div>
+     </div>
+     
+     <div class="clear"></div>
+     </div>
+     
+       <div class="stock-photo_topblock3">
+       
+      <div class="sptop3_block1">
+       
+       <p><strong>Lorem Ipsum</strong> Stock Photos <strong>(25,122, 503 Results)</strong></p>
+       
+       <span>Related :   <a href="javascript:void(0)">lorem ipsum</a>,   <a href="javascript:void(0)">dolor</a>,   <a href="javascript:void(0)">sit amet</a>,   <a href="javascript:void(0)">demo</a></span>
+       
+       </div>
+       
+       <div class="sptop3_block2">
+       
+       <select>
+       <option>Most Popular</option>
+        <option>Most Popular</option>
+         <option>Most Popular</option>
+       </select>
+       
+       <select>
+       <option>Any License</option>
+         <option>Any License</option>
+        <option>Any License</option>
+       </select>
+       
+       <select>
+       <option>Any License</option>
+        <option>Any License</option>
+         <option>Any License</option>
+       </select>
     
-    <div class="search_div">
-    <form>
-    <input type="text" class="searchinput" placeholder="Search Images" />
-    <input type="button"  class="searchbtn"/>
-    
-   <div class="clear"></div>
-    
-    </form>
-    
-    </div>
-    
-    </div>
-
-    <div class="container imagegallery">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h2>IMAGE GALLERY</h2>
-                <div class="gallery_image_block">
-                    <div class="gallerybox imgbx1" ng-click="showmodal($event)">
-                        <!--width:800px; height:595px;-->
-
-                        <div class="galleryimage">
-                            <img src="images/g_img1.png"  alt="#"/>
-                            
-                        </div>
-                        
-                        
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="watermark1">
-                            <tr>
-                                <td align="center" valign="middle">
-                                     <img src="images/watermark1.png"  alt="#" />
-                                </td>
-                            </tr>
-                        </table>
-                        
-                        
-                       
-                         
-                         
-           <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="imgtd" imgsrc="images/g_img1.png" align="center" valign="middle">
-                                    <img src="images/imgicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="gallerybox imgbx2" ng-click="showmodal($event)">
-                        <!-- width:390px; height:595px; -->
-                        <div class="galleryimage">
-                            <img src="images/g_img2.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="watermark1">
-                            <tr>
-                                <td align="center" valign="middle">
-                                     <img src="images/watermark1.png"  alt="#" />
-                                </td>
-                            </tr>
-                        </table>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td class="imgtd" imgsrc="images/g_img2.png" align="center" valign="middle">
-                                    <img src="images/imgicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="gallerybox imgbx3" ng-click="showmodal($event)">
-                        <!--width:366px; height:298px;-->
-                        <div class="galleryimage">
-                            <img src="images/g_img3.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="watermark1">
-                            <tr>
-                                <td align="center" valign="middle">
-                                     <img src="images/watermark1.png"  alt="#" />
-                                </td>
-                            </tr>
-                        </table>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                               <td class="imgtd" imgsrc="images/g_img3.png" align="center" valign="middle">
-                                    <img src="images/imgicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class=" gallerybox imgbx4" ng-click="showmodal($event)">
-                        <!--width:366px; height:298px;-->
-                        <div class="galleryimage">
-                            <img src="images/g_img4.png"  alt="#"/>
-                        </div>
-                         <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="watermark1">
-                            <tr>
-                                <td align="center" valign="middle">
-                                     <img src="images/watermark1.png"  alt="#" />
-                                </td>
-                            </tr>
-                        </table>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                               <td class="imgtd" imgsrc="images/g_img4.png" align="center" valign="middle">
-                                    <img src="images/imgicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="gallerybox imgbx5" ng-click="showmodal($event)">
-                        <!-- width: 448px; height:298px;-->
-                        <div class="galleryimage">
-                            <img src="images/g_img5.png"  alt="#"/>
-                        </div>
-                         <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="watermark1">
-                            <tr>
-                                <td align="center" valign="middle">
-                                     <img src="images/watermark1.png"  alt="#" />
-                                </td>
-                            </tr>
-                        </table>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                               <td class="imgtd" imgsrc="images/g_img5.png" align="center" valign="middle">
-                                    <img src="images/imgicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+        <div class="clear"></div>
+       </div>
+       
+        <div class="sptop3_block3">
+              <a href="javascript:void(0)">Next Page</a>
         </div>
-    </div>
-    
-    
-  <!--  <div class="container imagegallery">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <h2>VIDEO GALLERY</h2>
-                <div class="gallery_image_block">
-
-                    <div class="gallerybox imgbx6">
-                      
-                        <div class="galleryimage">
-                            <img src="images/g_video1.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td align="center" valign="middle">
-                                    <img src="images/videoicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="gallerybox imgbx7">
-                       
-                        <div class="galleryimage">
-                            <img src="images/g_video2.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td align="center" valign="middle">
-                                    <img src="images/videoicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="gallerybox imgbx8">
-                      
-                        <div class="galleryimage">
-                            <img src="images/g_video3.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td align="center" valign="middle">
-                                    <img src="images/videoicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="gallerybox imgbx9">
-                     
-                        <div class="galleryimage">
-                            <img src="images/g_video4.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td align="center" valign="middle">
-                                    <img src="images/videoicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="gallerybox imgbx10">
-                      
-                        <div class="galleryimage">
-                            <img src="images/g_video5.png"  alt="#"/>
-                        </div>
-                        <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td align="center" valign="middle">
-                                    <img src="images/videoicon.png"  alt="#" style="width:24px;"/>
-                                    <strong>LOREM IPSUM DOLOR</strong>
-                                    <span>LOREM IPSUM DOLOR</span>
-
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
+       
+            <div class="clear"></div>
+       </div>
+     
+     
+     
+  </div>
 </div>
+
+
+
+
+
+<div class="container-fluid  galleryimgblock">
+   <div class="row">
+   
+   
+    <div class="galleryrow1">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-repeat="itemphoto  in productlist">
+      <div class="galleryblocksrc">
+    <!-- <img  src="images/demoimg.jpg" alt="#" class="gallerysrcimg" >-->
+     <img  src="{{itemphoto.image_url}}" imgsrc="{{itemphoto.image_url}}" alt="#" ng-click="showmodal($event)" class="gallerysrcimg" >
+
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event)" imgsrc="{{itemphoto.image_url}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img ui-sref="stock-details({id:itemphoto.id})"  src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+<!--
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+-->
+   </div>
+     
+     
+<!--
+     <div class="galleryrow2">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+   </div>
+   
+   <div class="galleryrow3">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv1">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv2">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv3">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv4">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv5">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+   </div>
+
+<div class="galleryrow1">
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv">
+      <div class="galleryblocksrc">
+     <img src="images/demoimg.jpg" alt="#" class="gallerysrcimg">
+     
+     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
+  <tr>
+    <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+     <td align="left" valign="middle"> <a href="javascript:void(0)"><img src="images/stockphoto_hovericon2.png" alt="#"></a></td>
+  </tr>
+</table>
+
+     </div>
+     </div>
+   </div>
+-->
+
+        <div class="clearfix"></div>
+        
+        
+        
+  </div>
+  
+</div>      
+
 
 
 
@@ -292,7 +471,6 @@
         <div class="modal-content">
         <!--    <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-
                
             </div>-->
             <div class="modal-body">
@@ -305,5 +483,3 @@
 
         </div>
 
-    </div>
-</div>
