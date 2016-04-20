@@ -26,30 +26,142 @@
      
 
 
-<div class="container newgalleryblocktop" style="width:1200px; margin:0 auto; padding:0; margin-top:12%;">
 
-<div style=" width:283px; float:left;">
-<img src="images/prcutimg1.png" alt="#" >
-<img src="images/prcutimg8.png" alt="#" >
+
+<div class="container newproductwrapper">
+   <div class="row">
+     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 newproductleftmenu"> 
+     
+     <h2>Categories</h2>
+     
+  <ul>
+      <li ng-repeat=" catitem in categorylist "><a ui-sref="product({id:catitem.id})" href="javascript:void(0)" >{{catitem.cat_name}}</a></li>
+ </ul>    
+     
+     <div class="bestsellerscontain">  
+      <h3>Best sellers</h3>
+      <div class="detailleftimgblock">
+      <img src="images/detail_pro1.png" alt="#">
+      
+      <p>Name:  <br />
+
+X 4 Mini Quadcopter 
+Camera Plus<br />
+<br />
+Description: <br />
+
+Lightweight airframe 
+with nice durability 
+Altitude Hold 
+function, 
+easy to learn
+</p>
+      
+      <div class="clear"></div>
+      </div>
+      
+      <div class="detailleftimgblock">
+      <img src="images/detail_pro2.png" alt="#">
+      
+      <p>Name:  <br />
+
+X 4 Mini Quadcopter 
+Camera Plus<br />
+<br />
+
+Description: <br />
+
+Lightweight airframe 
+with nice durability 
+Altitude Hold 
+function, 
+easy to learn</p>
+      
+      <div class="clear"></div>
+      </div>
+     
+     
+     
+     <div class="clear"></div>
+      </div>
+       </div>
+       
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 newproductdetailright"> 
+            
+            
+            <div class="productdetail_topblock">
+            
+            <div class="product_imageblock">
+<img class="img1" alt="#" src="images/product_body_img1.png">
+<h2>
+<span>2.4</span>
+GHZ RC SERIES
+</h2>
+<div class="product_image_text">
+<span>
+<label>EASY TO CONTROL</label>
+</span>
+</div>
+<img class="img2" alt="#" src="images/product_body_img2.png">
+<h4 class="h4text1">H107C+</h4>
+<h5 class="h5text1">Hubsan x4 cam plus</h5>
+</div>
+
+
+<div class="productdetail_toptextblock">
+
+<h2>Name:  <strong>{{pname}}</strong></h2>
+
+<!--
+<div class="starpointblock"><span class="active">&#9733;</span> <span class="active">&#9733;</span> <span class="active">&#9733;</span> <span>&#9733;</span> <span>&#9733;</span></div>
+-->
+
+<h3>Price (US Dollar): ${{pprice}}</h3>
+
+
+<!--<h4>pcs/ctn:  12<br />
+<br />
+
+
+Packing:  Gift box size:35.5*18*9cm<br />
+
+0.6kgs/box<br />
+12pcs/carton<br />
+carton size:57*37.5*38cm</h4>-->
+
+    <span ng-bing-html="{{pdesc | sanitize123 }}"></span>
+
+
+<div class="detail_cartblock">
+
+<a href="javascript:void(0)" class="cartbtn1">add to cart</a>
+
+<div class="detailqtyblock">
+<span>qty</span>
+
+<input type="text"  value="1" class="qtyinput"/>
+
+
+<div class="qtybtndiv">
+<a href="javascript:void(0)"><img src="images/detailqtytop.png" alt="#"></a>
+
+<a href="javascript:void(0)"><img src="images/detailqtybottom.png" alt="#"></a>
+</div>
+
+
+
+
+<div class="clear"></div>
+
+
 
 
 </div>
 
-<div style=" width:1050px; float:right; margin-right:-152px; margin-top:38px;">
-<img src="images/prcutimg9.png" alt="#" >
-<img src="images/prcutimg10.png" alt="#" >
-
-<img src="images/prcutimg11.png" alt="#" >
 
 
 
-</div>
-
-
-
-
-<div style="clear:both;"></div>
-
+<div class="clear"></div>
 
 
 
@@ -58,5 +170,321 @@
 
 
 </div>
+
+<!--<div class="detail_cartblockbtnbox">
+<a href="javascript:void(0)" class="detail_cartblockbtn1"> Email to a Friend</a>
+<a href="javascript:void(0)" class="detail_cartblockbtn2"> Add to Wishlist</a>
+<a href="javascript:void(0)" class="detail_cartblockbtn3">Add to Compare</a>
+
+</div>
+
+
+
+<a href="javascript:void(0)" class="buynowbtn1">buy Now</a>
+<div class="clear"></div>-->
+
+
+<div class="detailslider1">
+<div class="slider2">
+  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+    <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+    <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+    <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="clear"></div>
+            </div>
+            
+            
+            
+            <div class="productdetail_tab_block">
+             <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#detailmenu1">Description</a></li>
+    <li><a data-toggle="tab" href="#detailmenu2">Additional Information</a></li>
+    <li><a data-toggle="tab" href="#detailmenu3">Reviews</a></li>
+  
+  </ul>
+  
+  
+  <div class="tab-content">
+    <div id="detailmenu1" class="tab-pane fade in active">
+      
+     Description:  Lightweight airframe with nice durability  Latest 6-axis flight control system with adjustable gyro sensitivity  Permits super stable flight, flying outdoor      Motor(X4): 0820 Coreless Frequency: 2.4GHz + 5.8GHz (Video transmission)     Transmitter: 2.4GHz 4 channels vs 4.3 Inch LCD      Control distance: 50 - 100meters
+Live video distance: around 100 meters      Battery: 3.7V Voltage, 380mAh li-po battery with auto cut off safety PCB       Charging time: about 30 minutes      Flight time: around 7 minutes     USB charging cable allows to charge by computer or wall charger      Camera: 0.3M pixels camera included, resolution: 640 x 480     Instant video review on transmitter    Memory card: SD card inserted in TX, Micro SDHC class6 2-16G (option)       4 night LED lights & rubber feet
+    </div>
+    <div id="detailmenu2" class="tab-pane fade">
+    
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    </div>
+    <div id="detailmenu3" class="tab-pane fade">
+      
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+    </div>
+    
+  </div>
+            
+            </div>
+            
+            
+            <h6 class="featuredproductstext">Featured Products</h6>
+            
+            <div class="detailslider2">
+<div class="slider3">
+
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+
+
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+
+
+
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+
+
+
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+
+
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+
+
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+<div class="featured_products_block">
+<img src="images/demosliderimg.png" alt="#">
+<div class="prosubblock1">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
+<strong>H501S</strong>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="clear"></div>
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+            
+            
+            </div>
+     
+        <div class="clear"></div>
+        
+      
+     </div>
+     </div>
 
 

@@ -60,7 +60,24 @@ jungledrone.service('contentservice', function($http, $log, $q) {
 });
 
 
+jungledrone.filter('startFrom', function () {
+    return function (input, start) {
+        if (input) {
+            start = +start;
+            return input.slice(start);
+        }
+        return [];
+    };
+});
 
+jungledrone.filter('htmlToPlaintext', function () {
+    return function (input, start) {
+        return function (text) {
+            console.log(text+'text===');
+            return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+        };
+    }
+});
 jungledrone.run(['$rootScope', '$state','contentservice',function($rootScope, $state,contentservice,$timeout){
 
 
@@ -245,7 +262,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
 
 
         .state('product-details',{
-            url:"/product-details",
+            url:"/product-details/:id",
             views: {
 
                 'header': {
@@ -258,7 +275,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/product-details.html' ,
-                    //controller: 'services'
+                    controller: 'productdetails'
                 },
 
             }
@@ -566,7 +583,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/imagesize_list.html' ,
-                    controller: 'imagesizetlist'
+                    controller: 'imagesizelist'
                 },
 
             }
@@ -1086,7 +1103,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
 
 
         .state('product',{
-            url:"/product",
+            url:"/product/:id",
             views: {
 
                 'header': {
@@ -1099,7 +1116,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/product.html' ,
-                    //controller: 'home'
+                    controller: 'products'
                 },
 
             }
@@ -3449,7 +3466,8 @@ jungledrone.controller('editimagesize', function($scope,$state,$http,$cookieStor
             height: data.height,
             width: data.width,
             priority: data.priority,
-            status: data.status
+            status: data.status,
+            style_id: data.style_id
 
         }
     });
@@ -5351,6 +5369,99 @@ jungledrone.controller('services', function($scope,$state,$http,$cookieStore,$ro
 });
 
 
+jungledrone.controller('productdetails', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+
+
+    $scope.categorylist={};
+
+    $scope.categoryid={};
+    $scope.categoryid.id=$stateParams.id;
+    $scope.catid=$stateParams.id;
+    $scope.pid=$stateParams.id;
+
+    $scope.type='General';
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'junglecategorylist?filter=status',
+        data    : $.param({'type':$scope.type}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.categorylist=data;
+
+        $scope.categorylist[0]=
+        {
+            id: 0,
+            cat_name: 'All'
+        };
+
+        //$scope.categorylist[0].category_id='All';
+        //console.log($scope.categorylist);
+        /*
+         angular.forEach(data, function(value, key){
+         console.log(value.type);
+         if(value.type == "Stock Image") {
+         $scope.categorylist.push(value);
+         }
+         });
+         console.log($scope.categorylist);
+         */
+    });
+
+
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'jungleproductlist?filter='+$scope.pid,
+        data    : $.param({'type':$scope.type}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.productlist=data;
+        console.log(data[$scope.pid].product_name+'pname');
+
+        $scope.pname=data[$scope.pid].product_name;
+        $scope.pdesc=data[$scope.pid].product_desc;
+        $scope.pprice=data[$scope.pid].price;
+        $scope.image_url=data[$scope.pid].image_url;
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( ((item.product_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) || ((item.product_desc.indexOf($scope.searchkey) != -1) && item.type==$scope.type)|| ((item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ) {
+            return true;
+        }
+        return false;
+    };
+
+
+
+
+
+
+
+
+    setTimeout(function(){
+       $('.slider2').bxSlider({
+           slideWidth: 230,
+           minSlides: 2,
+           maxSlides: 5,
+           slideMargin: 10
+       });
+
+       $('.slider3').bxSlider({
+           slideWidth: 343,
+           minSlides: 3,
+           maxSlides: 3,
+           slideMargin: 10
+       });
+   },200);
+
+
+});
 jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
     // $state.go('login');
    //  $scope.categorylist=[];
@@ -5413,7 +5524,87 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
 
 
-    $scope.showmodal=function($ev){
+    $rootScope.showmodal=function($ev){
+
+        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+
+        console.log($(target).html());
+        console.log($(target).attr('class'));
+        $('#gallerymodal').find('h2').find('img').attr('src','');
+        $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+
+        $('#gallerymodal').modal('show');
+        // $(event.target).parent().parent().css('display','none');
+
+
+    }
+
+});
+jungledrone.controller('products', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+    // $state.go('login');
+     $scope.categorylist={};
+
+    $scope.categoryid={};
+    $scope.categoryid.id=$stateParams.id;
+    $scope.catid=$stateParams.id;
+
+    $scope.type='General';
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'junglecategorylist?filter=status',
+        data    : $.param({'type':$scope.type}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.categorylist=data;
+
+        $scope.categorylist[0]=
+        {
+            id: 0,
+            cat_name: 'All'
+        };
+
+        //$scope.categorylist[0].category_id='All';
+        console.log($scope.categorylist);
+/*
+        angular.forEach(data, function(value, key){
+            console.log(value.type);
+            if(value.type == "Stock Image") {
+                $scope.categorylist.push(value);
+            }
+        });
+        console.log($scope.categorylist);
+*/
+    });
+
+
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'jungleproductlist',
+        data    : $.param({'type':$scope.type}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.productlist=data;
+        console.log($scope.productlist);
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( ((item.product_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) || ((item.product_desc.indexOf($scope.searchkey) != -1) && item.type==$scope.type)|| ((item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ) {
+            return true;
+        }
+        return false;
+    };
+
+
+
+
+    $rootScope.showmodal=function($ev){
 
         var target = $ev.target || $ev.srcElement || $ev.originalTarget;
 
@@ -5435,23 +5626,30 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
 
     $scope.id=$stateParams.id;
 
+    console.log($scope.id+'sid');
+
      $http({
         method:'POST',
         async:false,
-        url:$scope.adminUrl+'jungleproductlist',
+        url:$scope.adminUrl+'jungleproductlist?filter=1',
         data    : $.param({'type':$scope.type}),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
         $scope.productlist=data;
-        $scope.pname=($scope.productlist[$scope.id].product_name);
+        $scope.pname=data[$scope.id].product_name;
+        $scope.pdesc=data[$scope.id].product_desc;
+        $scope.image_url=data[$scope.id].image_url;
+
+         console.log(data);
+         console.log(data[9].product_name);
     });
 
 
     $http({
         method  : 'POST',
         async:   false,
-        url     : $scope.adminUrl+'imagesizelist',
+        url     : $scope.adminUrl+'imagesizelist?filter=1',
         // data    : $.param($scope.form),  // pass in data as strings
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
     }) .success(function(data) {
@@ -5461,6 +5659,59 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
 
     });
     $('script[src="ng-js/ui-bootstrap-tpls-0.14.3.min.js"]').remove();
+
+    $scope.clickable=0;
+    $scope.sizechoiceval=false;
+
+
+    $rootScope.showmodal=function($ev){
+
+        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+
+        console.log($(target).html());
+        console.log($(target).attr('class'));
+        $('#gallerymodal').find('h2').find('img').attr('src','');
+        $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+
+        $('#gallerymodal').modal('show');
+        // $(event.target).parent().parent().css('display','none');
+
+
+    }
+
+    $rootScope.pad=function  (str, max) {
+        str = str.toString();
+        return str.length < max ? $rootScope.pad("0" + str, max) : str;
+    }
+
+    $scope.pidvar=$rootScope.pad($scope.id,7);
+
+    $scope.sizechoice=function(val,$ev1){
+
+        var target1 = $ev1.target1 || $ev1.srcElement || $ev1.originalTarget;
+
+        $(target1).addClass('darkar');
+        console.log($(target1).html());
+
+        $('.trc').removeClass('darkar');
+        $('.trc'+val).addClass('darkar');
+
+        console.log(val);
+
+        $scope.clickable=1;
+        $scope.sizechoiceval=false;
+        $scope.sizeid=val;
+        $('.tabdownloadbtn').attr('href','http://admin.jungledrones.com/filedownload/id/'+$scope.id+'/'+$scope.sizeid);
+        $('.tabdownloadbtn').attr('target','_blank');
+
+    }
+
+    $scope.clicktodownload=function($ev){
+        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+
+        if($(target).attr('clickable')==0) $scope.sizechoiceval=true;
+
+    }
 
     setTimeout(function(){
 
@@ -5966,15 +6217,27 @@ jungledrone.controller('addcategoryjungle',function($scope,$state,$http,$cookieS
 
 
 
-jungledrone.controller('junglecategorylist',function($scope,$state,$http,$cookieStore,$rootScope,$uibModal,$sce){
+jungledrone.controller('junglecategorylist',function($scope,$state,$http,$cookieStore,$rootScope,$uibModal,$sce,$filter){
     $scope.trustAsHtml=$sce.trustAsHtml;
 
     $scope.predicate = 'id';
     $scope.reverse = true;
+
+    var orderBy = $filter('orderBy');
+
     $scope.order = function(predicate) {
-        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+
+        console.log('pre'+predicate);
         $scope.predicate = predicate;
+        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+        $scope.categorylist = orderBy($scope.categorylist, predicate, $scope.reverse);
     };
+
+
+    $rootScope.integerId= function(val) {
+        return parseInt(val, 10);
+    };
+
     $scope.currentPage=1;
     $scope.perPage=10;
 
@@ -5990,11 +6253,13 @@ jungledrone.controller('junglecategorylist',function($scope,$state,$http,$cookie
 
     }).success(function(data){
         $scope.categorylist=data;
+
+
     })
     $scope.searchkey = '';
     $scope.search = function(item){
 
-        if ( (item.cat_name.indexOf($scope.searchkey) != -1) || (item.cat_desc.indexOf($scope.searchkey) != -1) || (item.type.indexOf($scope.searchkey) != -1) || (item.priority.indexOf($scope.searchkey) != -1)|| (item.status.indexOf($scope.searchkey) != -1) || (item.parent_cat_name.indexOf($scope.searchkey) != -1)){
+        if ( (item.cat_name.indexOf($scope.searchkey) != -1) || (item.cat_desc.indexOf($scope.searchkey) != -1) || (item.type.indexOf($scope.searchkey) != -1) ||  (item.status.indexOf($scope.searchkey) != -1) || (item.parent_cat_name.indexOf($scope.searchkey) != -1)){
             return true;
         }
         return false;
@@ -6417,8 +6682,9 @@ jungledrone.controller('jungleproductlist',function($scope,$state,$http,$cookieS
     $scope.predicate = 'id';
     $scope.reverse = true;
     $scope.order = function(predicate) {
-        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
         $scope.predicate = predicate;
+        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+        //$scope.friends = orderBy($scope.friends, predicate, $scope.reverse);
     };
     $scope.currentPage=1;
     $scope.perPage=10;
@@ -6521,6 +6787,9 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
             }
         }
 
+
+
+
         $scope.form = {
             id: data.id,
 
@@ -6532,6 +6801,7 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
             },
             product_file: data.product_file,
             priority: data.priority,
+            price: data.price,
 
         }
     });

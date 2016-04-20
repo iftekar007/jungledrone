@@ -212,16 +212,22 @@ function junglecategorylist()
     if(isset($_POST['type']) && $_POST['type']!=''){
         $queryu->condition('ca.type',$_POST['type'],'=')  ;
     }
+
+    if( $_REQUEST['filter']=='status'){
+        $queryu->condition('ca.status',1,'=')  ;
+    }
      $resultu = $queryu->execute();
 
 
     if ($resultu->rowCount() > 0) {
-        $i = 0;
+        $i = 1;
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
             if($recordu['cat_image']!=''){
                 $temparray['image_url'] = image_style_url('front-photo_600_600_', (@$recordu['cat_image']));
            }
+
+            $temparray['priority']=intval($recordu['priority']);
 
 
             $queryu1 = db_select('junglecategory', 'ca');

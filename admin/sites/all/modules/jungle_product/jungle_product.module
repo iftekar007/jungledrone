@@ -148,6 +148,7 @@ function imguploadproduct(){
     $queryu->condition('ca.id',$x[1],'=');
     $resultu = $queryu->execute();
 
+    ini_set('memory_limit', '128M');
 
     if ($resultu->rowCount() > 0) {
         $i = 0;
@@ -201,7 +202,7 @@ function imguploadproduct(){
 // width to calculate positioning of the stamp.
     //imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
     //imagecopy($im, $stamp, $centerX, $centerY, 0, 0, imagesx($stamp), imagesy($stamp));
-    imagecopy($im, $stamp, 0, -100,0, 0, imagesx($stamp), imagesy($stamp));
+    imagecopy($im, $stamp, 0, -150,0, 0, imagesx($stamp), imagesy($stamp));
 
 // Output and free memory
     header('Content-type: image/png');
@@ -224,6 +225,7 @@ function uploadjungleproductimage(){
     $target_dir = realpath(dirname(__FILE__))."/uploads/";
     $path_parts = pathinfo($_FILES['Filedata']['name']);
     $filename = rand().'_'.time().'.'.$path_parts['extension'];
+    ini_set('memory_limit', '128M');
 
     $profile_url = '';
     $extarray=array('jpg','png','gif','mp4');
@@ -271,6 +273,7 @@ function uploadjungleproductimage(){
     echo json_encode(@$data) ;
 }
 function jungleproductdetails(){
+
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
     header("Access-Control-Allow-Credentials: true");
@@ -279,6 +282,7 @@ function jungleproductdetails(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
     $queryu = db_select('jungleproduct', 'jd');
+    ini_set('memory_limit', '128M');
     $queryu->innerJoin('junglecategory', 'jc','jc.id=jd.category_id');
     $queryu->fields('jd');
     $queryu->fields('jc',array('type'))
@@ -351,6 +355,8 @@ function jungleproductlist()
         $queryu->condition('jc.type',$_POST['type'],'=')  ;
     }
 
+    if(@$_REQUEST['id']>0)$queryu->condition('jp.id',$_REQUEST['id'],'=')  ;
+
     $resultu = $queryu->execute();
 
 
@@ -358,6 +364,9 @@ function jungleproductlist()
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
+            $temparray['textdesc']=strip_tags($recordu['product_desc']);
+
+            $temparray['productlisturl'] = image_style_url('productlist', (@$recordu['product_file']));
 
             if($recordu['product_file']!='') {
                 $productextns = explode('.', $recordu['product_file']);
@@ -369,11 +378,14 @@ function jungleproductlist()
                 }
             }
 
-                    $jungleproductlist[$i]= $temparray;
+            if(@$_REQUEST['filter']>0)$jungleproductlist[@$recordu['id']]= $temparray;
+                    else $jungleproductlist[$i]= $temparray;
+
+            //echo $recordu['id'];
             $i++;
         }
     }
-    echo json_encode(@$jungleproductlist);
+    echo json_encode(@$jungleproductlist,JSON_NUMERIC_CHECK);
 
 }
 function parentproductlist()
@@ -397,6 +409,7 @@ function parentproductlist()
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
+
 
             $jungleproductlist[$i]= $temparray;
             $i++;
@@ -436,9 +449,9 @@ function addjungleproduct(){
         $product_file =$_POST['product_file'];
     }
 
-    $query = db_insert('jungleproduct')->fields(array('product_name','product_desc','category_id','product_file','status','priority'));
+    $query = db_insert('jungleproduct')->fields(array('product_name','product_desc','category_id','product_file','status','priority','price'));
         //foreach ($values as $record) {
-        $query->values(array(@$_POST['product_name'],@$_POST['product_desc'],@$_POST['category_id']['id'],$product_file,1,@$_POST['priority']));
+        $query->values(array(@$_POST['product_name'],@$_POST['product_desc'],@$_POST['category_id']['id'],$product_file,1,@$_POST['priority'],@$_POST['price']));
         //}
         $query->execute();
 
@@ -462,7 +475,7 @@ function jungleproductupdates(){
 
 
     db_update('jungleproduct')
-        ->fields(array('product_name'=>@$_POST['product_name'],'product_desc'=>@$_POST['product_desc'],'category_id'=>@$_POST['category_id']['id'],'product_file'=>@$_POST['product_file'],'priority'=>@$_POST['priority']))
+        ->fields(array('product_name'=>@$_POST['product_name'],'product_desc'=>@$_POST['product_desc'],'category_id'=>@$_POST['category_id']['id'],'product_file'=>@$_POST['product_file'],'priority'=>@$_POST['priority'],'price'=>@$_POST['price']))
         ->condition('id', intval($_POST['id']))
          ->execute();
 }
@@ -503,6 +516,7 @@ function jungleproductupdatestatus(){
 
 
 function filedownload(){
+    ini_set('memory_limit', '128M');
 
     header('Content-type: text/html');
     //header('Content-Disposition: attachment');
@@ -527,7 +541,10 @@ function filedownload(){
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
-            $filePath = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
+            //$filePath = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
+            $filePath = @$recordu['product_file'];
+            $filePath2 = @$recordu['product_file'];
+
 
             $jungleproductlist[$i]= $temparray;
             $i++;
@@ -541,8 +558,36 @@ function filedownload(){
         }
     }
 
+
+    $filetype=explode('/',file_get_mimetype($filePath2));
+
+    //print_r($filetype); exit;
+
+    $queryu = db_select('image_styles', 'u');
+    //$queryu->join('admin', 'f', 'f.user_id = u.uid');
+    //$queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
+    //$queryu->fields('ur', array('rid'));
+    $queryu->fields('u', array( 'name', 'isid'));
+    //$queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    $queryu->condition('u.isid', $x[3], '=');
+    //$queryu->orderBy('u.ieid','DESC');
+    //->condition('u.uid', 74, '=');
+    $queryu->range(0, 1);
+    $resultu = $queryu->execute();
+    $recordu = $resultu->fetchAssoc();
+
+    //print_r(($recordu['name']));
+    //exit;
+    $filePath = image_style_url($recordu['name'], (@$filePath));
+
+    //echo strpos($filePath,'itok');
+   // echo substr($filePath,0,strpos($filePath,'itok')-1);
+   // exit;
+    //exit;
+
      //file_transfer($filePath, array('Content-disposition', 'attachment; filename='.$filePath));
-drupal_add_http_header('Content-disposition', 'attachment; filename=' . $filePath);
+drupal_add_http_header('Content-disposition', 'attachment; filename=' .substr($filePath,0,strpos($filePath,'itok')-1));
     readfile($filePath);
   
 

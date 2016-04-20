@@ -52,7 +52,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat=" item in  filterResult = (categorylist | filter:search) | orderBy:predicate:reverse">
+                        <!--<tr ng-repeat=" item in  filterResult = (categorylist | filter:search) | orderBy:predicate:reverse">-->
+                        <tr ng-repeat=" item in  filterResult = (categorylist | filter:search) | startFrom:(currentPage-1)*perPage | limitTo:perPage | orderBy:predicate:reverse">
                             <td>{{item.cat_name}}</td>
                             <td ng-bind-html="trustAsHtml(item.cat_desc)"></td>
                             <td>{{item.parent_cat_name}}</td>
@@ -70,7 +71,7 @@
                     <div ng-show="filterResult.length > perPage" class="paginationblock">
                         <uib-pagination total-items="filterResult.length" ng-model="currentPage" items-per-page="perPage" max-size="4"></uib-pagination>
                     </div>
-                    <div ng-if="categorylist.length == 0" class="callout callout-danger">
+                    <div ng-show="categorylist.length == 0" class="callout callout-danger">
                         <h4>Sorry</h4>
 
                         <p>No category exists in system right now !!.</p>

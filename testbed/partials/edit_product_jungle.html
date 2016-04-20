@@ -59,7 +59,7 @@
 
 
                                 </div>
-                                <div class="form-group" ng-show="form.category_id.type=='Stock Image' || form.category_id.type=='Stock Video'">
+                                <div class="form-group" >
                                     <label >Product file(jpg,png,gif,mp4)* :</label>
                                     <div class="clearfix"></div>
                                     <img ng-if="product_img_src!=false" src="{{product_img_src}}">
@@ -80,6 +80,16 @@
                                     <input type="text" class="form-control"  placeholder="Priority" name="priority"
                                            ng-model="form.priority"
                                            required-message="'Priority can not be blank.'"
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+
+                                <div class="form-group">
+                                    <label >Price</label>
+                                    <input type="text" class="form-control"  placeholder="Price" name="price"
+                                           ng-model="form.price"
+                                           required-message="'Price can not be blank.'"
                                            required>
 
                                     <!-- <span class="errormsg">erroe msg</span>-->

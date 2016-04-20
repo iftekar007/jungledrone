@@ -130,7 +130,7 @@ function imagesizedetails(){
 
     $queryu = db_select('imagesizemanager', 'u');
    // $queryu->join('admin', 'a', 'a.user_id = u.uid');
-     $queryu->fields('u', array('id','sizename','height','width','status','priority'))
+     $queryu->fields('u', array('id','sizename','height','width','status','priority','style_id'))
     //$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address'))
         ->condition('u.id', $_POST['id'], '=');
 
@@ -163,10 +163,11 @@ function imagesizelist()
     //$queryu->join('admin', 'f', 'f.user_id = u.uid');
     //$queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
     //$queryu->fields('ur', array('rid'));
-    $queryu->fields('u', array('id', 'sizename', 'height', 'width', 'status','priority'));
+    $queryu->fields('u', array('id', 'sizename', 'height', 'width', 'status','priority','style_id'));
     //$queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
         // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
-        //->condition('ur.rid', 4, '=');
+    if(@$_REQUEST['filter']==1)$queryu->condition('u.status', 1, '=');
+    $queryu->orderBy('u.priority','DESC');
     //->condition('u.uid', 74, '=');
     //->range(0, 20);
     $resultu = $queryu->execute();
@@ -199,14 +200,6 @@ function imagesizeadd(){
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');
 
-    //if($account->uid>0){
-        $query = db_insert('imagesizemanager')->fields(array('sizename','height','width', 'status','priority'));
-        //foreach ($values as $record) {
-        $query->values(array(@$_POST['sizename'],@$_POST['height'],@$_POST['width'], 0,@$_POST['priority']));
-        //}
-        $query->execute();
-    //}
-
 
     $style = image_style_save(array(
             'name' => @$_POST['sizename'],
@@ -220,11 +213,23 @@ function imagesizeadd(){
             'upscale' => TRUE,
         ),
         'isid' => $style['isid'],
+        //'ieid' => $style['isid']
     );
     image_effect_save($effect);
 
+    //if($account->uid>0){
+    $query = db_insert('imagesizemanager')->fields(array('sizename','height','width', 'status','priority','style_id'));
+    //foreach ($values as $record) {
+    $query->values(array(@$_POST['sizename'],@$_POST['height'],@$_POST['width'], 0,@$_POST['priority'],@$style['isid']));
+    //}
+    $query->execute();
+    //}
+
+
+
+
     $data['status'] = 'success';
-     echo json_encode($data);
+    echo json_encode($data);
     return;
 }
 function imagesizeupdates(){
@@ -237,11 +242,22 @@ function imagesizeupdates(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
 
+    $effect = array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+            'width' => @$_POST['width'],
+            'height' => @$_POST['height'],
+            'upscale' => TRUE,
+        ),
+        'isid' => @$_POST['style_id'],
+        'ieid' => @$_POST['style_id'],
+    );
+    image_effect_save($effect);
     db_update('imagesizemanager')
         //->expression('weight', 'weight + :weight', array(':weight' => 1))
         ->fields(array('sizename'=>@$_POST['sizename'], 'height'=>@$_POST['height'],'width'=>@$_POST['width'],
 
-            'priority'=>@$_POST['priority'],'status'=>@$_POST['status']))
+            'priority'=>@$_POST['priority'],'status'=>@$_POST['status'],'style_id'=>@$_POST['style_id']))
         ->condition('id', intval($_POST['id']))
          ->execute();
 }

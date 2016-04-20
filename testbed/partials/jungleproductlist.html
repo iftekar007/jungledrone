@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Product Manager
+            stock photo/video inventory Manager
         </h1>
         <!--<ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -12,7 +12,7 @@
         <div class="newblock1">
 
             <input type="text" name="search" ng-model="searchkey" class="search1" placeholder="Search product">
-            <a ui-sref="add-product" class="addfrinderbtn">Add Product</a>
+            <a ui-sref="add-product" class="addfrinderbtn">Add  stock photo/video inventory</a>
             <div class="clear"></div>
         </div>
         <div class="clearfix"></div>
@@ -26,9 +26,10 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Product List</h3>
+                        <h3 class="box-title"> stock photo/video inventory</h3>
                     </div><!-- /.box-header -->
                     <table id="example1" class="table table-bordered table-striped" ng-show="productlist.length>0">
+
                         <thead>
                         <tr>
                             <th><a ng-click="order('product_name')" href="javascript:void(0);">Product Name</a>
@@ -50,7 +51,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat=" item in  filterResult = (productlist | filter:search) | orderBy:predicate:reverse">
+                        <tr ng-repeat=" item in  filterResult = (productlist | filter:search) | startFrom:(currentPage-1)*perPage | limitTo:perPage | orderBy:predicate:reverse">
                             <td>{{item.product_name}}</td>
                             <td ng-bind-html="trustAsHtml(item.product_desc)"></td>
                             <td>{{item.cat_name}}</td>
