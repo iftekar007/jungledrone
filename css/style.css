@@ -1368,5 +1368,12 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 #pilotsuccess .modal-dialog .modal-content h2{ text-align:center; margin:0; padding:5px 0;}
 #pilotsuccess .modal-dialog .modal-content .loginlink{color:#ff0b16;}
 
-/*--------------------------------------------------end-pilot-registration--------------------------------------------------------*/		
+/*--------------------------------------------------end-pilot-registration--------------------------------------------------------*/
+
+
+.linkDisabled {
+	cursor: not-allowed;
+	pointer-events: none;
+	color: grey;
+}
 

@@ -367,6 +367,9 @@ function jungleproductlist()
             $temparray['textdesc']=strip_tags($recordu['product_desc']);
 
             $temparray['productlisturl'] = image_style_url('productlist', (@$recordu['product_file']));
+            $temparray['productdetailmain'] = image_style_url('productdetailmain', (@$recordu['product_file']));
+            $temparray['bestsellerp'] = image_style_url('bestseller', (@$recordu['product_file']));
+
 
             if($recordu['product_file']!='') {
                 $productextns = explode('.', $recordu['product_file']);

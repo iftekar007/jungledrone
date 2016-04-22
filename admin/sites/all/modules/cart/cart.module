@@ -1,0 +1,156 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function cart_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function cart_menu()
+{
+    $items = array();
+
+    $items['addtocart'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'addtocart',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['ffmpeg'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'fmpegconvert',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    return $items;
+}
+
+function ffmpegconvert(){
+    ob_clean();
+    echo 98;;
+    /*ob_start();
+    phpinfo();
+    $info = ob_get_contents();
+    ob_end_clean();*/
+
+}
+
+function addtocart(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+    $conn = Database::getConnection();
+    $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
+
+    $conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('PDOStatement'));
+
+    $statement = $conn->prepare("Call addtocart(?,?,?)");
+
+
+    $op_status = $statement->bindParam(1, $_POST['pid'], PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT, 25);
+    $op_status = $statement->bindParam(2, $_POST['qty'], PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT);
+    $op_status = $statement->bindParam(3, $_POST['userid'], PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT);
+
+
+
+    $exec_result = $statement->execute();
+    /*//$conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
+
+    $rows = array();
+    while ($row = $statement->fetchColumn(0)) {
+        $rows[]['data'] = array($row);
+    }*/
+}
+
+function uploadjunglssecategoryimage(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+    $target_dir = realpath(dirname(__FILE__))."/uploads/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+    $filename = rand().'_'.time().'.'.$path_parts['extension'];
+
+    $profile_url = '';
+    $extarray=array('jpg','png','gif');
+    if(in_array($path_parts['extension'],$extarray)) {
+        if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir . $filename)) {
+            //$account = user_load($_POST['userid']);
+
+            $filepath = ($target_dir . $filename);
+
+            $file = (object)array(
+                'uid' => 1,
+                'uri' => $filepath,
+                'filemime' => file_get_mimetype($filepath),
+                'status' => 1,
+            );
+            if ($file) {
+// Move the file, into the Drupal file system
+                if ($file = file_move($file, 'public://')) {
+                    $file->status = FILE_STATUS_PERMANENT;
+                    // $file->file_display = 1;
+                    $file = file_save($file);
+                    //set the extra values needed to make node_save work
+                    $file->display = 1;
+                    $file->description = "";
+                }
+
+            }
+        }
+        // echo file_create_url(@$file->uri);
+//print_r($file);
+            $data['image_url'] = image_style_url('large', (@$file->uri));
+
+        //
+
+        $data['image_name'] = (@$file->uri);
+        // $data['status'] = 'success';
+    }
+    else{
+        $data['status']='error';
+    }
+    echo json_encode(@$data) ;
+}

@@ -5372,12 +5372,38 @@ jungledrone.controller('services', function($scope,$state,$http,$cookieStore,$ro
 jungledrone.controller('productdetails', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
 
 
-    $scope.categorylist={};
+    $scope.categorylist = {};
 
-    $scope.categoryid={};
-    $scope.categoryid.id=$stateParams.id;
-    $scope.catid=$stateParams.id;
-    $scope.pid=$stateParams.id;
+    $scope.categoryid = {};
+    $scope.categoryid.id = $stateParams.id;
+    $scope.catid = $stateParams.id;
+    $scope.pid = $stateParams.id;
+
+
+    $scope.cart = {};
+
+    console.log($scope.cart);
+    //$cookieStore.put('cart',$scope.cart);
+
+    $rootScope.addtocart=function(pid){
+
+
+
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'addtocart',
+            data    : $.param({'pid':pid,'qty':$scope.pqty,'userid':$rootScope.userid}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+            $scope.categorylist=data;
+
+
+        });
+
+
+    }
 
     $scope.type='General';
     $http({
@@ -5420,10 +5446,13 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
     }).success(function(data){
         $scope.productlist=data;
+        //$scope.productlist=data;
         console.log(data[$scope.pid].product_name+'pname');
+        console.log($scope.productlist);
 
         $scope.pname=data[$scope.pid].product_name;
         $scope.pdesc=data[$scope.pid].product_desc;
+        $scope.productdetailmain=data[$scope.pid].productdetailmain;
         $scope.pprice=data[$scope.pid].price;
         $scope.image_url=data[$scope.pid].image_url;
     });
@@ -5458,7 +5487,7 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
            maxSlides: 3,
            slideMargin: 10
        });
-   },200);
+   },2000);
 
 
 });

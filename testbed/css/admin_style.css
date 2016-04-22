@@ -31,10 +31,16 @@ body{ background:#fff;}
 .main-footer{ font-family:Arial, Helvetica, sans-serif;}
 .skin-blue .sidebar-menu > li:hover > a,
 .skin-blue .sidebar-menu > li.active > a {
-  color: #fff;
+  color: #fff!important;
   background: #b5bbb3;
   border-left-color: #fff; text-shadow:none;
 }
+
+.skin-blue .sidebar-menu li.active a:focus{ color: #fff!important;}
+
+.skin-blue .sidebar-menu .active a{ color: #fff!important;}
+
+.formsection .btn{ font-size:17px!important;}
 
 .skin-blue .sidebar-menu a{ color: #1e1e1e;}
 

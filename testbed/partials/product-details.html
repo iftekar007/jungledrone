@@ -38,47 +38,24 @@
       <li ng-repeat=" catitem in categorylist "><a ui-sref="product({id:catitem.id})" href="javascript:void(0)" >{{catitem.cat_name}}</a></li>
  </ul>    
      
-     <div class="bestsellerscontain">  
+     <div class="bestsellerscontain" >
       <h3>Best sellers</h3>
-      <div class="detailleftimgblock">
-      <img src="images/detail_pro1.png" alt="#">
+      <div class="detailleftimgblock" ng-repeat="item in productlist  " ng-if="$index<4">
+      <img ui-sref="product-details({id:item.id})" src="{{item.bestsellerp}}" alt="#">
       
-      <p>Name:  <br />
+      <p>Name:<br />
 
-X 4 Mini Quadcopter 
-Camera Plus<br />
+{{item.product_name}}
 <br />
 Description: <br />
 
-Lightweight airframe 
-with nice durability 
-Altitude Hold 
-function, 
-easy to learn
+<span> {{item.textdesc | limitTo:80 }}</span>
 </p>
       
       <div class="clear"></div>
       </div>
       
-      <div class="detailleftimgblock">
-      <img src="images/detail_pro2.png" alt="#">
-      
-      <p>Name:  <br />
 
-X 4 Mini Quadcopter 
-Camera Plus<br />
-<br />
-
-Description: <br />
-
-Lightweight airframe 
-with nice durability 
-Altitude Hold 
-function, 
-easy to learn</p>
-      
-      <div class="clear"></div>
-      </div>
      
      
      
@@ -92,7 +69,7 @@ easy to learn</p>
             <div class="productdetail_topblock">
             
             <div class="product_imageblock">
-<img class="img1" alt="#" src="images/product_body_img1.png">
+<!--<img class="img1" alt="#" src="images/product_body_img1.png">
 <h2>
 <span>2.4</span>
 GHZ RC SERIES
@@ -104,7 +81,10 @@ GHZ RC SERIES
 </div>
 <img class="img2" alt="#" src="images/product_body_img2.png">
 <h4 class="h4text1">H107C+</h4>
-<h5 class="h5text1">Hubsan x4 cam plus</h5>
+<h5 class="h5text1">Hubsan x4 cam plus</h5>-->
+
+<img src="{{productdetailmain}}" alt="#" class="imgcon">
+
 </div>
 
 
@@ -129,23 +109,23 @@ Packing:  Gift box size:35.5*18*9cm<br />
 12pcs/carton<br />
 carton size:57*37.5*38cm</h4>-->
 
-    <span ng-bing-html="{{pdesc | sanitize123 }}"></span>
+    <span ng-bind-html="pdesc | sanitize123 "></span>
 
 
 <div class="detail_cartblock">
 
-<a href="javascript:void(0)" class="cartbtn1">add to cart</a>
+<a href="javascript:void(0)" class="cartbtn1" ng-click="addtocart(pid)">add to cart</a>
 
 <div class="detailqtyblock">
 <span>qty</span>
 
-<input type="text"  value="1" class="qtyinput"/>
+<input type="text"  value="1" class="qtyinput" ng-model="pqty" />
 
 
 <div class="qtybtndiv">
-<a href="javascript:void(0)"><img src="images/detailqtytop.png" alt="#"></a>
+<a href="javascript:void(0)"><img src="images/detailqtytop.png" alt="#" ng-click="pqty=pqty+1" ng-init="pqty=1"></a>
 
-<a href="javascript:void(0)"><img src="images/detailqtybottom.png" alt="#"></a>
+<a href="javascript:void(0)" > <img src="images/detailqtybottom.png" alt="#"  ng-click=" pqty <=1 || (pqty=pqty-1)"  ></a>
 </div>
 
 
@@ -185,17 +165,14 @@ carton size:57*37.5*38cm</h4>-->
 
 
 <div class="detailslider1">
-<div class="slider2">
-  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-    <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-    <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-    <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
-  <div class="imagebox"><img src="images/demosliderimg2.png" alt="#"></div>
+    <div class="slider2" >
 
-</div>
+       <!-- <span ng-repeat="item in productlist">-->
+
+            <div  class="imagebox" ng-repeat="item in productlist"><img ui-sref="product-details({id:item.id})" src="{{item.productlisturl}}" alt="#"></div>
+        <!--</span>-->
+
+    </div>
 
 </div>
 
@@ -213,26 +190,24 @@ carton size:57*37.5*38cm</h4>-->
             <div class="productdetail_tab_block">
              <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#detailmenu1">Description</a></li>
-    <li><a data-toggle="tab" href="#detailmenu2">Additional Information</a></li>
-    <li><a data-toggle="tab" href="#detailmenu3">Reviews</a></li>
+   <!-- <li><a data-toggle="tab" href="#detailmenu2">Additional Information</a></li>
+    <li><a data-toggle="tab" href="#detailmenu3">Reviews</a></li>-->
   
   </ul>
   
   
   <div class="tab-content">
-    <div id="detailmenu1" class="tab-pane fade in active">
+    <div id="detailmenu1" class="tab-pane fade in active" ng-bind-html="pdesc | sanitize123 ">
       
-     Description:  Lightweight airframe with nice durability  Latest 6-axis flight control system with adjustable gyro sensitivity  Permits super stable flight, flying outdoor      Motor(X4): 0820 Coreless Frequency: 2.4GHz + 5.8GHz (Video transmission)     Transmitter: 2.4GHz 4 channels vs 4.3 Inch LCD      Control distance: 50 - 100meters
-Live video distance: around 100 meters      Battery: 3.7V Voltage, 380mAh li-po battery with auto cut off safety PCB       Charging time: about 30 minutes      Flight time: around 7 minutes     USB charging cable allows to charge by computer or wall charger      Camera: 0.3M pixels camera included, resolution: 640 x 480     Instant video review on transmitter    Memory card: SD card inserted in TX, Micro SDHC class6 2-16G (option)       4 night LED lights & rubber feet
     </div>
-    <div id="detailmenu2" class="tab-pane fade">
+  <!--  <div id="detailmenu2" class="tab-pane fade">
     
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
     </div>
     <div id="detailmenu3" class="tab-pane fade">
       
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-    </div>
+    </div>-->
     
   </div>
             
@@ -244,234 +219,19 @@ Live video distance: around 100 meters      Battery: 3.7V Voltage, 380mAh li-po 
             <div class="detailslider2">
 <div class="slider3">
 
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
+<div class="featured_products_block" ng-repeat="item in productlist">
+<img src="{{item.productdetailmain}}" ui-sref="product-details({id:item.id})" alt="#">
 <div class="prosubblock1">
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
+<strong>{{item.product_name | limitTo:8}}</strong>
 </div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ {{item.price}}</div>
 <div class="clear"></div>
 </div>
 
 
 </div>
 
-
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-
-
-
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-
-
-
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-
-
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-
-
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
-<div class="featured_products_block">
-<img src="images/demosliderimg.png" alt="#">
-<div class="prosubblock1">
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">
-<strong>H501S</strong>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ 220 .00</div>
-<div class="clear"></div>
-</div>
-
-
-</div>
 
 
 </div>
