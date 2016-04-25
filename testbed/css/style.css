@@ -2164,7 +2164,7 @@ a:focus {
 
 	z-index: 5;
 
-	width: 20%;
+	width: 22%;
 
 }
 
@@ -5266,7 +5266,7 @@ opacity:1;
 
 	z-index: 5;
 
-	width: 20%;
+	width: 22%;
 
 }
 
@@ -6852,3 +6852,250 @@ opacity:1;
 .carttotal_wrapper .carttotal_box2  .subtotalmain  span{ width:115px; display:block; float:right; font-weight:normal; text-align:left; line-height:40px;  font-size:16px; color:#ff0000; }
 
 .checkoutbtn{ width:156px; height:40px; background:#ff0000; text-align:center; line-height:40px;  font-family:'OpenSans-Semibold'; font-size:18px; color:#fff!important; text-transform:uppercase; display:block; float:right;}
+
+/*--------------------------------------*/
+
+.choutblock1{ border-top:solid 1px #b0afaf; padding:12px 0;}
+
+.choutblock1 .chakeboxwrapper1{ background: url("../images/checkout-img1.png") no-repeat right top; min-height:130px; margin-top:-15px; padding-top:20px; }
+
+
+.choutblock1 .chakeboxwrapper1 input[type=checkbox].css-checkbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+.choutblock1 .chakeboxwrapper1 input[type=checkbox].css-checkbox + label.css-label {
+							padding-left:35px;
+							height:21px; 
+							display:inline-block;
+							line-height:21px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							font-size:12px;
+							vertical-align:middle;
+							cursor:pointer; font-family:Arial, Helvetica, sans-serif; color:#5f5e5e; text-transform:uppercase; font-weight:normal; margin-right:40px;
+
+						}
+
+.choutblock1 .chakeboxwrapper1 input[type=checkbox].css-checkbox:checked + label.css-label {
+							background-position: 0 -21px;
+							 color:#f30100;
+						}
+.choutblock1 .chakeboxwrapper1 label.css-label {
+				background-image:url(../images/chakeboximg.png);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			
+.choutblock1  .chakeboxwrapper2	h2{ font-size:24px; color:#323131; font-family:'OpenSans-Semibold';   background: url("../images/checkouticon1.png") no-repeat left top; margin:0; padding:16px 0 0 54px; text-transform:uppercase; }		
+
+.choutblock1  .chakeboxwrapper2	h3{ margin:0; padding:20px 0; font-size:18px; color:#323131; font-family:'OpenSans-Semibold';}
+
+.choutblock1  .chakeboxwrapper2	h3 a{ color:#f30100!important; text-decoration:none;}
+
+.choutblock1  .chakeboxwrapper2	h3 a:hover{ text-decoration:underline;}
+
+.choutblock1 .chakeboxform1{ margin:24px 0 10px 0;}
+
+.choutblock1 .chakeboxform1 .formgroup{ width:500px; margin-bottom:7px;}
+
+.choutblock1 .chakeboxform1 .formgroup label{ display:block; font-weight:normal; float:left; text-align:right; width:112px; padding-right:12px; line-height:40px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#252424;}
+
+.choutblock1 .chakeboxform1 .formgroup .form-control{ width:384px; float:left; height:38px; background:#fff; border:solid 1px #bebebe; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#252424;}
+
+.choutblock2{ border-top:solid 1px #b0afaf; padding:12px 0;}
+
+.choutblock2 h2{ font-size:24px; color:#323131; font-family:'OpenSans-Semibold';   background: url("../images/checkouticon2.png") no-repeat left top; margin:10px 0 0 0; padding:15px 0 0 50px; text-transform:uppercase; }	
+
+.choutblock2  h4{ font-size:18px; color:#403f3f; margin:22px 0; padding:0;  font-family:'OpenSans-Semibold'; } 	
+.choutblock2  h4 input{ margin-right:12px;}
+
+
+
+
+.choutblock2 input[type=checkbox].css-checkbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+.choutblock2 input[type=checkbox].css-checkbox + label.css-label {
+							padding-left:24px;
+							height:24px; 
+							display:inline-block;
+							
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							line-height:24px;
+							
+							vertical-align:middle;
+							cursor:pointer; font-size:18px; color:#403f3f; font-family:'OpenSans-Semibold';
+							background-position: 0 0px;
+
+						}
+
+.choutblock2 input[type=checkbox].css-checkbox:checked + label.css-label {
+							background-position: 0 -24px;
+							
+						}
+.choutblock2 label.css-label {
+				background-image:url(../images/chakeboximg2.png);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			
+			
+			
+	.choutblock2 .chakeboxform2{ width:510px; float:left; margin:30px 0 30px 0;}	
+	
+	.choutblock2 .chakeboxform2 .formgroup{ width:100%; margin-bottom:7px;}
+
+	.choutblock2 .chakeboxform2 .formgroup label{ display:block; font-weight:normal; float:left; text-align:right; width:112px; padding-right:12px; line-height:40px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#252424;}
+
+	.choutblock2 .chakeboxform2 .formgroup .form-control{ width:384px; float:left; height:38px; background:#fff; border:solid 1px #bebebe; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#252424;}
+	
+	.choutblock2 .chakeboxform2 .formgroup .form-controltextarea{ width:384px; float:left; height:38px; background:#fff; border:solid 1px #bebebe; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#252424; resize:none;}
+	
+	
+	.choutblock2 .chakeboxform2 .formgroup .form-controlselecct{ width:384px; float:left; height:38px; background:#fff; border:solid 1px #bebebe; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#252424;}
+	
+	
+	
+	.choutblock3{ border-top:solid 1px #b0afaf; padding:12px 0;}
+	
+	
+	
+.choutblock3 h2{ font-size:24px; color:#323131; font-family:'OpenSans-Semibold';   background: url("../images/checkouticon3.png") no-repeat left top; margin:16px 0 0 0; padding:7px 0 0 56px; text-transform:uppercase; width:400px; float:left; }
+
+
+.choutblock3 .paymentoptionblock{ width:340px; float:right; text-align:right; margin:20px 0 0 0;}	
+
+.choutblock3 .paymentoptionblock input{ margin-left:12px;}
+			
+			
+	.choutblock4{ border-top:solid 1px #b0afaf; padding:12px 0; margin:16px 0 0 0;}
+	
+	
+	
+.choutblock4 h2{ font-size:24px; color:#323131; font-family:'OpenSans-Semibold';   background: url("../images/checkouticon4.png") no-repeat left top; margin:10px 0 0 0; padding:12px 0 0 56px; text-transform:uppercase; }	
+
+
+.choutblock4 table{ margin-top:25px; border:solid 1px #9aabb1; font-family:'OpenSans-Semibold';}	
+
+.choutblock4 table td{ border-bottom:solid 1px #9aabb1; padding:14px; font-size:14px; color:#2d2e2e; font-family:'OpenSans-Semibold';  }	
+
+.choutblock4 table th{ border-bottom:none; padding:14px; font-size:24px; color:#e3e2e2; font-family:'OpenSans-Semibold'; background:#91a3aa; text-align:right;  } 
+
+.choutblock4 table th.price{ text-align:right; border-left:solid 1px #ffffff;}
+
+.choutblock4 table td.price{ text-align:right; border-left:solid 1px #9aabb1;}
+
+.choutblock4 table .totaltext{ padding:5px!important;}
+
+.choutblock4 table .totaltext span{ background:#91a3aa; font-size:24px; color:#ffffff; display:inline-block; min-width:92px; text-align:center; height: 40px;
+    line-height: 38px;}
+
+.totalprice{ background:#91a3aa; font-size:24px!important; color:#ffffff!important; padding:9px!important;}
+
+
+.choutblock4 tr:nth-child(odd) {background: #edf1f2;}
+
+
+	.choutblock5{ border-top:solid 1px #b0afaf; padding:12px 0; margin:20px 0 0 0;}
+	
+	
+	
+.choutblock5 h2{ font-size:24px; color:#323131; font-family:'OpenSans-Semibold';   background: url("../images/checkouticon5.png") no-repeat left top; margin:10px 0 0 0;   padding: 20px 0 5px 62px; text-transform:uppercase; }	
+			
+			
+.choutblock5 h5{ font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#878787; margin:0;  padding: 17px 0 0 62px; }
+			
+.choutblock5 .termstextblock{ background:#eeeeee; border:solid 1px #cdcaca; padding:20px; margin:30px auto; font-size:12px; color:#4a4848; line-height:24px; font-family:'OpenSans-Semibold';}	
+
+.choutblock5 h6{ margin:0 0 20px 0; background: url("../images/checkouticon6.png") no-repeat left top; padding:4px 0 4px 45px;}		
+			
+			
+			
+	.choutblock5 input[type=checkbox].css-checkbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+.choutblock5 input[type=checkbox].css-checkbox + label.css-label {
+							padding-left:22px;
+							height:24px; 
+							display:inline-block;
+							
+							background-repeat:no-repeat;
+							background-position: 0 -1px;
+							line-height:24px;
+							
+							vertical-align:middle;
+							cursor:pointer; font-size:12px; color:#4a4848; font-family:'OpenSans-Semibold';
+							background-position: 0 0px;
+
+						}
+
+.choutblock5 input[type=checkbox].css-checkbox:checked + label.css-label {
+							background-position: 0 -25px;
+							
+						}
+.choutblock5 label.css-label {
+				background-image:url(../images/chakeboximg2.png);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+					
+	.chakeoutbtngroup a{ display:block; float:left; width:233px; height:38px; text-align:center; line-height:38px; margin-right:13px; font-size:18px; color:#303030; text-transform:uppercase; font-family:'OpenSans-Semibold'; background:#e1e0e0;}	
+	
+		.chakeoutbtngroup a:hover{ background:#f30100; color:#fff;}			
+		
+			.chakeoutbtngroup a.active{ background:#f30100; color:#fff;}	
+			
+			
+.successwrapper{ padding-bottom:100px;}	
+
+.successwrapper h2{background: url("../images/orderdevider.png")  left bottom repeat-x;  margin:0; padding:0; font-size:36px; color:#323131; font-family:'OpenSans-Semibold';}	
+
+.successwrapper h2 span{ background:#fff; display:inline-block; padding:0 12px 0 0;}
+					
+			
+.successwrapper  img{ display:block; margin:0 auto; margin-top:43px;}			
+
+.successwrapper h3{ font-size:36px; color:#333333; text-align:center; text-transform:uppercase; font-family:'OpenSans-Semibold'; padding:0; margin:10px 0;}
+
+
+.successwrapper .orderdevider{ width:146px; height:2px; margin:21px auto; background:#fc3e3e;}
+
+.successwrapper h4{ font-size:18px; color:#616060; text-align:center; text-transform:uppercase; font-family:'OpenSans-Semibold'; padding:0; margin:40px 0;}
+
+
+
+
+/*--------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------*/
+/*--------------------------------------------ADMIN CSS---------------------------------*/
+/*--------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------*/
+
+
+.adminleft{width:20%; float:left; margin-left:11%;}
+
+.admincontain{width:57%; float:right; margin-right:11%;}
+
+.adminnewwrapper{width:78%; margin:30px auto;  margin-bottom:36px;}
+
+.adminfooter{ background:#76797c; padding:26px 5px; text-align:center; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#e9e9e8; margin-top:50px;}
+
+
+.planswrapper{ width:78%; margin:0 auto;}

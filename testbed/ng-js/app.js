@@ -214,6 +214,265 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         })
 
+        .state('checkout',{
+            url:"/checkout",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/footer.html' ,
+                    //controller: 'footer'
+                },
+                'content': {
+                    templateUrl: 'partials/checkout.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+        .state('success',{
+            url:"/success",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/footer.html' ,
+                    //controller: 'footer'
+                },
+                'content': {
+                    templateUrl: 'partials/success.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+        .state('myaccount',{
+            url:"/myaccount",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/myaccount.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+        .state('editprofile',{
+            url:"/editprofile",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/editprofile.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+        .state('mydownloads',{
+            url:"/mydownloads",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/mydownloads.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+        .state('receipts',{
+            url:"/receipts",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/receipts.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+        .state('billings',{
+            url:"/billings",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/billings.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+        .state('plans',{
+            url:"/plans",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+               /* 'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },*/
+                'content': {
+                    templateUrl: 'partials/plans.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+        .state('uploads',{
+            url:"/uploads",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/uploader-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/uploads.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+
+
+.state('agreement',{
+            url:"/agreement",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/uploader-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/agreement.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+
+.state('addasuploader',{
+            url:"/addasuploader",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/uploader-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/addasuploader.html' ,
+                    //controller: 'checkout'
+                },
+
+            }
+        })
+
+
+
+
 
         .state('cart',{
             url:"/cart",
