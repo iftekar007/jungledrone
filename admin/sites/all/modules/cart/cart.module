@@ -45,6 +45,31 @@ function cart_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['updatecartuser'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'updatecartuser',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['carttotal'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'carttotal',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['cartdetail'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'cartdetail',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
     $items['ffmpeg'] = array(
         'title' => 'Add junglecategory',
         'page callback' => 'fmpegconvert',
@@ -76,6 +101,7 @@ function addtocart(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
     set_time_limit(0);
 
+    print_r($_POST);
     $conn = Database::getConnection();
     $saved_class = $conn->getAttribute(PDO::ATTR_STATEMENT_CLASS);
 
@@ -91,12 +117,82 @@ function addtocart(){
 
 
     $exec_result = $statement->execute();
+
+    print_r($exec_result);
     /*//$conn->setAttribute(PDO::ATTR_STATEMENT_CLASS, $saved_class);
 
     $rows = array();
     while ($row = $statement->fetchColumn(0)) {
         $rows[]['data'] = array($row);
     }*/
+}
+
+function updatecartuser(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+
+    db_update('cart')
+        ->fields(array('userid'=>@$_POST['newuserid']))
+        ->condition('userid', intval($_POST['olduserid']))
+        ->execute();
+
+}
+
+function carttotal(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+
+    $queryu = db_select('cart', 'ca');
+    $queryu->fields('ca');
+    $queryu->condition('ca.userid',$_REQUEST['user'],'=');
+    $queryu->addExpression('SUM(qty)', 'qty');
+    $resultu = $queryu->execute();
+    $recordu = $resultu->fetchAssoc();
+    echo ($recordu['qty']);
+
+}
+function cartdetail(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+
+    $cartarr=[];
+    $i=0;
+
+    $queryu = db_select('cart', 'ca');
+    ini_set('memory_limit', '128M');
+    $queryu->innerJoin('jungleproduct', 'jp','ca.pid=jp.id');
+    $queryu->fields('ca');
+    $queryu->fields('jp')
+        ->condition('ca.userid', $_REQUEST['user'], '=');
+    $resultu = $queryu->execute();
+    while($recordu = $resultu->fetchAssoc()) {
+
+        //print_r($recordu);
+        $recordu['textdesc']=strip_tags($recordu['product_desc']);
+        $recordu['cartimage'] = image_style_url('cartimage', (@$recordu['product_file']));
+
+        $cartarr[$i++]=$recordu;
+    }
+
+    echo json_encode($cartarr);
 }
 
 function uploadjunglssecategoryimage(){

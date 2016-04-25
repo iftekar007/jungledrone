@@ -35,29 +35,41 @@ jungledrone.service('contentservice', function($http, $log, $q) {
 
 
 
-    /*return {
-     getcontent: function(url){
 
-     $http.get(url)
-     .success(function(data) {
-     /!*deferred.resolve({
-     content: data
-     });*!/
-     //this.data=data;
-     d=data;
-     //return data;
-     }).error(function(msg, code) {
-     /!*deferred.reject(msg);
-     $log.error(msg, code);*!/
-     });
-     console.log('d-'+url);
-     return url;
-     },
-     sayGoodbye: function(text){
-     return "Factory says \"Goodbye " + text + "\"";
-     }
-     }*/
+
 });
+
+
+jungledrone.service('carttotal', function($http, $log, $q,$rootScope) {
+// this.data='';
+    var d;
+
+    this.getcontent= function(url) {
+        //var deferred = $q.defer();
+        $http.get(url)
+            .success(function(data) {
+                /* deferred.resolve({
+                 content: data,
+                 val:0
+                 });*/
+                //this.data=data;
+                d= data;
+                //return data;
+            }).error(function(msg, code) {
+                //deferred.reject(msg);
+                $log.error(msg, code);
+            });
+        return d;
+    }
+
+
+
+
+});
+
+
+
+
 
 
 jungledrone.filter('startFrom', function () {
@@ -78,18 +90,56 @@ jungledrone.filter('htmlToPlaintext', function () {
         };
     }
 });
-jungledrone.run(['$rootScope', '$state','contentservice',function($rootScope, $state,contentservice,$timeout){
+jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttotal',function($rootScope, $state,contentservice,$cookieStore,carttotal){
 
 
 
+    Math.random()
     $rootScope.$on('$stateChangeStart',function(){
+
+        $rootScope.userid=$cookieStore.get('userid');
+
+        console.log($rootScope.userid+'state change user id');
+
+        if($rootScope.userid == 0)  $rootScope.cartuser=$cookieStore.get('randomid');
+        else {
+            $rootScope.cartuser = $rootScope.userid;
+        }
+
         $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
+        $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.jungledrones.com/carttotal?user='+$rootScope.cartuser));
         $rootScope.stateIsLoading = true;
+        var random=Math.random() * Math.random();
+        //$cookieStore.remove('randomid');
+        random=random.toString().replace('.','');
+        //$cookieStore.put('randomid', random);
+
+        //console.log($cookieStore.get('randomid')+'random');
+
+        if(typeof($cookieStore.get('randomid'))=='undefined'){
+
+            $cookieStore.put('randomid', random);
+
+            console.log($cookieStore.get('randomid')+'random');
+        }
     });
 
 
     $rootScope.$on('$stateChangeSuccess',function(ev, to, toParams, from, fromParams){
         setTimeout(function(){
+
+           // $rootScope.userid=$cookieStore.get('userid');
+
+            console.log($rootScope.userid+'state change user id success ');
+
+            if($rootScope.userid == 0)  $rootScope.cartuser=$cookieStore.get('randomid');
+            else {
+                $rootScope.cartuser = $rootScope.userid;
+            }
+
+            $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.jungledrones.com/carttotal?user='+$rootScope.cartuser));
+
+            $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
             console.log($rootScope.userid+'userid');
             if($rootScope.userid<1) $('.editableicon').hide();
 
@@ -488,7 +538,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/cart.html' ,
-                    //controller: 'services'
+                    controller: 'cart'
                 },
 
             }
@@ -2026,9 +2076,24 @@ jungledrone.controller('packagedelivery', function($compile,$scope,contentservic
     },$scope.interval);
 
 });
-jungledrone.controller('header', function($compile,$scope,contentservice,$state,$http,$cookieStore,$rootScope,Upload,$sce) {
+jungledrone.controller('header', function($compile,$scope,contentservice,$state,$http,$cookieStore,$rootScope,Upload,$sce,carttotal) {
 
 
+
+
+
+    setTimeout(function(){
+
+        if($rootScope.userid == 0)  $rootScope.cartuser=$cookieStore.get('randomid');
+        else {
+            $rootScope.cartuser = $rootScope.userid;
+        }
+
+        $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.jungledrones.com/carttotal?user='+$rootScope.cartuser));
+
+        console.log($rootScope.userid+'state change user id header ');
+
+    },2000);
 
 
 
@@ -5628,6 +5693,30 @@ jungledrone.controller('services', function($scope,$state,$http,$cookieStore,$ro
 });
 
 
+jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+
+
+    if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
+    else
+        $scope.cartuser=$rootScope.userid;
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'cartdetail',
+        data    : $.param({'user':$scope.cartuser}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+
+
+
+    $scope.cartarray=data;
+
+
+    });
+
+});
 jungledrone.controller('productdetails', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
 
 
@@ -5646,20 +5735,46 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
     $rootScope.addtocart=function(pid){
 
+        console.log($rootScope.userid+'userid..');
+
+        if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
+        else {
+            $scope.cartuser=$rootScope.userid;
+
+            $http({
+                method:'POST',
+                async:false,
+                url:$scope.adminUrl+'updatecartuser',
+                data    : $.param({'newuserid':$rootScope.userid,'olduserid':$cookieStore.get('randomid')}),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+            }).success(function(data){
+
+
+
+
+
+
+            });
+        }
+
 
 
         $http({
             method:'POST',
             async:false,
             url:$scope.adminUrl+'addtocart',
-            data    : $.param({'pid':pid,'qty':$scope.pqty,'userid':$rootScope.userid}),
+            data    : $.param({'pid':pid,'qty':$scope.pqty,'userid':$scope.cartuser}),
             headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
         }).success(function(data){
-            $scope.categorylist=data;
+
+            $rootScope.carttotal=parseInt($rootScope.carttotal+parseInt($scope.pqty));
+
 
 
         });
+
 
 
     }

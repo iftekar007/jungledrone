@@ -28,7 +28,46 @@
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="productacrttable">
-  <tr>
+  <tr ng-repeat="cartitem in cartarray">
+    <td align="left" valign="top">
+    <img src="{{cartitem.cartimage}}" alt="#" class="jd_pro" >
+    
+    <div class="producttext">
+    <!--<h2><{{cartitem.product_name}}</h2>-->
+    
+    <p>Name:  <br />
+    
+{{cartitem.product_name}}<br />
+<br />
+Description:  <br />
+{{cartitem.textdesc | limitTo:100}} ....</p>
+    
+    </div>
+    
+    </td>
+    <td align="center" valign="middle">
+    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" ></a> <input type="text" value="{{cartitem.qty}}" class="qtyinput" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ></a>
+ <div class="clear"></div>
+    </div>
+    </td>
+      <td align="center" valign="middle">
+      <h3>Unit Price<br />
+
+<span>${{cartitem.price}}</span></h3>
+      </td>
+      <!--<td align="center" valign="middle">
+      
+      <h3>
+      vat (00%)<br />
+
+<span>$0.00</span>
+      </h3>
+      </td>-->
+      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
+  </tr>
+
+
+ <!-- <tr>
     <td align="left" valign="top">
     <img src="images/newcart1.png" alt="#" class="jd_pro" >
     
@@ -141,45 +180,7 @@ Latest 6-axis flight control system with adjustable gyro sensitivity</p>
       </h3>
       </td>
       <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
-  </tr>
-  <tr>
-    <td align="left" valign="top">
-    <img src="images/newcart1.png" alt="#" class="jd_pro" >
-    
-    <div class="producttext">
-    <h2><strong>2.4</strong> GHZ  RC SERIES</h2>
-    
-    <p>Name:  <br />
-    
-X 4 Mini Quadcopter Camera Plus<br />
-<br />
-Description:  <br />
-Lightweight airframe with nice durability
-Latest 6-axis flight control system with adjustable gyro sensitivity</p>
-    
-    </div>
-    
-    </td>
-    <td align="center" valign="middle">
-    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" ></a> <input type="text" value="1" class="qtyinput" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ></a>
- <div class="clear"></div>
-    </div>
-    </td>
-      <td align="center" valign="middle">
-      <h3>Unit Price<br />
-
-<span>$00.00</span></h3>
-      </td>
-      <td align="center" valign="middle">
-      
-      <h3>
-      vat (00%)<br />
-
-<span>$0.00</span>
-      </h3>
-      </td>
-      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
-  </tr>
+  </tr>-->
 
 </table>
 

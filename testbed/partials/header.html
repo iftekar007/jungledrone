@@ -40,7 +40,7 @@
      <div class="new_menu_list">
    <a ng-if="userid==0" ui-sref=login href="javascript:void(0);"> Login </a>
        <a style=cursor:pointer ng-click=logout() ng-if="userid!=0">Logout</a>
-    <a href="javascript:void(0);"> Cart </a>         
+    <a ui-sref="cart" href="javascript:void(0);"> Cart ({{carttotal}}) </a>
     <!-- <a href="javascript:void(0);">My Profiel</a>   -->
       <a  ng-if="userid!=0" href="javascript:void(0);">Profile</a>
       </div> 
