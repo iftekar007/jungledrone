@@ -38,11 +38,64 @@
     
    <div class="container new_menu_block">
      <div class="new_menu_list">
-   <a ng-if="userid==0" ui-sref=login href="javascript:void(0);"> Login </a>
-       <a style=cursor:pointer ng-click=logout() ng-if="userid!=0">Logout</a>
-    <a ui-sref="cart" href="javascript:void(0);"> Cart ({{carttotal}}) </a>
+   <a ng-if="userid==0" ui-sref=login href="javascript:void(0);" class="sublink"> Login </a>
+       <a style=cursor:pointer ng-click=logout() ng-if="userid!=0" class="sublink">Logout</a>
+   <!-- <a ui-sref="cart" href="javascript:void(0);"> Cart ({{carttotal}}) </a>-->
+    
+       <a href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">  Cart ({{carttotal}})  </a> 
+    
     <!-- <a href="javascript:void(0);">My Profiel</a>   -->
-      <a  ng-if="userid!=0" href="javascript:void(0);">Profile</a>
+      <a  ng-if="userid!=0" href="javascript:void(0);" class="sublink">Profile</a>
+      
+       <div class="clearfix"></div>
+       
+         <div class="dropdown-menu">
+         <h4>Shopping Bag</h4>
+         
+         
+         <!--<h6 class="emptyshopingtext">Your Shopping Bag Is empty</h6>-->
+         
+        <!-- shopping product row-->
+         
+         <div class="shoppingrow">
+            <div class="shopbox_pro"><img alt="#" src="images/events_banner_drone.png"></div>
+            <div class="shopbox_name">A2b 5 Channel Nano Quadcopter 6 Axis Gyro </div>
+            <div class="shopbox_price"><span>1</span> x <strong>$44.95</strong></div>
+            <div class="shopbox_close"><img alt="#" src="images/shopclose.png"></div>
+          <div class="clearfix"></div>
+          </div>
+          
+          <!--////////////////////-->
+          
+           <div class="shoppingrow">
+            <div class="shopbox_pro"><img alt="#" src="images/events_banner_drone.png"></div>
+            <div class="shopbox_name">A2b 5 Channel Nano Quadcopter 6 Axis Gyro </div>
+            <div class="shopbox_price"><span>1</span> x <strong>$44.95</strong></div>
+            <div class="shopbox_close"><img alt="#" src="images/shopclose.png"></div>
+          <div class="clearfix"></div>
+          </div>
+         
+         <!-- shopping product row end -->
+         
+         
+            <!-- shopping product Total row -->
+           <div class="shoppingtotalrow">
+            
+            <div class="shoptotal1">Total</div>
+            <div class="shoptotal2">2 items</div>
+            <div class="shoptotal3">$89.09</div>
+           
+          <div class="clearfix"></div>
+          </div>
+          <!-- shopping product Total row end -->
+          
+         
+         <a ui-sref="cart" href="javascript:void(0);" class="shoppingbagbtn"> Shopping Bag </a>
+         
+         </div>
+      
+      
+      
       </div> 
       <div class="clearfix"></div>
    </div> 
