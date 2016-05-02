@@ -154,7 +154,15 @@ function imguploadproduct(){
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
-             $filePath = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
+
+
+            $productextns=explode('.',$recordu['product_file']);
+
+            if($productextns['1']=='mp4'){
+                $filePath = image_style_url('front-photo_600_600_', 'public://'.$productextns['0'].'.jpg');
+            }else{
+                $filePath = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
+            }
 
             $jungleproductlist[$i]= $temparray;
             $i++;
@@ -224,11 +232,12 @@ function uploadjungleproductimage(){
 
     $target_dir = realpath(dirname(__FILE__))."/uploads/";
     $path_parts = pathinfo($_FILES['Filedata']['name']);
-    $filename = rand().'_'.time().'.'.$path_parts['extension'];
+    $filename1 = rand().'_'.time();
+    $filename = $filename1.'.'.$path_parts['extension'];
     ini_set('memory_limit', '128M');
 
     $profile_url = '';
-    $extarray=array('jpg','png','gif','mp4');
+    $extarray=array('jpg','png','gif','mp4','flv','MP4','FLV');
     if(in_array($path_parts['extension'],$extarray)) {
         if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir . $filename)) {
             //$account = user_load($_POST['userid']);
@@ -256,10 +265,136 @@ function uploadjungleproductimage(){
         }
       // echo file_create_url(@$file->uri);
 //print_r($file);
-        if($path_parts['extension']=='mp4'){
-            $data['video_url'] = file_create_url(@$file->uri);;
+        if($path_parts['extension']=='mp4'||$path_parts['extension']=='MP4'){
+
+            $data['is_video']=1;
+
+            $data['video_url1222'] = $data1['video_url1'] = file_create_url(@$file->uri);
+
+
+            $fileToFlv = $data1['video_url1'];
+            $fileFlv = 'convertedvdo.mp4';
+            $Flvjpg = $target_dir.$filename1.'.jpg';
+
+
+            $command = "/usr/bin/ffmpeg" . ' -i ' . $fileToFlv . ' -vstats 2>&1';
+            $output = shell_exec ( $command );
+
+            $result = ereg ( '[0-9]?[0-9][0-9][0-9]x[0-9][0-9][0-9][0-9]?', $output, $regs );
+
+            $vals = (explode ( 'x', $regs [0] ));
+            $width = $vals [0] ? $vals [0] : null;
+            $height = $vals [1] ? $vals [1] : null;
+            $info = array ('width' => $width, 'height' => $height );
+
+//$s_vid_conv_cmd = "/usr/bin/ffmpeg -i ".$fileToFlv." -ar 22050 -f mp4 ".$fileFlv;
+            //$s_vid_conv_cmd = "/usr/bin/ffmpeg -i ".$fileToFlv." -b 1500k -vcodec libx264 -vpre slow -vpre baseline -g 30 -s 640x360 ".$fileFlv;
+
+            //$x=exec($s_vid_conv_cmd);
+
+            exec("/usr/bin/ffmpeg -i ".$fileToFlv." -vframes 1 -ss 00:00:10 -s 640x360 -f image2 ".$Flvjpg);
+
+
+
+            $file1 = (object)array(
+                'uid' => 1,
+                'uri' => $Flvjpg,
+                'filemime' => file_get_mimetype($Flvjpg),
+                'status' => 1,
+            );
+            if ($file1) {
+// Move the file, into the Drupal file system
+                if ($file1 = file_move($file1, 'public://')) {
+                    $file1->status = FILE_STATUS_PERMANENT;
+                    // $file->file_display = 1;
+                    $file1 = file_save($file1);
+                    //set the extra values needed to make node_save work
+                    $file1->display = 1;
+                    $file1->description = "";
+                }
+
+            }
+
+            $data['video_name'] = $filename;
+            $data['image_url'] = image_style_url('large', (@$file1->uri));
+
+
+
+
+        }
+        else if($path_parts['extension']=='flv'||$path_parts['extension']=='FLV'){
+
+            $data['is_video']=1;
+
+            $data1['video_url1'] = file_create_url(@$file->uri);
+
+            $fileToFlv = $data1['video_url1'];
+            $fileFlv = $target_dir.$filename1.'.mp4';
+            $Flvjpg = $target_dir.$filename1.'.jpg';
+
+            $command = "/usr/bin/ffmpeg" . ' -i ' . $fileToFlv . ' -vstats 2>&1';
+            $output = shell_exec ( $command );
+
+            $result = ereg ( '[0-9]?[0-9][0-9][0-9]x[0-9][0-9][0-9][0-9]?', $output, $regs );
+
+            $vals = (explode ( 'x', $regs [0] ));
+            $width = $vals [0] ? $vals [0] : null;
+            $height = $vals [1] ? $vals [1] : null;
+            $info = array ('width' => $width, 'height' => $height );
+
+            $s_vid_conv_cmd = "/usr/bin/ffmpeg -i ".$fileToFlv." -b 1500k -vcodec libx264 -vpre slow -vpre baseline -g 30 -s 640x360 ".$fileFlv;
+
+            $x=exec($s_vid_conv_cmd);
+
+            exec("/usr/bin/ffmpeg -i ".$fileToFlv." -vframes 1 -ss 00:00:10 -s 640x360 -f image2 ".$Flvjpg);
+
+            $file1 = (object)array(
+                'uid' => 1,
+                'uri' => $Flvjpg,
+                'filemime' => file_get_mimetype($Flvjpg),
+                'status' => 1,
+            );
+            if ($file1) {
+// Move the file, into the Drupal file system
+                if ($file1 = file_move($file1, 'public://')) {
+                    $file1->status = FILE_STATUS_PERMANENT;
+                    // $file->file_display = 1;
+                    $file1 = file_save($file1);
+                    //set the extra values needed to make node_save work
+                    $file1->display = 1;
+                    $file1->description = "";
+                }
+
+            }
+
+            $file2 = (object)array(
+                'uid' => 1,
+                'uri' => $fileFlv,
+                'filemime' => file_get_mimetype($fileFlv),
+                'status' => 1,
+            );
+            if ($file2) {
+// Move the file, into the Drupal file system
+                if ($file2 = file_move($file2, 'public://')) {
+                    $file2->status = FILE_STATUS_PERMANENT;
+                    // $file->file_display = 1;
+                    $file2 = file_save($file2);
+                    //set the extra values needed to make node_save work
+                    $file2->display = 1;
+                    $file2->description = "";
+                }
+
+            }
+
+            $data['video_url1222'] = file_create_url(@$file2->uri);
+            $data['video_name'] = $filename1.'.mp4';
+            $data['image_url'] = image_style_url('large', (@$file1->uri));
+
+
+
         }
         else{
+            $data['is_video']=0;
             $data['image_url'] = image_style_url('large', (@$file->uri));
         }
         //
@@ -296,9 +431,12 @@ function jungleproductdetails(){
             $productextns=explode('.',$recordu['product_file']);
 
             if($productextns['1']=='mp4'){
-                $temparray['video_url'] = file_create_url(@$recordu['product_file']);;
+                $temparray['is_video'] = 1;
+                $temparray['cover_img_url'] = image_style_url('large', 'public://'.$productextns['0'].'.jpg');;
+                $temparray['video_url'] = file_create_url('public://'.@$recordu['product_file']);
             }
             else{
+                $temparray['is_video'] = 0;
                 $temparray['image_url'] = image_style_url('large', (@$recordu['product_file']));
 
                 $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/icon5copy.png');
@@ -375,8 +513,11 @@ function jungleproductlist()
                 $productextns = explode('.', $recordu['product_file']);
 
                 if ($productextns['1'] == 'mp4') {
-                    $temparray['video_url'] = file_create_url(@$recordu['product_file']);;
+                    $temparray['is_video'] = 1;
+                    $temparray['image_url'] = image_style_url('front-photo_600_600_', ('public://'.$productextns['0'].'.jpg'));
+                    $temparray['video_url'] = file_create_url('public://'.$recordu['product_file']);;
                 } else {
+                    $temparray['is_video'] = 0;
                     $temparray['image_url'] = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
                 }
             }

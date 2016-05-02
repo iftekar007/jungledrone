@@ -131,6 +131,7 @@ function contentlist()
     //'fname','lname','email','phone', 'country','city','resume'
 
     $queryu->fields('ev', array('id','cname','content','description','ctype','parentid'));
+    $queryu->orderBy('id','DESC');
     // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
     // ->condition('ur.rid', 5, '=');
     //->condition('u.uid', 74, '=');

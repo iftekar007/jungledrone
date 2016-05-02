@@ -138,12 +138,13 @@ jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttot
             }
 
             $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.jungledrones.com/carttotal?user='+$rootScope.cartuser));
+            $rootScope.carttotal=0;
 
             $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
             console.log($rootScope.userid+'userid');
             if($rootScope.userid<1) $('.editableicon').hide();
 
-            $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
+            //$rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
             $rootScope.stateIsLoading = false;
 
         },20);
@@ -160,6 +161,8 @@ jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttot
 
 jungledrone.filter("sanitize123", ['$sce', function($sce) {
     return function(htmlCode){
+        console.log(htmlCode);
+        console.log('santize');
         return $sce.trustAsHtml(htmlCode);
     }
 }]);
@@ -604,7 +607,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/droneracing.html' ,
-                    //controller: 'home'
+                    controller: 'services'
                 },
 
             }
@@ -870,6 +873,29 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 'content': {
                     templateUrl: 'partials/admin_list.html' ,
                     controller: 'adminlist'
+                },
+
+            }
+        }
+    )
+        .state('contentlist',{
+            url:"/contentlist",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                    //  controller: 'admin_left'
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/contentlist.html' ,
+                    controller: 'contentlist'
                 },
 
             }
@@ -1403,7 +1429,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/tourism.html' ,
-                    //controller: 'home'
+                    controller: 'services'
                 },
 
             }
@@ -1591,7 +1617,7 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
 });
 
 
-jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,contentservice) {
     //$state.go('home');
     //return
     // $rootScope.stateIsLoading = true;
@@ -1819,12 +1845,81 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
 
 
 
+    $scope.interval=200;
+    $scope.contentupdated=false;
+    var myVar =setInterval(function(){
+
+        $rootScope.contentdata=contentservice.getcontent( $scope.adminUrl+'contentlist');
+
+
+        //console.log('in setInterval'+$scope.interval);
+        //console.log( $rootScope.contentdata);
+        var x;
+        var y;
+        if(typeof ($rootScope.contentdata)!='undefined' && $scope.contentupdated){
+
+            $scope.interval=999990;
+
+            clearInterval(myVar);
+        }
+
+        $scope.contentupdated=true;
+        for (x in $rootScope.contentdata ){
+            var contentw='';
+            //console.log($rootScope.contentdata[x]);
+            //console.log(($rootScope.contentdata[x].content));
+            //console.log(($rootScope.contentdata[x].parentid));
+
+
+            if($rootScope.contentdata[x].ctype!='image') {
+
+                for (y in $rootScope.contentdata[x].content) {
+                    if ($rootScope.contentdata[x].ctype != 'image')
+                        contentw += ($rootScope.contentdata[x].content[y]);
+                    else {
+
+                        contentw += "<img src=" + $rootScope.contentdata[x].content[y] + " />";
+                    }
+                }
+                $rootScope.contentdata[x].content=(contentw);
+            }
+            /* else{
+
+             $rootScope.contentdata[x].content = "< img src = " + $rootScope.contentdata[x].content + " >";
+
+             //$rootScope.contentdata[x].content=$rootScope.contentdata[x].content.replace('["','').replace.(']"','');
+             }*/
+
+
+            console.log(($rootScope.contentdata[x].content));
+            $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
+            if($rootScope.contentdata[x].parentid!=0){
+
+                var z=parseInt($rootScope.contentdata[x].parentid);
+                console.log(z);
+                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+
+                $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
+
+            }
+
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+        //console.log('----'+$scope);
+
+
+    },$scope.interval);
+
+
 
 
 });
 
 
-jungledrone.controller('contactus', function($scope,$state,$http,$cookieStore,$rootScope) {
+jungledrone.controller('contactus', function($scope,$state,$http,$cookieStore,$rootScope,contentservice) {
     //$state.go('home');
     //return
 
@@ -1857,11 +1952,81 @@ jungledrone.controller('contactus', function($scope,$state,$http,$cookieStore,$r
 
     }
 
+    $scope.interval=200;
+    $scope.contentupdated=false;
+    var myVar =setInterval(function(){
+
+        $rootScope.contentdata=contentservice.getcontent( $scope.adminUrl+'contentlist');
+
+
+        //console.log('in setInterval'+$scope.interval);
+        //console.log( $rootScope.contentdata);
+        var x;
+        var y;
+        if(typeof ($rootScope.contentdata)!='undefined' && $scope.contentupdated){
+
+            $scope.interval=999990;
+
+            clearInterval(myVar);
+        }
+
+        $scope.contentupdated=true;
+        for (x in $rootScope.contentdata ){
+            var contentw='';
+            //console.log($rootScope.contentdata[x]);
+            //console.log(($rootScope.contentdata[x].content));
+            //console.log(($rootScope.contentdata[x].parentid));
+
+
+            if($rootScope.contentdata[x].ctype!='image') {
+
+                for (y in $rootScope.contentdata[x].content) {
+                    if ($rootScope.contentdata[x].ctype != 'image')
+                        contentw += ($rootScope.contentdata[x].content[y]);
+                    else {
+
+                        contentw += "<img src=" + $rootScope.contentdata[x].content[y] + " />";
+                    }
+                }
+                $rootScope.contentdata[x].content=(contentw);
+            }
+            /* else{
+
+             $rootScope.contentdata[x].content = "< img src = " + $rootScope.contentdata[x].content + " >";
+
+             //$rootScope.contentdata[x].content=$rootScope.contentdata[x].content.replace('["','').replace.(']"','');
+             }*/
+
+
+            console.log(($rootScope.contentdata[x].content));
+            $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
+            if($rootScope.contentdata[x].parentid!=0){
+
+                var z=parseInt($rootScope.contentdata[x].parentid);
+                console.log(z);
+                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+
+                $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
+
+            }
+
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+        //console.log('----'+$scope);
+
+
+    },$scope.interval);
+
+
+
 
 });
 
 
-jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieStore,$rootScope) {
+jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieStore,$rootScope,contentservice,$sce,$compile) {
     //$state.go('home');
     //return
     $scope.form={};
@@ -1998,6 +2163,74 @@ jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieSto
 
     }
 
+
+    $scope.interval=200;
+    $scope.contentupdated=false;
+    var myVar =setInterval(function(){
+
+        $rootScope.contentdata=contentservice.getcontent( $scope.adminUrl+'contentlist');
+
+
+        //console.log('in setInterval'+$scope.interval);
+        //console.log( $rootScope.contentdata);
+        var x;
+        var y;
+        if(typeof ($rootScope.contentdata)!='undefined' && $scope.contentupdated){
+
+            $scope.interval=999990;
+
+            clearInterval(myVar);
+        }
+
+        $scope.contentupdated=true;
+        for (x in $rootScope.contentdata ){
+            var contentw='';
+            //console.log($rootScope.contentdata[x]);
+            //console.log(($rootScope.contentdata[x].content));
+            //console.log(($rootScope.contentdata[x].parentid));
+
+
+            if($rootScope.contentdata[x].ctype!='image') {
+
+                for (y in $rootScope.contentdata[x].content) {
+                    if ($rootScope.contentdata[x].ctype != 'image')
+                        contentw += ($rootScope.contentdata[x].content[y]);
+                    else {
+
+                        contentw += "<img src=" + $rootScope.contentdata[x].content[y] + " />";
+                    }
+                }
+                $rootScope.contentdata[x].content=(contentw);
+            }
+            /* else{
+
+             $rootScope.contentdata[x].content = "< img src = " + $rootScope.contentdata[x].content + " >";
+
+             //$rootScope.contentdata[x].content=$rootScope.contentdata[x].content.replace('["','').replace.(']"','');
+             }*/
+
+
+            console.log(($rootScope.contentdata[x].content));
+            $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
+            if($rootScope.contentdata[x].parentid!=0){
+
+                var z=parseInt($rootScope.contentdata[x].parentid);
+                console.log(z);
+                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+
+                $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
+
+            }
+
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+        //console.log('----'+$scope);
+
+
+    },$scope.interval);
 
 
 
@@ -2173,7 +2406,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
 
 });
-jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$rootScope,Upload) {
+jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$rootScope,Upload,contentservice) {
 
 
     $scope.form={};
@@ -2331,6 +2564,76 @@ jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$
 
 
 
+    $scope.interval=200;
+    $scope.contentupdated=false;
+    var myVar =setInterval(function(){
+
+        $rootScope.contentdata=contentservice.getcontent( $scope.adminUrl+'contentlist');
+
+
+        //console.log('in setInterval'+$scope.interval);
+        //console.log( $rootScope.contentdata);
+        var x;
+        var y;
+        if(typeof ($rootScope.contentdata)!='undefined' && $scope.contentupdated){
+
+            $scope.interval=999990;
+
+            clearInterval(myVar);
+        }
+
+        $scope.contentupdated=true;
+        for (x in $rootScope.contentdata ){
+            var contentw='';
+            //console.log($rootScope.contentdata[x]);
+            //console.log(($rootScope.contentdata[x].content));
+            //console.log(($rootScope.contentdata[x].parentid));
+
+
+            if($rootScope.contentdata[x].ctype!='image') {
+
+                for (y in $rootScope.contentdata[x].content) {
+                    if ($rootScope.contentdata[x].ctype != 'image')
+                        contentw += ($rootScope.contentdata[x].content[y]);
+                    else {
+
+                        contentw += "<img src=" + $rootScope.contentdata[x].content[y] + " />";
+                    }
+                }
+                $rootScope.contentdata[x].content=(contentw);
+            }
+            /* else{
+
+             $rootScope.contentdata[x].content = "< img src = " + $rootScope.contentdata[x].content + " >";
+
+             //$rootScope.contentdata[x].content=$rootScope.contentdata[x].content.replace('["','').replace.(']"','');
+             }*/
+
+
+            console.log(($rootScope.contentdata[x].content));
+            $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
+            if($rootScope.contentdata[x].parentid!=0){
+
+                var z=parseInt($rootScope.contentdata[x].parentid);
+                console.log(z);
+                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+
+                $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
+
+            }
+
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+        //console.log('----'+$scope);
+
+
+    },$scope.interval);
+
+
+
 
 });
 
@@ -2406,7 +2709,7 @@ jungledrone.controller('addcontent', function($compile,$scope,contentservice,$st
         ],
         // toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
         toolbar: ' undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link  |   media fullpage | forecolor backcolor',
-        valid_elements : "a[href|target=_blank],strong/b,div[align],br,span,label",
+        valid_elements : "a[href|target=_blank],strong/b,div[align|class],br,span,label",
         force_p_newlines : false,
         forced_root_block:'',
         extended_valid_elements : "label,span"
@@ -3049,7 +3352,7 @@ jungledrone.controller('editcontent', function($compile,$scope,contentservice,$s
         ],
         toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
         toolbar2: "print preview media | forecolor backcolor emoticons",
-        valid_elements : "a[href|target=_blank],strong/b,div[align],br,span,label,h3,h4,h2,h1,strong",
+        valid_elements : "a[href|target=_blank],strong/b,div[align|class],br,span,label,h3,h4,h2,h1,strong",
         extended_valid_elements : "label,span",
         'force_p_newlines'  : false,
         'forced_root_block' : '',
@@ -3889,6 +4192,146 @@ jungledrone.controller('adminlist', function($scope,$state,$http,$cookieStore,$r
 
     //console.log('in add admin form ');
 });
+jungledrone.controller('contentlist', function($scope,$state,$http,$cookieStore,$rootScope) {
+
+
+
+
+    $scope.getTextToCopy = function() {
+        return "ngClip is awesome!";
+    }
+    $scope.doSomething = function () {
+        console.log("NgClip...");
+    }
+
+    var clipboard = new Clipboard('.btn');
+
+
+    $scope.currentPage=1;
+    $scope.perPage=3;
+    $scope.begin=0;
+
+    $scope.setPage = function (pageNo) {
+        $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function(){
+        console.log($scope.currentPage);
+        $scope.begin=parseInt($scope.currentPage-1)*$scope.perPage;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+    }
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     : $scope.adminUrl+'contentlist',
+        // data    : $.param($scope.form),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        $rootScope.stateIsLoading = false;
+        //console.log(data);
+        var x;
+        var y;
+
+        for (x in data ){
+            var contentw='';
+            //console.log($rootScope.contentdata[x]);
+            //console.log(($rootScope.contentdata[x].content));
+            //console.log(($rootScope.contentdata[x].parentid));
+
+
+            if(data[x].ctype!='image') {
+
+                for (y in data[x].content) {
+                    if (data[x].ctype != 'image')
+                        contentw += (data[x].content[y]);
+                    else {
+
+                        contentw += "<img src=" + data[x].content[y] + " />";
+                    }
+                }
+                data[x].content=(contentw);
+            }
+            /* else{
+
+             $rootScope.contentdata[x].content = "< img src = " + $rootScope.contentdata[x].content + " >";
+
+             //$rootScope.contentdata[x].content=$rootScope.contentdata[x].content.replace('["','').replace.(']"','');
+             }*/
+
+
+            //console.log(($rootScope.contentdata[x].content));
+            $scope[data.cname+data[x].id]=data[x];
+            if(data[x].parentid!=0){
+
+                var z=parseInt(data[x].parentid);
+                console.log(z);
+                console.log(data[x].cname+data[x].parentid);
+
+                $scope[data[x].cname+data[x].parentid]=data[x];
+
+            }
+
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+
+        $scope.userlist=data;
+        $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+
+    });
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( (item.cname.indexOf($scope.searchkey) != -1) || (item.content.indexOf($scope.searchkey) != -1) ){
+            return true;
+        }
+        return false;
+
+        //return true;
+    };
+    $scope.deladmin = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.userlist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'deleteadmin',
+            data    : $.param({uid: $scope.userlist[idx].uid}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.userlist.splice(idx,1);
+            $scope.userlistp = $scope.userlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+        });
+    }
+
+    $scope.changeStatus = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.userlist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'updatestatus',
+            data    : $.param({uid: $scope.userlist[idx].uid}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.userlist[idx].status = !$scope.userlist[idx].status;
+        });
+    }
+
+
+
+
+    //console.log('in add admin form ');
+});
+
+
 jungledrone.controller('imagesizelist', function($scope,$state,$http,$cookieStore,$rootScope) {
     $scope.currentPage=1;
     $scope.perPage=3;
@@ -5671,7 +6114,7 @@ jungledrone.controller('admin_header', function($scope,$state,$http,$cookieStore
 });
 
 
-jungledrone.controller('services', function($scope,$state,$http,$cookieStore,$rootScope) {
+jungledrone.controller('services', function($compile,$scope,contentservice,$state,$http,$cookieStore,$rootScope,Upload,$sce) {
     // $state.go('login');
     angular.element('head').append('<link id="home" href="css/admin_style.css" rel="stylesheet">');
 
@@ -5690,6 +6133,81 @@ jungledrone.controller('services', function($scope,$state,$http,$cookieStore,$ro
 
 
 },2000);
+
+
+
+
+
+    $scope.interval=200;
+    $scope.contentupdated=false;
+    var myVar =setInterval(function(){
+
+        $rootScope.contentdata=contentservice.getcontent( $scope.adminUrl+'contentlist');
+
+
+        //console.log('in setInterval'+$scope.interval);
+        //console.log( $rootScope.contentdata);
+        var x;
+        var y;
+        if(typeof ($rootScope.contentdata)!='undefined' && $scope.contentupdated){
+
+            $scope.interval=999990;
+
+            clearInterval(myVar);
+        }
+
+        $scope.contentupdated=true;
+        for (x in $rootScope.contentdata ){
+            var contentw='';
+            //console.log($rootScope.contentdata[x]);
+            //console.log(($rootScope.contentdata[x].content));
+            //console.log(($rootScope.contentdata[x].parentid));
+
+
+            if($rootScope.contentdata[x].ctype!='image') {
+
+                for (y in $rootScope.contentdata[x].content) {
+                    if ($rootScope.contentdata[x].ctype != 'image')
+                        contentw += ($rootScope.contentdata[x].content[y]);
+                    else {
+
+                        contentw += "<img src=" + $rootScope.contentdata[x].content[y] + " />";
+                    }
+                }
+                $rootScope.contentdata[x].content=(contentw);
+            }
+            /* else{
+
+             $rootScope.contentdata[x].content = "< img src = " + $rootScope.contentdata[x].content + " >";
+
+             //$rootScope.contentdata[x].content=$rootScope.contentdata[x].content.replace('["','').replace.(']"','');
+             }*/
+
+
+            console.log(($rootScope.contentdata[x].content));
+            $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
+            if($rootScope.contentdata[x].parentid!=0){
+
+                var z=parseInt($rootScope.contentdata[x].parentid);
+                console.log(z);
+                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+
+                $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
+
+            }
+
+            //var model=$parse($rootScope.contentdata[x].id);
+            //model.assign($scope, $rootScope.contentdata[x]);
+            //.id=$rootScope.contentdata[x];
+        }
+
+        //console.log('----'+$scope);
+
+
+    },$scope.interval);
+
+
+
 });
 
 
@@ -5716,7 +6234,101 @@ jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootSc
 
     });
 
+
+    if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
+    else {
+        $scope.cartuser=$rootScope.userid;
+
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'updatecartuser',
+            data    : $.param({'newuserid':$rootScope.userid,'olduserid':$cookieStore.get('randomid')}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+
+
+
+
+
+
+        });
+    }
+
+    $scope.addqty=function(val){
+
+        $('.qtyi'+val).val(parseInt(parseInt( $('.qtyi'+val).val())+1));
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'updatecart',
+            data    : $.param({'pid':$('.qtyi'+val).attr('pid'),'qty':$('.qtyi'+val).val(),'userid':$scope.cartuser}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+            $scope.cartarray[val].qty= $scope.cartarray[val].qty+1;
+
+            $rootScope.carttotal=parseInt($rootScope.carttotal+parseInt(1));
+
+
+
+        });
+        console.log(val+'addval'+$('.qtyi'+val).val());
+    }
+    $scope.delqty=function(val) {
+        if ($('.qtyi' + val).val() > 1) {
+            $('.qtyi' + val).val(parseInt(parseInt($('.qtyi' + val).val()) - 1));
+
+            $http({
+                method: 'POST',
+                async: false,
+                url: $scope.adminUrl + 'updatecart',
+                data: $.param({
+                    'pid': $('.qtyi' + val).attr('pid'),
+                    'qty': $('.qtyi' + val).val(),
+                    'userid': $scope.cartuser
+                }),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+
+            }).success(function (data) {
+
+                $rootScope.carttotal = parseInt($rootScope.carttotal - parseInt($('.qtyi' + val).val()));
+                $scope.cartarray[val].qty = $scope.cartarray[val].qty -parseInt($('.qtyi' + val).val());
+
+
+            });
+
+        }
+    }
+
+        $scope.delcart=function(val){
+
+            $http({
+                method:'POST',
+                async:false,
+                url:$scope.adminUrl+'deletecartbyid',
+                data    : $.param({'id':val,'userid':$scope.cartuser}),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+            }).success(function(data){
+
+                $rootScope.carttotal=parseInt($rootScope.carttotal-parseInt(1));
+                $scope.cartarray[val].qty= 0;
+
+
+
+            });
+
+
+        console.log(val+'addval'+$('.qtyi'+val).val());
+    }
+
+
+
 });
+
+
 jungledrone.controller('productdetails', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
 
 
@@ -5865,32 +6477,32 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
 
 });
-jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal) {
     // $state.go('login');
    //  $scope.categorylist=[];
 
     $scope.categoryid={};
     $scope.categoryid.id=$stateParams.id;
 
+    $scope.type1 = $stateParams.id;
+
     $scope.type='Stock Image';
     $http({
         method:'POST',
         async:false,
         url:$scope.adminUrl+'junglecategorylist',
-        data    : $.param({'type':$scope.type}),
+        //data    : $.param({'type':$scope.type}),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
+
+
         $scope.categorylist=data;
 
-        $scope.categorylist[0]=
-        {
-            id: 0,
-            cat_name: 'All'
-        };
+        $scope.categorylist.splice(0, 0, { id: 0, cat_name: 'All' });
 
         //$scope.categorylist[0].category_id='All';
-        console.log($scope.categorylist);
+      //  console.log($scope.categorylist);
 /*
         angular.forEach(data, function(value, key){
             console.log(value.type);
@@ -5908,7 +6520,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         method:'POST',
         async:false,
         url:$scope.adminUrl+'jungleproductlist',
-        data    : $.param({'type':$scope.type}),
+        //data    : $.param({'type':$scope.type}),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
@@ -5927,19 +6539,74 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
 
 
-    $rootScope.showmodal=function($ev){
+    $rootScope.showmodal=function($ev,item){
 
-        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+        if(item.is_video == 0){
 
-        console.log($(target).html());
-        console.log($(target).attr('class'));
-        $('#gallerymodal').find('h2').find('img').attr('src','');
-        $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+            var target = $ev.target || $ev.srcElement || $ev.originalTarget;
 
-        $('#gallerymodal').modal('show');
-        // $(event.target).parent().parent().css('display','none');
+            console.log($(target).html());
+            console.log($(target).attr('class'));
+            $('#gallerymodal').find('h2').find('img').attr('src','');
+            $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+
+            $('#gallerymodal').modal('show');
 
 
+        }else{
+            $uibModal.open({
+                animation: true,
+                template: '<div style="position: relative;"><a href="javascript:void(0);" style="position: absolute; top: -17px; right: -19px; " ng-click="cancel()"><img src="images/galleryclose.png" alt="#"></a><video id="maintvVideo" volume="0" width="100%" height="100%" autoplay muted controls>\
+            <source src="' + item.video_url + '" type="video/mp4">\
+            </video></div>',
+                controller: 'ModalInstanceCtrl',
+                size: 'lg',
+                scope:$scope,
+                windowClass:'vidoemodal1'
+
+            });
+
+            setTimeout(function(){
+                $scope.playVideoTeaserFrom();
+            },500);
+
+
+        }
+    }
+
+     $scope.playVideoTeaserFrom = function() {
+        var videoplayer = document.getElementById("maintvVideo");
+
+        videoplayer.currentTime = 0; //not sure if player seeks to seconds or milliseconds
+        videoplayer.play();
+
+         var stopVideoAfter = 10 * 1000;
+
+         videoplayer.onseeking = function() {
+             if(videoplayer.currentTime > 10){
+                 videoplayer.pause();
+                 videoplayer.currentTime = 0;
+             }
+         };
+         videoplayer.onplay = function() {
+             setTimeout(function(){
+                 videoplayer.pause();
+                 videoplayer.currentTime = 0;
+             }, stopVideoAfter);
+
+         };
+
+
+
+         /*setTimeout(function(){
+            videoplayer.pause();
+            videoplayer.currentTime = 0;
+        }, stopVideoAfter);*/
+
+    }
+
+    $scope.changecategory = function(){
+        $state.go('stock-photo',{id:$scope.type1});
     }
 
 });
@@ -6009,16 +6676,14 @@ jungledrone.controller('products', function($scope,$state,$http,$cookieStore,$ro
 
     $rootScope.showmodal=function($ev){
 
-        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+            var target = $ev.target || $ev.srcElement || $ev.originalTarget;
 
-        console.log($(target).html());
-        console.log($(target).attr('class'));
-        $('#gallerymodal').find('h2').find('img').attr('src','');
-        $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+            console.log($(target).html());
+            console.log($(target).attr('class'));
+            $('#gallerymodal').find('h2').find('img').attr('src','');
+            $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
 
-        $('#gallerymodal').modal('show');
-        // $(event.target).parent().parent().css('display','none');
-
+            $('#gallerymodal').modal('show');
 
     }
 
@@ -6043,6 +6708,7 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
         $scope.pname=data[$scope.id].product_name;
         $scope.pdesc=data[$scope.id].product_desc;
         $scope.image_url=data[$scope.id].image_url;
+         $scope.is_video = data[$scope.id].is_video;
 
          console.log(data);
          console.log(data[9].product_name);
@@ -6145,16 +6811,29 @@ jungledrone.controller('stockcategory', function($scope,$state,$http,$cookieStor
     // $state.go('login');
     //  $scope.categorylist=[];
 
-    if($stateParams.type=='image')
-    $scope.type='Stock Image';
-    if($stateParams.type=='video')
-    $scope.type='Stock Video';
+    if($stateParams.type=='image'){
+        $scope.type='Stock Image';
+        $scope.type1='image';
+    }else if($stateParams.type=='video'){
+        $scope.type='Stock Video';
+        $scope.type1='video';
+    }else{
+        $scope.type='';
+        $scope.type1='all';
+    }
+
+    $scope.limit = 5;
+
+    $scope.loadmore = function(){
+        $scope.limit = $scope.limit+5;
+    }
+
 
     $http({
         method:'POST',
         async:false,
         url:$scope.adminUrl+'junglecategorylist',
-        //data    : $.param({'type':$scope.type}),
+        data    : $.param({'type':$scope.type}),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
@@ -6181,6 +6860,10 @@ jungledrone.controller('stockcategory', function($scope,$state,$http,$cookieStor
         }
         return false;
     };
+
+    $scope.changetype = function(){
+        $state.go('stock-category',{type:$scope.type1});
+    }
 
 
  /*   $scope.showmodal=function($ev){
@@ -6924,7 +7607,7 @@ jungledrone.controller('editcategoryjungle', function($scope,$state,$http,$cooki
 })
 
 
-jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce){
+jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal){
     $scope.trustAsHtml=$sce.trustAsHtml;
     $http({
         method  :   'POST',
@@ -7002,16 +7685,31 @@ jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieSt
             else {
                 $('.progress').removeClass('ng-hide');
                 file.result = response.data;
-                if(response.data.video_url!='') {
+
+                /*if(response.data.video_url!='') {
                     $sce.trustAsResourceUrl(response.data.video_url);
                     $scope.product_video_src = response.data.video_url;
-                }
+                }*/
+
+                $scope.is_video=response.data.is_video;
                 if(response.data.image_url!='') {
                     $scope.product_img_src = response.data.image_url;
                 }
 
-                $scope.form.product_file = response.data.image_name;
-                console.log($scope.product_video_src);
+
+
+
+                if($scope.is_video == 1){
+                    $scope.form.product_file = response.data.video_name;
+                    $scope.video_url1222 = response.data.video_url1222;
+                }else{
+                    $scope.form.product_file = response.data.image_name;
+                }
+
+
+
+
+
 
                 if(typeof($scope.product_video_src)!='undefined') {
 
@@ -7055,6 +7753,19 @@ jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieSt
 
     console.log($scope.product_video_src);
 
+
+    $scope.showvideo = function(video_url1222){
+        $uibModal.open({
+            animation: true,
+            template: '<div style="position: relative;"><a href="javascript:void(0);" style="position: absolute; top: 0; right: 0; color:#fff; background-color: #000; width:40px; font-size: 40px; text-align:center;" ng-click="cancel()">&times;</a><video id="maintvVideo" volume="0" width="100%" height="100%" autoplay loop muted controls>\
+            <source src="' + video_url1222 + '" type="video/mp4">\
+            </video></div>',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg',
+            scope:$scope
+
+        });
+    }
 
 
     $scope.addproductsubmit=function() {
@@ -7144,7 +7855,7 @@ jungledrone.controller('jungleproductlist',function($scope,$state,$http,$cookieS
 
 })
 
-jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$sce,Upload){
+jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$sce,Upload,$uibModal){
     $scope.trustAsHtml=$sce.trustAsHtml;
     $scope.product_video_src='';
     $scope.product_img_src='';
@@ -7172,10 +7883,16 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
         headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
     }) .success(function(data) {
 
-        if(data.image_url!=''){
+        /*if(data.image_url!=''){
             $scope.product_img_src = data.image_url;
         }
         console.log($scope.product_img_src);
+
+        if(data.is_video == 1){
+
+        }
+
+
         if(data.video_url!=''){
 
             $scope.product_video_src = data.video_url;
@@ -7188,6 +7905,20 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
             </video>');
                 }, 2000);
             }
+        }*/
+
+
+        $scope.is_video=data.is_video;
+        if(data.image_url!='') {
+            $scope.product_img_src = data.image_url;
+        }
+
+
+
+
+        if($scope.is_video == 1){
+            $scope.product_img_src = data.cover_img_url;
+            $scope.video_url1222 = data.video_url;
         }
 
 
@@ -7344,6 +8075,19 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
 
         })
 
+    }
+
+    $scope.showvideo = function(video_url1222){
+        $uibModal.open({
+            animation: true,
+            template: '<div style="position: relative;"><a href="javascript:void(0);" style="position: absolute; top: 0; right: 0; color:#fff; background-color: #000; width:40px; font-size: 40px; text-align:center;" ng-click="cancel()">&times;</a><video id="maintvVideo" volume="0" width="100%" height="100%" autoplay loop muted controls>\
+            <source src="' + video_url1222 + '" type="video/mp4">\
+            </video></div>',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg',
+            scope:$scope
+
+        });
     }
 
 

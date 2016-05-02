@@ -63,11 +63,15 @@
                                     <!--ng-show="form.category_id.type=='Stock Image' || form.category_id.type=='Stock Video'"-->
                                     <label >Product file(jpg,png,gif,mp4)* :</label>
                                     <div class="clearfix"></div>
-                                    <img ng-if="product_img_src!=false" src="{{product_img_src}}">
+                                    <div class="playerdiv">
+                                        <img ng-if="product_img_src!=false" src="{{product_img_src}}">
+                                        <img ng-if="is_video==1" class="picon" ng-click="showvideo(video_url1222)" src="/images/palyicon.png">
+                                    </div>
 
 
 
-                                    <div ng-if="product_video_src!=false" id="maintvDiv"></div>
+
+                                    <!--<div ng-if="product_video_src!=false" id="maintvDiv"></div>-->
 
 
                                     <div class="clearfix"></div>

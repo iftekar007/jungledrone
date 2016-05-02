@@ -28,7 +28,7 @@
 
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="productacrttable">
-  <tr ng-repeat="cartitem in cartarray">
+  <tr ng-repeat="cartitem in cartarray" ng-if="cartitem.qty>0">
     <td align="left" valign="top">
     <img src="{{cartitem.cartimage}}" alt="#" class="jd_pro" >
     
@@ -46,14 +46,14 @@ Description:  <br />
     
     </td>
     <td align="center" valign="middle">
-    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" ></a> <input type="text" value="{{cartitem.qty}}" class="qtyinput" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ></a>
+    <div class="productnodiv"> <a href="javascript:void(0)"><img src="images/cutdownno.png" alt="#" pid="{{cartitem.pid}}" ng-click="delqty(cartitem.pid)"  ></a> <input type="text" pid="{{cartitem.pid}}" value="{{cartitem.qty}}" class="qtyinput qtyi{{cartitem.pid}}" /><a href="javascript:void(0)"><img src="images/cutupno.png" alt="#" ng-click=" addqty(cartitem.pid)"  ></a>
  <div class="clear"></div>
     </div>
     </td>
       <td align="center" valign="middle">
       <h3>Unit Price<br />
 
-<span>${{cartitem.price}}</span></h3>
+<span>${{cartitem.price*cartitem.qty}}</span></h3>
       </td>
       <!--<td align="center" valign="middle">
       
@@ -63,7 +63,7 @@ Description:  <br />
 <span>$0.00</span>
       </h3>
       </td>-->
-      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ></a></td>
+      <td align="right" valign="middle"> <a href="javascript:void(0)"><img src="images/cutclose.png" alt="#" ng-click="delcart(cartitem.pid)" ></a></td>
   </tr>
 
 

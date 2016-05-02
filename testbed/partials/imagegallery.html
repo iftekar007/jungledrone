@@ -34,9 +34,8 @@
      
      <div class="gallerytopleftsearch">
      <div class="stockphoto_selectoption">
-     <select>
-     <option>Images</option>
-      <option>Videos</option>
+     <select ng-model="type1" name="type" ng-change="changecategory()">
+         <option ng-repeat="item in categorylist" value="{{item.id}}" ng-selected="type1==item.id">{{item.cat_name}}</option>
      </select>
      
      </div>
@@ -69,14 +68,14 @@
      <img src="images/stockphoto_icon2.png" alt="#">
      
      </div>-->
-     
-     <div class="divclass2">
-     <label>Category</label>
-    <!-- <select ng-options="item.cat_name for item in categorylist track by item.id">-->
+         <!--
+         <div class="divclass2">
+         <label>Category</label>
+        <!-- <select ng-options="item.cat_name for item in categorylist track by item.id">
 
          <select  ng-model="categoryid"   ng-options="item as item.cat_name for item in categorylist track by item.id"  >
              <!--<option value="" >All</option>-->
-             <!--<option value="item.id" >{{item.cat_name}}</option>-->
+             <!--<option value="item.id" >{{item.cat_name}}</option>
 
          </select>
 
@@ -88,14 +87,14 @@
 
      <option>All</option>
      <option>All</option>
--->
+
 
 
      
      </div>
      
 
-     
+     -->
      
      
        
@@ -106,11 +105,11 @@
      
      </div>-->
      
-     <div class="divclass4">
+   <!--  <div class="divclass4">
      <label>Contributor</label>
      <input type="text" />
      
-     </div>
+     </div>-->
      
 
      
@@ -210,7 +209,7 @@
 
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
                         <tr>
-                            <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event)" imgsrc="{{itemphoto.image_url}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+                            <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event,itemphoto)" imgsrc="{{itemphoto.image_url}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
                             <td align="left" valign="middle"> <a href="javascript:void(0)"><img ui-sref="stock-details({id:itemphoto.id})"  src="images/stockphoto_hovericon2.png" alt="#"></a></td>
                         </tr>
                     </table>

@@ -103,7 +103,9 @@
               </li>
 
                  <li ng-if="userrole==4" ><a ui-sref="eventrsvplist"><i class="fa fa-link"></i> <span>Event RSVP</span></a></li>
-                 
+                 <li ng-if="userrole==4" ><a ui-sref="addcontent"><i class="fa fa-link"></i> <span>Add Content</span></a></li>
+                 <li ng-if="userrole==4" ><a ui-sref="contentlist"><i class="fa fa-link"></i> <span>Content List</span></a></li>
+
                   <li><a style="cursor: pointer" ui-sref="logout" ng-click="logout()"><i class="fa fa-link"></i> <span>Logout</span></a></li>
 
           </ul><!-- /.sidebar-menu -->

@@ -53,6 +53,14 @@ function cart_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['updatecart'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'updatecart',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
     $items['carttotal'] = array(
         'title' => 'Add junglecategory',
@@ -73,6 +81,14 @@ function cart_menu()
     $items['ffmpeg'] = array(
         'title' => 'Add junglecategory',
         'page callback' => 'fmpegconvert',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['deletecartbyid'] = array(
+        'title' => 'Add junglecategory',
+        'page callback' => 'deletecartbyid',
         'access callback' => TRUE,
         'access arguments' => array('Anonymous Actions.'),
         'expanded' => TRUE,
@@ -144,6 +160,40 @@ function updatecartuser(){
 
 }
 
+function deletecartbyid(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+
+    $num_deleted = db_delete('cart')
+        ->condition('pid', @$_POST['pid'])
+        ->condition('userid', @$_POST['userid'])
+        ->execute();
+
+}
+function updatecart(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+
+    db_update('cart')
+        ->fields(array('userid'=>@$_POST['userid'],'qty'=>@$_POST['qty']))
+        ->condition('userid', intval($_POST['userid']))
+        ->condition('pid', intval($_POST['pid']))
+        ->execute();
+
+}
+
 function carttotal(){
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -160,7 +210,8 @@ function carttotal(){
     $queryu->addExpression('SUM(qty)', 'qty');
     $resultu = $queryu->execute();
     $recordu = $resultu->fetchAssoc();
-    echo ($recordu['qty']);
+    if(@$recordu['qty']>0)echo ($recordu['qty']);
+    else echo 0;
 
 }
 function cartdetail(){
@@ -187,9 +238,10 @@ function cartdetail(){
 
         //print_r($recordu);
         $recordu['textdesc']=strip_tags($recordu['product_desc']);
+        //$recordu['id']=($recordu['ca.id']);
         $recordu['cartimage'] = image_style_url('cartimage', (@$recordu['product_file']));
 
-        $cartarr[$i++]=$recordu;
+        $cartarr[$recordu['ca.id']]=$recordu;
     }
 
     echo json_encode($cartarr);

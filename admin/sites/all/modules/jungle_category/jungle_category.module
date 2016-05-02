@@ -220,9 +220,12 @@ function junglecategorylist()
 
 
     if ($resultu->rowCount() > 0) {
-        $i = 1;
+        $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
+
+            $temparray['product_img_urls'] = array();
+
             if($recordu['cat_image']!=''){
                 $temparray['image_url'] = image_style_url('front-photo_600_600_', (@$recordu['cat_image']));
            }
@@ -245,6 +248,50 @@ function junglecategorylist()
                 else{
                     $temparray['parent_cat_name']='';
                 }
+
+            $queryu5 = db_select('jungleproduct', 'jp');
+            $queryu5->fields('jp');
+            $queryu5->condition('jp.category_id',$recordu['id'],'=');
+            $queryu5->range(0,3);
+            $queryu5->orderRandom();
+
+            $resultu5 = $queryu5->execute();
+            $k=1;
+            if ($resultu5->rowCount() > 0) {
+                while ($recordu5 = $resultu5->fetchAssoc()) {
+                    if($recordu5['product_file']!='') {
+                        $productextns = explode('.', $recordu5['product_file']);
+
+                        $tempimage['id'] =$k;
+
+                        if ($productextns['1'] == 'mp4') {
+                            $tempimage['image'] = image_style_url('front-photo_600_600_', ('public://'.$productextns['0'].'.jpg'));
+                        } else {
+                            $tempimage['image'] = image_style_url('front-photo_600_600_', (@$recordu5['product_file']));
+                        }
+
+                        $temparray['product_img_urls'][] =  $tempimage;
+                    }
+
+                    $k++;
+                }
+            }
+
+
+            $no_p = count($temparray['product_img_urls']);
+            if($no_p < 3){
+                $no_i = 3-$no_p;
+                for($j=0;$j<$no_i;$j++){
+
+                    $tempimage['id'] =$k;
+                    $tempimage['image'] = 'images/categoryimg_th1.png';
+
+                    $temparray['product_img_urls'][] = $tempimage;
+
+                    $k++;
+                }
+            }
+
 
 
 
