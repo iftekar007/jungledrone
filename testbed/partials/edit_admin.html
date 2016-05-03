@@ -1,14 +1,16 @@
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Admin Manager
 
-          </h1>
+            <h1 ng-show="uType=='auditor'">Auditor Manager</h1>
+            <h1 ng-hide="uType=='auditor'">Admin Manager</h1>
+
           <ol class="breadcrumb">
          <li><a ui-sref="dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-          <li class="active"><a ui-sref="admin-list">Manage Admin </a></li>
-            <li><a href="javascript:void(0)" class="active"> Edit Admin </a></li>
+              <li ng-show="uType=='auditor'"><a ui-sref="auditorlist">Manage Auditor</a></li>
+              <li ng-hide="uType=='auditor'"><a ui-sref="admin-list">Manage Admin </a></li>
+              <li ng-show="uType=='auditor'" class="active">Edit Auditor</li>
+              <li ng-hide="uType=='auditor'" class="active">Edit Admin</li>
           </ol>
         </section>
 
@@ -27,7 +29,8 @@
             
                 <div class="box-header with-border">
                   <h3 class="box-title"></h3>
-                  <h3 class="box-title">Edit Admin</h3>
+                    <h3 ng-show="uType=='auditor'" class="box-title">Edit Auditor</h3>
+                    <h3 ng-hide="uType=='auditor'" class="box-title">Edit Admin</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 

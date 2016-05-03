@@ -159,11 +159,19 @@ function adminlist()
     $queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
     $queryu->fields('ur', array('rid'));
     $queryu->fields('u', array('uid', 'created', 'status', 'login', 'mail'));
-    $queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
+    $queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'));
         // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
-        ->condition('ur.rid', 4, '=');
+        //->condition('ur.rid', 4, '=');
     //->condition('u.uid', 74, '=');
     //->range(0, 20);
+
+    if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'auditor'){
+        $queryu->condition('ur.rid', 7, '=');
+    }else{
+        $queryu->condition('ur.rid', 4, '=');
+    }
+
+
     $resultu = $queryu->execute();
 
 
@@ -232,7 +240,13 @@ function addadmin(){
     $roles = array(
         DRUPAL_AUTHENTICATED_RID => 'authenticated user',
      );
-    $roles[4]=' siteadmin';
+
+
+    if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'auditor'){
+        $roles[7]=' auditor';
+    }else{
+        $roles[4]=' siteadmin';
+    }
 
     $new_user = array(
          'name' => $_POST['email'],
