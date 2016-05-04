@@ -114,6 +114,17 @@ function document_menu()
 
 
 
+    $items['getfilepreview'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getfilepreview',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
     return $items;
 }
 
@@ -165,10 +176,11 @@ function documentlist()
     $queryu = db_select('document', 'doc');
     $queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
     $queryu->fields('doc');
-    $queryu->fields('doc_cat',array('cat_name'));
+    $queryu->fields('doc_cat',array('cat_name','parent_cat'));
 
     if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
         $queryu->condition('doc.status',1,'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
 
     $resultu = $queryu->execute();
 
@@ -264,7 +276,7 @@ function uploaddocument(){
 
     $filename = $string.'-'.rand().'-'.time().'.'.$path_parts['extension'];
 
-    $filetype = array('pdf','doc','docx','rtf','txt','xml','csv');
+    $filetype = array('pdf','doc','docx','rtf','txt','xml','csv','xlsx','odt','ods','tsv','jpg','png','xls');
 
     if(in_array($path_parts['extension'],$filetype)){
         if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
@@ -331,7 +343,7 @@ function getdoccategory()
 
 
     $queryu = db_select('documentcategory', 'ca');
-    $queryu->fields('ca',array('id','cat_name'));
+    $queryu->fields('ca',array('id','cat_name','parent_cat'));
 
     $queryu->condition('ca.status',1,'=')  ;
 
@@ -366,6 +378,7 @@ function getdoccategory1()
     $queryu->fields('ca',array('id','cat_name','parent_cat'));
 
     $queryu->condition('ca.status',1,'=')  ;
+    if($_REQUEST['cat_id']>0)$queryu->condition('ca.parent_cat',$_REQUEST['cat_id'],'=')  ;
 
     $resultu = $queryu->execute();
 
@@ -374,15 +387,28 @@ function getdoccategory1()
         while ($recordu = $resultu->fetchAssoc()) {
             $temparray=$recordu;
             $junglecategorylist[$recordu['parent_cat']][]= $temparray;
+
+            $junglecategorylista[$i]= $temparray;
             $i++;
         }
     }
 
-    echo json_encode(@$junglecategorylist);
+    $data['cat']=$junglecategorylist;
+    $data['cata']=$junglecategorylista;
+    echo json_encode(@$data);
 }
 
 
 function getcattree($id=0,$junglecategorylist=array()){
 
+}
+
+
+function getfilepreview(){
+
+
+    if (!extension_loaded('imagick'))
+        echo 'imagick not installed';
+    exec("convert  -quality 100 http://admin.jungledrones.com/sites/default/files/Review-faster-site-4-22-16-1003003961-1462283481.pdf http://admin.jungledrones.com/sites/default/files/Review-faster-site-4-22-16-1003003961-1462283481.jpeg");
 }
 

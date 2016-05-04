@@ -413,7 +413,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         })
         .state('mydownloads',{
-            url:"/mydownloads",
+            url:"/mydownloads/:id",
             views: {
 
                 'header': {
@@ -9923,6 +9923,9 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
     $scope.userid = 0;
 
+    $scope.currentid=$stateParams.id;
+    $scope.currentcategoryname="All Files";
+
     $scope.trustAsHtml = $sce.trustAsHtml;
 
     if(typeof($cookieStore.get('userid')) != 'undefined'){
@@ -9935,13 +9938,56 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
         url:$scope.adminUrl+'getdoccategory1',
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).success(function(data){
-        $scope.categorylist=data;
+        $scope.categorylist=data.cat;
+        $scope.categorylistl=data.cata;
+
+
+        var log = [];
+
+        angular.forEach(data.cata, function(value, key) {
+            //console.log( value);
+          /*  console.log( key);
+            console.log( value.id);
+            console.log( value.cat_name);
+            console.log( value['id']);*/
+            if($scope.currentid==value.id) {
+                $scope.currentcategoryname=value.cat_name;
+                $scope.getcatetree(value.parent_cat);
+            }
+
+        }, log);
     })
+
+    $scope.cattree={};
+
+    $scope.getcatetree=function(catid){
+
+
+        var log = [];
+
+        console.log('formal catid='+catid);
+
+        angular.forEach($scope.categorylistl, function(value, key) {
+            //console.log( value);
+            /*  console.log( key);
+             console.log( value.id);
+             console.log( value.cat_name);
+             console.log( value['id']);*/
+            if(catid==value.id) {
+                $scope.cattree.push(value.cat_name);
+                if(value.parent_cat!=0) $scope.getcatetree(value.id);
+            }
+
+        }, log);
+
+        console.log('tree'+$scope.cattree);
+
+    }
 
     $http({
         method:'POST',
         async:false,
-        url:$scope.adminUrl+'documentlist?filter=status',
+        url:$scope.adminUrl+'documentlist?filter=status&catid='+$scope.currentid,
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).success(function(data){
         $scope.documentlist1=data;
@@ -9960,6 +10006,11 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
 
     setTimeout(function(){
+
+
+
+        $('[data-toggle="tooltip"]').tooltip({html:true});
+
         $(".dropdown-menu > li > a.trigger").on("click",function(e){
             var current=$(this).next();
             var grandparent=$(this).parent().parent();
@@ -9976,7 +10027,7 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
             root.find('.left-caret').toggleClass('right-caret left-caret');
             root.find('.sub-menu:visible').hide();
         });
-    },5000);
+    },3000);
 
 
     $scope.currentcat = 'Category';

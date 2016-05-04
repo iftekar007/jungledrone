@@ -1698,6 +1698,23 @@
 
 @media(max-width:991px){
 
+
+.productacrttable tr{ border-bottom:solid 10px #fff!important; display:block!important; width:100%!important;}
+
+.productacrttable td{ border-bottom:solid 1px #dadbdb!important; display:block!important; width:100%!important; text-align:center;}
+
+
+.productacrttable td .jd_pro{ float:none; margin:0 auto; display:block;}
+.productacrttable td .producttext p{ width:90%; display:block; margin:0 auto;}
+
+
+.productacrttable td .productnodiv{ width:216px; margin:0 auto;}
+
+.productacrttable td h3{ text-align:center;}
+
+.productacrttable td  .producttext{ width:100%; float:none; padding-left:0; color:#323131; font-family:'OpenSans-Regular'; text-align:center;}
+ 
+
 .tabdownloadbtn{ width:280px!important; margin:0 auto!important; margin-top:30px!important;  background: #f30100 url("../images/stock-details_downloadicon.png") no-repeat scroll 45px center!important; padding: 0 0 0 54px!important;}
 
 
@@ -1896,6 +1913,20 @@
 .detail_cartblock .cartbtn1{ display:block; float:none; margin:0 auto;}
 
 .detail_cartblock .detailqtyblock{ display:block; float:none; margin:0 auto; margin-top:20px;}
+
+
+
+
+.myaccountheader .myaccountcontainer{ width:90%; margin:0 auto; padding:16px 0;}
+
+.adminleft{width:90%; float:none; margin:0 auto;}
+
+.admincontain{width:90%; float:none; margin:25px auto;}
+
+.myaccountheader .myaccountcontainer .myaccountlogo{ width:180px; padding:5px 0; margin:0 auto;} 
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail{ text-align:center; padding:14px 0; }
+
 
 }
 
@@ -2195,6 +2226,11 @@
 
 }
 
+@media(max-width:630px){
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog4{ margin-top:12px;}
+
+}
 
 
 @media(max-width:580px){
@@ -2243,7 +2279,8 @@
 }
 
 @media(max-width:480px){
-
+.myaccountplanblock .myaccountplanblock_textblock { background-size:26%;
+}
 
 
 .top_slider_block .logo img{ width:280px; display:block; margin:0 auto;}
@@ -2668,10 +2705,19 @@
 }
 
 
+@media(max-width:1023px){
+.mah2block h3{ width:100%; float:none;    border-bottom: 1px solid #b6b6b6; margin-bottom:13px;}
 
 
+}
 
 @media(max-width:991px){
+
+
+
+
+.mah2block h3{ width:100%; float:none;    border-bottom: 1px solid #b6b6b6; margin-bottom:24px;}
+.mah2block{ padding-bottom:24px;}
 
 .stockdetail_blog .details_text{ padding:0; margin-top:35px;}
 
@@ -2833,6 +2879,10 @@
 
 @media(max-width:480px){
 
+
+
+.ma_categoryd{ float:none; margin:0 auto; display:block;  width:100%; margin-top:20px; text-align:center;}
+.masearch{ float:none; margin:0 auto;  display: block; width:300px; }
 
 
     .event_top_block .logo{width: 90%; margin: 0 auto;}
