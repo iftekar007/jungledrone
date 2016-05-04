@@ -221,3 +221,7 @@ body{ background:#fff;}
 
 .ctext .delb:first-of-type{display: none !important;}
 .chtml .delb:first-of-type{display: none !important;}
+
+
+.content-wrapper, .right-side {
+    min-height: 840px !important;}

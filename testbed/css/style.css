@@ -6249,7 +6249,7 @@ box-shadow: 3px 4px 8px -1px rgba(0,0,0,0.49); padding:16px 0; text-align:center
 
 .newgalleryblocktop .gallerytopleftsearch{ width:100%;}
 
-.newgalleryblocktop .gallerytopleftsearch{ width:1030px; float:left; background:#1e1e1e; padding:11px;  }
+.newgalleryblocktop .gallerytopleftsearch{ width:1030px; float:none; background:#1e1e1e; padding:11px; margin:0 auto;  }
 
 
 .newgalleryblocktop .gallerytopleftsearch .stockphoto_selectoption{ width:234px; height:64px; border-right:solid 1px #b6b6b6; background:#fff; padding:18px; float:left; }
@@ -6544,7 +6544,7 @@ opacity:1;
 
 .category_mainwrapper .categoryblock .category_smallimg img{ width:100%; display:block;  margin:0; padding:0;}
 
-.category_mainwrapper .categoryblock .category_blockheading{ position:absolute; top:5px; left:4px; background:  url("../images/categoryimageheding.png") no-repeat left top; width:443px; height:151px; font-size:28px; color:#ffffff;   font-family:'OpenSans-Semibold'; padding:32px 0 0 16px;}
+.category_mainwrapper .categoryblock .category_blockheading{ position:absolute; top:5px; left:4px; background:  url("../images/categoryimageheding.png") no-repeat left top; width:90%; background-size:100%; height:210px; font-size:28px; color:#ffffff;   font-family:'OpenSans-Semibold'; padding:32px 0 0 16px;}
 
 
 .containerviewmore{ width:550px; height:72px; display:block; margin:0 auto; margin-top:25px; margin-bottom:40px;  background: #f30100 url("../images/viewicon.png") no-repeat 166px 22px; font-size:30px; color:#fff!important;  font-family:'OpenSans-Semibold'; padding:0 0 0 230px; line-height:72px;}
@@ -7259,7 +7259,56 @@ opacity:1;
 
 .adminleft{width:20%; float:left; margin-left:11%;}
 
+.adminleft h2{background: #1e1e1e url("../images/ma_lefticon1.png")  10px center no-repeat; font-size:16px; color:#ffffff;  font-family:'OpenSans-Semibold'; margin-bottom:1px; padding:14px 5px 13px 40px; margin:0px;}
+
+.adminleft ul{ margin:0; padding:0 40px 25px 40px; background:#e4e4e4; border:solid 1px #d2d2d2;}
+
+.adminleft ul li{background: url("../images/ma_lefticon_devider.png") left bottom repeat-x; padding:12px 0; }
+
+.adminleft ul li a{ background: url("../images/ma_lefticon2.png") left center no-repeat; padding:0 0 0 17px; font-size:14px; color:#525252; font-family:'OpenSans-Regular';}
+
+.adminleft ul li a:hover{ color:#f30100;}
+.adminleft ul li a.active{ color:#f30100;}
+
+
 .admincontain{width:57%; float:right; margin-right:11%;}
+
+.admincontain h2{ margin:0 0 23px 0; padding:0 0 12px 0; border-bottom:solid 1px #b6b6b6; font-size:22px; color:#161616; font-family:'OpenSans-Semibold';}
+
+.mah2block{  margin:0 0 23px 0; padding:0 0 12px 0; border-bottom:solid 1px #b6b6b6;}
+
+.mah2block h3{font-size:22px; color:#161616; font-family:'OpenSans-Semibold'; width:300px; float:left; display:block; margin:0; padding:0;}
+
+.ma_categoryd{ width:220px; float:right; margin-right:10px; margin-top:6px; font-family:'OpenSans-Regular';}
+
+.ma_categoryd .dropdown-toggle{ background:none; border:none; font-family:'OpenSans-Regular'; font-size:16px; color:#161616;}
+
+.ma_categoryd button{font-family:'OpenSans-Regular'; font-size:14px; color:#161616;}
+ 
+ .ma_categoryd a{font-family:'OpenSans-Regular'}
+ 
+ .ma_categoryd .dropdown-menu{ border:solid 1px #e4e4e4;}
+  .ma_categoryd .dropdown-menu a{ color:#333;}
+   .ma_categoryd .dropdown-menu a:hover{ background:#f30100; color:#fff; }
+   .ma_categoryd .dropdown-menu a:focus{ background:#f30100; color:#fff; }
+
+.ma_categoryd button a{ color:#161616;}
+.myaccountplanblock{ background:#e4e4e4; border:solid 1px #d2d2d2; margin-bottom:30px; width:100%;}
+
+.myaccountplanblock .myaccountplanblock_heading{ background:#f30100; font-size:18px; color:#ffffff; font-family:'OpenSans-Semibold'; padding:14px;}
+
+.myaccountplanblock .myaccountplanblock_textblock{ background: url("../images/ma_glogo.png") 98% center no-repeat; min-height:96px; padding:16px 14px 16px 14px; }
+.myaccountplanblock .myaccountplanblock_textblock p{ font-size:16px; color:#787878; margin:0; padding:0; font-family:'OpenSans-Regular';}
+
+
+
+.myaccountplanblock .myaccountplanblock_textblock .my_textblock_wrapper{ width:70%;}
+
+
+.myaccountplanblock .myaccountplanblock_textblock .maviewlink{ width:180px; margin:15px 0; background: url("../images/ma_lefticon2.png") left center no-repeat; padding:0 0 0 16px;}
+.myaccountplanblock .myaccountplanblock_textblock .maviewlink a{ font-size:14px; color:#f30100; font-family:'OpenSans-Regular'; text-decoration:underline;}
+
+.myaccountplanblock .myaccountplanblock_textblock .maviewlink a:hover{ text-decoration:none;}
 
 .adminnewwrapper{width:78%; margin:30px auto;  margin-bottom:36px;}
 
@@ -7293,3 +7342,161 @@ opacity:1;
 .playerdiv img{ width:100%;}
 
 .playerdiv .picon{ width:20%;  position:absolute; left:41%; top:34%; cursor:pointer;}
+
+
+/*------------------*/
+
+
+
+.newlogin-box{ background:#e3e2e2; border:solid 8px #000000; position:relative; width:777px;}
+
+.newlogin-box .closebtn{ position:absolute; right:-19px; top:-19px; width:32px; height:32px;}
+
+.newloginwrapper{ width:622px; margin:0 auto; padding-bottom:40px;}
+
+.newlogin-box h2{ padding:40px 0 30px 0; margin:0; font-size:18px; color:#000000;  font-family:'OpenSans-Bold'; text-transform:uppercase;}
+
+.newlogin-box .form-group label{ font-size:14px; color:#000000; font-family:'OpenSans-Regular'; margin-top:10px; margin-bottom:12px; font-weight:normal;}
+
+.newlogin-box  .form-group  .form-control{ width:100%; height:70px; padding:5px 20px; background:#fff; border:solid 1px #000000; color:#000000; }
+
+.newlogin-box .checkboxdiv label{font-size:12px; color:#000000; font-family:'OpenSans-Regular'; margin-top:25px; margin-bottom:0; font-weight:normal; }
+.newlogin-box .checkboxdiv label input{ margin-right:10px;}
+
+
+.newlogin-box .loginbtn{ width:126px; height:52px; background:#c10404; margin:20px auto; margin-top:30px; font-size:18px; color:#ffffff; font-family:'OpenSans-Bold'; line-height:40px;}
+
+.newlogin-box .forgotpassword{ width:184px; display:block; margin:0 auto; text-align:center; font-size:12px; color:#000000!important; padding-bottom:10px; font-family:'OpenSans-Regular'; border-bottom:solid 1px #949494;}
+
+.newlogin-box  .form-horizontal .has-feedback .form-control-feedback{ top:60px;}
+
+
+
+.confirm_delpopup { background:#e3e2e2; border:solid 8px #000000; padding:20px; text-align:center; position:relative;}
+
+.confirm_delpopup .shutter-close2{position:absolute; right:-19px; top:-19px; width:32px; height:32px;}
+
+.confirm_delpopup h2{  font-family:'OpenSans-Regular'; text-align:center; color: #ff0000 !important; margin:0; padding:25px 0;}
+
+.confirm_delpopup .confirm_delbtn{ width:310px; margin:15px auto;}
+
+
+
+
+.confirm_delpopup .confirm_delbtn .subbtn{ height:52px; width:150px; background:#c10404; font-size:16px; color:#ffffff; font-family:'OpenSans-Bold'; line-height:40px; border:none; border-radius:0px;}
+
+
+
+.formsection .btn{background:#c10404; font-size:16px; color:#ffffff; font-family:'OpenSans-Regular'; line-height:28px; border:none; border-radius:0px;}
+
+.formsection .btn:hover{background:#c10404;}
+
+
+
+/*-----------------------------myaccount------------------*/
+
+.myaccountheader{background:#e1e1e1  url("../images/ma_topbg.png") repeat-x left top; border-top:solid 4px #eb1b24;}
+
+.myaccountheader .myaccountcontainer{ width:78%; margin:0 auto;}
+
+.myaccountheader .myaccountcontainer .col-md-4{ padding-left:0; padding-right:0px;}
+
+.myaccountheader .myaccountcontainer .col-md-8{ padding-left:0; padding-right:0px;}
+
+.myaccountheader .myaccountcontainer .myaccountlogo{ width:180px; padding:5px 0;} 
+.myaccountheader .myaccountcontainer .myaccountlogo img{ width:100%;}
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail{ text-align:right; padding:14px 0; }
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog1{ width:auto; display:inline-block; background:  url("../images/ma_icon1.png") no-repeat left center; padding:0 0 2px 24px; font-size:14px; color:#ea1b25;   font-family:'OpenSans-Regular'; margin:10px 20px 0 0; }
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog1 span{ width:auto; display:inline; background:  url("../images/ma_icon2.png") no-repeat right center; padding:0 18px 2px 0;   }
+
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog1 span a{ color:#ea1b25;}
+
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog2{ width:auto; display:inline-block; margin:10px 20px 0 0; background:#f30100; font-size:15px; color:#ffffff; text-transform:uppercase;}
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog2 a{color:#ffffff!important; display:block; font-family:'OpenSans-Semibold'; width:187px; height:38px;  line-height: 35px;
+    text-align: center; }
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog3{ width:auto; display:inline-block; background:  url("../images/ma_icon3.png") no-repeat left center; padding:0 0 2px 24px; font-size:14px; color:#ea1b25;   font-family:'OpenSans-Regular'; margin:10px 20px 0 0; }
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog3 span{ width:auto; display:inline; background:  url("../images/ma_icon2.png") no-repeat right center; padding:0 18px 2px 0;   }
+
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog3 span a{ color:#ea1b25;}
+
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog4{ width:auto; display:inline-block; font-family:'OpenSans-Regular'; font-size:14px; color:#1e1e1e; background:  url("../images/ma_icon2.png") no-repeat right center; padding:0 18px 2px 14px;  position:relative;}
+
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog4 a{ color:#1e1e1e;}
+
+
+
+
+.adminnewwrapper .gallerytopleftsearch_ma{ width:100%; float:none; background:#1e1e1e; padding:11px; margin:30px auto; margin-bottom:34px;  }
+
+
+.adminnewwrapper  .stockphoto_selectoption_ma{ width:24%; height:64px; border-right:solid 1px #b6b6b6; background:#fff; padding:18px; float:left; }
+
+.adminnewwrapper  .stockphoto_selectoption_ma select{ width:100%; height:100%; background:#fff; border:none; border-radius:0px; box-shadow:none;  font-family:'OpenSans-Regular';  font-size:16px; color:#6f6c6c;}
+
+.adminnewwrapper .stockphoto_inputoption_ma{ width: 75.9%; float:right; background:#ffffff; height:64px;}
+
+
+.adminnewwrapper   .stockphotosearch_ma{ width:86%; height:100%; font-family:'OpenSans-Regular';  font-size:16px; color:#6f6c6c; padding:20px; border:none;}
+
+
+
+.adminnewwrapper  .stockphotobtn_ma{ background: #f30100  url("../images/stockphoto_searchicon.png") no-repeat  center center; width:98px; height:64px; border:none; cursor:pointer; box-shadow:none; float:right; 
+}
+
+
+
+.maDownloadstable th{ background:#f30100!important; padding:14px; font-family:'OpenSans-Semibold'; font-size:14px; color:#fff; text-transform:uppercase; border:solid 1px #b6b6b6;}
+
+.maDownloadstable td{ background:#e4e4e4; padding:13px;  font-family:'OpenSans-Regular'; font-size:14px; color:#1e1e1e;  border:solid 1px #b6b6b6;}
+
+.maDownloadstable tr:nth-child(odd) {background: #e9e7e7;}
+
+.maDownloadstable tr:nth-child(even) {background: #e4e4e4;}
+
+.maDownloadstable .downloadslink_ma{background: #f30100 url("../images/stock-details_downloadicon.png") no-repeat  12px center; background-size:20px;
+    color: #fff!important;
+    display: block;
+    font-family: "OpenSans-Semibold";
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+   
+    text-align: left;
+    width: 125px; padding: 0 0 0 42px;}
+	
+	
+	.masearch{ width:220px; float:right; height:32px; background:#fff; padding:4px; border:solid 1px #b6b6b6; font-size:13px; color:#161616; font-family:Arial, Helvetica, sans-serif;}
+	
+	
+	.mauserblock{ right:0; width:180px; background:#e2e2e2; padding:10px; border:solid 1px #a4a4a4!important;}
+	
+.mauserblock img{ width:80px; border:solid 2px #a4a4a4; border-radius:100px; display:block; margin:0 auto;}
+		
+.mauserblock h4{ margin:0; padding:12px 5px; text-align:center;   font-family: "OpenSans-Semibold"; color:#f30100;}  
+
+.mauserblock .signoutbtn2{ color: #ffffff !important;
+    display: block;
+    font-family: "OpenSans-Semibold";
+    height: 38px;
+    line-height: 35px;
+    text-align: center;
+    width: 120px; display:block; margin:0 auto; padding:0 10px; border-radius:4px; background:#f30100; margin-bottom:12px;}
+
+

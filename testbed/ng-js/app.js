@@ -429,7 +429,8 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                     //controller: 'checkout'
                 },
                 'content': {
-                    templateUrl: 'partials/mydownloads.html' ,
+                    templateUrl: 'partials/myfiles.html' ,
+                    //templateUrl: 'partials/mydownloads.html' ,
                     controller: 'mydownloads'
                 },
 
