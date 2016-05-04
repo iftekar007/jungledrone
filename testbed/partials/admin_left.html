@@ -112,6 +112,14 @@
               </li>
 
               <li class="treeview" ng-if="userrole==4">
+                  <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Document Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu left_treemenu">
+                      <li><a ui-sref="adddocument">Add Document</a></li>
+                      <li><a ui-sref="documentlist">Document List</a></li>
+                  </ul>
+              </li>
+
+              <li class="treeview" ng-if="userrole==4">
                   <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Auditor Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu left_treemenu">
                       <li><a ui-sref="addauditor">Add Auditor</a></li>

@@ -182,7 +182,7 @@ function documentparentcategorylist()
 
     $queryu = db_select('documentcategory', 'ca');
     $queryu->fields('ca');
-    $queryu->condition('ca.parent_cat',0,'=');
+  //  $queryu->condition('ca.parent_cat',0,'=');
     $resultu = $queryu->execute();
 
 

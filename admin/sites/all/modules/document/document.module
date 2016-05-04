@@ -1,0 +1,388 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: debasis
+ * Date: 16/6/15
+ * Time: 12:04 AM
+ */
+header('Content-type: text/html');
+header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+function document_init() // init function called by defaulted when this module loaded by system
+{
+
+    //echo $GLOBALS['theme'];
+    //echo 5656;
+    //echo user_authenticate('debasis','Pp@ss1234');
+
+//echo "kl";
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+}
+
+function document_menu()
+{
+    $items = array();
+
+    $items['adddocument'] = array(
+        'title' => 'Add event',
+        'page callback' => 'adddocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['documentlist'] = array(
+        'title' => 'event List',
+        'page callback' => 'documentlist',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['uploaddocument'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'uploaddocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['documentdetails'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'documentdetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['updatedocument'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'updatedocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['deldocument'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'deldocument',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['updatedocstatus'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'updatedocstatus',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['getdoccategory'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getdoccategory',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['getdoccategory1'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getdoccategory1',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+
+
+    return $items;
+}
+
+
+function documentdetails(){
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $eventlist = array();
+
+
+    $queryu = db_select('document', 'ev');
+    $queryu->fields('ev');
+    $queryu->condition('ev.id', $_POST['id'], '=');
+    $resultu = $queryu->execute();
+
+
+    while($recordu = $resultu->fetchAssoc()) {
+
+        $eventlist['id'] = $recordu['id'];
+        $eventlist['file_name'] = $recordu['file_name'];
+        $eventlist['file_url'] = $recordu['file_url'];
+        $eventlist['description'] = $recordu['description'];
+        $eventlist['category_id'] = $recordu['category_id'];
+        $eventlist['status'] = $recordu['status'];
+
+        $path_parts = pathinfo($recordu['file_name']);
+        $eventlist['file_type'] = $path_parts['extension'];
+    }
+
+
+    echo json_encode(@$eventlist);
+
+}
+
+
+function documentlist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $queryu = db_select('document', 'doc');
+    $queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->fields('doc');
+    $queryu->fields('doc_cat',array('cat_name'));
+
+    if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        $queryu->condition('doc.status',1,'=')  ;
+
+    $resultu = $queryu->execute();
+
+    $eventlist = array();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray = $recordu;
+
+            $path_parts = pathinfo($recordu['file_name']);
+            $temparray['file_type'] = $path_parts['extension'];
+
+
+
+            $eventlist[] = $temparray;
+        }
+    }
+    echo json_encode($eventlist);
+
+}
+
+
+function adddocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status'));
+    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id']['id'],1));
+    $query->execute();
+
+
+    $data['status'] = 'success';
+    echo json_encode($data);
+    return;
+}
+
+function updatedocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
+
+    db_update('document')
+        //->expression('weight', 'weight + :weight', array(':weight' => 1))
+        ->fields(array( 'file_name'=>@$_POST['file_name'], 'file_url'=>@$_POST['file_url'], 'description'=>$_POST['description'],'category_id'=>@$_POST['category_id']['id'],'status'=>@$_POST['status']))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+}
+
+function deldocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $num_deleted = db_delete('document')
+        ->condition('id', @$_POST['id'])
+        ->execute();
+
+}
+
+function uploaddocument(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+    $target_dir = realpath(dirname(__FILE__))."/uploads/";
+    $path_parts = pathinfo($_FILES['Filedata']['name']);
+
+    $string = preg_replace('/[^a-zA-Z0-9]/', '-', $path_parts['filename']);
+
+    $filename = $string.'-'.rand().'-'.time().'.'.$path_parts['extension'];
+
+    $filetype = array('pdf','doc','docx','rtf','txt','xml','csv');
+
+    if(in_array($path_parts['extension'],$filetype)){
+        if (move_uploaded_file($_FILES["Filedata"]["tmp_name"], $target_dir.$filename)) {
+
+            $filepath = ($target_dir.$filename);
+
+            $file = (object) array(
+                'uid' => 1,
+                'uri' => $filepath,
+                'filemime' => file_get_mimetype($filepath),
+                'status' => 1,
+            );
+
+            if ($file) {
+                if ($file = file_copy($file, 'public://')) {
+                    $file->status = FILE_STATUS_PERMANENT;
+                    $file = file_save($file);
+                    $file->display = 1;
+                    $file->description = "";
+                }
+            }
+        }
+
+        $data['file_url']= file_create_url((@$file->uri));
+        $data['file_name']= $filename;
+        $data['file_type']= $path_parts['extension'];
+    }else{
+        $data['status'] = 'error';
+    }
+
+
+    echo json_encode(@$data) ;
+
+}
+
+
+function updatedocstatus(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    $status=1-intval($_POST['status']);
+    $query=db_update('document')
+        ->fields(array('status'=>@$status))
+        ->condition('id', intval($_POST['id']))
+        ->execute();
+
+    echo "true";
+}
+
+function getdoccategory()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $junglecategorylist = array();
+
+
+    $queryu = db_select('documentcategory', 'ca');
+    $queryu->fields('ca',array('id','cat_name'));
+
+    $queryu->condition('ca.status',1,'=')  ;
+
+    $resultu = $queryu->execute();
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+            $junglecategorylist[$i]= $temparray;
+            $i++;
+        }
+    }
+
+    echo json_encode(@$junglecategorylist);
+
+}
+
+function getdoccategory1()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $junglecategorylist = array();
+
+
+    $queryu = db_select('documentcategory', 'ca');
+    $queryu->fields('ca',array('id','cat_name','parent_cat'));
+
+    $queryu->condition('ca.status',1,'=')  ;
+
+    $resultu = $queryu->execute();
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+            $junglecategorylist[$recordu['parent_cat']][]= $temparray;
+            $i++;
+        }
+    }
+
+    echo json_encode(@$junglecategorylist);
+}
+
+
+function getcattree($id=0,$junglecategorylist=array()){
+
+}
+

@@ -1,0 +1,53 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for faq
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function document_schema() {
+    $schema = array();
+
+    $schema['document'] = array(
+        'description' => 'employement Table',
+        'fields' => array(
+            'id' => array(
+                'description' => 'Primary Key user',
+                'type' => 'serial',
+                'not null' => TRUE,
+            ),
+
+            'file_name' => array(
+                'description' => 'file name',
+                'type' => 'text',
+                'not null' => false,
+            ),
+
+            'description' => array(
+                'description' => 'resume',
+                'type' => 'text',
+                'not null' => false,
+            ),
+            'status' => array(
+                             'description' => 'status',
+                             'type' => 'int',
+                             'length' => '11',
+                             'not null' => TRUE,
+                             'default' => 0,
+                         ),
+
+
+
+
+
+
+
+
+        ),
+        'primary key' => array('id'),
+
+    );
+    return $schema;
+}

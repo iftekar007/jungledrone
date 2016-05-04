@@ -42,10 +42,10 @@
        <a style=cursor:pointer ng-click=logout() ng-if="userid!=0" class="sublink">Logout</a>
    <!-- <a ui-sref="cart" href="javascript:void(0);"> Cart ({{carttotal}}) </a>-->
     
-       <a href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">  Cart ({{carttotal}})  </a> 
+       <a href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">   Cart ({{carttotal}})  </a> 
     
     <!-- <a href="javascript:void(0);">My Profiel</a>   -->
-      <a  ng-if="userid!=0" href="javascript:void(0);" class="sublink">Profile</a>
+      <a  ng-if="userid!=0" ui-sref="mydownloads" class="sublink">Profile</a>
       
        <div class="clearfix"></div>
        
@@ -108,48 +108,66 @@
 <div class="go_dashboard"><a href="javascript:void(0);" ng-if="userid!=0" ui-sref="dashboard"><img src=images/dashboard_icon.png alt=# /></a></div>
 
 
-<script type="text/ng-template" id="loginmodal.html">
-    <div class="login-box">
 
-        <div class="login-boxwrapper">
-            <div class="login-logo">
-                <img src="images/logo1.png" alt="#" style="display:block; width:96%; margin:0 auto; margin-top:30px;">
-            </div><!-- /.login-logo -->
-            <div class="login-box-body">
-                <img src="images/newlockicon.png" alt="#" style="display:block; margin:0 auto;">
-                <p class="login-box-msg" style=" font-size:22px;">Login to your account</p>
-                <form angular-validator-submit="login()"  name="loginForm"  class="form-horizontal" novalidate angular-validator>
-                    <div ng-show="errormsg" class="alert alert-danger alert-dismissible">{{errormsg}}</div>
-                    <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
-                        <input type="email" class="form-control" placeholder="Email" style="font-family:Arial, Helvetica, sans-serif;" name="email"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/ng-template" id="loginmodal">
+    <div class="newlogin-box">
+        <a href="javascript:void(0);" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+        <div class="newloginwrapper">
+            <h2>Sign IN</h2>
+
+            <form angular-validator-submit="popuplogin()"  name="loginForm"  class="form-horizontal" novalidate angular-validator>
+                <div ng-show="errormsg" class="alert alert-danger alert-dismissible">{{errormsg}}</div>
+                <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+                    <label>Your Email</label>
+                    <input type="email" class="form-control" placeholder="Email" style="font-family:Arial, Helvetica, sans-serif;" name="email"
                                ng-model="form.email"
                                required-message="'Email can not be blank.'"
                                invalid-message="'Enter valid email address.'"
                                required
-
                                 >
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
-                        <input type="password" class="form-control" placeholder="Password" style="font-family:Arial, Helvetica, sans-serif;" name="password"
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback" style="margin-left:0; margin-right:0">
+                    <label>Your Password</label>
+                    <input type="password" class="form-control" placeholder="Password" style="font-family:Arial, Helvetica, sans-serif;" name="password"
                                ng-model="form.password"
-
                                required-message="'Password can not be blank.'"
                                required
-
                                 >
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="checkboxdiv">
+                    <label><input type="checkbox" value="">Remember me</label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12" style="padding-top:0px; margin-top:0px;">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat loginbtn">Login</button>
+                        <a href="javascript:void(0)" ng-click="gotofpassword()" class="forgotpassword">Forgot your password?</a>
                     </div>
-                    <div class="row">
-                        <!-- /.col -->
-                        <div class="col-xs-12" style="padding-top:0px; margin-top:0px;">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat loginbtn">Sign In</button>
-                        </div><!-- /.col -->
-                    </div>
-                </form>
-            </div><!-- /.login-box-body -->
+                </div>
+            </form>
         </div>
-
     </div>
 </script>
 

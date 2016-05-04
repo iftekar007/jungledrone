@@ -246,9 +246,9 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
         })
 
 
-        .state('login1',
+        .state('login',
         {
-            url:"/login1",
+            url:"/login",
             views: {
 
                               'header': {
@@ -365,6 +365,30 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             }
         })
 
+        .state('myprofile',{
+            url:"/myprofile",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/myprofile.html' ,
+                    controller: 'myprofile'
+                },
+
+            }
+        })
+
         .state('editprofile',{
             url:"/editprofile",
             views: {
@@ -383,7 +407,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/editprofile.html' ,
-                    //controller: 'checkout'
+                    controller: 'editprofile'
                 },
 
             }
@@ -406,7 +430,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/mydownloads.html' ,
-                    //controller: 'checkout'
+                    controller: 'mydownloads'
                 },
 
             }
@@ -1449,9 +1473,9 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
     )
 
 
-        .state('login',
+        .state('login2',
         {
-            url:"/login",
+            url:"/login2",
             views: {
 
                 /*              'header': {
@@ -1480,6 +1504,42 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
              });
              }]
              */        }
+    )
+
+        .state('forgot-password',
+        {
+            url:"/forgot-password" ,
+            views:{
+                'content':{
+                    templateUrl: 'partials/forgot_password.html',
+                    controller:  'forgotpassword'
+                }
+            }
+        }
+    )
+
+        .state('forgot-password-check',
+        {
+            url:"/forgot-password-check" ,
+            views:{
+                'content':{
+                    templateUrl: 'partials/forgot_password_check.html',
+                    controller:  'forgotpasswordcheck'
+                }
+            }
+        }
+    )
+
+        .state('change-password',
+        {
+            url:"/change-password" ,
+            views:{
+                'content':{
+                    templateUrl: 'partials/change_password.html',
+                    controller: 'change_password'
+                }
+            }
+        }
     )
 
 
@@ -1684,6 +1744,75 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
         }
     )
 
+        .state('adddocument',{
+            url:"/add-document",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/adddocument.html' ,
+                    controller: 'adddocument'
+                },
+
+            }
+        }
+    )
+
+        .state('editdocument',{
+            url:"/edit-document/:id",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/editdocument.html' ,
+                    controller: 'editdocument'
+                },
+
+            }
+        }
+    )
+
+        .state('documentlist',{
+            url:"/document-list",
+            views: {
+
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/documentlist.html' ,
+                    controller: 'documentlist'
+                },
+
+            }
+        }
+    )
+
 
     $locationProvider.html5Mode({
         enabled: true,
@@ -1716,6 +1845,89 @@ jungledrone.directive('myCustomer', function() {
         template: 'Name: {{customer.name}} Address: {{customer.address}}'
     };
 });*/
+
+
+
+jungledrone.controller('forgotpassword', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.forgotpasssubmit = function(){
+        $rootScope.stateIsLoading = true;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'forgotpass',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            if(data.status == 'success'){
+                $cookieStore.put('user_id',data.userdetails.user_id);
+                $cookieStore.put('user_email',data.userdetails.email);
+
+                $rootScope.user_id=$cookieStore.get('user_id');
+                $rootScope.user_email=$cookieStore.get('user_email');
+
+                // console.log($rootScope.user_email);
+                // console.log($rootScope.user_id);
+                //console.log($rootScope.refferalcodes);
+
+                $state.go('forgot-password-check');
+
+
+            }else{
+                $scope.errormsg = data.msg;
+            }
+
+        });
+    }
+});
+jungledrone.controller('forgotpasswordcheck', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.form={email:$rootScope.user_email}
+    $scope.forgotpasschecksubmit = function(){
+        $rootScope.stateIsLoading = true;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'forgotpassaccesscheck',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            if(data.status == 'success'){
+                $state.go('change-password');
+                return
+
+            }else{
+                $scope.errormsg = data.msg;
+            }
+
+        });
+    }
+});
+
+jungledrone.controller('change_password', function($scope,$state,$http,$cookieStore,$rootScope) {
+    $scope.form={email:$rootScope.user_email,user_id:$rootScope.user_id}
+    $scope.changepassFormSubmit = function(){
+        $rootScope.stateIsLoading = true;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'changepasswords',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            if(data.status == 'success'){
+                $state.go('login');
+                return
+
+            }else{
+                $scope.errormsg = data.msg;
+            }
+
+        });
+    }
+});
+
 
 
 jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,$http,$uibModalInstance,$rootScope,Upload) {
@@ -1830,8 +2042,105 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
         });
     }
 
+    $scope.jungleconfirmdocumentstatus=function(){
+        $uibModalInstance.dismiss('cancel');
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.currentindex;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'updatedocstatus',
+            data    : $.param({id: $scope.documentlist[idx].id,status:$scope.documentlist[idx].status}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+
+            if($scope.documentlist[idx].status == 0){
+                $scope.documentlist[idx].status = 1;
+            }else{
+                $scope.documentlist[idx].status = 0;
+            }
+        });
+    }
 
 
+    $scope.jungleconfirmdocdelete=function(){
+        $uibModalInstance.dismiss('cancel');
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.currentindex;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'deldocument',
+            data    : $.param({id: $scope.documentlist[idx].id}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            $scope.documentlist.splice(idx,1);
+        });
+    }
+
+
+
+    $scope.popuplogin = function(){
+        $rootScope.stateIsLoading = true;
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'adminlogin',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+
+
+            if(data.status == 'success'){
+
+                $uibModalInstance.dismiss('cancel');
+
+
+
+                $cookieStore.put('userid',data.userdetails.id);
+                $cookieStore.put('useremail',data.userdetails.email);
+                $cookieStore.put('userfullname',data.userdetails.fname+' '+data.userdetails.lname);
+                $cookieStore.put('userfname',data.userdetails.fname);
+                $cookieStore.put('userlname',data.userdetails.lname);
+                $cookieStore.put('username',data.userdetails.username);
+                $cookieStore.put('userrole',data.userdetails.userrole);
+
+                if(typeof (data.userdetails.roles[4]) != 'undefined')
+                    $cookieStore.put('userrole',4);
+                if(typeof (data.userdetails.roles[5]) != 'undefined')
+                    $cookieStore.put('userrole',5);
+                if(typeof (data.userdetails.roles[6]) != 'undefined')
+                    $cookieStore.put('userrole',6);
+                if(typeof (data.userdetails.roles[7]) != 'undefined')
+                    $cookieStore.put('userrole',7);
+
+
+
+                if(typeof (data.userdetails.roles[7]) != 'undefined')
+                    $state.go('index');
+                else
+                    $state.go('dashboard');
+
+
+            }else{
+                $rootScope.stateIsLoading = false;
+                $scope.errormsg = data.msg;
+
+                console.log('in error'+$rootScope.stateIsLoading );
+            }
+
+        });
+    }
+
+    $scope.gotofpassword =function(){
+        $uibModalInstance.dismiss('cancel');
+
+        $state.go('forgot-password');
+        return
+    }
 
 
 });
@@ -2597,6 +2906,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
     setTimeout(function(){
         $('.dropdown-menu').hide(500);
         $scope.toggledropdown=function(){
+            /*
 
             console.log('uuuu');
             if($('.dropdown-menu').css('display')=='none'){
@@ -2610,7 +2920,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
                 $('.dropdown-menu').hide();
                 $('.dropdown-menu').stop(true, true).delay(400).hide();
             }
-
+*/
 
         }
 
@@ -4157,7 +4467,10 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
 
                 //console.log($rootScope.userrole);
 
-                $state.go('dashboard');
+                if(typeof (data.userdetails.roles[7]) != 'undefined')
+                    $state.go('index');
+                else
+                    $state.go('dashboard');
 
                 /*
 
@@ -6314,12 +6627,14 @@ jungledrone.controller('admin_header', function($scope,$state,$http,$cookieStore
         $state.go('index');
     }
 
-    if (typeof($cookieStore.get('userid')) != 'undefined' && $cookieStore.get('userid') > 0) {
+    if (typeof($cookieStore.get('userid')) != 'undefined' && $cookieStore.get('userid') > 0 && $cookieStore.get('userrole') != 7) {
 
         $rootScope.userfullname=$cookieStore.get('userfullname');
         $rootScope.userid=$cookieStore.get('userid');
         $rootScope.userrole=$cookieStore.get('userrole');
         console.log($rootScope.userfullname);
+    }else if($cookieStore.get('userrole') == 7){
+        $state.go('index');
     }
     else{
         $rootScope.userid=0;
@@ -8919,9 +9234,13 @@ jungledrone.controller('documentcategorylist',function($scope,$state,$http,$cook
     $scope.searchkey = '';
     $scope.search = function(item){
 
-        if ( (item.cat_name.indexOf($scope.searchkey) != -1) || (item.cat_desc.indexOf($scope.searchkey) != -1) ||  (item.status.indexOf($scope.searchkey) != -1) || (item.parent_cat_name.indexOf($scope.searchkey) != -1)){
+        if ( ($filter('lowercase')(item.cat_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.cat_desc).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.parent_cat_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) ){
             return true;
         }
+
+
+
+
         return false;
     };
 
@@ -9104,7 +9423,7 @@ jungledrone.controller('editauditor', function($scope,$state,$http,$cookieStore,
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
         }) .success(function(data) {
             $rootScope.stateIsLoading = false;
-            $state.go('admin-list');
+            $state.go('auditorlist');
             return
         });
     }
@@ -9195,3 +9514,488 @@ jungledrone.controller('auditorlist', function($scope,$state,$http,$cookieStore,
 });
 
 
+jungledrone.controller('adddocument',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal){
+
+    $scope.file_type = '';
+
+    $scope.trustAsHtml=$sce.trustAsHtml;
+    $http({
+        method  :   'POST',
+        async   :   false,
+
+        url :       $scope.adminUrl+'getdoccategory',
+        // data    : $.param($scope.form),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.categorylist=data;
+
+    })
+
+    $scope.tinymceOptions = {
+        trusted: true,
+        theme: 'modern',
+        plugins: [
+            'advlist autolink link  lists charmap   hr anchor pagebreak spellchecker',
+            'searchreplace wordcount visualblocks visualchars code  insertdatetime  nonbreaking',
+            'save table contextmenu directionality  template paste textcolor'
+        ],
+        // toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+        toolbar: ' undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link  |   media fullpage | forecolor backcolor',
+    };
+
+    $scope.form = {
+        file_name : '',
+        file_url : ''
+    }
+
+    $scope.getReqParams = function () {
+        return $scope.generateErrorOnServer ? '?errorCode=' + $scope.serverErrorCode +
+        '&errorMessage=' + $scope.serverErrorMsg : '';
+    };
+
+    $scope.$watch('product_upload', function (files) {
+        $('.errormsg').html('');
+        $scope.formUpload = false;
+        if (files != null) {
+            for (var i = 0; i < files.length; i++) {
+                $scope.errorMsg = null;
+                (function (file) {
+                    upload(file);
+                })(files[i]);
+            }
+        }
+    });
+
+
+    function upload(file) {
+        $scope.errorMsg = null;
+        uploadUsingUpload(file);
+    }
+
+    function uploadUsingUpload(file) {
+
+        $('#loaderDiv').addClass('ng-hide');
+        file.upload = Upload.upload({
+            url: $scope.adminUrl+'uploaddocument' + $scope.getReqParams(),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            fields: {'id':$rootScope.createIdeaId},
+            file: file,
+            fileFormDataName: 'Filedata'
+        });
+
+        file.upload.then(function (response) {
+
+            $('.progress').addClass('ng-hide');
+
+            if(response.data.status=='error'){
+                $('.errormsg').html('Invalid file type.');
+
+                $scope.form.file_name = '';
+                $scope.form.file_url = '';
+
+            }
+            else {
+                file.result = response.data;
+
+                $scope.form.file_name = response.data.file_name;
+                $scope.form.file_url = response.data.file_url;
+
+                $scope.file_type = response.data.file_type;
+            }
+        }, function (response) {
+            console.log(response.status);
+            if(response.data.status>0) {
+
+            }
+
+        });
+
+        file.upload.progress(function (evt) {
+
+            $('#loaderDiv').removeClass('ng-hide');
+
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
+        });
+
+        file.upload.xhr(function (xhr) {
+            // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+        });
+    }
+
+    $scope.addproductsubmit=function() {
+
+        $('.errormsg').html('');
+
+        if($scope.form.file_name == ''){
+            $('.errormsg').html('Please Upload File');
+        }else{
+            $http({
+                method  :   'POST',
+                async   :   false,
+                url :       $scope.adminUrl+'adddocument',
+                data    : $.param($scope.form),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+            }).success(function(){
+                $state.go('documentlist');
+
+            })
+        }
+
+
+
+    }
+
+
+
+
+})
+
+jungledrone.controller('documentlist',function($scope,$state,$http,$cookieStore,$rootScope,$uibModal,$sce,$filter){
+    $scope.trustAsHtml=$sce.trustAsHtml;
+
+    $scope.predicate = 'id';
+    $scope.reverse = true;
+    $scope.order = function(predicate) {
+        $scope.predicate = predicate;
+        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+    };
+    $scope.currentPage=1;
+    $scope.perPage=10;
+
+    $scope.totalItems = 0;
+
+    $scope.filterResult = [];
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'documentlist',
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).success(function(data){
+        $scope.documentlist=data;
+    })
+
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( ($filter('lowercase')(item.file_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.description).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.cat_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) ){
+            return true;
+        }
+
+        return false;
+    };
+
+    $scope.jungledeldocument = function(item,size){
+
+        $scope.currentindex=$scope.documentlist.indexOf(item);
+
+        $uibModal.open({
+            animation: true,
+            templateUrl: 'jungleproductdelconfirm.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            scope:$scope
+        });
+    }
+
+    $scope.changedocumentstatus = function(item,size){
+
+        $scope.currentindex=$scope.documentlist.indexOf(item);
+
+        $uibModal.open({
+            animation: true,
+            templateUrl: 'jungleproductstatusfirm.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            scope:$scope
+        });
+    }
+
+
+
+})
+
+
+jungledrone.controller('editdocument',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams){
+    $scope.file_type = '';
+    $scope.id=$stateParams.id;
+
+    $scope.trustAsHtml=$sce.trustAsHtml;
+    $http({
+        method  :   'POST',
+        async   :   false,
+
+        url :       $scope.adminUrl+'getdoccategory',
+        // data    : $.param($scope.form),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.categorylist=data;
+
+    })
+
+    $scope.tinymceOptions = {
+        trusted: true,
+        theme: 'modern',
+        plugins: [
+            'advlist autolink link  lists charmap   hr anchor pagebreak spellchecker',
+            'searchreplace wordcount visualblocks visualchars code  insertdatetime  nonbreaking',
+            'save table contextmenu directionality  template paste textcolor'
+        ],
+        // toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+        toolbar: ' undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link  |   media fullpage | forecolor backcolor',
+    };
+
+    $scope.form = {
+        file_name : '',
+        file_url : ''
+    }
+
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     :     $scope.adminUrl+'documentdetails',
+        data    : $.param({'id':$scope.id}),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+
+        $scope.prev_file_name = data.file_name;
+        $scope.prev_file_url = data.file_url;
+
+        $scope.file_type = data.file_type;
+
+        $scope.form = {
+            id: data.id,
+            file_name: data.file_name,
+            file_url: data.file_url,
+            description: data.description,
+            category_id:{
+                id : data.category_id,
+            } ,
+            status : data.status
+        }
+    });
+
+
+    $scope.getReqParams = function () {
+        return $scope.generateErrorOnServer ? '?errorCode=' + $scope.serverErrorCode +
+        '&errorMessage=' + $scope.serverErrorMsg : '';
+    };
+
+    $scope.$watch('product_upload', function (files) {
+        $('.errormsg').html('');
+        $scope.formUpload = false;
+        if (files != null) {
+            for (var i = 0; i < files.length; i++) {
+                $scope.errorMsg = null;
+                (function (file) {
+                    upload(file);
+                })(files[i]);
+            }
+        }
+    });
+
+
+    function upload(file) {
+        $scope.errorMsg = null;
+        uploadUsingUpload(file);
+    }
+
+    function uploadUsingUpload(file) {
+
+        $('#loaderDiv').addClass('ng-hide');
+        file.upload = Upload.upload({
+            url: $scope.adminUrl+'uploaddocument' + $scope.getReqParams(),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            fields: {'id':$rootScope.createIdeaId},
+            file: file,
+            fileFormDataName: 'Filedata'
+        });
+
+        file.upload.then(function (response) {
+
+            $('.progress').addClass('ng-hide');
+
+            if(response.data.status=='error'){
+                $('.errormsg').html('Invalid file type.');
+
+                $scope.form.file_name = $scope.prev_file_name;
+                $scope.form.file_url = $scope.prev_file_url;
+
+            }
+            else {
+                file.result = response.data;
+
+                $scope.form.file_name = response.data.file_name;
+                $scope.form.file_url = response.data.file_url;
+
+                $scope.file_type = response.data.file_type;
+            }
+        }, function (response) {
+            console.log(response.status);
+            if(response.data.status>0) {
+
+            }
+
+        });
+
+        file.upload.progress(function (evt) {
+
+            $('#loaderDiv').removeClass('ng-hide');
+
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
+        });
+
+        file.upload.xhr(function (xhr) {
+            // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+        });
+    }
+
+    $scope.addproductsubmit=function() {
+
+        $('.errormsg').html('');
+
+        if($scope.form.file_name == ''){
+            $('.errormsg').html('Please Upload File');
+        }else{
+            $http({
+                method  :   'POST',
+                async   :   false,
+                url :       $scope.adminUrl+'updatedocument',
+                data    : $.param($scope.form),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+            }).success(function(){
+                $state.go('documentlist');
+
+            })
+        }
+
+
+
+    }
+
+
+
+
+})
+
+
+jungledrone.controller('myprofile',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams){
+
+    $scope.userid = 0;
+
+    if(typeof($cookieStore.get('userid')) != 'undefined'){
+        $scope.userid = $cookieStore.get('userid');
+    }
+
+
+
+
+})
+
+jungledrone.controller('editprofile',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams){
+
+    $scope.userid = 0;
+
+    if(typeof($cookieStore.get('userid')) != 'undefined'){
+        $scope.userid = $cookieStore.get('userid');
+    }
+
+
+
+
+})
+
+jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams,$filter){
+
+    $scope.userid = 0;
+
+    $scope.trustAsHtml = $sce.trustAsHtml;
+
+    if(typeof($cookieStore.get('userid')) != 'undefined'){
+        $scope.userid = $cookieStore.get('userid');
+    }
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'getdoccategory1',
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).success(function(data){
+        $scope.categorylist=data;
+    })
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'documentlist?filter=status',
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).success(function(data){
+        $scope.documentlist1=data;
+        $scope.documentlist=data;
+    })
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( ($filter('lowercase')(item.file_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.description).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.cat_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) ){
+            return true;
+        }
+
+        return false;
+    };
+
+
+    setTimeout(function(){
+        $(".dropdown-menu > li > a.trigger").on("click",function(e){
+            var current=$(this).next();
+            var grandparent=$(this).parent().parent();
+            if($(this).hasClass('left-caret')||$(this).hasClass('right-caret'))
+                $(this).toggleClass('right-caret left-caret');
+            grandparent.find('.left-caret').not(this).toggleClass('right-caret left-caret');
+            grandparent.find(".sub-menu:visible").not(current).hide();
+            current.toggle();
+            e.stopPropagation();
+        });
+
+        $(".dropdown-menu > li > a:not(.trigger)").on("click",function(){
+            var root=$(this).closest('.dropdown');
+            root.find('.left-caret').toggleClass('right-caret left-caret');
+            root.find('.sub-menu:visible').hide();
+        });
+    },5000);
+
+
+    $scope.currentcat = 'Category';
+    $scope.currentcatid = 0;
+
+    $scope.searchbycat = function(id,title){
+        $scope.currentcat = title;
+        $scope.currentcatid = id;
+
+        if(id==0){
+            $scope.searchkey = '';
+        }else{
+            $scope.searchkey = title;
+        }
+
+
+
+    }
+
+
+
+
+})

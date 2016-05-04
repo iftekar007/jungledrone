@@ -265,9 +265,9 @@ function junglecategorylist()
                         $tempimage['id'] =$k;
 
                         if ($productextns['1'] == 'mp4') {
-                            $tempimage['image'] = image_style_url('front-photo_600_600_', ('public://'.$productextns['0'].'.jpg'));
+                            $tempimage['image'] = image_style_url('420_230', ('public://'.$productextns['0'].'.jpg'));
                         } else {
-                            $tempimage['image'] = image_style_url('front-photo_600_600_', (@$recordu5['product_file']));
+                            $tempimage['image'] = image_style_url('420_230', (@$recordu5['product_file']));
                         }
 
                         $temparray['product_img_urls'][] =  $tempimage;
@@ -284,7 +284,7 @@ function junglecategorylist()
                 for($j=0;$j<$no_i;$j++){
 
                     $tempimage['id'] =$k;
-                    $tempimage['image'] = 'images/categoryimg_th1.png';
+                    $tempimage['image'] = 'images/demojdlogo.png';
 
                     $temparray['product_img_urls'][] = $tempimage;
 
