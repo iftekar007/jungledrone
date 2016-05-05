@@ -101,8 +101,9 @@
 
     <ol class="breadcrumb">
         <li><a href="javascript:void(0)" ui-sref="mydownloads({id:0})">Home</a></li>
+        <li ng-repeat="itemtree in cattree"><a href="javascript:void(0)" ui-sref="mydownloads({id:itemtree.id})">{{itemtree.cat_name}}</a></li>
 
-        {{gettree}}
+
         <!--<li ng-if="currentid>0"><a ng-if="currentid == parseInt(catitem1.id)" ng-repeat="catitem1 in categorylist[currentid] track by $index" href="javascript:void(0)">
             {{catitem1.cat_name}}
             {{catitem1.id}}
@@ -149,7 +150,7 @@
                 <span class="{{item.file_type}}_icon"></span>
                 {{item.file_name | limitTo : 12}}
                 <div class="hoverfile">
-                    <a class="hoverdownload" href="{{item.file_url}}" target="_blank"></a>
+                    <a class="hoverdownload" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank"></a>
                     <a class="hoverpreview" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{item.description}}" href="javascript:void(0)"></a>
                 </div>
             </div>
@@ -160,7 +161,7 @@
                 <span class="{{item.file_type}}_icon"></span>
                 {{item.file_name | limitTo : 12}}
                 <div class="hoverfile">
-                    <a class="hoverdownload" href="{{item.file_url}}" target="_blank"></a>
+                    <a class="hoverdownload" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank"></a>
                     <a class="hoverpreview" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{item.description}}" href="javascript:void(0)"></a>
                 </div>
             </div>

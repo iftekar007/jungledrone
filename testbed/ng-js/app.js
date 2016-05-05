@@ -436,6 +436,30 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
 
             }
         })
+        .state('myfilelist',{
+            url:"/myfilelist",
+            views: {
+
+                'header': {
+                    templateUrl: 'partials/myaccount-header.html' ,
+                    controller: 'header'
+                },
+                'footer': {
+                    templateUrl: 'partials/myaccount-footer.html' ,
+                    //controller: 'footer'
+                },
+                'left': {
+                    templateUrl: 'partials/myaccount-left.html' ,
+                    //controller: 'checkout'
+                },
+                'content': {
+                    templateUrl: 'partials/mydownloads.html' ,
+                    //templateUrl: 'partials/mydownloads.html' ,
+                    controller: 'myfilelist'
+                },
+
+            }
+        })
 
         .state('receipts',{
             url:"/receipts",
@@ -2871,6 +2895,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
     if(typeof ($cookieStore.get('userid'))!='undefined'){
 
         $rootScope.userid=$cookieStore.get('userid');
+        $rootScope.username=$cookieStore.get('username');
 
     }
 
@@ -2934,6 +2959,21 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
     },2000);
 
+
+    if($rootScope.userrole==7 || $rootScope.userrole==4){
+
+
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'mydownloadlist?userid='+$rootScope.userid,
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).success(function(data){
+            $rootScope.filenotdownloaded=data.notdownloaded;
+            $rootScope.filedownloaded=data.downloaded;
+        })
+
+    }
 
 
 });
@@ -6633,6 +6673,7 @@ jungledrone.controller('admin_header', function($scope,$state,$http,$cookieStore
         $rootScope.userfullname=$cookieStore.get('userfullname');
         $rootScope.userid=$cookieStore.get('userid');
         $rootScope.userrole=$cookieStore.get('userrole');
+        $rootScope.username=$cookieStore.get('username');
         console.log($rootScope.userfullname);
     }else if($cookieStore.get('userrole') == 7){
         $state.go('index');
@@ -7116,10 +7157,10 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         videoplayer.currentTime = 0; //not sure if player seeks to seconds or milliseconds
         videoplayer.play();
 
-         var stopVideoAfter = 10 * 1000;
+         var stopVideoAfter = 30 * 1000;
 
          videoplayer.onseeking = function() {
-             if(videoplayer.currentTime > 10){
+             if(videoplayer.currentTime > 30){
                  videoplayer.pause();
                  videoplayer.currentTime = 0;
              }
@@ -7339,7 +7380,7 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
         });
 
 
-    },1000);
+    },4000);
 
 
 });
@@ -9958,7 +9999,7 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
         }, log);
     })
 
-    $scope.cattree={};
+    $scope.cattree=[];
 
     $scope.getcatetree=function(catid){
 
@@ -9974,13 +10015,32 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
              console.log( value.cat_name);
              console.log( value['id']);*/
             if(catid==value.id) {
-                $scope.cattree.push(value.cat_name);
-                if(value.parent_cat!=0) $scope.getcatetree(value.id);
+               /* $scope.cattree.push({
+                    id: value.id,
+                    cat_name: value.cat_name,
+                });*/
+
+                $scope.tree={
+
+                    id: value.id,
+                    cat_name: value.cat_name,
+                }
+                $scope.cattree.push($scope.tree);
+
+
+                if(value.parent_cat!=0) $scope.getcatetree(value.parent_cat);
+                else  {
+                    $scope.cattree.reverse();
+                    return;
+                }
+
+
             }
 
         }, log);
 
-        console.log('tree'+$scope.cattree);
+        console.log($scope.cattree);
+
 
     }
 
@@ -9993,6 +10053,85 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
         $scope.documentlist1=data;
         $scope.documentlist=data;
     })
+
+    $scope.searchkey = '';
+    $scope.search = function(item){
+
+        if ( ($filter('lowercase')(item.file_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.description).indexOf($filter('lowercase')($scope.searchkey)) != -1) || ($filter('lowercase')(item.cat_name).indexOf($filter('lowercase')($scope.searchkey)) != -1) ){
+            return true;
+        }
+
+        return false;
+    };
+
+
+    setTimeout(function(){
+
+
+
+        $('[data-toggle="tooltip"]').tooltip({html:true});
+
+        $(".dropdown-menu > li > a.trigger").on("click",function(e){
+            var current=$(this).next();
+            var grandparent=$(this).parent().parent();
+            if($(this).hasClass('left-caret')||$(this).hasClass('right-caret'))
+                $(this).toggleClass('right-caret left-caret');
+            grandparent.find('.left-caret').not(this).toggleClass('right-caret left-caret');
+            grandparent.find(".sub-menu:visible").not(current).hide();
+            current.toggle();
+            e.stopPropagation();
+        });
+
+        $(".dropdown-menu > li > a:not(.trigger)").on("click",function(){
+            var root=$(this).closest('.dropdown');
+            root.find('.left-caret').toggleClass('right-caret left-caret');
+            root.find('.sub-menu:visible').hide();
+        });
+    },3000);
+
+
+    $scope.currentcat = 'Category';
+    $scope.currentcatid = 0;
+
+    $scope.searchbycat = function(id,title){
+        $scope.currentcat = title;
+        $scope.currentcatid = id;
+
+        if(id==0){
+            $scope.searchkey = '';
+        }else{
+            $scope.searchkey = title;
+        }
+
+
+
+    }
+
+
+
+
+})
+jungledrone.controller('myfilelist',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams,$filter){
+
+    $scope.userid = 0;
+
+    $scope.currentid=$stateParams.id;
+    $scope.currentcategoryname="All Files";
+
+    $scope.trustAsHtml = $sce.trustAsHtml;
+
+    if(typeof($cookieStore.get('userid')) != 'undefined'){
+        $scope.userid = $cookieStore.get('userid');
+    }
+
+
+
+
+    //$scope.documentlist1=$rootScope.filedownloaded;
+    //$scope.documentlist=$rootScope.filedownloaded;
+
+    console.log($rootScope.filedownloaded);
+
 
     $scope.searchkey = '';
     $scope.search = function(item){

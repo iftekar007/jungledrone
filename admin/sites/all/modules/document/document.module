@@ -114,9 +114,17 @@ function document_menu()
 
 
 
-    $items['getfilepreview'] = array(
+    $items['addfiledownload'] = array(
         'title' => 'event Updates',
-        'page callback' => 'getfilepreview',
+        'page callback' => 'addfiledownload',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['mydownloadlist'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'mydownloadlist',
         'access callback' => TRUE,
         'access arguments' => array('Anonymous Actions.'),
         'expanded' => TRUE,
@@ -204,6 +212,52 @@ function documentlist()
 
 }
 
+function mydownloadlist()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $queryu = db_select('document', 'doc');
+    $queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->leftJoin('filedownloadlist', 'filed', 'filed.fileid = doc.id');
+    $queryu->fields('doc');
+    $queryu->fields('filed');
+    $queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+   // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        //$queryu->condition('filed.userid',$_REQUEST['userid'],'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultu = $queryu->execute();
+
+    $eventlist = array();
+    $downloadlist = array();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $recordu['timedownloaded']=date('m/d/Y h:s',$recordu['timedownloaded']);
+            $recordu['timeadded']=date('m/d/Y h:s',$recordu['timeadded']);
+            $temparray = $recordu;
+
+            $path_parts = pathinfo($recordu['file_name']);
+            $temparray['file_type'] = $path_parts['extension'];
+           // $eventlist[] = $temparray;
+            if($recordu['userid']==$_REQUEST['userid']) $downloadlist[] = $temparray;
+            else $eventlist[] = $temparray;
+        }
+    }
+    $data['downloaded']=$downloadlist;
+    $data['notdownloaded']=$eventlist;
+    echo json_encode($data);
+
+}
+
 
 function adddocument(){
 
@@ -215,14 +269,49 @@ function adddocument(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
 
-    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status'));
-    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id']['id'],1));
+    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status','timeadded'));
+    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id']['id'],1,time()));
     $query->execute();
 
 
     $data['status'] = 'success';
     echo json_encode($data);
     return;
+}
+function addfiledownload(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $x=arg();
+
+
+    $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
+    $query->values(array(@$x[1],@$x[2],time()));
+    $query->execute();
+
+    $queryu = db_select('document', 'doc');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->fields('doc');
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+    //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+    $queryu->condition('doc.id',$x[1],'=')  ;
+    $resultu = $queryu->execute();
+    $recordu = $resultu->fetchAssoc();
+
+    drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_url']);
+    readfile($recordu['file_url']);
+
+
+
+    /* $data['status'] = 'success';
+     echo json_encode($data);
+     return;*/
 }
 
 function updatedocument(){
@@ -239,7 +328,7 @@ function updatedocument(){
 
     db_update('document')
         //->expression('weight', 'weight + :weight', array(':weight' => 1))
-        ->fields(array( 'file_name'=>@$_POST['file_name'], 'file_url'=>@$_POST['file_url'], 'description'=>$_POST['description'],'category_id'=>@$_POST['category_id']['id'],'status'=>@$_POST['status']))
+        ->fields(array( 'file_name'=>@$_POST['file_name'], 'file_url'=>@$_POST['file_url'], 'description'=>$_POST['description'],'category_id'=>@$_POST['category_id']['id'],'status'=>@$_POST['status'],'timeadded'=>time()))
         ->condition('id', intval($_POST['id']))
         ->execute();
 }

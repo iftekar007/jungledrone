@@ -30,6 +30,12 @@ function document_schema() {
                 'type' => 'text',
                 'not null' => false,
             ),
+
+            'timeadded' => array(
+                'description' => 'timeadded',
+                'type' => 'bigint',
+                'not null' => false,
+            ),
             'status' => array(
                              'description' => 'status',
                              'type' => 'int',
@@ -49,5 +55,39 @@ function document_schema() {
         'primary key' => array('id'),
 
     );
+
+
+    $schema['filedownloadlist'] = array(
+            'description' => 'download Table',
+            'fields' => array(
+                'id' => array(
+                    'description' => 'Primary Key user',
+                    'type' => 'serial',
+                    'not null' => TRUE,
+                ),
+
+                'fileid' => array(
+                    'description' => 'file id',
+                    'type' => 'int',
+                    'not null' => false,
+                ),
+
+                'userid' => array(
+                    'description' => 'userid',
+                    'type' => 'int',
+                    'not null' => false,
+                ),
+
+                'timedownloaded' => array(
+                    'description' => 'timeadded',
+                    'type' => 'bigint',
+                    'not null' => false,
+                ),
+
+            ),
+            'primary key' => array('id'),
+
+        );
+
     return $schema;
 }

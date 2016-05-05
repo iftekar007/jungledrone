@@ -39,6 +39,7 @@
                          <th>Height</th>
                         <th>Width</th>
                         <th>Priority</th>
+                        <th>Type</th>
 
                          <th>Status</th>
                         <th>Action</th>
@@ -52,6 +53,7 @@
                         <td>{{item.height}}</td>
                         <td> {{item.width}}</td>
                         <td>{{item.priority}}</td>
+                        <td>{{(item.type==1) ? 'Image' : 'Video'}}</td>
 
 
                         <td><a href="javascript:void(0)" ng-click="changeStatus(item)"> {{(item.status==1) ? 'Active' : 'Blocked'}}</a> </td>

@@ -1698,6 +1698,13 @@
 
 @media(max-width:991px){
 
+.bannersloderbox #myCarousel .carousel-inner{ width:200%; margin-left:-100%;}
+
+.event_bannerbg{   margin-left: -300%;
+    width: 400%;  }
+
+
+
 
 .productacrttable tr{ border-bottom:solid 10px #fff!important; display:block!important; width:100%!important;}
 
@@ -1954,9 +1961,16 @@
 
 
 
+.bannersloderbox .carousel-control .icon-prev, .bannersloderbox .carousel-control .icon-next, .bannersloderbox .carousel-control .glyphicon-chevron-left, .bannersloderbox .carousel-control .glyphicon-chevron-right{ margin-top:-16px;}
 
 
 
+/*
+.newbannerblock {
+
+	width:200%; margin-right:-100%;
+}
+*/
 
 
 .form-group .radiobox{ float:none; width:100%; padding:0 0 8px 0;}
@@ -2228,7 +2242,13 @@
 
 @media(max-width:630px){
 
-.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog4{ margin-top:12px;}
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog4{ margin-top:0; padding-left:0px;}
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog2{ display:block; margin:0 auto; width:188px; margin-bottom:12px;  float:none;}
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog5{ width:300px; margin:20px auto; float:none; display:block;}
+
+.myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog5 button{ margin-top:0px;}
 
 }
 
@@ -3090,3 +3110,44 @@
  
  .detailslider2 .prosubblock1 .text2con{ padding-top:4px; padding-bottom:6px;}
  }
+ 
+ 
+  @media screen and (max-width:1320px){
+ .filediv{ width:22.8%;}
+ 
+  }
+  
+  
+    @media screen and (max-width:1025px){
+ .filediv{ width:30.8%;}
+ 
+  }
+  
+  
+      @media screen and (max-width:991px){
+ .filediv{ width:17.8%;}
+ 
+  }
+  
+  
+    @media screen and (max-width:926px){
+ .filediv{ width:22.8%;}
+ 
+  }
+  
+      @media screen and (max-width:710px){
+ .filediv{ width:30.8%;}
+ 
+  }
+  
+  
+        @media screen and (max-width:550px){
+ .filediv{ width:47.8%;}
+ 
+  }
+  
+  
+          @media screen and (max-width:400px){
+ .filediv{ width:100%; margin:10px auto;}
+ 
+  }

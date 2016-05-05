@@ -163,7 +163,7 @@ function imagesizelist()
     //$queryu->join('admin', 'f', 'f.user_id = u.uid');
     //$queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
     //$queryu->fields('ur', array('rid'));
-    $queryu->fields('u', array('id', 'sizename', 'height', 'width', 'status','priority','style_id'));
+    $queryu->fields('u', array('id', 'sizename', 'height', 'width', 'status','priority','style_id','type'));
     //$queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
         // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
     if(@$_REQUEST['filter']==1)$queryu->condition('u.status', 1, '=');
@@ -218,9 +218,9 @@ function imagesizeadd(){
     image_effect_save($effect);
 
     //if($account->uid>0){
-    $query = db_insert('imagesizemanager')->fields(array('sizename','height','width', 'status','priority','style_id'));
+    $query = db_insert('imagesizemanager')->fields(array('sizename','height','width', 'status','priority','style_id','type'));
     //foreach ($values as $record) {
-    $query->values(array(@$_POST['sizename'],@$_POST['height'],@$_POST['width'], 0,@$_POST['priority'],@$style['isid']));
+    $query->values(array(@$_POST['sizename'],@$_POST['height'],@$_POST['width'], 0,@$_POST['priority'],@$style['isid'],@$_POST['type']));
     //}
     $query->execute();
     //}
@@ -257,7 +257,7 @@ function imagesizeupdates(){
         //->expression('weight', 'weight + :weight', array(':weight' => 1))
         ->fields(array('sizename'=>@$_POST['sizename'], 'height'=>@$_POST['height'],'width'=>@$_POST['width'],
 
-            'priority'=>@$_POST['priority'],'status'=>@$_POST['status'],'style_id'=>@$_POST['style_id']))
+            'priority'=>@$_POST['priority'],'status'=>@$_POST['status'],'type'=>@$_POST['type'],'style_id'=>@$_POST['style_id']))
         ->condition('id', intval($_POST['id']))
          ->execute();
 }
