@@ -23,8 +23,12 @@
                         <thead>
                         <tr>
                             <th>
-                                <a ng-click="order('file_name')" href="javascript:void(0);">File Name</a>
+                                <a ng-click="order('name')" href="javascript:void(0);">Document Name </a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'file_name'"></span>
+                            </th>
+                            <th>
+                                <a ng-click="order('file_name')" href="javascript:void(0);">File </a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'name'"></span>
                             </th>
                             <th>
                                 <a ng-click="order('description')" href="javascript:void(0);">Description</a>
@@ -34,6 +38,10 @@
                                 <a ng-click="order('cat_name')" href="javascript:void(0);">Category Name</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'cat_name'"></span>
                             </th>
+                            <th>
+                                <a ng-click="order('timeadded')" href="javascript:void(0);">Time Added</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'timeadded'"></span>
+                            </th>
                             <th><a ng-click="order('status')" href="javascript:void(0);">Status</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'status'"></span>
                             </th>
@@ -42,12 +50,19 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat=" item in  filterResult = (documentlist | filter:search) | startFrom:(currentPage-1)*perPage | limitTo:perPage | orderBy:predicate:reverse">
+                            <td >{{item.name}}</td>
                             <td><a href="{{item.file_url}}" target="_blank"><img src="images/icon/{{item.file_type}}.png" width="20">{{item.file_name}}</a></td>
-                            <td ng-bind-html="trustAsHtml(item.description)"></td>
+                            <td ><div ng-bind-html=" item.description | sanitizelimit | limitTo : 20 ">
+                                </div>
+                                <a class ="filedesc" data-toggle="popover"  data-content="{{item.description}}" href="javascript:void(0)" > <span class="glyphicon glyphicon-eye-open" style="font-weight:normal;"></span></a>
+
+                            </td>
                             <td>{{item.cat_name}}</td>
+                            <td>{{coverttodatetime(item.timeadded)}}</td>
                             <td><a tooltip-placement="bottom" uib-tooltip="Click to change status" href="javascript:void(0)" ng-click="changedocumentstatus(item)">{{(item.status==1)?'Active':'Blocked'}}</a></td>
 
-                            <td><a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="editdocument({id:item.id})">Edit</a>&nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledeldocument(item)">Delete</a></td>
+                            <td><a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="editdocument({id:item.id})">Edit</a>&nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledeldocument(item)">Delete</a>
+                                &nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to Download Document" href="{{adminUrl}}/addfiledownload/{{item.id}}/{{userid}}" target="_blank">Download</a></td>
                         </tr>
 
                           </tbody>

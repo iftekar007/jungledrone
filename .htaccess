@@ -28,7 +28,7 @@ ExpiresByType application/pdf "access plus 1 month"
 ExpiresByType text/x-javascript "access plus 1 month"
 ExpiresByType application/x-shockwave-flash "access plus 1 month"
 ExpiresByType image/x-icon "access plus 1 year"
-ExpiresDefault "access plus 6 days"
+ExpiresDefault "access plus 15 days"
 
 
 
@@ -49,7 +49,7 @@ ExpiresDefault "access plus 6 days"
 
 
 
- <FilesMatch "\.(js|css|xml|gz)$">
+ <FilesMatch "\.(js|css|xml|png|jpggz)$">
     Header append Vary: Accept-Encoding
   </FilesMatch>
 

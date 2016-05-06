@@ -377,6 +377,7 @@ function login(){
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
     $user=user_load_by_mail(@$_POST['email']);
+    //print_r($user);
     if($user==''){
         $data['status']='error';
         $data['msg']='Email does not exists';
@@ -389,12 +390,13 @@ function login(){
         //print_r($user->roles);
 
         $queryu = db_select('users', 'u');
-        if($user->roles[4]=='siteadmin')$queryu->join('admin', 'a', 'a.user_id = u.uid');
+        if($user->roles[4]=='siteadmin' || $user->roles[7]=='auditor')$queryu->join('admin', 'a', 'a.user_id = u.uid');
         if($user->roles[6]=='pilot')$queryu->join('pilot', 'p', 'p.user_id = u.uid');
         $queryu->fields('u', array('uid','created','status','login','mail'));
-        if($user->roles[4]=='siteadmin')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
-        if($user->roles[6]=='pilot')$queryu->fields('p',array('fname','lname'))
-            ->condition('u.uid', $user->uid, '=');
+        if($user->roles[4]=='siteadmin'|| $user->roles[7]=='auditor')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        if($user->roles[6]=='pilot')
+            $queryu->fields('p',array('fname','lname'));
+        $queryu->condition('u.uid', $user->uid, '=');
 
         //->range(0, 20);
         $resultu = $queryu->execute();

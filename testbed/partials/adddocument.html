@@ -18,6 +18,17 @@
                         <form role="form" angular-validator-submit="addproductsubmit()" name="addproductform" novalidate angular-validator>
                             <div class="box-body">
 
+                                <div class="form-group">
+                                    <label >Document Name * :</label>
+                                    <input type="text" class="form-control" placeholder="Document Name " name="name"
+
+                                           ng-model="form.name"
+                                           required-message="'Document can not be blank.'"
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+
                                 <div class="form-group" >
                                     <label >Document file(only doc type file like .docx,.pdf,.txt etc)* :</label>
                                     <div class="clearfix"></div>
