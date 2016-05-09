@@ -138,6 +138,14 @@ function document_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['getfilepreview'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getfilepreview',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
 
@@ -236,15 +244,20 @@ function mydownloadlist()
     $queryu->fields('doc',array('id','file_name','file_url','description'));
     $queryu->fields('filed');
     $queryu->fields('doc_cat',array('cat_name','parent_cat'));
+    $queryu->condition('doc.status',1,'=')  ;
+
+
 
    // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
         //$queryu->condition('filed.userid',$_REQUEST['userid'],'=')  ;
     //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
 
     $resultu = $queryu->execute();
+    //$resultua = $queryua->execute();
 
     $eventlist = array();
     $downloadlist = array();
+    $downloadlist1 = array();
 
 
     if ($resultu->rowCount() > 0) {
@@ -257,15 +270,32 @@ function mydownloadlist()
             $path_parts = pathinfo($recordu['file_name']);
             $temparray['file_type'] = $path_parts['extension'];
            // $eventlist[] = $temparray;
-            if($recordu['userid']==$_REQUEST['userid']) $downloadlist[$recordu['id']] = $temparray;
-           // if($recordu['userid']=='') $eventlist[$recordu['id']] = $temparray;
-            if($recordu['userid']=='')  {
-                $eventlist[] = $temparray;
+            if($recordu['userid']==$_REQUEST['userid']) {
+
+                $downloadlist1[$recordu['id']] = $recordu['id'];
+                $downloadlist[] = $temparray;
+
             }
+           // if($recordu['userid']=='') $eventlist[$recordu['id']] = $temparray;
+           /* if($recordu['userid']=='')  {
+
+            }*/
+
+            else if(!in_array($recordu['id'],$downloadlist1)) $eventlist1[$recordu['id']] = $temparray;
+             $eventlist[] = $temparray;
         }
     }
+
+    $result = array_merge(array_diff($eventlist, $downloadlist1), array_diff($downloadlist1, $eventlist1));
+
+
+
     $data['downloaded']=$downloadlist;
-    $data['notdownloaded']=$eventlist;
+    $data['notdownloaded']=$eventlist1;
+    $data['notdownloadcount']=count($eventlist1);
+    //echo json_encode(count($eventlist1));
+    //echo json_encode(count($downloadlist1));
+    //exit;
     echo json_encode($data);
 
 }

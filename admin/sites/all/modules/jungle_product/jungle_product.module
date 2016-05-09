@@ -122,6 +122,14 @@ function jungle_product_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['filedownloadvideo'] = array(
+        'title' => 'jungleproduct File Upload',
+        'page callback' => 'filedownloadvideo',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
 
@@ -488,7 +496,7 @@ function jungleproductlist()
     $queryu = db_select('jungleproduct', 'jp');
     $queryu->innerJoin('junglecategory', 'jc','jc.id=jp.category_id');
     $queryu->fields('jp');
-    $queryu->fields('jc',array('cat_name'));
+    $queryu->fields('jc',array('cat_name','type'));
     if(isset($_POST['type']) && $_POST['type']!=''){
         $queryu->condition('jc.type',$_POST['type'],'=')  ;
     }
@@ -756,6 +764,82 @@ drupal_add_http_header('Content-disposition', 'attachment; filename=' .substr($f
     else {
         die('The provided file path is not valid.');
     }*/
+}
+function filedownloadvideo(){
+    ini_set('memory_limit', '128M');
+
+    header('Content-type: text/html');
+    //header('Content-Disposition: attachment');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+     $filePath = ('http://admin.jungledrones.com/sites/default/files/styles/front-photo_600_600_/public/1458148736_1460724758.png');
+
+     $x=arg();
+     //print_r($x); exit;
+
+     $queryu = db_select('jungleproduct', 'ca');
+    $queryu->fields('ca');
+    $queryu->condition('ca.id',$x[2],'=');
+    $resultu = $queryu->execute();
+
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+            //$filePath = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
+            $filePath = @$recordu['product_file'];
+            $filePath2 = @$recordu['product_file'];
+
+
+            $jungleproductlist[$i]= $temparray;
+            $i++;
+
+/*            $jungleproductlist[$i]['cat_name'] = $recordu['cat_name'];
+            $jungleproductlist[$i]['id'] = $recordu['id'];
+            $jungleproductlist[$i]['parent_cat'] = $recordu['parent_cat'];
+            $jungleproductlist[$i]['status'] = $recordu['status'];
+            $i++;*/
+
+        }
+    }
+
+
+    $filetype=explode('/',file_get_mimetype($filePath2));
+
+    //print_r($filetype); exit;
+
+    $queryu = db_select('image_styles', 'u');
+    //$queryu->join('admin', 'f', 'f.user_id = u.uid');
+    //$queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
+    //$queryu->fields('ur', array('rid'));
+    $queryu->fields('u', array( 'name', 'isid'));
+    //$queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    $queryu->condition('u.isid', $x[3], '=');
+    //$queryu->orderBy('u.ieid','DESC');
+    //->condition('u.uid', 74, '=');
+    $queryu->range(0, 1);
+    $resultu = $queryu->execute();
+    $recordu = $resultu->fetchAssoc();
+
+
+    $filePath = drupal_realpath('public://'.$filePath);
+    //exit;
+
+
+
+
+drupal_add_http_header('Content-disposition', 'attachment; filename=' .($filePath));
+    readfile($filePath);
+
+
+
+
 }
 
 

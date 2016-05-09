@@ -47,6 +47,9 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 details_img" >
             <img  src="http://admin.jungledrones.com/imguploadproduct/{{id}}"  alt="#">
+            
+             <a ng-if="type == 'Stock Video'" href="javascript:void(0)" ng-click="showmodal($event,currentpid)"><img src="images/jd_newpalyicon.png" alt="#" class="jd_newpalyicon" ></a>
+            
             <span>Download any size at one price</span>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 details_text">
@@ -108,7 +111,7 @@
                                     <input type="radio" name="c4" id="c4">
                                     <label for="c4"> 10 credits </label>
                                 </td>
-                                <td align="center" valign="middle">  &nbsp;</td>
+                                <td align="center" valign="middle">&nbsp;  </td>
                                 <td align="right" valign="middle">
                                     <strong>$0</strong>
                                 </td>
@@ -163,10 +166,22 @@
                                 <td align="right" valign="middle">Credits</td>
                             </tr>
                             <tbody ng-repeat="imgsize  in imagesizelist ">
-                                <tr ng-click="sizechoice(imgsize.style_id,$event)" class="trc trc{{imgsize.style_id}}">
+                                <tr ng-if="type=='Stock Image' && imgsize.type==1" ng-click="sizechoice(imgsize.style_id,$event,imgsize.type)" class="trc trc{{imgsize.style_id}}">
                                     <td align="left" valign="middle">
                                         <b>  {{imgsize.sizename}}</b>
                                     </td>
+
+                                    <td align="center" valign="middle" > {{imgsize.width}} x {{imgsize.height}}</td>
+                                    <td align="right" valign="middle">
+                                        <strong>1</strong>
+                                    </td>
+                                </tr>
+
+                                <tr  ng-if="type=='Stock Video' && imgsize.type==2" ng-click="sizechoice(imgsize.style_id,$event,imgsize.type)" class="trc trc{{imgsize.style_id}}">
+                                    <td align="left" valign="middle">
+                                        <b>  {{imgsize.sizename}}</b>
+                                    </td>
+
                                     <td align="center" valign="middle"> {{imgsize.width}} x {{imgsize.height}}</td>
                                     <td align="right" valign="middle">
                                         <strong>1</strong>
@@ -194,7 +209,7 @@
 <div class="container-fluid sd_maingallery">
     <div>
         <div class="slider1" >
-            <div class="slide"  ng-repeat=" item in productlist">
+            <div class="slide"  ng-repeat=" item in productlist" ng-if="item.type=='Stock Image' || item.type=='Stock Video' ">
                 <img src="http://admin.jungledrones.com/imguploadproduct/{{item.id}}" alt="#" class="sdsrcimg">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
                     <tr>
