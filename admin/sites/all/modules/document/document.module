@@ -233,7 +233,7 @@ function mydownloadlist()
     $queryu = db_select('document', 'doc');
     $queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
     $queryu->leftJoin('filedownloadlist', 'filed', 'filed.fileid = doc.id');
-    $queryu->fields('doc');
+    $queryu->fields('doc',array('id','file_name','file_url','description'));
     $queryu->fields('filed');
     $queryu->fields('doc_cat',array('cat_name','parent_cat'));
 
@@ -257,8 +257,11 @@ function mydownloadlist()
             $path_parts = pathinfo($recordu['file_name']);
             $temparray['file_type'] = $path_parts['extension'];
            // $eventlist[] = $temparray;
-            if($recordu['userid']==$_REQUEST['userid']) $downloadlist[] = $temparray;
-            else $eventlist[] = $temparray;
+            if($recordu['userid']==$_REQUEST['userid']) $downloadlist[$recordu['id']] = $temparray;
+           // if($recordu['userid']=='') $eventlist[$recordu['id']] = $temparray;
+            if($recordu['userid']=='')  {
+                $eventlist[] = $temparray;
+            }
         }
     }
     $data['downloaded']=$downloadlist;
@@ -334,10 +337,8 @@ function downloadfilecart(){
 
     $x=arg();
 
+    $fid=explode('|',$x[1]);
 
-    /*$query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
-    $query->values(array(@$x[1],@$x[2],time()));
-    $query->execute();*/
 
     $queryu = db_select('document', 'doc');
     //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
@@ -356,34 +357,32 @@ function downloadfilecart(){
 
     global $user;
 
+$zip = new ZipArchive();
+	 $zip->open(drupal_realpath($new_folder.$x[2]."_".time().'_download.zip'), ZIPARCHIVE::CREATE );
+//echo drupal_realpath($new_folder.'test.zip'); exit;
 
     while ($recordu = $resultu->fetchAssoc()) {
-      //  $recordu['timedownloaded']=date('m/d/Y h:s',$recordu['timedownloaded']);
-      //  $recordu['timeadded']=date('m/d/Y h:s',$recordu['timeadded']);
-        $temparray = $recordu;
 
-        //$path_parts = pathinfo($recordu['file_name']);
-        //$temparray['file_type'] = $path_parts['extension'];
-        // $eventlist[] = $temparray;
-      //  if($recordu['userid']==$_REQUEST['userid']) $downloadlist[] = $temparray;
-        //else $eventlist[] = $temparray;
+	 
+	  if(in_array($recordu['id'],$fid)){
 
-        $file = new stdClass;
-        $file->uid = $user->uid;
-        echo  $file->filename = $recordu['file_name'];
-        exit;
-        $file->uri = $recordu['file_url'];
-//    /$file->filemime = 'text/plain';
-        //$file->filesize = filesize($recordu['file_url']);
-        $file->status = 1;
+          $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
+          $query->values(array(@$recordu['id'],@$x[2],time()));
+          $query->execute();
 
-        file_save($file);
+          $zip->addFile("/home/jungledrones/public_html/admin/sites/default/files/".($recordu['file_name']),($recordu['file_name']));
+      }
 
-        //print_r($file);
-
-        $x=file_copy($file, $new_folder);
-        print_r($x);
     }
+
+	 $zip->close();
+
+  header("Content-type: application/zip");
+  header("Content-Disposition: attachment; filename=".$x[2]."_".time()."_download.zip");
+  header("Pragma: no-cache");
+  header("Expires: 0");
+  readfile(($new_folder).$x[2]."_".time().'_download.zip');
+  exit;
 
 
 

@@ -2900,7 +2900,24 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
 
     $rootScope.filecartarr=[];
-    $rootScope.filecartarr=$cookieStore.get('filecartarr');
+    if(typeof($cookieStore.get('filecartarr'))!='undefined') $rootScope.filecartarr=$cookieStore.get('filecartarr');
+
+
+    $scope.fileidstr='';
+    var log = [];
+
+    angular.forEach($rootScope.filecartarr, function(value, key) {
+        //console.log( value);
+        /*  console.log( key);
+         console.log( value.id);
+         console.log( value.cat_name);
+         console.log( value['id']);*/
+
+        if($scope.fileidstr.length>1)$scope.fileidstr=$scope.fileidstr+"|"+value.id;
+        else $scope.fileidstr=value.id;
+
+
+    }, log);
 
 
     setTimeout(function(){
@@ -3005,6 +3022,9 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
         }).success(function(data){
             $rootScope.filenotdownloaded=data.notdownloaded;
             $rootScope.filedownloaded=data.downloaded;
+
+            console.log(data.notdownloaded);
+            console.log(data.downloaded);
         })
 
     }
@@ -10170,12 +10190,13 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
     }
 
-    var log = [];
+
 
     $rootScope.downloadcart=function (item) {
 
 
         $scope.fileidstr='';
+        var log = [];
 
         angular.forEach($rootScope.filecartarr, function(value, key) {
             //console.log( value);
@@ -10190,7 +10211,7 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
         }, log);
 
-        window.location.href=$scope.adminUrl+'downloadfilecart?q='+$scope.fileidstr;
+        window.location.href=$scope.adminUrl+'downloadfilecart/'+$scope.fileidstr+'/'+$rootScope.userid;
 
     }
 
@@ -10212,10 +10233,32 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
         $rootScope.filecartarr.push($rootScope.filecartval);
         $cookieStore.put('filecartarr',$rootScope.filecartarr);
+
+
+        $scope.fileidstr='';
+        var log = [];
+
+        angular.forEach($rootScope.filecartarr, function(value, key) {
+            //console.log( value);
+            /*  console.log( key);
+             console.log( value.id);
+             console.log( value.cat_name);
+             console.log( value['id']);*/
+
+            if($scope.fileidstr.length>1)$scope.fileidstr=$scope.fileidstr+"|"+value.id;
+            else $scope.fileidstr=value.id;
+
+
+        }, log);
+
+        console.log($scope.fileidstr);
     }
 
 
 })
+
+
+
 jungledrone.controller('categoryfolderview',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams,$filter){
 
     $scope.userid = 0;
