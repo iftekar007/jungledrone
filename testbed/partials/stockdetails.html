@@ -194,6 +194,7 @@
 
                         <h3>Sizes apply to subscriptions and credits</h3>
                         <h3 ng-show="sizechoiceval">Please select a size before you download !!</h3>
+                        <h3 ng-show="userid<1">Please Login before you download !!</h3>
                     </div>
                 </div>
             </div>
@@ -209,7 +210,7 @@
 <div class="container-fluid sd_maingallery">
     <div>
         <div class="slider1" >
-            <div class="slide"  ng-repeat=" item in productlist" ng-if="item.type=='Stock Image' || item.type=='Stock Video' ">
+            <div class="slide"  ng-repeat=" item in productlist" ng-if="item.type==type ">
                 <img src="http://admin.jungledrones.com/imguploadproduct/{{item.id}}" alt="#" class="sdsrcimg">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="sdgallerytble">
                     <tr>

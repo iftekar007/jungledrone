@@ -7264,7 +7264,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         }
     }
 
-     $scope.playVideoTeaserFrom = function() {
+    $rootScope.playVideoTeaserFrom = function() {
         var videoplayer = document.getElementById("maintvVideo");
 
         videoplayer.currentTime = 0; //not sure if player seeks to seconds or milliseconds
@@ -7384,7 +7384,7 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
 
     $scope.id=$stateParams.id;
 
-    console.log($scope.id+'sid');
+    //console.log($scope.id+'sid');
 
      $http({
         method:'POST',
@@ -7462,7 +7462,7 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
     $rootScope.showmodal=function($ev,item){
 
         console.log(item);
-        console.log(type);
+        //console.log(type);
 
         if(item.is_video == 0){
 
@@ -7521,32 +7521,39 @@ jungledrone.controller('stockdetail', function($scope,$state,$http,$cookieStore,
     $scope.pidvar=$rootScope.pad($scope.id,7);
 
     $scope.sizechoice=function(val,$ev1,type){
+        if ($rootScope.userid > 0) {
 
-        var target1 = $ev1.target1 || $ev1.srcElement || $ev1.originalTarget;
+            var target1 = $ev1.target1 || $ev1.srcElement || $ev1.originalTarget;
 
-        $(target1).addClass('darkar');
-        console.log($(target1).html());
+            $(target1).addClass('darkar');
+            console.log($(target1).html());
 
-        $('.trc').removeClass('darkar');
-        $('.trc'+val).addClass('darkar');
+            $('.trc').removeClass('darkar');
+            $('.trc' + val).addClass('darkar');
 
-        console.log(val);
+            console.log(val);
 
-        $scope.clickable=1;
-        $scope.sizechoiceval=false;
-        $scope.sizeid=val;
-        if(type==1)$('.tabdownloadbtn').attr('href','http://admin.jungledrones.com/filedownload/id/'+$scope.id+'/'+$scope.sizeid);
-        if(type==2)$('.tabdownloadbtn').attr('href','http://admin.jungledrones.com/filedownloadvideo/id/'+$scope.id+'/'+$scope.sizeid);
-        $('.tabdownloadbtn').attr('target','_blank');
-
-    }
-
-    $scope.clicktodownload=function($ev){
-        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
-
-        if($(target).attr('clickable')==0) $scope.sizechoiceval=true;
+            $scope.clickable = 1;
+            $scope.sizechoiceval = false;
+            $scope.sizeid = val;
+            if (type == 1)$('.tabdownloadbtn').attr('href', 'http://admin.jungledrones.com/filedownload/id/' + $scope.id + '/' + $scope.sizeid);
+            if (type == 2)$('.tabdownloadbtn').attr('href', 'http://admin.jungledrones.com/filedownloadvideo/id/' + $scope.id + '/' + $scope.sizeid);
+            $('.tabdownloadbtn').attr('target', '_blank');
+        }
 
     }
+
+    $scope.clicktodownload=function($ev) {
+
+        if ($rootScope.userid > 0) {
+
+            var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+
+            if ($(target).attr('clickable') == 0) $scope.sizechoiceval = true;
+        }
+    }
+
+
 
     setTimeout(function(){
 

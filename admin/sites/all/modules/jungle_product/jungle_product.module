@@ -282,6 +282,8 @@ function uploadjungleproductimage(){
 
             $fileToFlv = $data1['video_url1'];
             $fileFlv = 'convertedvdo.mp4';
+
+            $tfileFlv = 'public://'.'temp/'.$filename1.'.mp4';
             $Flvjpg = $target_dir.$filename1.'.jpg';
 
 
@@ -295,12 +297,14 @@ function uploadjungleproductimage(){
             $height = $vals [1] ? $vals [1] : null;
             $info = array ('width' => $width, 'height' => $height );
 
+            //print_r($info);
+
 //$s_vid_conv_cmd = "/usr/bin/ffmpeg -i ".$fileToFlv." -ar 22050 -f mp4 ".$fileFlv;
             //$s_vid_conv_cmd = "/usr/bin/ffmpeg -i ".$fileToFlv." -b 1500k -vcodec libx264 -vpre slow -vpre baseline -g 30 -s 640x360 ".$fileFlv;
 
             //$x=exec($s_vid_conv_cmd);
 
-            exec("/usr/bin/ffmpeg -i ".$fileToFlv." -vframes 1 -ss 00:00:10 -s 640x360 -f image2 ".$Flvjpg);
+            exec("/usr/bin/ffmpeg -i ".$fileToFlv." -vframes 1 -ss 00:00:03 -s 640x360 -f image2 ".$Flvjpg);
 
 
 
@@ -325,6 +329,15 @@ function uploadjungleproductimage(){
 
             $data['video_name'] = $filename;
             $data['image_url'] = image_style_url('large', (@$file1->uri));
+
+             $command = " /usr/bin/ffmpeg  -loop 1 -r 24 -i /home/jungledrones/public_html/images/logo.png  -i ".drupal_realpath($file->uri)." -strict experimental -filter_complex '[0:v]scale=180:-1[watermark];[1:v]scale=360:-1[background];[background][watermark]overlay=main_w-overlay_w-0:main_h-overlay_h-0:shortest=1[video]' -map [video] -map 0:a:0 -c:v libx264 -profile:v baseline -acodec aac    ". drupal_realpath($tfileFlv);
+
+            //exit;
+            //exit;
+            $output = shell_exec ( $command );
+
+            //print_r($output);
+            //exit;
 
 
 
@@ -523,7 +536,7 @@ function jungleproductlist()
                 if ($productextns['1'] == 'mp4') {
                     $temparray['is_video'] = 1;
                     $temparray['image_url'] = image_style_url('front-photo_600_600_', ('public://'.$productextns['0'].'.jpg'));
-                    $temparray['video_url'] = file_create_url('public://'.$recordu['product_file']);;
+                    $temparray['video_url'] = file_create_url('public://'.$recordu['product_file']);
                 } else {
                     $temparray['is_video'] = 0;
                     $temparray['image_url'] = image_style_url('front-photo_600_600_', (@$recordu['product_file']));
@@ -829,13 +842,49 @@ function filedownloadvideo(){
 
 
     $filePath = drupal_realpath('public://'.$filePath);
+
+    $data1['video_url1'] = (@$filePath);
+
+    $fileToFlv = $filePath;
+    $fileFlv = 'public://temp/'.time().$filePath2;
+    //$fileFlv = $filePath;
+    //$Flvjpg = $target_dir.$filename1.'.jpg';
+
+
+
+    $queryu = db_select('imagesizemanager', 'u');
+    //$queryu->join('admin', 'f', 'f.user_id = u.uid');
+    //$queryu->leftjoin('users_roles', 'ur', 'ur.uid = u.uid');
+    //$queryu->fields('ur', array('rid'));
+    $queryu->fields('u');
+    //$queryu->fields('f', array('fname', 'lname', 'phone_no', 'mobile_no', 'address'))
+    // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    $queryu->condition('u.style_id', $x[3], '=');
+    //$queryu->orderBy('u.ieid','DESC');
+    //->condition('u.uid', 74, '=');
+    $queryu->range(0, 1);
+    $resultu = $queryu->execute();
+    $recordu = $resultu->fetchAssoc();
+
+
+    //print_r($recordu);
     //exit;
 
 
+    //echo $command = "/usr/bin/ffmpeg" . '  -s '.$recordu['width'].'X'.$recordu['height'] ." -i ". $fileToFlv . ' -vstats 2>&1';
+    // $command = " /usr/bin/ffmpeg -i ".$fileToFlv." -s  ".$recordu['width'].'x'.$recordu['height'] ." ". drupal_realpath($fileFlv);
+     $command = " /usr/bin/ffmpeg -i ".$fileToFlv."   -sameq -s ".$recordu['width']."X".$recordu['height']." ". drupal_realpath($fileFlv);
+  //  $command = " /usr/bin/ffmpeg -i ".$fileToFlv." -i /home/jungledrones/public_html/images/logo.png -filter_complex \"overlay=5:5,format=yuv420p\"   ". drupal_realpath($fileFlv);
+    //exit;
+   // exit;
+    $output = shell_exec ( $command );
+   // exit;
 
 
-drupal_add_http_header('Content-disposition', 'attachment; filename=' .($filePath));
-    readfile($filePath);
+
+
+drupal_add_http_header('Content-disposition', 'attachment; filename=' .($filePath2));
+    readfile(drupal_realpath($fileFlv));
 
 
 
