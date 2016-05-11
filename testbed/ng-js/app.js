@@ -1437,6 +1437,29 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
         }
 
     )
+        .state('editflight', {
+            url: "/editflight/:id",
+            views: {
+                'admin_header': {
+                    templateUrl: 'partials/admin_top_menu.html' ,
+                    controller: 'admin_header'
+                },
+                'admin_left': {
+                    templateUrl: 'partials/admin_left.html' ,
+                    //  controller: 'admin_left'
+                },
+                'admin_footer': {
+                    templateUrl: 'partials/admin_footer.html' ,
+                },
+                'content': {
+                    templateUrl: 'partials/edit_flight.html' ,
+                    controller: 'editflight'
+                },
+
+            }
+        }
+
+    )
         .state('edit-event', {
             url: "/edit-event/:eventId",
             views: {
@@ -6046,6 +6069,431 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
 });
 
 
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var month1 = a.getUTCMonth();
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = month + ' ' + date + ' ' + year + '  ' + hour + ':' + min + ':' + sec ;
+    return time;
+}
+
+var firstDayOfMonth = function() {
+    // your special logic...
+    return 5;
+};
+
+jungledrone.controller('editflight',function($scope,$state,$http,$cookieStore,$rootScope,$log,Upload,uibDateParser,$stateParams){
+
+
+    $scope.fid = $stateParams.id;
+    //$scope.form={};
+    $scope.event_status=false;
+    $scope.event_img=false;
+
+    $http({
+        method: 'POST',
+        async: false,
+        url: $scope.adminUrl + 'flightdetails',
+        data: $.param({'id': $scope.fid}),  // pass in data as strings
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(function (data) {
+        console.log(data);
+
+        $scope.form = {
+            id: data.id,
+            status: 2,
+            refferid: data.id,
+            //flight_daterange: timeConverter(data.dateforg),
+            aircraft: data.aircraft,
+            manoeuvre: data.manoeuvre,
+            first_flight: $cookieStore.get('userfname'),
+            last_flight: $cookieStore.get('userlname'),
+            flight_daterange: new Date(data.dateforg * 1000),
+            start_time: new Date(data.start_time * 1000),
+            end_time: new Date(data.end_time * 1000),
+            //event_status: data.event_status,
+            notes: data.notes,
+            user_id: data.user_id,
+            editstatus: 1,
+
+        }
+        //setTimeout(function(){
+
+
+
+            $scope.dt = new Date(data.dateforg * 1000);
+            $scope.starttime = new Date(data.start_time * 1000);
+            $scope.endtime = new Date(data.end_time * 1000);
+            $scope.ismeridian=true;
+
+            $scope.hstep = 1;
+            $scope.mstep = 15;
+
+            $scope.options = {
+                hstep: [1, 2, 3],
+                mstep: [1, 5, 10, 15, 25, 30]
+            };
+
+            $scope.ismeridian = true;
+            $scope.toggleMode = function() {
+                $scope.ismeridian = ! $scope.ismeridian;
+            };
+
+
+
+            console.log($scope.dt);
+            console.log($scope.starttime);
+            console.log($scope.endtime);
+
+       // },2000)
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+    $scope.format = 'yyyy/MM/dd';
+    $scope.date = new Date();
+    $scope.open = function() {
+        $scope.opened = true;
+    };
+
+    $scope.tdif=3600;
+
+
+    $scope.addanother=function(){
+        $scope.isaddanother=true;
+    }
+    $scope.psubmit=function(){
+        $scope.isaddanother=false;
+    }
+
+    $scope.form={};
+    $scope.form.first_flight= $cookieStore.get('userfname');
+    $scope.form.last_flight= $cookieStore.get('userlname');
+
+    setTimeout(function(){
+
+        $('input[name="first_flight"]').val($cookieStore.get('userfname'));
+        $('input[name="last_flight"]').val($cookieStore.get('userlname'));
+
+
+        console.log( $('input[name="first_flight"]').val()+'   f val');
+        console.log( $('input[name="last_flight"]').val()+'  l val');
+
+    },1500);
+
+
+    $scope.event_status=false;
+    $scope.form.user_id=$rootScope.userid;
+    $scope.event_img=false;
+
+
+
+
+    /*file upload part start */
+
+
+
+    $scope.$watch('event_imgupload', function (files) {
+        $scope.formUpload = false;
+        if (files != null) {
+            for (var i = 0; i < files.length; i++) {
+                $scope.errorMsg = null;
+                (function (file) {
+                    upload(file);
+                })(files[i]);
+            }
+        }
+    });
+
+    $scope.getReqParams = function () {
+        return $scope.generateErrorOnServer ? '?errorCode=' + $scope.serverErrorCode +
+        '&errorMessage=' + $scope.serverErrorMsg : '';
+    };
+
+    function upload(file) {
+        $scope.errorMsg = null;
+        uploadUsingUpload(file);
+    }
+
+    function uploadUsingUpload(file) {
+        $('#loaderDiv').addClass('ng-hide');
+        file.upload = Upload.upload({
+            url: $scope.adminUrl+'uploadeventbanner' + $scope.getReqParams(),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            fields: {'id':$rootScope.createIdeaId},
+            file: file,
+            fileFormDataName: 'Filedata'
+        });
+
+        file.upload.then(function (response) {
+            $('.progress').removeClass('ng-hide');
+            file.result = response.data;
+
+            $scope.event_img = response.data.image_url;
+            $scope.form.event_image = response.data.image_name;
+
+            $('#loaderDiv').addClass('ng-hide');
+
+
+        }, function (response) {
+            if (response.status > 0)
+                $scope.errorMsg = response.status + ': ' + response.data;
+        });
+
+        file.upload.progress(function (evt) {
+            // Math.min is to fix IE which reports 200% sometimes
+            $('#loaderDiv').removeClass('ng-hide');
+
+            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
+        });
+
+        file.upload.xhr(function (xhr) {
+            // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+        });
+    }
+
+
+
+    /*file upload end */
+
+
+
+
+
+
+
+
+   /* setTimeout(function(){
+        jQuery('input[name="event_daterange"]').daterangepicker({
+            /!* timePicker: true,
+             timePickerIncrement: 30,*!/
+            locale: {
+                format: 'MM/DD/YYYY h:mm A'
+            }
+        });
+
+
+        var d = new Date();
+        var currMonth = d.getMonth();
+        var currYear = d.getFullYear();
+        var startDate = new Date(currYear,currMonth,firstDayOfMonth());
+        jQuery('input[name="event_daterange"]').daterangepicker('setDate',startDate);*/
+
+        /*
+         $('#timepicker1').timepicker({
+         minuteStep: 1,
+         template: 'modal',
+         appendWidgetTo: 'body',
+         showSeconds: true,
+         showMeridian: false,
+         defaultTime: false
+         });
+         */
+
+    //},4000);
+
+
+    $scope.addeventsForm=function(){
+
+
+        $scope.form.flight_daterangeorg=($scope.form.flight_daterange);
+        $scope.form.flight_daterange=convert($scope.form.flight_daterange);
+
+        /*console.log(($scope.form));
+        console.log( jQuery('input[name="event_daterange"]').val());*/
+
+        //return true;
+
+
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'addflight',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            //$rootScope.stateIsLoading = false;
+            if($scope.isaddanother){
+
+
+                $scope.df=$scope.form.flight_daterangeorg;
+                $scope.add_event.reset();
+                $scope.form.flight_daterange=$scope.df;
+                $('input[name="flight_daterange"]').val($scope.df);
+
+                $scope.form.first_flight= $cookieStore.get('userfname');
+                $scope.form.last_flight= $cookieStore.get('userlname');
+
+
+
+                $('input[name="first_flight"]').val($cookieStore.get('userfname'));
+                $('input[name="last_flight"]').val($cookieStore.get('userlname'));
+
+                $('select').val('');
+            }else{
+                $state.go('flight-list');
+            }
+            console.log(data);
+            /* if(data.status == 'error'){
+             console.log(data);
+             $('.email_div').append('<label class="control-label has-error validationMessage">This email already exists.</label>');
+             }else{
+             //console.log(data);
+             //$cookieStore.put('user_insert_id',data);
+
+             $state.go('finder-list');
+             return;
+             //console.log(data);
+             }*/
+
+        });
+
+
+
+    }
+
+
+    $scope.toggletimerange=function(){
+        //console.log($scope.allday);
+    }
+    $scope.custom=function(){
+        //console.log($scope.form);
+        $scope.timeerror=false;
+        $scope.form.event_status=$scope.event_status;
+        //console.log($scope.timediff()+"test custom");
+        if($scope.allday) {
+
+            angular.element('#timeval').val('all day');
+            $scope.form.timer='all day';
+
+            return true;
+        }
+        if($scope.timediff()>0){
+            //$scope.form.timer=angular.element('input[ng-model="hours"]').eq(0).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(0).val()) +" to "+angular.element('input[ng-model="hours"]').eq(1).val()+' : ' +parseInt(angular.element('input[ng-model="minutes"]').eq(1).val());
+
+            $scope.form.timer=$scope.timediff();
+            angular.element('#timeval').val($scope.timediff());
+            return true ;
+        }
+
+        else {
+            $scope.timeerror=true;
+            return "Please set a correct time range for your event !!" ;
+        }
+
+        return true;
+    }
+
+    $scope.timediff= function () {
+
+
+
+/*
+        console.log($scope.endtime+'et'+
+        $scope.starttime+'st');*/
+
+        $scope.form.start_time=convert($scope.starttime);
+        $scope.form.end_time=convert($scope.endtime);
+
+        /*console.log('td-'+parseInt($scope.endtime.getHours()-$scope.starttime.getHours()));
+         console.log('md-'+parseInt($scope.endtime.getMinutes()-$scope.starttime.getMinutes()));*/
+
+
+        ////console.log('td1-'+angular.element('input[ng-model="hours"]').eq(0).val());
+        // console.log('td1-'+angular.element('input[ng-model="hours"]').eq(1).val());
+        //console.log('md2-'+parseInt($scope.minutes));
+
+        var totalst=parseInt(parseInt(angular.element('input[ng-model="hours"]').eq(0).val()*60)+parseInt(angular.element('input[ng-model="minutes"]').eq(0).val()));
+        var totalet=parseInt(parseInt(angular.element('input[ng-model="hours"]').eq(1).val()*60)+parseInt(angular.element('input[ng-model="minutes"]').eq(1).val()));
+
+
+        //console.log('timediff'+$scope.tdif);
+
+        return $scope.tdif;
+
+        //
+        /* console.log('td1-'+angular.element('input[ng-model="minutes"]').eq(0).val());
+         console.log('td1-'+angular.element('input[ng-model="minutes"]').eq(1).val());*/
+        //console.log('md2-'+parseInt($scope.minutes));
+    }
+
+
+    $scope.showtime=false;
+
+    $scope.toggletimepicker=function(){
+
+        console.log("before"+$scope.showtime);
+        $scope.showtime=! $scope.showtime ;
+        console.log("after"+$scope.showtime);
+    }
+
+
+    /*var st=new Date();
+    //console.log(st.getHours());
+    st.setHours(st.getHours());
+    var et=new Date();
+    //console.log(st.getHours());
+    et.setHours(et.getHours()+1);
+    $scope.endtime = et;
+    $scope.starttime = st;*/
+
+
+    $scope.update = function() {
+        var d = new Date();
+        d.setHours( 14 );
+        d.setMinutes( 0 );
+        $scope.starttime = d;
+        d.setHours( 15 );
+        d.setMinutes( 0 );
+        $scope.endtime = d;
+
+        console.log('st changed'+$scope.starttime);
+        console.log('et changed'+$scope.endtime);
+    };
+
+    $scope.changed = function (s,e) {
+        $log.log('ST changed to: ' + $scope.starttime);
+        $log.log('ET changed to: ' + $scope.endtime);
+        $log.log('ET changed to: ' +s+'====--=='+e);
+
+        $scope.form.start_time=convert(s);
+        $scope.form.end_time=convert(e);
+        $scope.starttime=s;
+        $scope.endtime=e;
+
+        $scope.tdif=parseInt(convert(e)-convert(s));
+    };
+
+    $scope.clear = function() {
+        $scope.starttime = null;
+    };
+
+
+
+
+});
+
+
 jungledrone.controller('event',function($scope,$state,$http,$cookieStore,$rootScope){
 
     $scope.form={};
@@ -6634,7 +7082,8 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
         $rootScope.stateIsLoading = false;
         console.log(data);
         $scope.eventlist=data;
-        $scope.eventlistp = $scope.eventlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+        //$scope.eventlistp = $scope.eventlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+        $scope.eventlistp = data;
 
 
     });
@@ -6687,12 +7136,47 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
             method  : 'POST',
             async:   false,
             url     : $scope.adminUrl+'delflight?role='+$rootScope.userrole,
-            data    : $.param({id: $scope.eventlist[idx].id}),  // pass in data as strings
+            data    : $.param({id: $scope.eventlist[idx].orgid}),  // pass in data as strings
             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
         }) .success(function(data) {
             $rootScope.stateIsLoading = false;
             $scope.eventlist.splice(idx,1);
             $scope.eventlistp = $scope.eventlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+        });
+    }
+
+ $scope.delflight1 = function(item){
+        $rootScope.stateIsLoading = true;
+        var idx = $scope.eventlist.indexOf(item);
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'delflight1?role='+$rootScope.userrole,
+            data    : $.param({id: $scope.eventlist[idx].orgid}),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            //$scope.eventlist.splice(idx,1);
+            //$scope.eventlistp = $scope.eventlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+
+
+
+            $http({
+                method  : 'POST',
+                async:   false,
+                url     : $scope.adminUrl+'flightlist'+'?userid='+$rootScope.userid+'&role='+$rootScope.userrole,
+                // data    : $.param($scope.form),  // pass in data as strings
+                headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }) .success(function(data) {
+                $rootScope.stateIsLoading = false;
+                console.log(data);
+                $scope.eventlist=data;
+                //$scope.eventlistp = $scope.eventlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
+                $scope.eventlistp = data;
+
+
+            });
 
         });
     }

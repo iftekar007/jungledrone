@@ -76,11 +76,12 @@
                        <th>Added On</th>
                        <th ng-if="userrole!=6">Added On</th>
                        <th>Action</th>
+
                    </tr>
                    </thead>
                    <tbody>
 
-                   <tr ng-repeat=" item in eventlist | filter:search |filter:setdata| orderBy:predicate:reverse">
+                   <tr ng-repeat=" item in eventlist track by item.id | filter:search |filter:setdata| orderBy:predicate:reverse">
                        <td>{{item.fflight}}</td>
                        <td>
 
@@ -92,14 +93,24 @@
                        <td> {{item.manoeuvre}}</td>
                        <td> {{item.notes}}</td>
                        <td> {{item.createdtime}}</td>
-                       <td ng-if="userrole!=6"> {{(item.status==1) ? 'Active' : 'Deleted'}}</td>
+                       <td ng-if="userrole!=6">
+
+                       <span ng-if="item.status==2"> Edit Requested</span>
+                       <span ng-if="item.status==0"> Deleted</span>
+                       <span ng-if="item.status==1"> Active</span>
+
+                       </td>
 
 
 
 
 
 
-                        <td> <a href="javascript:void(0)" ng-click="delflight(item)" >Delete</a></td>
+                        <td  >
+                            <a ng-if="userrole==4" href="javascript:void(0)" ng-click="delflight(item)" >Delete</a>
+                            <a ng-if="userrole==4 && item.status!=1" href="javascript:void(0)" ng-click="delflight1(item)" >Activate</a>
+                            <a ng-if="userrole==6" href="javascript:void(0)" ui-sref="editflight({id:item.id})" >Edit</a>
+                        </td>
                       </tr>
 
                     </tbody>

@@ -60,6 +60,22 @@ function flight_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['delflight1'] = array(
+        'title' => 'event List',
+        'page callback' => 'delflight1',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+    $items['flightdetails'] = array(
+        'title' => 'event List',
+        'page callback' => 'flightdetails',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
    /* $items['uploadresume'] = array(
         'title' => 'event Updates',
@@ -130,8 +146,96 @@ function flightlist()
 
     //'fname','lname','email','phone', 'country','city','resume'
 
-    $queryu->fields('ev', array('id','fflight','lflight','user_id','datef', 'timef', 'aircraft','manoeuvre','notes','createdtime','status'));
+    $queryu->fields('ev');
     // ->condition('u.name', '%' . db_like('john') . '%', 'LIKE')
+    // ->condition('ur.rid', 5, '=');
+    if($_REQUEST['role']==6) {
+        $queryu->condition('ev.user_id', @$_REQUEST['userid'], '=');
+        $queryu->condition('ev.status', 1, '=');
+        //$queryu->condition('ev.editstatus', 1, '=');
+    }
+    $queryu->orderBy('id', 'DESC');
+    $resultu = $queryu->execute();
+
+    $ar='';
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            // $picture=$recordu['event_image'];
+            // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
+            // else $picture='';
+
+            if($recordu['refferid']==0 && !in_array($recordu['id'],$ar)) {
+                $ar[]=$recordu['id'];
+
+                $eventlist[$i]['id'] = $recordu['id'];
+                $eventlist[$i]['orgid'] = $recordu['id'];
+                $eventlist[$i]['fflight'] = $recordu['fflight'];
+                $eventlist[$i]['lflight'] = $recordu['lflight'];
+                $eventlist[$i]['user_id'] = $recordu['user_id'];
+                $eventlist[$i]['datef'] = date("m/d/Y ", $recordu['datef']);
+                $eventlist[$i]['realdatef'] = $recordu['datef'];
+
+
+                $eventlist[$i]['timef'] = $recordu['timef'] / 60;
+                $eventlist[$i]['aircraft'] = $recordu['aircraft'];
+                $eventlist[$i]['manoeuvre'] = $recordu['manoeuvre'];
+                $eventlist[$i]['notes'] = $recordu['notes'];
+                $eventlist[$i]['status'] = $recordu['status'];
+                $eventlist[$i]['createdtime'] = date('m/d/Y', $recordu['createdtime']);
+                //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
+            }
+
+
+
+
+            if($recordu['refferid']!=0 && (!in_array($recordu['id'],$ar)) && !in_array($recordu['refferid'],$ar)) {
+                $ar[]=$recordu['refferid'];
+
+                $eventlist[$i]['id'] = $recordu['refferid'];
+                $eventlist[$i]['orgid'] = $recordu['id'];
+                $eventlist[$i]['fflight'] = $recordu['fflight'];
+                $eventlist[$i]['lflight'] = $recordu['lflight'];
+                $eventlist[$i]['user_id'] = $recordu['user_id'];
+                $eventlist[$i]['datef'] = date("m/d/Y ",$recordu['datef']);
+                $eventlist[$i]['realdatef'] = $recordu['datef'];
+
+
+                $eventlist[$i]['timef'] = $recordu['timef']/60;
+                $eventlist[$i]['aircraft'] = $recordu['aircraft'];
+                $eventlist[$i]['manoeuvre'] = $recordu['manoeuvre'];
+                $eventlist[$i]['notes'] = $recordu['notes'];
+                $eventlist[$i]['status'] = $recordu['status'];
+                $eventlist[$i]['createdtime'] = date('m/d/Y',$recordu['createdtime']);
+
+
+            }
+            if(count($eventlist[$i])>0) $eventlist1[]=$eventlist[$i];
+            $i++;
+
+        }
+    }
+    echo json_encode(@$eventlist1);
+
+}
+function flightdetails()
+{
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+    $userlist = array();
+
+    $queryu = db_select('flight', 'ev');
+
+    //'fname','lname','email','phone', 'country','city','resume'
+
+    $queryu->fields('ev');
+    //$queryu->condition('ev.id', @$_REQUEST['id'], '=');
     // ->condition('ur.rid', 5, '=');
     if($_REQUEST['role']==6) {
         $queryu->condition('ev.user_id', @$_REQUEST['userid'], '=');
@@ -148,21 +252,25 @@ function flightlist()
             // if(isset($picture->uri))$picture= image_style_url('thumbnail', $picture->uri);
             // else $picture='';
 
-            $eventlist[$i]['id'] = $recordu['id'];
-            $eventlist[$i]['fflight'] = $recordu['fflight'];
-            $eventlist[$i]['lflight'] = $recordu['lflight'];
-            $eventlist[$i]['user_id'] = $recordu['user_id'];
-            $eventlist[$i]['datef'] = date("m/d/Y ",$recordu['datef']);
-            $eventlist[$i]['realdatef'] = $recordu['datef'];
+            $eventlist['id'] = $recordu['id'];
+            $eventlist['fflight'] = $recordu['fflight'];
+            $eventlist['lflight'] = $recordu['lflight'];
+            $eventlist['user_id'] = $recordu['user_id'];
+            $eventlist['datef'] = date("m/d/Y ",$recordu['datef']);
+            $eventlist['dateforg'] = $recordu['datef'];
+            $eventlist['realdatef'] = $recordu['datef'];
 
 
-            $eventlist[$i]['timef'] = $recordu['timef']/60;
-            $eventlist[$i]['aircraft'] = $recordu['aircraft'];
-            $eventlist[$i]['manoeuvre'] = $recordu['manoeuvre'];
-            $eventlist[$i]['notes'] = $recordu['notes'];
-            $eventlist[$i]['status'] = $recordu['status'];
-            $eventlist[$i]['createdtime'] = date('m/d/Y',$recordu['createdtime']);
+            $eventlist['timef'] = $recordu['timef']/60;
+            $eventlist['aircraft'] = $recordu['aircraft'];
+            $eventlist['manoeuvre'] = $recordu['manoeuvre'];
+            $eventlist['notes'] = $recordu['notes'];
+            $eventlist['status'] = $recordu['status'];
+            $eventlist['start_time'] = $recordu['start_time'];
+            $eventlist['end_time'] = $recordu['end_time'];
+            $eventlist['createdtime'] = date('m/d/Y',$recordu['createdtime']);
             //$eventlist[$i]['event_create_time'] = $recordu['event_create_time'];
+            if($recordu['id']==$_REQUEST['id'] || $recordu['refferid']==$_REQUEST['id'] ) break ;
 
 
             $i++;
@@ -172,6 +280,9 @@ function flightlist()
     echo json_encode(@$eventlist);
 
 }
+
+
+
 function employemsdfentlistfrontlisting()
 {
     header('Content-type: text/html');
@@ -243,10 +354,14 @@ function addflight(){
     ///exit;
 
 
+    if(isset($_POST['status'])){
+        $editstatus=$_POST['status'];
+    }
+    else $editstatus=1;
 
-    $query = db_insert('flight')->fields(array('fflight','lflight','datef','timef', 'aircraft','manoeuvre','notes','user_id','createdtime'));
+    $query = db_insert('flight')->fields(array('fflight','lflight','datef','timef', 'aircraft','manoeuvre','notes','user_id','createdtime','start_time','end_time','status','refferid'));
     //foreach ($values as $record) {
-    $query->values(array(@$_POST['first_flight'],@$_POST['last_flight'],@$_POST['flight_daterange'],@$_POST['timer'],@$_POST['aircraft'],@$_POST['manoeuvre'],@$_POST['notes'],@$_POST['user_id'],time()));
+    $query->values(array(@$_POST['first_flight'],@$_POST['last_flight'],@$_POST['flight_daterange'],@$_POST['timer'],@$_POST['aircraft'],@$_POST['manoeuvre'],@$_POST['notes'],@$_POST['user_id'],time(),@$_REQUEST['start_time'],@$_REQUEST['end_time'],$editstatus,@$_POST['refferid']));
     //}
     $query->execute();
 
@@ -321,6 +436,31 @@ function delflight(){
             ->condition('id', intval($_POST['id']))
             ->execute();
     }
+
+
+}
+function delflight1(){
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+//    if($_REQUEST['role']!=6) {
+//        $num_deleted = db_delete('flight')
+//            ->condition('id', @$_POST['id'])
+//            ->execute();
+//    }
+
+    //if($_REQUEST['role']==6) {
+        db_update('flight')
+            //->expression('weight', 'weight + :weight', array(':weight' => 1))
+            ->fields(array('status' => 1))
+            ->condition('id', intval($_POST['id']))
+            ->execute();
+   // }
 
 
 }
