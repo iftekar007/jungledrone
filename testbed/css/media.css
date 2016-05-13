@@ -1,6 +1,12 @@
 @charset "utf-8";
 
+
+
 /* CSS Document */
+
+
+
+
 
 
 
@@ -8,13 +14,27 @@
 
 
 
+
+
+
+
 	.pilotregistration_body_bottom{padding-top:13%;}
+
+
 
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:30px;}
 
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-size:18px;}
 
+
+
 }
+
+
+
+
 
 
 
@@ -22,9 +42,21 @@
 
 
 
+
+
+
+
 .partblock2 .formwrapper .form-group .input1{ width:300px;}
 
+
+
 .partblock2 .formwrapper .form-group .input2{ width:300px;}
+
+
+
+
+
+
 
 
 
@@ -38,31 +70,67 @@
 
 
 
+
+
+
+
+
+
+
+
 .partblock2 .formwrapper .formgroup2 {
+
+
 
     margin-left: 178px;
 
+
+
     width: auto;
 
+
+
 }
+
+
+
+
 
 
 
 .partblock2 .formwrapper .formgroup3 {
 
+
+
     margin-left: 178px;
+
+
 
     width: auto;
 
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
 
 
-
-
-
-}
 
 
 
@@ -70,50 +138,102 @@
 
 
 
+
+
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:28px;}
+
+
 
 	
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1800px){
 
-.partblock2 .formwrapper .form-group .input1 {
-    width: 280px;
-}
+
 
 .partblock2 .formwrapper .form-group .input1 {
+
     width: 280px;
+
 }
+
+
+
+.partblock2 .formwrapper .form-group .input1 {
+
+    width: 280px;
+
+}
+
+
 
 .partblock2 .formwrapper .form-group .input2 {
+
     width: 280px;
+
 }
+
+
 
 .partblock2 .formwrapper .form-group .radiobox{width: 280px;}
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1740px){
 
-.partblock2 .formwrapper .form-group .input1 {
-    width: 260px;
-}
+
 
 .partblock2 .formwrapper .form-group .input1 {
+
     width: 260px;
+
 }
+
+
+
+.partblock2 .formwrapper .form-group .input1 {
+
+    width: 260px;
+
+}
+
+
 
 .partblock2 .formwrapper .form-group .input2 {
+
     width: 260px;
+
 }
 
+
+
 .partblock2 .formwrapper .form-group .radiobox{width: 260px;}
+
 }
+
+
+
+
+
 
 
 
@@ -122,13 +242,27 @@
 
 
 
+
+
+
+
 	.pilotregistration_body_bottom{padding-top:11%;}
+
+
+
+
 
 
 
 }
 
+
+
 @media(max-width:1680px){
+
+
+
+
 
 
 
@@ -138,65 +272,133 @@
 
 
 
+
+
+
+
+
+
 .containblock1 .part3 {
+
+
 
     left: -68px;
 
+
+
     position: absolute;
+
+
 
     top: 116%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part5 {
 
+
+
     left: -150px;
+
+
 
     position: absolute;
 
+
+
     top: 284%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part4 {
 
+
+
     position: absolute;
+
+
 
     right: -100px;
 
+
+
     top: 170%;
 
+
+
 }
+
+
 
 .containblock1 .part6 {
 
+
+
     position: absolute;
+
+
 
     right: -164px;
 
+
+
     top: 310%;
 
+
+
 }
+
+
 
 .containblock1 .part7 {
 
+
+
     left: 370px;
+
+
 
     position: absolute;
 
+
+
     top: 346%;
 
+
+
 }
+
+
+
+
 
 
 
 .partblock2 .formwrapper{ margin:30px 25px 0 0px; }
 
+
+
 .partblock2 .formwrapper .form-group .labeltext1{ width:168px; float:left; display:block; font-weight:normal; color:#fff; text-align:right; line-height:40px; }
+
+
+
+
 
 
 
@@ -204,7 +406,13 @@
 
 
 
+
+
+
+
 .partblock2 .formwrapper .formgroup2{ margin-left:142px;}
+
+
 
 .partblock2 .formwrapper .formgroup3{ margin-left:142px;}
 
@@ -212,29 +420,61 @@
 
 
 
+
+
+
+
+
+
 .containblock3 .partblock1 .bgimg1 {
+
+
 
     left: 0;
 
+
+
     position: absolute;
+
+
 
     top: 140px;
 
+
+
     width: 100%;
 
+
+
 }
+
+
 
 .containblock3 .partblock3 .bgimg1 {
 
+
+
     left: 0;
+
+
 
     position: absolute;
 
+
+
     top: 140px;
+
+
 
     width: 100%;
 
+
+
 }
+
+
+
+
 
 
 
@@ -242,27 +482,59 @@
 
 
 
+
+
+
+
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:26px;}
 
 
 
-.partblock2 .formwrapper .form-group .input1 {
-    width: 280px;
-}
+
+
+
 
 .partblock2 .formwrapper .form-group .input1 {
+
     width: 280px;
+
 }
+
+
+
+.partblock2 .formwrapper .form-group .input1 {
+
+    width: 280px;
+
+}
+
+
 
 .partblock2 .formwrapper .form-group .input2 {
+
     width: 280px;
+
 }
+
+
+
 
 
 .partblock2 .formwrapper .form-group .radiobox{width: 280px;}
 
 
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -274,7 +546,17 @@
 
 
 
+
+
+
+
 .containblock1{ height:940px; background:  url(../images/img1.png) no-repeat  35% 56%; background-size:60%; position:relative; z-index:12;}
+
+
+
+
+
+
 
 
 
@@ -282,63 +564,125 @@
 
 .containblock1 .part3 {
 
+
+
     left: -68px;
+
+
 
     position: absolute;
 
+
+
     top: 116%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part5 {
 
+
+
     left: -150px;
+
+
 
     position: absolute;
 
+
+
     top: 284%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part4 {
 
+
+
     position: absolute;
+
+
 
     right: -100px;
 
+
+
     top: 170%;
 
+
+
 }
+
+
 
 .containblock1 .part6 {
 
+
+
     position: absolute;
+
+
 
     right: -164px;
 
+
+
     top: 310%;
 
+
+
 }
+
+
 
 .containblock1 .part7 {
 
+
+
     left: 370px;
+
+
 
     position: absolute;
 
+
+
     top: 346%;
 
+
+
 }
+
+
+
+
 
 
 
 .partblock2 .formwrapper{ margin:30px 25px 0 0px; }
 
+
+
 .partblock2 .formwrapper .form-group .labeltext1{ width:168px; float:left; display:block; font-weight:normal; color:#fff; text-align:right; line-height:40px; }
+
+
+
+
 
 
 
@@ -346,7 +690,13 @@
 
 
 
+
+
+
+
 .partblock2 .formwrapper .formgroup2{ margin-left:112px;}
+
+
 
 .partblock2 .formwrapper .formgroup3{ margin-left:112px;}
 
@@ -354,29 +704,61 @@
 
 
 
+
+
+
+
+
+
 .containblock3 .partblock1 .bgimg1 {
+
+
 
     left: 0;
 
+
+
     position: absolute;
+
+
 
     top: 140px;
 
+
+
     width: 100%;
 
+
+
 }
+
+
 
 .containblock3 .partblock3 .bgimg1 {
 
+
+
     left: 0;
+
+
 
     position: absolute;
 
+
+
     top: 140px;
+
+
 
     width: 100%;
 
+
+
 }
+
+
+
+
 
 
 
@@ -384,7 +766,15 @@
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -392,122 +782,248 @@
 
 
 
+
+
+
+
 .partblock2 .formwrapper .form-group .labeltext1{ width:148px;}
+
+
 
 .partblock2 .formwrapper .form-group .labeltext2{ width:148px;}
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1560px){
 
+
+
 	.pilotregistration_body_bottom{padding-top:11%;}
 
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content{padding-bottom:20px;}
+
+
 
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:24px;}
 
 
+
+
+
 /*.newproductdetailright{ width:80%; margin:43px 0 0 0; padding-left:24px; padding-bottom:40px; float:right;}*/
+
 }
+
+
+
 
 
 @media(max-width:1540px){
-.partblock2 .formwrapper .form-group .input1 {
-    width: 260px;
-}
 
 .partblock2 .formwrapper .form-group .input1 {
+
     width: 260px;
+
 }
+
+
+
+.partblock2 .formwrapper .form-group .input1 {
+
+    width: 260px;
+
+}
+
+
 
 .partblock2 .formwrapper .form-group .input2 {
+
     width: 260px;
+
 }
+
+
+
 
 
 .partblock2 .formwrapper .form-group .radiobox{width: 260px;}
 
 
+
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1500px){
 
 
+
+
+
 .newproductdetailright{ width:980px; margin:43px -176px 0 0; padding-left:24px; padding-bottom:40px;}
+
+
 
 .newproductdetailright .productdetail_topblock{ min-height:680px;}
 
+
+
 .newproductdetailright .productdetail_topblock .product_imageblock{ width:410px;     border-bottom: 1px solid #e3e2e2;}
 
+
+
 }
+
+
+
 
 
 @media(max-width:1480px){
 
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:22px;}
+
+
 
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-size:14px;}
 
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content{padding-bottom:3%;}
+
 	
+
 	
+
 	.category_mainwrapper .categoryblock .category_blockheading{ padding-top:20px;}
 
+
+
 }
+
+
+
 
 
 @media(max-width:1460px){
-.partblock2 .formwrapper .form-group .input1 {
-    width: 240px;
-}
 
 .partblock2 .formwrapper .form-group .input1 {
+
     width: 240px;
+
 }
+
+
+
+.partblock2 .formwrapper .form-group .input1 {
+
+    width: 240px;
+
+}
+
+
 
 .partblock2 .formwrapper .form-group .input2 {
+
     width: 240px;
+
 }
+
+
+
 
 
 .partblock2 .formwrapper .form-group .radiobox{width: 240px;}
 
 
+
+
+
 }
+
+
 
 	
 
+
+
 @media(max-width:1400px){
+
+
 
 .virtualrealityimgdiv{ position:relative; top:-60px; width:100%;}
 
+
+
 .virtualrealityimg1{ display:block; margin:0 auto; width:100%;}
 
+
+
 }
+
+
+
 
 
 @media(max-width:1388px){
-.partblock2 .formwrapper .form-group .input1 {
-    width: 220px;
-}
 
 .partblock2 .formwrapper .form-group .input1 {
+
     width: 220px;
+
 }
+
+
+
+.partblock2 .formwrapper .form-group .input1 {
+
+    width: 220px;
+
+}
+
+
 
 .partblock2 .formwrapper .form-group .input2 {
+
     width: 220px;
+
 }
+
+
+
 
 
 .partblock2 .formwrapper .form-group .radiobox{width: 220px;}
 
 
+
+
+
 }
+
+
+
+
+
+
+
 
 
 
@@ -517,35 +1033,70 @@
 @media(max-width:1360px){
 
 
+
+
+
 .newproductdetailright{ width:900px; margin:43px -176px 0 0; padding-left:24px; padding-bottom:40px;}
+
+
 
 .newproductdetailright .productdetail_topblock{ min-height:680px;}
 
+
+
 .newproductdetailright .productdetail_topblock .product_imageblock{ width:330px;     border-bottom: 1px solid #e3e2e2;}
 
+
+
 }
+
+
+
+
+
 
 
 
 
 @media(max-width:1356px){
 
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:21px;}	
+
+
 
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content{padding-bottom:1%;}
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1366px){
 
 
+
+
+
 .galleryimgblock .gallerybox{ height:228px; }
+
+
 
 .galleryimgblock .galleryimgdiv{  height:220px;}
 
+
+
 .contact_mainbody .contactright .contactform{ width:840px; background:#6c7375; margin-top:16px; border:solid 1px #d9dadb;}
+
+
+
+
 
 
 
@@ -553,11 +1104,23 @@
 
 
 
+
+
+
+
 .contact_mainbody .contactright .contactform .contactform_wrapper .formgroup2{ width:350px; float:right; margin-bottom:30px;}
 
 
 
+
+
+
+
 .contactform_wrapper .forminput1{ width:248px;}
+
+
+
+
 
 
 
@@ -569,39 +1132,83 @@
 
 
 
+
+
+
+
+
+
+
+
 .contact_mainbody .contactright .contactform .contactform_wrapper{ padding:40px;}
+
+
+
+
 
 
 
 .partblock2 .formwrapper .form-group .labeltext1{ width:140px;}
 
+
+
 .partblock2 .formwrapper .form-group .labeltext2{ width:140px;}
+
+
+
+
 
 
 
 .partblock2 .formwrapper .form-group .input1 {
 
+
+
     width: 240px;
 
+
+
 }
+
+
+
+
 
 
 
 .partblock2 .formwrapper .form-group .input2 {
 
+
+
     width: 240px;
 
+
+
 }
+
+
+
+
 
 
 
 .partblock2 .formwrapper .form-group .radiobox {
 
+
+
     width: 240px;
+
+
 
 }
 
+
+
 .top_slider_block .carouselindicators{ position:absolute; right:5%; top:115%; z-index:10; width:200px; }
+
+
+
+
 
 
 
@@ -611,61 +1218,125 @@
 
 
 
+
+
+
+
+
+
 .containblock1 .part3 {
+
+
 
     left: -38px;
 
+
+
     position: absolute;
+
+
 
     top: 116%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part5 {
 
+
+
     left: -60px;
+
+
 
     position: absolute;
 
+
+
     top: 262%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part4 {
 
+
+
     position: absolute;
+
+
 
     right: -28px;
 
+
+
     top: 166%;
 
+
+
 }
+
+
 
 .containblock1 .part6 {
 
+
+
     position: absolute;
+
+
 
     right: -60px;
 
+
+
     top: 274%;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock1 .part7 {
 
+
+
     left: 333px;
+
+
 
     position: absolute;
 
+
+
     top: 366%;
 
+
+
 }
+
+
+
+
 
 
 
@@ -677,35 +1348,75 @@
 
 
 
+
+
+
+
+
+
+
+
  
+
+
+
+
 
 
 
 .partblock2 .formwrapper .formgroup2{ margin-left:120px;}
 
+
+
 .partblock2 .formwrapper .formgroup3{ margin-left:120px;}
+
+
+
+
 
 
 
 .partimg1 {
 
+
+
     left: 24px;
+
+
 
     position: absolute;
 
+
+
     top: 8px;
 
+
+
 }
+
+
 
 .containblock3 .partblock1 .parttext1 {
 
+
+
     color: #545454;
+
+
 
     font-family: "OpenSans-Semibold";
 
+
+
     font-size: 28px;
 
+
+
 }
+
+
+
+
 
 
 
@@ -713,31 +1424,63 @@
 
 
 
+
+
+
+
 .textcondiv {
+
+
 
  
 
+
+
     top: 250px;
+
+
 
    
 
+
+
 }
+
+
+
+
 
 
 
 .containblock3 .partblock3 .parttext1 {
 
+
+
     color: #545454;
+
+
 
     font-family: "OpenSans-Semibold";
 
+
+
     font-size: 28px;
+
+
 
     text-align: right;
 
+
+
     width: 350px;
 
+
+
 }
+
+
+
+
 
 
 
@@ -745,19 +1488,39 @@
 
 
 
+
+
+
+
     text-align: center;
+
+
 
     width: 278px;
 
+
+
 }
+
+
 
 .textcondiv2{ top: 250px;}
 
 
 
+
+
+
+
 .containblock3 .partblock3 .bgimg1{ top:160px;}
 
+
+
 .containblock3 .partblock1 .bgimg1{ top:160px;}
+
+
+
+
 
 
 
@@ -765,9 +1528,17 @@
 
 
 
+
+
+
+
 .myaccountheader .myaccountcontainer{ width:88%; margin:0 auto;}
 
+
+
 .adminleft{width:25%; float:left; margin-left:6%;}
+
+
 
 .admincontain{width:62%; float:right; margin-right:6%;}
 
@@ -775,45 +1546,95 @@
 
 
 
+
+
+
+
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1280px){
 
+
+
 .new_menu_block .new_menu_list .dropdown-menu{ width:300px; right: 0; left:0; float:none; margin:0 auto; margin-top:12px;}
+
+
 
 .new_menu_block .new_menu_list .dropdown-menu .shopbox_name{ width:80px;}
 
+
+
 .new_menu_block .new_menu_list .dropdown-menu .shopbox_pro{ width:70px;}
 
+
+
 .new_menu_block .new_menu_list .dropdown-menu .shopbox_price{ width:96px;}
+
+
 
 .shoppingtotalrow .shoptotal1{ width:65px;}
 
 
+
+
+
 .top_menu_subdiv{ padding-left:0px; padding-right:0px; width:100%;}
+
+
 
 .top_menu_subdiv row{ margin:0; padding:0;}
 
+
+
 .new_menu_block{ position:inherit; right:0px; top:0;
 
+
+
  z-index:9; overflow:hidden;}
+
  
+
  .new_menu_block .new_menu_list{ padding:16px 0 12px 0;}
+
  
+
  .new_menu_block .new_menu_list a{ font-size:18px;}
+
  
+
  .new_menu_block .new_menu_list{ width:100%; height:auto; text-align:center; float:none; box-shadow:none;}
+
+
+
 
 
 .contact_mainbody .contactright .contactform{ width:800px; background:#6c7375; margin-top:16px; border:solid 1px #d9dadb;}
 
+
+
 .contactform_wrapper .forminput2 {
+
+
 
     width: 615px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -821,13 +1642,25 @@
 
 .partblock2 .formwrapper .form-group .labeltext1{ width:100%; float:none; text-align:left;   font-size: 16px; font-weight:normal;}
 
+
+
 .partblock2 .formwrapper .form-group .labeltext2{ width:100%; float:none; text-align:left; font-size: 16px; font-weight:normal;}
+
+
+
+
 
 
 
 .partblock2 .formwrapper .form-group .input1{ width:100%; float:none;}
 
+
+
 .partblock2 .formwrapper .form-group .input2{ width:100%; float:none;}
+
+
+
+
 
 
 
@@ -835,7 +1668,15 @@
 
 
 
+
+
+
+
 .form-group .labeltext-line{ line-height:20px!important; margin-top:0px;}
+
+
+
+
 
 
 
@@ -843,75 +1684,149 @@
 
 
 
+
+
+
+
 .containblock1 .part1 {
+
+
 
     margin: 8% 0 0 80px;
 
+
+
 }
+
+
 
 .containblock1 .part2 {
 
+
+
     position: absolute;
+
+
 
     right: 130px;
 
+
+
     top: 52%;
 
+
+
 }
+
+
 
 .containblock1 .part4 {
 
+
+
     position: absolute;
+
+
 
     right: 34px;
 
+
+
     top: 166%;
 
+
+
 }
+
+
 
 .containblock1 .part6 {
 
+
+
     position: absolute;
+
+
 
     right: 22px;
 
+
+
     top: 274%;
 
+
+
 }
+
+
 
 .containblock1 .part3 {
 
+
+
     left: 50px;
 
+
+
     position: absolute;
+
+
 
     top: 116%;
 
+
+
 }
+
+
 
 .containblock1 .part5 {
 
+
+
     left: -20px;
 
+
+
     position: absolute;
+
+
 
     top: 272%;
 
+
+
 }
+
+
 
 .containblock1 .part7 {
 
+
+
     left: 433px;
+
+
 
     position: absolute;
 
+
+
     top: 366%;
 
+
+
 }
+
+
+
+
 
 
 
 .partblock2 .formblock{ padding-right:20px; }
+
+
 
 .partblock2{ padding:25px 0 0 10px;}
 
@@ -919,41 +1834,85 @@
 
 
 
+
+
+
+
+
+
 .partblock2 .formwrapper {
+
+
 
     margin: 18px 0 0 9px;
 
+
+
 }
+
+
+
+
 
 
 
  
 
+
+
 .partimg1{ width:90%;}
+
+
 
 .partimg2{ width:70%;}
 
+
+
 .partimg5{ width:80%;}
+
+
 
 .partimg6{ width:85%;}
 
+
+
 .containblock3 .partblock1 .bgimg1 {
+
+
 
     top: 170px;
 
+
+
 }
+
+
 
 .containblock3 .partblock3 .bgimg1 {
 
+
+
     top: 170px;
 
+
+
 }
+
+
+
+
 
 
 
 .containblock3 .partblock1 .parttext1{ font-size:24px;}
 
+
+
 .containblock3 .partblock3 .parttext1{ font-size:24px;}
+
+
+
+
 
 
 
@@ -961,23 +1920,45 @@
 
 
 
+
+
+
+
 .block5part2 .well .carousel-control{ top:0;  font-size: 100px;
+
+
 
     padding-top:1%;
 
+
+
     width: 5%;}
 
-	
+
 
 	
+
+
+
+	
+
+
 
 	.top_menu_block .menuwrapper{ width:100%; margin:0 auto; display:block;  }
 
+
+
 	
 
 
 
+
+
+
+
 	
+
+
 
 	.responsivemenu{ display:inline-block; 	font-family:'OpenSans-Semibold'; font-size:18px; color:#f30100; font-weight:bold; padding:15px 0 0 0;}
 
@@ -985,7 +1966,15 @@
 
 
 
+
+
+
+
+
+
 .navbar-header{ width:100%; display:block; padding:0 4%; margin:0 auto;}
+
+
 
 	.navbar-toggle{ display:inline-block; float:right; margin:3px 0 0 0;}
 
@@ -993,9 +1982,21 @@
 
 
 
+
+
+
+
+
+
 .top_menu_block .nav{ text-align:center; width:100%; padding:0 0; background:#f8f8f8;}
 
+
+
 .top_menu_block .nav a{ display:block; padding:0!important; line-height:inherit!important; font-size:18px; background:none; border:none!important; }
+
+
+
+
 
 
 
@@ -1003,11 +2004,25 @@
 
 
 
+
+
+
+
 .top_menu_block .navbar-nav{ margin:0; padding:0;}
 
 
 
+
+
+
+
 .top_menu_block .navbar-toggle{ margin-right:0px;}
+
+
+
+
+
+
 
 
 
@@ -1019,63 +2034,131 @@
 
 
 
+
+
+
+
+
+
   .navbar-header {
+
+
 
       float: none;
 
+
+
    }
+
+
 
    .navbar-toggle {
 
+
+
       display: block;
+
+
 
 	  border:none!important
 
+
+
    }
+
+
+
+
 
 
 
    .navbar-collapse.collapse {
 
+
+
       display: none!important;
+
+
 
 	  border:none!important
 
+
+
    }
+
+
 
    .navbar-nav {
 
+
+
       float: none!important;
+
+
 
 	  border:none!important
 
+
+
    
 
+
+
    }
+
+
 
    .navbar-nav>li {
 
+
+
       float: none;
 
+
+
    }
+
+
+
+
 
 
 
    .collapse.in {
 
+
+
       display: block !important;
+
+
 
    }
 
+
+
  
+
+
 
  .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 
+
+
     background-color: #f8f8f8;
+
+
 
     color: #010101;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1085,58 +2168,119 @@
 
 
 
+
+
+
+
 .contact_bannertext2{position: absolute; left: 23%; top:83%; z-index: 5; width: 280px; max-width:100%;}
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1245px){
 
+
+
 	.pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:20px;}	
+
+
 
 	
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1200px){
 
 
+
+
+
 .newproductdetailright{ width:800px; margin:43px -176px 0 0; padding-left:24px; padding-bottom:40px;}
+
+
 
 .newproductdetailright .productdetail_topblock{ min-height:inherit; padding-bottom:40px;}
 
+
+
 .newproductdetailright .productdetail_topblock .product_imageblock{ width:480px;     border: 1px solid #e3e2e2; border-top:none; float:none; margin:0 auto;}
+
+
 
 .productdetail_toptextblock{ width:480px; margin-left:0; margin:0 auto; float:none; }
 
+
+
 }
+
+
+
 
 
 @media(max-width:1090px){
 
 
+
+
+
 .newproductdetailright{ width:720px; margin:43px -176px 0 0; padding-left:24px; padding-bottom:40px;}
 
+
+
 .detailslider2 .featured_products_block img{ width:86%;}
+
 .detailslider2 .prosubblock1{ width:86%;}
+
+
 
 .detailslider2 .prosubblock1 .text1con{ font-size:18px;}
 
 
+
+
+
 }
+
+
 
 @media(max-width:1200px){
 
+
+
 .galleryimgblock .galleryimgdiv{  height:180px;}
+
+
 
 .containblock1{ height:auto; background:  none;  position:relative; z-index:12; padding-bottom:0px; margin-bottom:0px;}
 
+
+
 .containblock1 .textblock1{ width:100%; margin:10px auto; text-align:center; background:none;  padding:0px 10px;}
 
+
+
 .containblock1 .textblock2{ width:100%; margin:10px auto; text-align:center; background:none; padding:0;}
+
+
+
+
+
+
 
 
 
@@ -1146,29 +2290,59 @@
 
 
 
+
+
+
+
 .containblock1 .textblock1 label{ line-height:28px; padding-top:10px;}
+
+
+
+
 
 
 
 .containblock1 .part1{ margin:40px auto; border-bottom:solid 1px #d3d5d6; padding-bottom:40px;}
 
+
+
 .containblock1 .part2{ position:inherit; right:0; left:0; top:0%; margin:40px auto;  border-bottom:solid 1px #d3d5d6; padding:0px 10px; }
+
+
 
 .containblock1 .part3{ position:inherit; right:0; left:0; top:0%; margin:40px auto;  border-bottom:solid 1px #d3d5d6; padding:0px 10px; }
 
+
+
 .containblock1 .part4{ position:inherit; right:0; left:0; top:0%; margin:40px auto;  border-bottom:solid 1px #d3d5d6; padding:0px 10px; }
+
+
 
 .containblock1 .part5{ position:inherit; right:0; left:0; top:0%; margin:40px auto;  border-bottom:solid 1px #d3d5d6; padding:0px 10px; }
 
+
+
 .containblock1 .part6{ position:inherit; right:0; left:0; top:0%; margin:40px auto;  border-bottom:solid 1px #d3d5d6; padding:0px 10px; }
+
+
 
 .containblock1 .part7{ position:inherit; right:0; left:0; top:0%; margin:40px auto;    padding:0px 10px; margin-bottom:20px;  }
 
 
 
+
+
+
+
 .containblock1 .part3 .viewlink{ display:inline-block; float:none; margin:0 auto; margin-top:20px;}
 
+
+
 .containblock1 .textblock2  .viewlink{ display:inline-block; float:none; margin:0 auto; margin-top:20px;}
+
+
+
+
 
 
 
@@ -1176,11 +2350,25 @@
 
 
 
+
+
+
+
 	.tourism_text_contain .tourimg1{ width:auto; float:none; margin:0 auto; margin-bottom:10px; max-width:100%; display:block;}
+
+
 
 		.tourism_text_contain .tourimg2{ width:auto; float:none; margin:0 auto; margin-bottom:10px; max-width:100%; display:block;}
 
+
+
 .tourism_text_contain .tourimg3{ width:auto; float:none; margin:0 auto; margin-bottom:10px; max-width:100%; display:block;}
+
+
+
+
+
+
 
 
 
@@ -1192,11 +2380,27 @@
 
 
 
+
+
+
+
+
+
 .droneracing_video{ width:600px; float:none; margin:0 auto; background:url(../images/dronarac_shadow.png) no-repeat center bottom; padding-bottom:44px;}
+
+
 
 .droneracing_text{ width:100%; text-align:center; float:none; margin-top:25px;}
 
+
+
 .droneracing_text img{ display:block; margin:0 auto; max-width:100%;}
+
+
+
+
+
+
 
 
 
@@ -1206,17 +2410,37 @@
 
 
 
+
+
+
+
 .virtualrealitytextdiv .v_text_left{ width:100%; float:none; padding:0; text-align:center; padding:25px; }
 
+
+
 .virtualrealitytextdiv .v_text1{ text-align:center; padding-left:25px; padding-right:25px;} 
+
+
 
 .virtualrealitytextdiv .v_text_left img{ display:block; margin:25px auto; max-width:100%;}
 
 
 
+
+
+
+
 	.virtualreality_formmain{ float:none; margin:0 auto; margin-top:30px;}
 
+
+
 } 
+
+
+
+
+
+
 
 
 
@@ -1225,46 +2449,102 @@
 @media(max-width:1199px){
 
 
+
+
+
+.formblock_p {
+
+    padding: 15px 0 0;
+
+}
+
+
+
+
+
 .newgalleryblocktop2{ margin-top:30px;}
 
+
+
 .services_toptext .services_topimg { float:none; margin:0 auto; margin-bottom:30px;}
+
+
 
 .services_toptext2{ width:100%; float:none;}
 
 
+
+
+
 .virtualrealitytextdiv .v_text1{ padding-top:20px;}
+
+
 
 .virtualrealityimgdiv{ position:relative; top:0px;}
 
 
 
+
+
+
+
 .virtualrealitytextdiv{ margin-top:0px;}
+
+
 
 .bannerbgwhite{ display:none;}
 
+
+
 .bannerbgred{ position:inherit; width:100%; height:5px; background:#f30100; }
+
+
 
 .bannerbgred img{ display:none;}
 
+
+
 .top_slider_block  .logo{  left: 0%;
+
+
 
     position: relative;
 
+
+
     top: 0%;
 
+
+
     width: 100%; height:auto;
+
+
 
     z-index: 8; margin-top:20px; } 
 
 
 
+
+
+
+
 .top_slider_block  .logo img{ width:330px; display:block; margin:0 auto;}
+
+
 
 .top_slider_block { border-top:solid 2px #e7e7e7; }
 
+
+
 .bannertext{ position:inherit; display:block; margin:0 auto; width:985px; max-width:96%; left:0; top:0;}
 
+
+
 .top_slider_block .carouselindicators{ position:inherit; right:0; top:0%; z-index:10; width:100%; }
+
+
+
+
 
 
 
@@ -1272,9 +2552,19 @@
 
 
 
+
+
+
+
 .top_slider_block .carousel-indicators li{ border-radius:0px; width:10px; height:10px; border:none; background:#bfbfbc; margin:0;  }
 
+
+
 .top_slider_block .carousel-indicators li.active{ border-radius:0px; width:10px; height:10px; border:none; background:#6f767a;}
+
+
+
+
 
 
 
@@ -1284,7 +2574,17 @@
 
 
 
+
+
+
+
+
+
 .containblock3 .partblock1 { height:auto; position:relative; padding:15px 0;}
+
+
+
+
 
 
 
@@ -1292,15 +2592,35 @@
 
 
 
+
+
+
+
 .partimg2{ position:inherit; top:0; left:0;  width:auto; display:block; margin:0 auto; max-width:90%;}
+
+
 
 .containblock3 .partblock1 .bgimg1{ display:none;}
 
 
 
+
+
+
+
 .textcondiv{position:inherit; z-index:5; width:100%; text-align:center; left:0; top:0; margin:40px auto; margin-top:20px;}
 
+
+
 .containblock3 .partblock1 .parttext1{font-size:30px; }
+
+
+
+
+
+
+
+
 
 
 
@@ -1322,7 +2642,25 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .containblock3 .partblock3 { height:auto; position:relative; padding:15px 0;}
+
+
+
+
 
 
 
@@ -1330,15 +2668,35 @@
 
 
 
+
+
+
+
 .partimg6{ position:inherit; top:0; left:0;  width:auto; display:block; margin:0 auto; max-width:90%;}
+
+
 
 .containblock3 .partblock3 .bgimg1{ display:none;}
 
 
 
+
+
+
+
 .textcondiv2{position:inherit; z-index:5; width:100%; text-align:center; left:0; top:0; margin:40px auto; margin-top:20px;}
 
+
+
 .containblock3 .partblock3 .parttext1{font-size:30px; }
+
+
+
+
+
+
+
+
 
 
 
@@ -1350,7 +2708,15 @@
 
 
 
+
+
+
+
 .formmain{ width:470px; margin:0 auto; padding-top:40px;}
+
+
+
+
 
 
 
@@ -1360,11 +2726,27 @@
 
 
 
+
+
+
+
+
+
     .partblock2 .formblock {
+
+
 
         padding-right: 0;
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -1374,11 +2756,23 @@
 
 
 
+
+
+
+
 .partblock2 .formwrapper {
+
+
 
     margin: 18px 0 0 0;
 
+
+
 }
+
+
+
+
 
 
 
@@ -1388,27 +2782,59 @@
 
 
 
+
+
+
+
+
+
 .block5part2 .well .carousel-control{ top:0;  font-size: 80px;
+
+
 
     padding-top:1%;
 
+
+
     width: 5%;}
 
-	
+
 
 	
 
+
+
 	
+
+
+
+	
+
+
 
 	.imagegallery{ width:900px; margin:0 auto;}
 
+
+
 	.imagegallery .gallery_image_block .imgbx1{ width:70%; height:400px; overflow:hidden;}
+
+
 
 	.imagegallery .gallery_image_block .imgbx2{ width:29%; height:400px; overflow:hidden;}
 
+
+
 	
 
+
+
 .imagegallery .gallery_image_block .imgbx3{ width:30%; height:230px; overflow:hidden;}
+
+
+
+
+
+
 
 
 
@@ -1418,7 +2844,17 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx5{ width:38%; height:230px; overflow:hidden;}
+
+
+
+
+
+
 
 
 
@@ -1428,7 +2864,15 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx7{ width:33%; height:160px; overflow:hidden;}
+
+
+
+
 
 
 
@@ -1438,7 +2882,17 @@
 
 
 
+
+
+
+
+
+
 .imagegallery .gallery_image_block .imgbx9{ width:49%; height:255px; overflow:hidden;}
+
+
+
+
 
 
 
@@ -1446,7 +2900,15 @@
 
 
 
+
+
+
+
 .gallerybody{ margin-top:0;}
+
+
+
+
 
 
 
@@ -1454,7 +2916,13 @@
 
 
 
+
+
+
+
 .event_body_container_block_odd .event_body_bottom .event_dateblock{ width:860px; }
+
+
 
 .event_body_container_block_even .event_body_bottom .event_dateblock{ width:860px; }
 
@@ -1462,19 +2930,41 @@
 
 
 
+
+
+
+
+
+
 .product_body_container{ margin-top:25px;}
+
+
 
 .product_textblock{ min-height:inherit;}
 
+
+
 .product_body_section_odd .product_textblock{ width:100%; float:none; text-align:center;}
+
+
 
 .product_body_section_odd .product_imageblock{ width:100%; float:none; text-align:center;}
 
 
 
+
+
+
+
 .product_body_section_even .product_textblock{ width:100%; float:none; text-align:center;}
 
+
+
 .product_body_section_even .product_imageblock{ width:100%; float:none; text-align:center;}
+
+
+
+
 
 
 
@@ -1482,96 +2972,197 @@
 
 
 
+
+
+
+
 .product_body_section_odd .orderbtn{ float:none; margin:0 auto; margin-top:40px; display:block;}
+
+
+
+
 
 
 
 		.product_imageblock .h4text1{ width:100%; margin:0 auto;}
 
+
+
 		.product_imageblock .h5text1{ width:100%; margin:0 auto;}
 
+
+
 		
+
+
 
 		.product_imageblock .h4text2{ width:100%; margin:0 auto;}
 
+
+
 		.product_imageblock .h5text2{ width:100%; margin:0 auto;}
 
+
+
 		
+
+
 
 		.product_imageblock .h4text3{ width:100%; margin:0 auto;}
 
+
+
 		.product_imageblock .h5text3{ width:100%; margin:0 auto;}
 
-		
+
 
 		
+
+
+
+		
+
+
 
 		.product_body_section_even .product_imageblock .h4text1{ width:100%; margin:0 auto;}
 
+
+
 		.product_body_section_even .product_imageblock .h5text1{ width:100%; margin:0 auto;}
 
+
+
 		
+
+
 
 		.product_body_container h4{ text-align:center;}
 
+
+
 		
+
+
 
 	.product_imageblock img{ max-width:100%;}
 
+
+
 		
+
 		
+
 		.contact_bannertextedit{   bottom: 0;
+
+
 
     display: block;
 
+
+
     left: 0;
+
+
 
     margin: 0 auto;
 
+
+
     position: inherit;
+
+
 
     right: 0;
 
+
+
     top: 0;
 
+
+
     width: 359px; }
+
 		
+
+
 
 .contact_bannertext{   bottom: 0;
 
+
+
     display: block;
+
+
 
     left: 0;
 
+
+
     margin: 0 auto;
+
+
 
     position: inherit;
 
+
+
     right: 0;
+
+
 
     top: 0;
 
+
+
     width: auto; max-width:90%; }
 
-	
+
 
 	
+
+
+
+	
+
+
 
 	.contact_bannertext2{   bottom: 0;
 
+
+
     display: block;
+
+
 
     left: 0;
 
+
+
     margin: 0 auto;
+
+
 
     position: inherit;
 
+
+
     right: 0;
+
+
 
     top: 0;
 
+
+
     width: auto; max-width:90%; }
+
+
+
+
+
+
+
+
 
 
 
@@ -1583,7 +3174,15 @@
 
 
 
+
+
+
+
 .services_toptext{ width:88%; margin:30px auto;}
+
+
+
+
 
 
 
@@ -1591,13 +3190,27 @@
 
 
 
+
+
+
+
 .services_blog .servicesimg{ width:100%;}
+
+
+
+
 
 
 
 .services_heading{ margin:0 auto; text-align:center; width:88%;}
 
+
+
 .services_heading .headingline{ display:inline-block; background:url(../images/productdevider.png) repeat-x center center; padding:0 20px;}
+
+
+
+
 
 
 
@@ -1605,11 +3218,25 @@
 
 
 
+
+
+
+
 .services_blog .servicesimg {
+
+
 
     width: 96%;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1621,9 +3248,21 @@
 
 
 
+
+
+
+
+
+
 .contact_mainbody .contactleft .contact_left_top_block2{  width:100%; margin:20px auto; }
 
+
+
 .contact_mainbody .contactright .contactform{ width:100%;}
+
+
+
+
 
 
 
@@ -1631,7 +3270,15 @@
 
 
 
+
+
+
+
 .contact_mainbody .contactright .contactform .contactform_wrapper .formgroup1{ width:390px;}
+
+
+
+
 
 
 
@@ -1639,17 +3286,37 @@
 
 
 
+
+
+
+
 .contactform_wrapper .forminput1 {
+
+
 
     width: 288px;
 
+
+
 }
+
+
 
 .contactform_wrapper .forminput2 {
 
+
+
     width: 696px;
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -1657,40 +3324,81 @@
 
 .pilotregistration_body_section_left{float:none; width:100%; text-align:center; padding:0 15px; margin-bottom:15px;}
 
+
+
 .pilotregistration_body_section_left img{width:auto;}
+
+
 
 .pilotregistration_body_section_left label{width:100%; display:block; text-align:center; margin:6px auto; margin-top:10px;}
 
+
+
 .pilotregistration_body_section_right{float:none; width:100%;}
+
+
 
 .pilotregistration_registration_top h1{background:  url(../images/pilotregistration_body_registrationicon.png) no-repeat top center; padding:56px 0 0 0; line-height:32px; text-align:center!important;}
 
+
+
 .pilotregistration_registration_bottom form label{width:100%; display:block; text-align:center; padding:0px; margin:4px auto;}
+
+
 
 .pilotregistration_registration_bottom form .pilotregistration_input{width:100%; display:block; text-align:center; padding:0px;}
 
+
+
 .pilotregistration_registration_bottom form .errmsg{text-align:center; margin:0 auto; margin-bottom:9px;}
+
+
 
 .pilotregistration_submit{margin:0px auto; float:none; display:block; margin-top:36px!important;}
 
 
 
+
+
+
+
 .pilotregistration_body_bottom{background:none; padding:0px;}
+
+
 
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content{width:100%; background:#f30100; padding:30px; text-align:center; height:auto}
 
+
+
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:25px; padding:0px; line-height:30px;}
+
+
 
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content p{font-size:18px; padding:0; text-align:center; width:100%;}
 
 
+
+
+
 .newgalleryblocktop2 .gallerytopleftsearch2{ width:100%; float:none; margin:0 auto; background:#1e1e1e; padding:11px;  }
+
+
 
 .newgalleryblocktop2 .stockphoto_selectoption2{ width:30%;}
 
+
+
 .newgalleryblocktop2 .stockphotosearch2{ width:70%;}
+
 .newgalleryblocktop2 .stockphoto_inputoption2{ width:70%;}
+
 }
+
+
+
+
+
+
 
 
 
@@ -1698,42 +3406,82 @@
 
 @media(max-width:991px){
 
+
+
 .bannersloderbox #myCarousel .carousel-inner{ width:200%; margin-left:-100%;}
 
+
+
 .event_bannerbg{   margin-left: -300%;
+
     width: 400%;  }
+
+
+
+
+
 
 
 
 
 .productacrttable tr{ border-bottom:solid 10px #fff!important; display:block!important; width:100%!important;}
 
+
+
 .productacrttable td{ border-bottom:solid 1px #dadbdb!important; display:block!important; width:100%!important; text-align:center;}
 
 
+
+
+
 .productacrttable td .jd_pro{ float:none; margin:0 auto; display:block;}
+
 .productacrttable td .producttext p{ width:90%; display:block; margin:0 auto;}
+
+
+
 
 
 .productacrttable td .productnodiv{ width:216px; margin:0 auto;}
 
+
+
 .productacrttable td h3{ text-align:center;}
 
+
+
 .productacrttable td  .producttext{ width:100%; float:none; padding-left:0; color:#323131; font-family:'OpenSans-Regular'; text-align:center;}
+
  
+
+
 
 .tabdownloadbtn{ width:280px!important; margin:0 auto!important; margin-top:30px!important;  background: #f30100 url("../images/stock-details_downloadicon.png") no-repeat scroll 45px center!important; padding: 0 0 0 54px!important;}
 
 
+
+
+
 .category_mainwrapper .categoryblock .category_blockheading{ width:60%;}
 
+
+
 .newlogin-box{ width:100%;}
+
+
+
 
 
 .newloginwrapper{ width:80%; }
 
 
+
+
+
 .tourism_heading_text{ font-size:32px; line-height:45px; padding:0 10px 40px 10px;}
+
+
+
 
 
 .top_menu_block .menuwrapper{ width:100%; margin:0 auto; display:block;}
@@ -1742,9 +3490,21 @@
 
 
 
+
+
+
+
+
+
 .containblock2 .textcon{ width:90%; margin-left:auto; margin-right:auto; padding:0;} 
 
+
+
 .containblock2 .videoblog{ width:90%; margin-left:auto; margin-right:auto; margin-top:25px;} 
+
+
+
+
 
 
 
@@ -1756,15 +3516,37 @@
 
 
 
+
+
+
+
+
+
+
+
 .imagegallery{ width:90%; margin:0 auto;}
+
+
 
 	.imagegallery .gallery_image_block .imgbx1{ width:100%; height:450px; overflow:hidden; float:none; margin-bottom:10px;}
 
+
+
 	.imagegallery .gallery_image_block .imgbx2{ width:100%; height:550px; overflow:hidden; float:none; margin-bottom:10px;}
+
+
 
 	
 
+
+
 .imagegallery .gallery_image_block .imgbx3{ width:100%; height:400px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -1774,7 +3556,17 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx5{  width:100%; height:400px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -1784,7 +3576,15 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx7{ width:100%; height:300px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
@@ -1794,7 +3594,17 @@
 
 
 
+
+
+
+
+
+
 .imagegallery .gallery_image_block .imgbx9{width:100%; height:300px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
@@ -1804,9 +3614,23 @@
 
 
 
+
+
+
+
+
+
 .event_body_container_block_odd .event_body_bottom .event_dateblock{ width:100%; float:none;   text-align:center;}
 
+
+
 .event_body_container_block_even .event_body_bottom .event_dateblock{width:100%; float:none; text-align:center;}
+
+
+
+
+
+
 
 
 
@@ -1816,11 +3640,23 @@
 
 
 
+
+
+
+
 .event_body_container_block_odd .event_body_bottom .event_numblock{ float:none; width:100%;}
 
 
 
+
+
+
+
 .event_body_container_block_odd .event_body_bottom .event_dateblock{ float:none; margin:0 auto; display:inline-block;}
+
+
+
+
 
 
 
@@ -1832,11 +3668,27 @@
 
 
 
+
+
+
+
+
+
+
+
 .event_body_container_block_even .event_body_bottom .event_dateblock{ float:none; margin:0 auto; display:inline-block;}
 
 
 
+
+
+
+
 .event_body_container_block_even .event_body_bottom .event_dateblock span{ float:none; display:block; margin:0 auto; margin-top:10px;}
+
+
+
+
 
 
 
@@ -1846,7 +3698,17 @@
 
 
 
+
+
+
+
+
+
 .contact_mainbody .contactright .contactform .contactform_wrapper{ width:700px; padding:0; margin:25px auto;}
+
+
+
+
 
 
 
@@ -1854,88 +3716,181 @@
 
 
 
+
+
+
+
 .contact_mainbody .contactright .contactform .contactform_wrapper .formgroup2{ width:340px;}
+
+
+
+
 
 
 
 .contactform_wrapper .forminput1 {
 
+
+
     width: 238px;
 
+
+
 }
+
+
 
 .contactform_wrapper .forminput2 {
 
+
+
     width: 598px;
 
+
+
 }
+
+
+
 
 
 .newproductwrapper{ margin-top:5%; margin-bottom:40px;}
 
+
+
 .newproductwrapper .newproductleftmenu h2{ text-align:center;}
+
 .newproductwrapper .newproductleftmenu ul li{ text-align:center;}
 
-.newproblockrow{ width:46%; margin-right:2%; margin-left:2%;}
+
+
+.newproblockrow{ width:46%; margin-right:2%; margin-left:2%; margin-bottom:40px!important; height:500px;}
+
+
 
 .newproductwrapper .newproductrightcon{ margin-top:35px;}
 
 
+
+
+
 .newproductitemrow{ width:605px; margin:0 auto;}
 
+
+
 .newproductwrapper .newproductrightcon .newpromenu1{ float:left; margin:0 5px;}
+
 .newproductwrapper .newproductrightcon .newpromenu2{ float:left; margin:0 5px;}
+
 .newproductwrapper .newproductrightcon .newpromenu3{ float:left; margin:0 5px;}
+
+
+
 
 
 .carttotal_wrapper{ width:100%; float:none;}
 
+
+
 .carttotal_wrapper .carttotal_box1{ width:90%; padding:2%; margin:0 auto; float:none; padding-bottom:25px;}
+
+
 
 .carttotal_wrapper .carttotal_box2{ width:90%; padding:2%; margin:0 auto; margin-top:25px; float:none; padding-bottom:25px;}
 
 
 
 
+
+
+
+
+
 .carttotal_wrapper .carttotal_box2 .subtotalbox{ height:50px;}
+
+
 
 .continueshoppingblock{ width:90%; margin:0 auto;}
 
+
+
 .carttotal_wrapper .carttotal_box2{ height:auto;}
+
 .carttotal_wrapper .carttotal_box1{ height:auto;}
+
+
+
 
 
 .bestsellerscontain h3{ text-align:center;}
 
+
+
 .bestsellerscontain .detailleftimgblock img{ float:none; margin:0 auto; display:block; }
+
+
 
 .bestsellerscontain .detailleftimgblock p{ width:100%; float:none; text-align:center; padding-top:25px; margin:0;}
 
+
+
 .productdetail_toptextblock h2{ text-align:center;}
+
+
 
 .productdetail_toptextblock h3{ text-align:center;}
 
+
+
 .productdetail_toptextblock p{ text-align:center;}
 
+
+
 .detail_cartblock .cartbtn1{ display:block; float:none; margin:0 auto;}
+
+
 
 .detail_cartblock .detailqtyblock{ display:block; float:none; margin:0 auto; margin-top:20px;}
 
 
 
 
+
+
+
+
+
 .myaccountheader .myaccountcontainer{ width:90%; margin:0 auto; padding:16px 0;}
+
+
 
 .adminleft{width:90%; float:none; margin:0 auto;}
 
+
+
 .admincontain{width:90%; float:none; margin:25px auto;}
 
+
+
 .myaccountheader .myaccountcontainer .myaccountlogo{ width:180px; padding:5px 0; margin:0 auto;} 
+
+
 
 .myaccountheader .myaccountcontainer .myaccountheader_detail{ text-align:center; padding:14px 0; }
 
 
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1945,18 +3900,36 @@
 
 @media(max-width:767px){
 
+
+
 .stockdetail_blog{ padding-left:20px; padding-right:20px;}
+
 .stockdetail_blog2 { padding-left:20px; padding-right:20px;}
+
+
 
 .newgalleryblocktop2 .gallerytopleftsearch2{ width:90%}
 
+
+
 .newgalleryblocktop2 .stockphotobtn2{ width:30%; background-size:50%;}
+
+
+
 
 
 .newgalleryblocktop .gallerytopleftsearch{ width:90%!important;}
 
 
+
+
+
 .newgalleryblocktop .gallerytopleftsearch .stockphoto_inputoption .stockphotobtn{ width:30%; background-size:50%;}
+
+
+
+
+
 
 
 
@@ -1965,31 +3938,63 @@
 
 
 
+
+
+
+
 /*
+
 .newbannerblock {
 
+
+
 	width:200%; margin-right:-100%;
+
 }
+
 */
+
+
+
 
 
 .form-group .radiobox{ float:none; width:100%; padding:0 0 8px 0;}
 
 
+
+
+
 .virtualreality_formmain .formwrapper .form-group .labeltext2{float: none;
+
     margin: 0 auto;
+
     text-align: left;
+
     width: 100%;}
+
 	
+
 	.virtualreality_formmain .formwrapper .form-group .input2{float: none;
+
     width: 100%;}
+
+
+
 
 
 		.newbannerblock .bannernewtext{ width:auto; padding:25px; background:#f30100; text-align:center; margin-top:0px;}
 
+
+
 		
 
+
+
 		.newbannerblock .bannernewtext h2{ font-size:28px; }
+
+
+
+
 
 
 
@@ -1997,7 +4002,15 @@
 
 
 
+
+
+
+
 .contact_mainbody .contactright .contactform .contactform_wrapper .formgroup1{ width:100%; float:none;}
+
+
+
+
 
 
 
@@ -2005,23 +4018,49 @@
 
 
 
+
+
+
+
 .contactform_wrapper .forminput1 {
+
+
 
     width: 100%; float:none;
 
+
+
 }
+
+
 
 .contactform_wrapper .forminput2 {
 
+
+
     width: 100%; float:none;
 
+
+
 }
+
+
 
 .contact_mainbody .contactright .contactform .contactform_wrapper label{ width:100%; float:none; text-align:left;}
 
 
 
+
+
+
+
 .row{ padding-left:0; padding-right:0px; margin:0;  }
+
+
+
+
+
+
 
 
 
@@ -2039,25 +4078,59 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 .bannertext{  max-width:96%; left:0; top:0; margin-left:-0.5%;}
+
+
+
+
 
 
 
 .block4part1text h2{ padding:0 10px; font-size:38px; line-height:40px;}
 
+
+
 .block4part1text h3{ font-size:52px; padding:0 10px; margin:5px 0 0 0;}
+
+
 
 .block5part2 .well .carousel-control{ top:0;  font-size: 60px;
 
+
+
     padding-top:0%;
 
+
+
     width: 5%;}
+
+
 
 .block5part2  .col-xs-12{ padding:0; width:100%;}
 
 
 
+
+
+
+
 .part2textmenu span{ display:block; background:none; padding:5px; text-align:center; margin:0 ; border-bottom:solid 1px #ccc;}
+
+
+
+
 
 
 
@@ -2067,44 +4140,93 @@
 
 
 
-	.virtualreality_formmain{ float:none; margin:0 auto; margin-top:30px; width:100%; margin-bottom:20px; padding-bottom:10px;}
+
+
+
+
+
+
+	.virtualreality_formmain{ float:none; margin:0 auto; margin-top:30px; width:100%; margin-bottom:20px; padding-bottom:30px;}
+
+
 
 	
+
+
 
 	.virtualreality_formmain .formwrapper{ width:480px; margin:0 auto; margin-top:20px;}
 
+
+
 	
+
+
 
 	.virtualreality_formmain h3{ width:280px; margin:0 auto;}
 
+
+
 	
+
+
 
 	.virtualreality_formmain .formwrapper .form-group .labeltext1{ width:100%; margin:0 auto; float:none; text-align:left;}
 
+
+
 	
+
+
 
 	.virtualreality_formmain .formwrapper .form-group .input1{ width:100%; float:none;}
 
-	
+
 
 	
+
+
+
+	
+
+
 
 	.virtualreality_formmain .subbtn{ float:none; margin:0 auto; display:block;}
 
+
+
 	
+
+
 
 	.uploadbtn_main .uploadbtn{ margin-left:0px;}
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:640px){
 
 
+
+
+
 .category_mainwrapper .categoryblock .category_blockheading{ width:90%;}
 
+
+
 .block4part1text h2{ font-size:35px; line-height:38px;}
+
+
+
+
+
+
 
 
 
@@ -2114,7 +4236,15 @@
 
 
 
+
+
+
+
 .block4part2 .part2bg{ display:none;}
+
+
+
+
 
 
 
@@ -2122,17 +4252,35 @@
 
 
 
+
+
+
+
 .part3text{ background:none; width:100%; height:auto;   padding:0; margin:0 auto; }
+
+
+
+
 
 
 
 .part3text .h6text{background:#e90101; width:auto; height:auto; padding:3px 20px 0 20px; display:block; padding:20px 10px; }
 
+
+
 .part3text h6{ color:#fff; line-height:28px;  text-align:center;  font-size:20px; color:#fff; font-family:'MyriadPro-Regular';  font-weight:normal; display:block; margin:0; padding:0;}
 
 
 
+
+
+
+
 .part3text h6 strong{ font-size:48px; font-family:'MyriadPro-Semibold'; display:inline; vertical-align:middle; padding:0 5px;}
+
+
+
+
 
 
 
@@ -2154,13 +4302,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .imagegallery .gallery_image_block .imgbx1{ width:100%; height:400px; overflow:hidden; float:none; margin-bottom:10px;}
+
+
 
 .imagegallery .gallery_image_block .imgbx2{ width:100%; height:500px; overflow:hidden; float:none; margin-bottom:10px;}
 
+
+
 	
 
+
+
 .imagegallery .gallery_image_block .imgbx3{ width:100%; height:350px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -2170,7 +4348,17 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx5{  width:100%; height:280px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -2180,7 +4368,15 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx7{ width:100%; height:250px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
@@ -2190,7 +4386,17 @@
 
 
 
+
+
+
+
+
+
 .imagegallery .gallery_image_block .imgbx9{width:100%; height:250px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
@@ -2200,7 +4406,17 @@
 
 
 
+
+
+
+
+
+
 .services_toptext .services_topimg{ float:none; margin:0 auto; margin-bottom:20px; display:block;} 
+
+
+
+
 
 
 
@@ -2208,7 +4424,15 @@
 
 
 
+
+
+
+
 .services_textwrapper p{ text-align:center;}
+
+
+
+
 
 
 
@@ -2218,7 +4442,17 @@
 
 
 
+
+
+
+
+
+
 .moretext .more_img{ float:none; margin:0 auto; margin-bottom:20px; display:block;}
+
+
+
+
 
 
 
@@ -2226,57 +4460,117 @@
 
 
 
+
+
+
+
 .pilotregistration_registration_bottom form{padding-left:20px; padding-right:20px;}
+
+
+
+
 
 
 
 .newproductitemrow{ width:90%; margin:0 auto; margin-bottom:50px;}
 
+
+
 .newproductwrapper .newproductrightcon .newpromenu1{ float:none; margin:0 auto;}
+
 .newproductwrapper .newproductrightcon .newpromenu2{ float:none; margin:20px auto;}
+
 .newproductwrapper .newproductrightcon .newpromenu3{ float:none; margin:0 auto;}
+
+
 
 .newproblockrow{ width:300px; float:none; margin:20px auto;}
 
+
+
 }
+
+
 
 @media(max-width:630px){
 
+
+
 .myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog4{ margin-top:0; padding-left:0px;}
+
+
 
 .myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog2{ display:block; margin:0 auto; width:188px; margin-bottom:12px;  float:none;}
 
+
+
 .myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog5{ width:300px; margin:20px auto; float:none; display:block;}
+
+
 
 .myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog5 button{ margin-top:0px;}
 
 
+
+
+
 .myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog6{ width:300px; margin:20px auto; float:none; display:block;}
+
+
 
 .myaccountheader .myaccountcontainer .myaccountheader_detail .maheaderblog6 button{ margin-top:0px;}
 
+
+
 }
+
+
+
 
 
 @media(max-width:580px){
 
 
 
+
+
+
+
 .block4part1text h2{ font-size:30px; line-height:34px;}
+
+
 
 .block4part1text h3{ font-size:18px; padding:0 10px; margin:5px 0 0 0;}
 
 
 
+
+
+
+
 .block5part2 .well .carousel-control{ top:0;  font-size: 46px;
+
+
 
     padding-top:0%;
 
+
+
     width: 5%;}
+
+
 
 	
 
+
+
 .gellary_bannertext2{ max-width:90%;}
+
+
+
+
+
+
 
 
 
@@ -2286,29 +4580,59 @@
 
 
 
+
+
+
+
 .containerviewmore {
+
     background: #f30100 url("../images/viewicon.png") no-repeat scroll 30px 22px;
+
     color: #fff !important;
+
     display: block;
+
     font-family: "OpenSans-Semibold";
+
     font-size: 30px;
+
     height: 72px;
+
     line-height: 72px;
+
     margin: 25px auto 40px;
+
     padding: 0 0 0 96px;
+
     width: 280px;
+
+}
+
+
+
+
+
+
+
 }
 
 
-
-}
 
 @media(max-width:480px){
+
 .myaccountplanblock .myaccountplanblock_textblock { background-size:26%;
+
 }
+
+
+
 
 
 .top_slider_block .logo img{ width:280px; display:block; margin:0 auto;}
+
+
+
+
 
 
 
@@ -2318,9 +4642,19 @@
 
 
 
+
+
+
+
+
+
 .block4part1text{  top:30%;}
 
+
+
 .block4part1text h2{ padding:0 10px; font-size:28px; line-height:30px;}
+
+
 
 .block4part1text h3{ font-size:18px; padding:0 10px; margin:5px 0 0 0;}
 
@@ -2328,23 +4662,51 @@
 
 
 
+
+
+
+
+
+
 .block5part2 .well .carousel-control{ top:0;  font-size: 40px;
+
+
 
     padding-top:0%;
 
+
+
     width: 5%;}
 
-	
+
 
 	
+
+
+
+	
+
+
 
 	.imagegallery .gallery_image_block .imgbx1{ width:100%; height:300px; overflow:hidden; float:none; margin-bottom:10px;}
 
+
+
 .imagegallery .gallery_image_block .imgbx2{ width:100%; height:400px; overflow:hidden; float:none; margin-bottom:10px;}
+
+
 
 	
 
+
+
 .imagegallery .gallery_image_block .imgbx3{ width:100%; height:350px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -2354,7 +4716,17 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx5{  width:100%; height:280px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -2364,7 +4736,15 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx7{ width:100%; height:240px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
@@ -2374,13 +4754,29 @@
 
 
 
+
+
+
+
+
+
 .imagegallery .gallery_image_block .imgbx9{width:100%; height:240px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
 .imagegallery .gallery_image_block .imgbx10{ width:100%; height:240px; overflow:hidden; float:none; margin:0 0 10px 0;}
 
+
+
 }
+
+
+
+
 
 
 
@@ -2390,11 +4786,25 @@
 
 
 
+
+
+
+
+
+
 .search_div{ width:300px;}
 
 
 
+
+
+
+
 .search_div .searchinput{ width:227px;}
+
+
+
+
 
 
 
@@ -2410,7 +4820,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 .partblock2 .subbtn{ float:none; margin-left:auto; margin-right:auto; display:block; margin-top:10px;}
+
+
 
 .partblock2 .formwrapper{ margin-top:34px;}
 
@@ -2422,13 +4846,35 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 	.imagegallery .gallery_image_block .imgbx1{ width:100%; height:200px; overflow:hidden; float:none; margin-bottom:10px;}
+
+
 
 .imagegallery .gallery_image_block .imgbx2{ width:100%; height:300px; overflow:hidden; float:none; margin-bottom:10px;}
 
+
+
 	
 
+
+
 .imagegallery .gallery_image_block .imgbx3{ width:100%; height:220px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -2438,7 +4884,17 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx5{  width:100%; height:180px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
+
+
 
 
 
@@ -2448,7 +4904,15 @@
 
 
 
+
+
+
+
 .imagegallery .gallery_image_block .imgbx7{ width:100%; height:160px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
@@ -2458,66 +4922,143 @@
 
 
 
+
+
+
+
+
+
 .imagegallery .gallery_image_block .imgbx9{width:100%; height:160px; overflow:hidden; float:none; margin:0 0 10px 0;}
+
+
+
+
 
 
 
 .imagegallery .gallery_image_block .imgbx10{ width:100%; height:160px; overflow:hidden; float:none; margin:0 0 10px 0;}
 
+
+
 .product_body_container{ width:96%; margin:25px auto;}
 
 
 
+
+
+
+
 }
+
+
+
 
 
 @media(max-width:420px){
+
 .category_mainwrapper .categoryblock .category_blockheading{ width:96%;}
 
+
+
 .category_mainwrapper .categoryblock .category_blockheading {
+
     padding-top: 12px;
-}
 
 }
+
+
+
+}
+
+
+
 
 
 @media(max-width:380px){
+
 .contact_bannertextedit{ width:90%;}
+
+
+
 
 
 .textcondiv{  width:80%;}
 
+
+
 .textcondiv2{  width:80%;}
 
+
+
 .containblock3 .partblock1 .parttext2{ width:100%;}
+
+
 
 .containblock3 .partblock3 .parttext2{ width:100%;}
 
 
 
+
+
+
+
 .block4part1text h2{ padding:0 6px; font-size:26px; line-height:30px;}
+
+
 
 .block4part1text h3{ font-size:14px; padding:0 6px; margin:5px 0 0 0;}
 
 
 
+
+
+
+
 .block5part2 .well .carousel-control{ top:0;  font-size: 30px;
+
+
 
     padding-top:0%;
 
+
+
     width: 5%;}
 
+
+
 	
+
+
 
 	.formmain{ width:90%; }
 
+
+
 	
+
+
 
 .pilotregistration_submit{width:80%;}	
 
+
+
 .pilotregistration_body_bottom .pilotregistration_body_bottom_content h1{font-size:22px;}
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2533,67 +5074,135 @@
 
 
 
+
+
+
+
 @media(max-width:1920px){
+
+
 
     .event_top_block .bannerbgred{ position: absolute;
 
+
+
         top: 43%;
+
+
 
         width: 52%;
 
+
+
         z-index: 4;}
+
+
 
     .event_top_block .logo{
 
+
+
         left: 13%;
+
+
 
         position: absolute;
 
+
+
         top: 26%;
 
+
+
         width: 18%;
+
+
 
         z-index: 6;}
 
+
+
     .event_bannertext{  left: 22%;
 
+
+
         position: absolute;
+
+
 
         top: 80%;
 
+
+
         z-index: 5;}
+
+
 
 		
 
+
+
 	.pilotregistration_top_block .bannerbgred{ position: absolute;
+
+
 
         top: 43%;
 
+
+
         width: 52%;
+
+
 
         z-index: 4;}
 
+
+
     .pilotregistration_top_block .logo{
+
+
 
         left: 13%;
 
+
+
         position: absolute;
+
+
 
         top: 26%;
 
+
+
         width: 18%;
+
+
 
         z-index: 6;}		
 
+
+
 }
 
+
+
 @media(max-width:1666px){
+
+
 
     .event_bannertext{left: 23%; top: 79%;}
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -2601,166 +5210,417 @@
 
 
 
+
+
+
+
     .event_top_block{position: relative;}
 
+
+
     .event_bannersloderbox{position: relative;}
+
+
 
     .event_bannertext{position: absolute; left: 23%; top:83%; z-index: 5; width: 20%;}
 
+
+
     .event_bannerbg img{width: 100%;}
+
+
 
     .event_top_block .bannerbgred{width: 53%; position: absolute; top: 44%; z-index: 4;}
 
+
+
     .event_top_block .logo{left: 13%; position: absolute; top: 27%; width: 19%; z-index: 6;}
 
+
+
     .event_top_block .event_bannerdrone{position: absolute; right: 18%; top: 43%; width: 34%;}
-	
-	.event_top_block .event_bannerdroneedit{position: absolute; right: 18%; top: 43%; width: 34%;}
 
 	
+
+	.event_top_block .event_bannerdroneedit{position: absolute; right: 18%; top: 43%; width: 34%;}
+
+
+
+	
+
+
 
 	 .event_top_block .event_bannerdronetour{position: absolute; right: 18%; top: 73%; width: 25%;}
 
+
+
 	 
+
+
 
 	 .pilotregistration_top_block{position: relative;}
 
+
+
     .event_bannersloderbox{position: relative;}
+
+
 
     .pilotregistration_top_block .event_bannertext{width: 28%;}
 
+
+
     .event_bannerbg img{width: 100%;}
+
+
 
     .pilotregistration_top_block .bannerbgred{width: 53%; position: absolute; top: 44%; z-index: 4;}
 
+
+
     .pilotregistration_top_block .logo{left: 13%; position: absolute; top: 27%; width: 19%; z-index: 6;}
+
+
 
     .pilotregistration_top_block .event_bannerdrone{position: absolute; right: 18%; top: 43%; width: 34%;}
 
+
+
 	
+
+
 
 	 .pilotregistration_top_block .event_bannerdronetour{position: absolute; right: 18%; top: 73%; width: 25%;}
 
+
+
 }
+
+
+
+
 
 
 
 @media(max-width:1199px){
 
 
+
+
+
+.pdiv4_text1{ width:80%;}
+
+
+
+.packagetextcon img{ max-width:99%; display:block; margin:0 auto; float:none;}
+
+
+
+.pdiv1 img {
+
+   max-width:99%; display:block; margin:0 auto; float:none;
+
+}
+
+
+
+.services_heading_pd div h3{min-width:inherit!important;}
+
+
+
+.services_heading_pd .head_content_new { padding:0 50px;}
+
+
+
 .newgalleryblocktop .gallerytopleftsearch{ width:100%;}
+
+
 
 .newgalleryblocktop .gallerytopleftsearch .stockphoto_selectoption{ width:30%;}
 
+
+
 .newgalleryblocktop .gallerytopleftsearch .stockphoto_inputoption{ width:70%;}
 
+
+
 .newgalleryblocktop .gallerytopleftsearch .stockphoto_inputoption .stockphotosearch{ width:70%;}
+
+
+
 
 
 .newgalleryblocktop{ margin-top:10px;}
 
 
+
+
+
   .row{ padding-left:0; padding-right:0px; margin:0;  }
 
 
+
+
+
 .servicesscon7{ width:100%; float:none;}
+
 .moretext .more_img{ float:none; margin:0 auto; margin-bottom:20px; display:block;}
+
+
+
+
+
 
 
 
 
     .event_body_container{margin-top: 10px;}
 
+
+
     .event_top_block .bannerbgred img{display: none;}
+
+
 
     .event_top_block .bannerbgred{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; width: 100%; background: #ff0000; height: 5px;}
 
+
+
     .event_top_block .logo{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
+
+
 
     .event_top_block .logo img{ width:330px; display:block; margin:0 auto;}
 
+
+
     .event_bannertext{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
+
+
 
     .event_top_block .event_bannerdrone{display: none;}
 
+
+
 	  .event_top_block .event_bannerdroneedit{display: none;}
+
+
 
 	.event_top_block .event_bannerdronetour{display: none;}
 
 
 
+
+
+
+
     .event_body_container_section{padding: 0 15px;}
+
+
 
     .event_body_container_block_odd .event_body_container_block_top .event_body_banner_white{width: 80%; background: url("../images/event_body_banner_whiteimg.png") no-repeat bottom left;}
 
+
+
     .event_body_container_block_even .event_body_container_block_top .event_body_banner_white{background: url("../images/event_body_banner_whiteimg2.png") no-repeat bottom right; width: 80%;}
+
+
 
     .event_body_container_block_odd .event_body_container_block_bottom{padding-right: 20px;}
 
+
+
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_left{width: 92%;}
+
+
 
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_right{width: 7%;}
 
-	
+
 
 	
+
+
+
+	
+
+
 
 	.pilotregistration_top_block .bannerbgred img{display: none;}
 
+
+
     .pilotregistration_top_block .bannerbgred{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; width: 100%; background: #ff0000; height: 5px;}
+
+
 
     .pilotregistration_top_block .logo{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
 
+
+
     .pilotregistration_top_block .logo img{ width:330px; display:block; margin:0 auto;}
+
+
 
     .pilotregistration_top_block .event_bannertext{width: auto;}
 
+
+
     .pilotregistration_top_block .event_bannerdrone{display: none;}
 
+
+
 	
+
+
 
 	.pilotregistration_top_block .event_bannerdronetour{display: none;}
 
+
+
 	
+
+
 
 	.pilotregistration_body_container{margin-top:3%;}
 
+
+
 	.pilotregistration_body_container .pilotregistration_body_container_section{padding:0 15px;}
 
+
+
 }
+
+
+
 
 
 @media(max-width:1023px){
+
 .mah2block h3{ width:100%; float:none;    border-bottom: 1px solid #b6b6b6; margin-bottom:13px;}
 
 
+
+.pdiv2 .pdli2{ width:100%; float:left; margin: 0; line-height:34px;}
+
+
+
+.pdiv1 .ptext1{ width:100%; float:left; margin:30px 0; line-height:34px;}
+
+.pdiv2 p{ padding-bottom:0px; margin-bottom:0px;}
+
+
+
+.pdiv2 ul{ padding-bottom:0px; margin-bottom:0px;}
+
+
+
 }
+
+
 
 @media(max-width:991px){
 
 
 
+.galleryimgblock .gallerybox{ padding:0px; position:relative; width:45%; height:278px; overflow:hidden; margin:0 2% 5px 2%;}
+
+
+
+.packagetextcon p{ text-align:center; padding:2px 0;}
+
+
+
+.pdiv2 {
+
+    padding: 15px 5px;
+
+}
+
+
+
+.pdiv2 .pdli2 ul li {
+
+    background: rgba(0, 0, 0, 0) url("../images/newlibg.png") no-repeat  top center;
+
+    padding: 16px 5px 35px 5px; text-align:center; line-height:24px;
+
+}
+
+
+
+
+
+.pdli1 li{ background: rgba(0, 0, 0, 0) url("../images/newlibg.png") no-repeat  top center;
+
+    padding: 16px 5px 35px 5px; text-align:center; line-height:24px;}
+
+
+
+.pdli1 {
+
+    background: rgba(0, 0, 0, 0) url("../images/pd_img2.png") no-repeat scroll top center;
+
+    margin: 30px 0;
+
+    padding: 70px 5px 5px 5px;
+
+}
+
+
+
+.pdiv4_wrapper p{ padding: 15px 5px;}
+
+
+
+.packagetextcon{ width:90%; margin:0 auto;}
+
+.packagetextcon img{ display:block; margin:0 auto; float:none;}
+
+
 
 .mah2block h3{ width:100%; float:none;    border-bottom: 1px solid #b6b6b6; margin-bottom:24px;}
+
 .mah2block{ padding-bottom:24px;}
+
+
 
 .stockdetail_blog .details_text{ padding:0; margin-top:35px;}
 
+
+
     .event_body_container_block_odd .event_body_container_block_top .event_body_banner_white{background: none; position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; width: 100%;}
 
+
+
     .event_body_container_block_odd .event_body_container_block_top .event_body_banner_white ul{padding: 15px 0;}
+
+
 
     .event_body_container_block_odd .event_body_container_block_top li{display: block; text-align: center; border-right: 0px;  margin-top: 10px; padding: 0px 0 5px 0;}
 
 
 
+
+
+
+
     .event_body_container_block_odd .event_body_container_block_bottom{padding-right: 0px;}
+
+
 
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_right{width: 100%; float: none; display: block;}
 
+
+
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_right span{float: none; width: 100%; display: block; text-align: center; margin-bottom: 20px;}
 
+
+
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_left{width: 100%; float: none; display: block; margin: 10px auto;}
+
+
 
     .event_body_container_block_odd .event_body_container_block_bottom .event_body_container_block_bottom_left span{float: none; display: block; margin: 0 auto; }
 
@@ -2768,30 +5628,65 @@
 
 
 
+
+
+
+
+
+
     .event_body_container_block_even .event_body_container_block_top .event_body_banner_white{background: none; width: 100%; position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px;}
+
+
 
     .event_body_container_block_even .event_body_container_block_top li{display: block; text-align: center; border-right: 0px; margin-top: 10px; padding: 0px 0 5px 0;}
 
+
+
     .event_body_container_block_even .event_body_container_block_bottom .event_body_container_block_bottom_right{width: 100%; float: none; display: block;}
+
+
 
     .event_body_container_block_even .event_body_container_block_bottom .event_body_container_block_bottom_right span{float: none; width: 100%; display: block; text-align: center; margin-bottom: 20px;}
 
+
+
     .event_body_container_block_even .event_body_container_block_bottom .event_body_container_block_bottom_left{width: 100%; float: none; display: block; margin: 10px auto;}
 
+
+
     .event_body_container_block_even .event_body_container_block_bottom .event_body_container_block_bottom_left span{float: none; display: block; margin: 0 auto; }
+
 	
+
 	.choutblock1{ padding:12px 0; width:90%; margin:0 auto; float:none;}
+
 	
+
 		.choutblock1  .chakeboxwrapper1{ padding-left:12px; padding-right:12px;}
+
 	.choutblock2{ padding:12px; width:90%; margin:0 auto; float:none;}
+
 	.choutblock3{ padding:12px; width:90%; margin:0 auto; float:none;}
+
 	.choutblock4{ padding:12px; width:90%; margin:0 auto; float:none;}
+
 	.choutblock5{ padding:12px; width:90%; margin:0 auto; float:none; margin-top:20px;}
+
 	
+
 	.chakeoutbtngroup a{ width:200px;}
+
 	
+
 	.newproductdetailright{ margin:0 auto;}
+
 }
+
+
+
+
+
+
 
 
 
@@ -2799,44 +5694,87 @@
 
 @media(max-width:767px){
 
+
+
     .row{ padding-left:0; padding-right:0px; margin:0;  }
+
+
 
 .chakeoutbtngroup a{ width:250px; float:none; margin:0 auto; margin-bottom:15px;}
 
 
+
+
+
 .choutblock1 .chakeboxwrapper1{ background: url("../images/checkout-img1.png") no-repeat center top; min-height:inherit; margin-top:0; padding-top:160px; padding-bottom:40px; }
 
+
+
 .choutblock1 .chakeboxform1 .formgroup{ width:100%; margin:0 auto;}
+
 .choutblock1 .chakeboxform1 .formgroup label{ float:none; width:100%; text-align:left;}
+
+
 
 .choutblock1 .chakeboxform1 .formgroup .form-control{ float:none; width:100%; margin-bottom:15px; }
 
 
 
+
+
+
+
 .choutblock2 .chakeboxform2 .formgroup{ width:100%; margin:0 auto;}
+
+
 
 .choutblock2 .chakeboxform2 { width:100%; margin:0 auto;}
 
 
+
+
+
 .choutblock2 .chakeboxform2 .formgroup label{ float:none; width:100%; text-align:left;}
+
+
 
 .choutblock2 .chakeboxform2 .formgroup .form-control{ float:none; width:100%; margin-bottom:10px; }
 
+
+
 .choutblock2 .chakeboxform2 .formgroup .form-controltextarea{ float:none; width:100%; margin-bottom:10px; }
+
+
 
 .choutblock2 .chakeboxform2 .formgroup .form-controlselecct{ float:none; width:100%; margin-bottom:10px; }
 
 
 
+
+
+
+
     .top_menu_block{ padding:0;}
+
+
 
     .top_menu_block .navbar-header{ padding:0 0; width:96%; margin-left:auto; margin-right:auto;}
 
 
 
+
+
+
+
     .top_menu_block .nav{ text-align:center; width:100%; padding:0 0; background:#f8f8f8;}
 
+
+
     .top_menu_block .nav a{ display:block; padding:10px 0; font-size:16px; background:none; border-bottom:solid 1px #e7e7e7;}
+
+
+
+
 
 
 
@@ -2844,7 +5782,15 @@
 
 
 
+
+
+
+
     .top_menu_block .navbar-nav{ margin:0; padding:0;}
+
+
+
+
 
 
 
@@ -2852,7 +5798,13 @@
 
 
 
+
+
+
+
     .responsivemenu{ display:inline-block; 	font-family:'OpenSans-Semibold'; font-size:18px; color:#f30100; font-weight:bold; padding:15px 0 0 0;}
+
+
 
     .bannertext{  max-width:96%; left:0; top:0; margin-left:-0.5%;}
 
@@ -2860,33 +5812,73 @@
 
 
 
+
+
+
+
+
+
     .block4part1text h2{ padding:0 20px; font-size:40px; line-height:44px;}
+
+
 
 	
 
+
+
 	.resumefilename2 {
+
+
 
     margin-left: 0;
 
+
+
     display: block;
+
+
 
 }
 
 
+
+
+
 .newproductdetailright{ margin:0 auto; width:100%; padding:0 10px;}
+
+
 
 .detailslider2 .prosubblock1{ height:auto;}
 
+
+
 .detailslider2 .prosubblock1 .text1con{ width:100%; text-align:center; line-height:35px;}
+
+
 
 .detailslider2 .prosubblock1 .text2con{ width:100%; text-align:center; padding-bottom:8px;} 
 
 
 
+
+
+
+
 .newproductdetailright .productdetail_topblock .product_imageblock{ width:80%; margin:0 auto;}
+
 .bestsellerscontain{ width:80%; margin:0 auto;}
 
+
+
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -2896,9 +5888,25 @@
 
 
 
+
+
+
+
 	.pilotregistration_top_block .event_bannertext{width: 80%; margin: 0 auto;}
 
+	
+
+	
+
+	.galleryimgblock .gallerybox{ padding:0px; position:relative; width:45%; height:200px; overflow:hidden; margin:0 2% 5px 2%;}
+
+
+
 }
+
+
+
+
 
 
 
@@ -2906,21 +5914,45 @@
 
 
 
+.gellary_bannertextnew{ max-width:80%;}
+
+
+
+	.galleryimgblock .gallerybox{ padding:0px; position:relative; width:100%; height:300px; overflow:hidden; margin:5px auto; float:none;}
+
+
+
 .ma_categoryd{ float:none; margin:0 auto; display:block;  width:100%; margin-top:20px; text-align:center;}
+
 .masearch{ float:none; margin:0 auto;  display: block; width:300px; }
+
+
+
 
 
     .event_top_block .logo{width: 90%; margin: 0 auto;}
 
+
+
     .event_top_block .logo img{width: 100%;}
+
+
 
     .event_bannertext{width: 80%; margin: 0 auto;}
 
+
+
 	
+
+
 
 	.pilotregistration_top_block .logo{width: 90%; margin: 0 auto;}
 
+
+
     .pilotregistration_top_block .logo img{width: 100%;}
+
+
 
 }
 
@@ -2928,7 +5960,19 @@
 
 
 
+@media(max-width:340px){
+
+.galleryimgblock .gallerybox{ padding:0px; position:relative; width:100%; height:280px; overflow:hidden; margin:5px auto; float:none;}
+
+}
+
 /*--------------------------------------------------end-gellary-page--------------------------------------------------------*/
+
+
+
+
+
+
 
 
 
@@ -2938,35 +5982,75 @@
 
 
 
+
+
+
+
 .tabdownloadbtn{ width:100%; height:72px; display:block; text-align:center; margin-top:25px; background:#f30100 url("../images/stock-details_downloadicon.png") no-repeat  100px center; line-height:72px; font-size:30px; color:#fff; font-family:'OpenSans-Semibold';}
+
+
 
 .stockdetail_blog2 .sdtextleft{ width:100%; text-align:center; float:none;}
 
+
+
 .sdseemore{ display:block; margin:0 auto; margin-top:20px; float:none;}
+
+
 
     .gellary_body_container{margin-top: 10px;}
 
+
+
     .gellary_top_block .bannerbgred img{display: none;}
+
+
 
     .gellary_top_block .bannerbgred{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; width: 100%; background: #ff0000; height: 5px;}
 
+
+
     .gellary_top_block .logo{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
+
+
 
     .gellary_top_block .logo img{ width:330px; display:block; margin:0 auto;}
 
+
+
     .gellary_bannertext{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
 
+
+
     .gellary_top_block .event_bannerdrone{display: none;}
+
+
 
 	   .gellary_bannertext2{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
 
 
+
+
+
  .gellary_bannertextnew{position: inherit; top: 0px; bottom: 0px; right: 0px; left: 0px; display: block; width: auto; margin: 0 auto;}
+
  
+
  
+
+
+
 
 
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -2978,37 +6062,87 @@
 
 
 
+
+
+
+
    
+
+
+
+
 
 
 
     .gellary_top_block .logo{width: 90%; margin: 0 auto;}
 
+
+
     .gellary_top_block .logo img{width: 100%;}
+
+
 
     .gellary_bannertext{width: 80%; margin: 0 auto;}
 
 
 
+
+
+
+
 	.services_heading .headingline{ padding:0 5px;}
 
+
+
 	
+
+
 
 	.services_heading .headingline label {
 
+
+
     border-left: 1px solid #fff;
+
+
 
     border-right: 1px solid #fff;}
 
+
+
 	
+
+
 
 	.services_heading .headingline h3 {
 
 
 
+
+
+
+
 	padding: 18px 5px;
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3028,7 +6162,17 @@
 
 
 
+
+
+
+
 #event-rsvp .subbtn{width: 230px;}
+
+
+
+
+
+
 
 
 
@@ -3036,13 +6180,27 @@
 
 .contact_mainbody .contactleft .contact_left_top_block1 img {
 
+
+
     margin: 0 14px;
 
+
+
 }
+
+
 
 .contacttop_heading label{padding: 0 10px 0 12px;}
 
+
+
 }
+
+
+
+
+
+
 
 
 
@@ -3052,107 +6210,219 @@
 
 
 
+
+
+
+
 .main-header .logo .logo-lg{width:160px; margin:0 auto;}
+
+
 
 .content-wrapper{margin-top:20px;}
 
+
+
 .newblock1 label{display:block; text-align:center; width:100%; margin:0 auto; margin-bottom:10px; float:none;}
 
+
+
 /*.newblock1 input{width:90%!important; margin:0 auto; display:block; margin-bottom:6px; float:none!important;}*/
+
+
 
 .newblock1 .clear_datebtn{width:120px; margin:0 auto; display:block; float:none; margin-bottom:6px;}
 
 
+
+
+
 .detailslider1{ position:relative; margin-top:35px; padding:0 30px; width:270px; margin:0 auto;}
+
+
 
 .detailslider1 .bx-prev{ font-size:0px; background: url("../images/mobilesliderrleft.png") no-repeat; width:29px; height:144px; display:block; top:0; left:0; position:absolute;}
 
+
+
 .detailslider1 .bx-next{ font-size:0px; background: url("../images/mobilesliderright.png") no-repeat; width:29px; height:144px; display:block; top:0; right:0;  position:absolute;}
+
+
 
 .newproductdetailright .productdetail_topblock{ min-height:inherit; padding-bottom:10px;}
 
+
+
 .productdetail_toptextblock{ width:90%; margin:0 auto;}
+
+
 
 .successwrapper img{ max-width:80%;}
 
+
+
 .successwrapper{ padding-left:10%; padding-right:10%;}
+
+
 
 .successwrapper h2{ background:none; text-align:center;}
 
+
+
 .successwrapper h2 span{ background:#fff; display:inline-block; padding:0 0 0 0;}
+
+
 
 }
 
+
+
 @media screen and (max-width:380px){
+
  .new_menu_block .new_menu_list a{ font-size:16px; padding: 0 17px 0 13px;}
+
  
+
  .choutblock3 .paymentoptionblock{ width:167px; float:left; margin:0 auto; margin-top:20px!important;}
+
  
+
   .choutblock3 .paymentoptionblock img{ margin-bottom:10px;}
+
   
+
   .choutblock4 table th{ padding:6px; font-size:16px;}
+
   
+
   .choutblock4 table td{ padding:6px;}
+
   
+
   .choutblock4 table .totaltext span{ font-size:16px;}
+
   
+
   .totalprice{ font-size:16px;}
+
  
+
  }
+
  
+
  
+
  @media screen and (max-width:400px){
+
+
+.filediv .hoverfile .hoverdownload{  margin:25px 10%;}
+.filediv .hoverfile .hoverpreview{  margin:25px 10%;}
+.filediv .hoverfile .hoverzoom{ margin:25px 10%;}
+.filediv .hoverfile .hoverdown{ margin:25px 10%;}
  
+
  .carttotal_wrapper .carttotal_box2 .subtotalbox label{ width:160px;}
+
  
+
  .carttotal_wrapper .carttotal_box2 .subtotalmain label{ width:160px;}
+
  
+
  .carttotal_wrapper .carttotal_box2 .subtotalbox span{ width:96px;}
+
  
+
  .featuredproductstext{ font-size:18px;}
+
  
+
  .detailslider2 .prosubblock1 .text1con{ font-size:12px;}
+
  
+
  .detailslider2 .prosubblock1 .text2con{ padding-top:4px; padding-bottom:6px;}
+
  }
+
  
+
  
+
   @media screen and (max-width:1320px){
+
  .filediv{ width:22.8%;}
+
  
+
   }
+
   
+
   
+
     @media screen and (max-width:1025px){
+
  .filediv{ width:30.8%;}
+
  
+
   }
+
   
+
   
+
       @media screen and (max-width:991px){
+
  .filediv{ width:17.8%;}
+
  
+
   }
+
   
+
   
+
     @media screen and (max-width:926px){
+
  .filediv{ width:22.8%;}
+
  
+
   }
+
   
+
       @media screen and (max-width:710px){
+
  .filediv{ width:30.8%;}
+
  
+
   }
+
   
+
   
+
         @media screen and (max-width:550px){
+
  .filediv{ width:47.8%;}
+
  
+
   }
+
   
+
   
+
           @media screen and (max-width:400px){
+
  .filediv{ width:100%; margin:10px auto;}
+
  
+
   }

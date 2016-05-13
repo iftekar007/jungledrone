@@ -2927,8 +2927,21 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
     if(typeof($cookieStore.get('filecartarr'))!='undefined') $rootScope.filecartarr=$cookieStore.get('filecartarr');
 
 
-    $scope.fileidstr='';
+    $rootScope.fileidstr='';
     var log = [];
+
+
+    $rootScope.emptyfilecart=function(){
+
+       setTimeout(function(){
+
+           $cookieStore.remove('filecartarr');
+           $rootScope.filecartarr=[];
+       },6000);
+
+
+
+    }
 
     angular.forEach($rootScope.filecartarr, function(value, key) {
         //console.log( value);
@@ -2937,8 +2950,8 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
          console.log( value.cat_name);
          console.log( value['id']);*/
 
-        if($scope.fileidstr.length>1)$scope.fileidstr=$scope.fileidstr+"|"+value.id;
-        else $scope.fileidstr=value.id;
+        if($rootScope.fileidstr.length>1)$rootScope.fileidstr=$rootScope.fileidstr+"|"+value.id;
+        else $rootScope.fileidstr=value.id;
 
 
     }, log);
@@ -2963,7 +2976,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
         if(typeof($cookieStore.get('filecartarr'))!='undefined') $rootScope.filecartarr=$cookieStore.get('filecartarr');
 
 
-        $scope.fileidstr='';
+        $rootScope.fileidstr='';
         var log = [];
 
         //$rootScope.filecartarr.push($rootScope.filecartval);
@@ -2984,8 +2997,8 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
                 $rootScope.filecartarr1.push(value);
 
-                if($scope.fileidstr.length>1)$scope.fileidstr=$scope.fileidstr+"|"+value.id;
-                else $scope.fileidstr=value.id;
+                if($rootScope.fileidstr.length>1)$rootScope.fileidstr=$rootScope.fileidstr+"|"+value.id;
+                else $rootScope.fileidstr=value.id;
                 //
 
             }
@@ -4675,9 +4688,14 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
 jungledrone.controller('addadmin', function($scope,$state,$http,$cookieStore,$rootScope) {
     // $state.go('login');
     $scope.contact=['Anytime','Early morning','Mid morning','Afternoon','Early evening','Late evening'];
+
+    $scope.form={};
+    $scope.form.address='';
     $scope.submitadminForm = function(){
 
         console.log($scope.adminUrl+'addadmin');
+
+
 
 
         $http({
@@ -5748,7 +5766,7 @@ jungledrone.controller('addevent',function($scope,$state,$http,$cookieStore,$roo
 jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$rootScope,$log,Upload,uibDateParser){
 
 
-    $scope.format = 'yyyy/MM/dd';
+    $scope.format = 'MM/dd/yyyy';
     $scope.date = new Date();
     $scope.open = function() {
         $scope.opened = true;
@@ -6056,6 +6074,9 @@ jungledrone.controller('addflight',function($scope,$state,$http,$cookieStore,$ro
         $log.log('ET changed to: ' + $scope.endtime);
         $log.log('ET changed to: ' +s+'====--=='+e);
 
+        $scope.form.start_time=convert(s);
+        $scope.form.end_time=convert(e)
+
         $scope.tdif=parseInt(convert(e)-convert(s));
     };
 
@@ -6165,7 +6186,7 @@ jungledrone.controller('editflight',function($scope,$state,$http,$cookieStore,$r
 
 
 
-    $scope.format = 'yyyy/MM/dd';
+    $scope.format = 'MM/dd/yy';
     $scope.date = new Date();
     $scope.open = function() {
         $scope.opened = true;
@@ -7082,7 +7103,6 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
         $rootScope.stateIsLoading = false;
         console.log(data);
         $scope.eventlist=data;
-        //$scope.eventlistp = $scope.eventlist.slice($scope.begin, parseInt($scope.begin+$scope.perPage));
         $scope.eventlistp = data;
 
 
@@ -7100,12 +7120,6 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
 
     $scope.setdata = function(item){
 
-        /*console.log('daterange'+item);
-
-        console.log('in set data ');
-        console.log($scope.sdate+'in set data s');
-        console.log($scope.edate+'in set data  e');*/
-
         $scope.nedate=convert($scope.edate);
         $scope.nsdate=convert($scope.sdate);
         if(typeof ($scope.edate)!='undefined' && typeof ($scope.sdate)!='undefined' && $scope.edate!=null && $scope.sdate!=null) {
@@ -7113,16 +7127,10 @@ jungledrone.controller('flightlist',function($scope,$state,$http,$cookieStore,$r
             console.log($scope.nedate + 'ed');
             console.log($scope.nsdate + 'sd');
             console.log(item.realdatef + 'red');
-            //if ($scope.edate.lenght > 0 && $scope.sdate.length > 0) {
 
-
-
-                if (item.realdatef <= $scope.nedate && item.realdatef >= $scope.nsdate)
-                    return true;
-                else return false;
-          //  }
-
-            //return false;
+            if (item.realdatef <= $scope.nedate && item.realdatef >= $scope.nsdate)
+                return true;
+            else return false;
         }
         else{
             return true;
@@ -9891,6 +9899,8 @@ jungledrone.controller('adddocumentcategory',function($scope,$state,$http,$cooki
 
     $scope.addcategorysubmit=function() {
 
+        $scope.form.add_user=$rootScope.form.userid;
+
 
         $http({
             method  :   'POST',
@@ -10349,7 +10359,13 @@ jungledrone.controller('adddocument',function($scope,$state,$http,$cookieStore,$
         });
     }
 
+
+
+
     $scope.addproductsubmit=function() {
+
+        $scope.form.add_user=$rootScope.userid;
+        $scope.form.category_id=JSON.stringify($scope.form.category_id);
 
         $('.errormsg').html('');
 
@@ -10523,9 +10539,10 @@ jungledrone.controller('editdocument',function($scope,$state,$http,$cookieStore,
             file_url: data.file_url,
             name: data.name,
             description: data.description,
-            category_id:{
+            /*category_id:{
                 id : data.category_id,
-            } ,
+            } ,*/
+            category_id:JSON.parse(data.category_id),
             status : data.status
         }
     });
@@ -10610,6 +10627,10 @@ jungledrone.controller('editdocument',function($scope,$state,$http,$cookieStore,
     }
 
     $scope.addproductsubmit=function() {
+
+        $scope.form.add_user=$rootScope.userid;
+        $scope.form.category_id=JSON.stringify($scope.form.category_id);
+        //category_id:JSON.parse(data.category_id),
 
         $('.errormsg').html('');
 
@@ -10818,10 +10839,10 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
 
 
-    $rootScope.downloadcart=function (item) {
+    $rootScope.downloadcart=function () {
 
 
-        $scope.fileidstr='';
+        $rootScope.fileidstr='';
         var log = [];
 
         angular.forEach($rootScope.filecartarr, function(value, key) {
@@ -10831,13 +10852,21 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
              console.log( value.cat_name);
              console.log( value['id']);*/
 
-            if($scope.fileidstr.length>1)$scope.fileidstr=$scope.fileidstr+"|"+value.id;
-            else $scope.fileidstr=value.id;
+            if($rootScope.fileidstr.length>1)$rootScope.fileidstr=$rootScope.fileidstr+"|"+value.id;
+            else $rootScope.fileidstr=value.id;
 
 
         }, log);
 
-        window.location.href=$scope.adminUrl+'downloadfilecart/'+$scope.fileidstr+'/'+$rootScope.userid;
+        //setTimeout(function(){
+
+            $cookieStore.remove('filecartarr');
+            $rootScope.filecartarr=[];
+       // },1000);
+
+        window.location.href=$scope.adminUrl+'downloadfilecart/'+$rootScope.fileidstr+'/'+$rootScope.userid;
+
+
 
     }
 
@@ -10861,7 +10890,7 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
         $cookieStore.put('filecartarr',$rootScope.filecartarr);
 
 
-        $scope.fileidstr='';
+        $rootScope.fileidstr='';
         var log = [];
 
         angular.forEach($rootScope.filecartarr, function(value, key) {
@@ -10871,14 +10900,58 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
              console.log( value.cat_name);
              console.log( value['id']);*/
 
-            if($scope.fileidstr.length>1)$scope.fileidstr=$scope.fileidstr+"|"+value.id;
-            else $scope.fileidstr=value.id;
+            if($rootScope.fileidstr.length>1)$rootScope.fileidstr=$rootScope.fileidstr+"|"+value.id;
+            else $rootScope.fileidstr=value.id;
 
 
         }, log);
 
-        console.log($scope.fileidstr);
+        console.log($rootScope.fileidstr);
     }
+    $rootScope.addcartfilendownload=function(item){
+
+        $rootScope.filecartarr=[];
+
+       if(typeof($cookieStore.get('filecartarr'))!='undefined')
+           $rootScope.filecartarr=$cookieStore.get('filecartarr');
+
+        $rootScope.filecartval={
+
+            'name':item.name,
+            'id':item.id,
+            'file_name':item.file_name,
+            'file_url':item.file_url,
+            'file_type':item.file_type,
+        }
+
+        $rootScope.filecartarr.push($rootScope.filecartval);
+        $cookieStore.put('filecartarr',$rootScope.filecartarr);
+
+
+        $rootScope.fileidstr='';
+        var log = [];
+
+        angular.forEach($rootScope.filecartarr, function(value, key) {
+            //console.log( value);
+            /*  console.log( key);
+             console.log( value.id);
+             console.log( value.cat_name);
+             console.log( value['id']);*/
+
+            if($rootScope.fileidstr.length>1)$rootScope.fileidstr=$rootScope.fileidstr+"|"+value.id;
+            else $rootScope.fileidstr=value.id;
+
+
+        }, log);
+
+        //console.log($rootScope.fileidstr);
+
+        //$('.downloadbagbtn').click();
+
+        $rootScope.downloadcart();
+    }
+
+
 
 
 })

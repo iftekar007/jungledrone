@@ -20,6 +20,8 @@ function document_init() // init function called by defaulted when this module l
     //echo 5656;
     //echo user_authenticate('debasis','Pp@ss1234');
 
+    date_default_timezone_set('America/Dawson_Creek');
+
 //echo "kl";
     header('Content-type: text/html');
     header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
@@ -27,6 +29,9 @@ function document_init() // init function called by defaulted when this module l
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+
+
 
 
 
@@ -168,6 +173,7 @@ function documentdetails(){
     $queryu->condition('ev.id', $_POST['id'], '=');
     $resultu = $queryu->execute();
 
+    date_default_timezone_set('America/Dawson_Creek');
 
     while($recordu = $resultu->fetchAssoc()) {
 
@@ -198,10 +204,42 @@ function documentlist()
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
+    $querydu = db_select('documentcategory', 'documentcategory');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    //$queryd->leftJoin('admin', 'u', 'u.user_id = doc.add_user');
+    $querydu->fields('documentcategory');
+    //$queryu->fields('u',array('fname','lname'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+   // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+    $querydu->condition('documentcategory.status',1,'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultdu = $querydu->execute();
+
+    $dcatlist = array();
+
+
+
+    if ($resultdu->rowCount() > 0) {
+        date_default_timezone_set('America/Dawson_Creek');
+        //echo date('m/d/Y h:s:i A',time());
+        //exit;
+        $i = 0;
+        while ($recorddu = $resultdu->fetchAssoc()) {
+
+            $dcatlist[$recorddu['id']]=$recorddu;
+
+        }
+    }
+
+
     $queryu = db_select('document', 'doc');
-    $queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    $queryu->leftJoin('admin', 'u', 'u.user_id = doc.add_user');
     $queryu->fields('doc');
-    $queryu->fields('doc_cat',array('cat_name','parent_cat'));
+    $queryu->fields('u',array('fname','lname'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
 
     if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
         $queryu->condition('doc.status',1,'=')  ;
@@ -210,12 +248,61 @@ function documentlist()
     $resultu = $queryu->execute();
 
     $eventlist = array();
+    /*echo time();
+    echo "<br/>";
+
+    date_default_timezone_set('America/Los_Angeles');
+    echo time();
+
+    echo "<br/>";
+    $date = new DateTime(null);
+    echo 'Default timezone: '.$date->getTimestamp().'<br />'."\r\n";
+
+//America/New_York
+    $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    echo 'America/los: '.$date->getTimestamp().'<br />'."\r\n";
+
+
+
+    $date = new DateTime(null, new DateTimeZone('America/New_York'));
+    echo 'America/New_York: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";
+
+//Europe/Amsterdam
+    $date = new DateTime(null, new DateTimeZone('Europe/Amsterdam'));
+    echo 'Europe/Amsterdam: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";*/
+
+
+
+
 
 
     if ($resultu->rowCount() > 0) {
+        date_default_timezone_set('America/Dawson_Creek');
+        //echo date('m/d/Y h:s:i A',time());
+        //exit;
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
+
+            $recordu['timeval']=date('m/d/Y h:i:s A',$recordu['timeadded']);
+
+
+
+            $category=json_decode($recordu['category_id']);
+            //print_r($category);
+            $recordu['cat_name']=' ';
+
+
+
+            foreach($category as $cat){
+
+                if(strlen($recordu['cat_name'])>5)$recordu['cat_name'].=' , '.$dcatlist[$cat->id]['cat_name'];
+                else$recordu['cat_name']=$dcatlist[$cat->id]['cat_name'];
+
+            }
+
+
             $temparray = $recordu;
+
 
             $path_parts = pathinfo($recordu['file_name']);
             $temparray['file_type'] = $path_parts['extension'];
@@ -310,9 +397,13 @@ function adddocument(){
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
+    date_default_timezone_set('America/Dawson_Creek');
 
-    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status','timeadded','name'));
-    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id']['id'],1,time(),$_POST['name']));
+    //print_r($_POST);
+    //exit;
+
+    $query = db_insert('document')->fields(array('file_name','file_url','description','category_id', 'status','timeadded','name','add_user'));
+    $query->values(array(@$_POST['file_name'],@$_POST['file_url'],@$_POST['description'],@$_POST['category_id'],1,time(),$_POST['name'],$_POST['add_user']));
     $query->execute();
 
 
@@ -369,6 +460,10 @@ function downloadfilecart(){
 
     $fid=explode('|',$x[1]);
 
+    print_r($fid);
+    print_r($x[2]);
+    //exit;
+
 
     $queryu = db_select('document', 'doc');
     //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
@@ -393,7 +488,7 @@ $zip = new ZipArchive();
 
     while ($recordu = $resultu->fetchAssoc()) {
 
-	 
+
 	  if(in_array($recordu['id'],$fid)){
 
           $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
@@ -407,12 +502,14 @@ $zip = new ZipArchive();
 
 	 $zip->close();
 
-  header("Content-type: application/zip");
-  header("Content-Disposition: attachment; filename=".$x[2]."_".time()."_download.zip");
-  header("Pragma: no-cache");
-  header("Expires: 0");
-  readfile(($new_folder).$x[2]."_".time().'_download.zip');
-  exit;
+    header("Content-type: application/zip");
+    header("Content-Disposition: attachment; filename=".$x[2]."_".time()."_download.zip");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+    readfile(($new_folder).$x[2]."_".time().'_download.zip');
+    //sleep(5);
+    //unlink(($new_folder).$x[2]."_".time().'_download.zip');
+    exit;
 
 
 
@@ -438,9 +535,38 @@ function updatedocument(){
 
 
 
+
+    date_default_timezone_set('America/Dawson_Creek');
+   // echo time();
+
+
+    /*echo time();
+    echo "<br/>";
+
+    date_default_timezone_set('America/Los_Angeles');
+    echo time();
+
+    echo "<br/>";
+    $date = new DateTime(null);
+    echo 'Default timezone: '.$date->getTimestamp().'<br />'."\r\n";
+
+//America/New_York
+    $date = new DateTime(null, new DateTimeZone('America/Los_Angeles'));
+    echo 'America/los: '.$date->getTimestamp().'<br />'."\r\n";
+
+
+
+    $date = new DateTime(null, new DateTimeZone('America/New_York'));
+    echo 'America/New_York: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";
+
+//Europe/Amsterdam
+    $date = new DateTime(null, new DateTimeZone('Europe/Amsterdam'));
+    echo 'Europe/Amsterdam: '.($date->getTimestamp() + $date->getOffset()).'<br />'."\r\n";
+
+    exit;*/
     db_update('document')
         //->expression('weight', 'weight + :weight', array(':weight' => 1))
-        ->fields(array( 'file_name'=>@$_POST['file_name'], 'file_url'=>@$_POST['file_url'], 'description'=>$_POST['description'],'category_id'=>@$_POST['category_id']['id'],'status'=>@$_POST['status'],'name'=>@$_POST['name'],'timeadded'=>time()))
+        ->fields(array( 'file_name'=>@$_POST['file_name'], 'file_url'=>@$_POST['file_url'], 'description'=>$_POST['description'],'category_id'=>@$_POST['category_id'],'status'=>@$_POST['status'],'name'=>@$_POST['name'],'add_user'=>@$_POST['add_user'],'timeadded'=>time()))
         ->condition('id', intval($_POST['id']))
         ->execute();
 }

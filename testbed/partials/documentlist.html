@@ -39,7 +39,11 @@
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'cat_name'"></span>
                             </th>
                             <th>
-                                <a ng-click="order('timeadded')" href="javascript:void(0);">Time Added</a>
+                                <a ng-click="order('cat_name')" href="javascript:void(0);">Added By / Last Updated By</a>
+
+                            </th>
+                            <th>
+                                <a ng-click="order('timeadded')" href="javascript:void(0);">Time Added / Last Edited</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'timeadded'"></span>
                             </th>
                             <th><a ng-click="order('status')" href="javascript:void(0);">Status</a>
@@ -58,7 +62,8 @@
 
                             </td>
                             <td>{{item.cat_name}}</td>
-                            <td>{{coverttodatetime(item.timeadded)}}</td>
+                            <td>{{item.fname}} {{item.lname}}</td>
+                            <td>{{(item.timeval)}}</td>
                             <td><a tooltip-placement="bottom" uib-tooltip="Click to change status" href="javascript:void(0)" ng-click="changedocumentstatus(item)">{{(item.status==1)?'Active':'Blocked'}}</a></td>
 
                             <td><a tooltip-placement="bottom" uib-tooltip="Click to edit product"  ui-sref="editdocument({id:item.id})">Edit</a>&nbsp;&nbsp;&nbsp;<a tooltip-placement="bottom" uib-tooltip="Click to delete product" href="javascript:void(0)" ng-click="jungledeldocument(item)">Delete</a>
