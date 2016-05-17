@@ -130,6 +130,14 @@ function jungle_product_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['imagestamp'] = array(
+        'title' => 'jungleproduct File Upload',
+        'page callback' => 'imagestamp',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
 
@@ -195,7 +203,7 @@ function imguploadproduct(){
 
 
     // Load the stamp and the photo to apply the watermark to
-    $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/icon_1.png');
+    $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/photostamp_3.png');
     if(strpos($filePath,'.png')>0)$im = imagecreatefrompng($filePath);
     if(strpos($filePath,'.jpg')>0) $im = imagecreatefromjpeg($filePath);
     if(strpos('.jpeg',$filePath)>0) $im = imagecreatefromjpeg($filePath);
@@ -218,7 +226,7 @@ function imguploadproduct(){
 // width to calculate positioning of the stamp.
     //imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
     //imagecopy($im, $stamp, $centerX, $centerY, 0, 0, imagesx($stamp), imagesy($stamp));
-    imagecopy($im, $stamp, 0, -150,0, 0, imagesx($stamp), imagesy($stamp));
+    imagecopy($im, $stamp, 0, 0,0, 0, imagesx($stamp), imagesy($stamp));
 
 // Output and free memory
     header('Content-type: image/png');
@@ -227,6 +235,101 @@ function imguploadproduct(){
 
 
 }
+
+function imagestamp(){
+
+
+    header('Content-type: text/html');
+    header('Access-Control-Allow-Origin: '.CUSTOM_URL);  //I have also tried the * wildcard and get the same response
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+    set_time_limit(0);
+
+    $x=arg();
+    //print_r($x[1]);
+
+    $queryu = db_select('jungleproduct', 'ca');
+    $queryu->fields('ca');
+    $queryu->condition('ca.id',$x[1],'=');
+    $resultu = $queryu->execute();
+
+    ini_set('memory_limit', '128M');
+
+    if ($resultu->rowCount() > 0) {
+        $i = 0;
+        while ($recordu = $resultu->fetchAssoc()) {
+            $temparray=$recordu;
+
+
+            $productextns=explode('.',$recordu['product_file']);
+
+            if($productextns['1']=='mp4'){
+                $filePath = image_style_url('popup', 'public://'.$productextns['0'].'.jpg');
+            }else{
+                $filePath = image_style_url('popup', (@$recordu['product_file']));
+            }
+
+            $jungleproductlist[$i]= $temparray;
+            $i++;
+
+            /*            $jungleproductlist[$i]['cat_name'] = $recordu['cat_name'];
+                        $jungleproductlist[$i]['id'] = $recordu['id'];
+                        $jungleproductlist[$i]['parent_cat'] = $recordu['parent_cat'];
+                        $jungleproductlist[$i]['status'] = $recordu['status'];
+                        $i++;*/
+
+        }
+    }
+
+
+    //print_r($filePath);
+    //exit;
+
+
+
+
+
+
+
+    // Load the stamp and the photo to apply the watermark to
+    $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/photostamp2.png');
+    if(strpos($filePath,'.png')>0)$im = imagecreatefrompng($filePath);
+    if(strpos($filePath,'.jpg')>0) $im = imagecreatefromjpeg($filePath);
+    if(strpos('.jpeg',$filePath)>0) $im = imagecreatefromjpeg($filePath);
+
+    //list($current_width, $current_height) = getimagesize($filePath);
+
+
+
+// Set the margins for the stamp and get the height/width of the stamp image
+    $marge_right = 0;
+    $marge_bottom = 0;
+    $sx = imagesx($stamp);
+    $sy = imagesy($stamp);
+    $imgx = imagesx($im);
+    $imgy = imagesy($im);
+    $centerX=round($imgx/2);
+    $centerY=round($imgy/2);
+
+// Copy the stamp image onto our photo using the margin offsets and the photo
+// width to calculate positioning of the stamp.
+    //imagecopy($im, $stamp, imagesx($im) - $sx - $marge_right, imagesy($im) - $sy - $marge_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+    //imagecopy($im, $stamp, $centerX, $centerY, 0, 0, imagesx($stamp), imagesy($stamp));
+    imagecopy($im, $stamp, 0, 0,0, 0, imagesx($stamp), imagesy($stamp));
+
+// Output and free memory
+    header('Content-type: image/png');
+    imagepng($im);
+    imagedestroy($im);
+
+
+}
+
+
+
+
 
 function uploadjungleproductimage(){
 
@@ -439,10 +542,10 @@ function jungleproductdetails(){
 
     $queryu = db_select('jungleproduct', 'jd');
     ini_set('memory_limit', '128M');
-    $queryu->innerJoin('junglecategory', 'jc','jc.id=jd.category_id');
+    //$queryu->innerJoin('junglecategory', 'jc','jc.id=jd.category_id');
     $queryu->fields('jd');
-    $queryu->fields('jc',array('type'))
-        ->condition('jd.id', $_POST['id'], '=');
+    //$queryu->fields('jc',array('type'))
+    $queryu->condition('jd.id', $_POST['id'], '=');
     $resultu = $queryu->execute();
 
     while($recordu = $resultu->fetchAssoc()) {
@@ -460,7 +563,7 @@ function jungleproductdetails(){
                 $temparray['is_video'] = 0;
                 $temparray['image_url'] = image_style_url('large', (@$recordu['product_file']));
 
-                $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/icon5copy.png');
+             /*   $stamp = imagecreatefrompng('http://testbed.jungledrones.com/images/icon5copy.png');
                 $im = imagecreatefrompng($temparray['image_url']);
 
 // Set the margins for the stamp and get the height/width of the stamp image
@@ -482,7 +585,7 @@ function jungleproductdetails(){
 // Output and free memory
                 header('Content-type: image/png');
                 imagepng($im);
-                imagedestroy($im);
+                imagedestroy($im);*/
 
             }
 
@@ -504,15 +607,47 @@ function jungleproductlist()
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
+
+
+    $junglecatlist = array();
+
+    $querycu = db_select('junglecategory', 'jp');
+    //$queryu->innerJoin('junglecategory', 'jc','jc.id=jp.category_id');
+    $querycu->fields('jp');
+    //$queryu->fields('jc',array('cat_name','type'));
+    /*if(isset($_POST['type']) && $_POST['type']!=''){
+        $queryu->condition('jc.type',$_POST['type'],'=')  ;
+    }*/
+
+    //if(@$_REQUEST['id']>0)$querycu->condition('jp.id',$_REQUEST['id'],'=')  ;
+
+    $resultcu = $querycu->execute();
+
+
+    if ($resultcu->rowCount() > 0) {
+        $i = 0;
+        while ($recordcu = $resultcu->fetchAssoc()) {
+
+            $junglecatlist[$recordcu['id']]=$recordcu;
+
+        }
+    }
+
+    //print_r($junglecatlist);
+
+
+
+
+
     $jungleproductlist = array();
 
     $queryu = db_select('jungleproduct', 'jp');
-    $queryu->innerJoin('junglecategory', 'jc','jc.id=jp.category_id');
+    //$queryu->innerJoin('junglecategory', 'jc','jc.id=jp.category_id');
     $queryu->fields('jp');
-    $queryu->fields('jc',array('cat_name','type'));
-    if(isset($_POST['type']) && $_POST['type']!=''){
+    //$queryu->fields('jc',array('cat_name','type'));
+    /*if(isset($_POST['type']) && $_POST['type']!=''){
         $queryu->condition('jc.type',$_POST['type'],'=')  ;
-    }
+    }*/
 
     if(@$_REQUEST['id']>0)$queryu->condition('jp.id',$_REQUEST['id'],'=')  ;
 
@@ -522,12 +657,46 @@ function jungleproductlist()
     if ($resultu->rowCount() > 0) {
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
+
+
+            if((intval($recordu['category_id'])<1)) {
+
+                $category = json_decode($recordu['category_id']);
+
+                $cf=0;
+
+                foreach ($category as $cat) {
+
+                    if ($cf==1) {
+                        $recordu['cat_name'] .= ' , ' . $junglecatlist[$cat->id]['cat_name'];
+                        $recordu['catids'] .= "|".$junglecatlist[$cat->id]['id'];
+                    }
+                    else {
+
+                        $recordu['cat_name'] = (string)$junglecatlist[$cat->id]['cat_name'];
+                        $recordu['type'] = $junglecatlist[$cat->id]['type'];
+                        $recordu['catids'] = $junglecatlist[$cat->id]['id'];
+                        $cf=1;
+                    }
+
+                }
+            }
+            else {
+                $recordu['cat_name'] = (string)($junglecatlist[$recordu['category_id']]['cat_name']);
+                $recordu['type'] = $junglecatlist[$recordu['category_id']]['type'];
+                $recordu['catids'] = $junglecatlist[$recordu['category_id']]['id'];
+            }
+
+
             $temparray=$recordu;
             $temparray['textdesc']=strip_tags($recordu['product_desc']);
 
             $temparray['productlisturl'] = image_style_url('productlist', (@$recordu['product_file']));
             $temparray['productdetailmain'] = image_style_url('productdetailmain', (@$recordu['product_file']));
             $temparray['bestsellerp'] = image_style_url('bestseller', (@$recordu['product_file']));
+
+
+
 
 
             if($recordu['product_file']!='') {
@@ -616,7 +785,7 @@ function addjungleproduct(){
 
     $query = db_insert('jungleproduct')->fields(array('product_name','product_desc','category_id','product_file','status','priority','price'));
         //foreach ($values as $record) {
-        $query->values(array(@$_POST['product_name'],@$_POST['product_desc'],@$_POST['category_id']['id'],$product_file,1,@$_POST['priority'],@$_POST['price']));
+        $query->values(array(@$_POST['product_name'],@$_POST['product_desc'],@$_POST['category_id'],$product_file,1,@$_POST['priority'],@$_POST['price']));
         //}
         $query->execute();
 
@@ -640,7 +809,7 @@ function jungleproductupdates(){
 
 
     db_update('jungleproduct')
-        ->fields(array('product_name'=>@$_POST['product_name'],'product_desc'=>@$_POST['product_desc'],'category_id'=>@$_POST['category_id']['id'],'product_file'=>@$_POST['product_file'],'priority'=>@$_POST['priority'],'price'=>@$_POST['price']))
+        ->fields(array('product_name'=>@$_POST['product_name'],'product_desc'=>@$_POST['product_desc'],'category_id'=>@$_POST['category_id'],'product_file'=>@$_POST['product_file'],'priority'=>@$_POST['priority'],'price'=>@$_POST['price']))
         ->condition('id', intval($_POST['id']))
          ->execute();
 }

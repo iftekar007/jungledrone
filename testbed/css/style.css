@@ -9714,7 +9714,7 @@ opacity:1;
 
 
 
-	background:  url(../images/watermark2.png) repeat left top;
+	/*background:  url(../images/watermark2.png) repeat left top;*/
 
 
 
@@ -12799,13 +12799,13 @@ opacity:1;
 
 
 
-.galleryblocksrc{ border:solid 5px #fff!important;}
+.galleryblocksrc{ border:solid 5px #fff!important; }
 
 
 
 
 
-.galleryimgblock .gallerybox{ padding:0px; position:relative; height:278px; overflow:hidden; margin:0 0 5px 0;}
+.galleryimgblock .gallerybox{ padding:0px; position:relative; height:278px; overflow:hidden; margin:0 0 5px 0; }
 
 
 
@@ -13199,6 +13199,8 @@ opacity:1;
 
 .jd_newpalyicon{ position:absolute; left:45%; top:35%; width:60px!important;}
 
+
+.jd_newpalyicon2{ position:absolute; left:45%; top:30%; width:60px!important;}
 
 
 .stockdetail_blog .details_img{ padding:0 0 5px 0; margin:0; background:#e7e7e7;}

@@ -202,19 +202,22 @@
 
         <span ng-repeat="itemphoto  in productlist | filter:searchkey" >
 
-            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-if="itemphoto.category_id==categoryid.id || (categoryid.id==0) "  >
+            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-if=" (itemphoto.cat_name.toString().indexOf('Nature') > 0 )&&( (itemphoto.type == 'Stock Image' ) || ( itemphoto.type =='Stock Video' )) "  >
                 <div class="  galleryblocksrc" >
+
+                    <img ng-if="itemphoto.type =='Stock Video'" class="jd_newpalyicon2" alt="#" src="images/jd_newpalyicon.png">
                     <!-- <img  src="images/demoimg.jpg" alt="#" class="gallerysrcimg" >-->
-                    <img  src="http://admin.jungledrones.com/imguploadproduct/{{itemphoto.id}}" imgsrc="{{itemphoto.image_url}}" alt="#" ng-click="showmodal($event)" class="gallerysrcimg" >
+                    <img  src="{{adminUrl}}imguploadproduct/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" alt="#" ng-click="showmodal($event)" class="gallerysrcimg" >
 
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="gallerytble">
                         <tr>
-                            <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event,itemphoto)" imgsrc="{{itemphoto.image_url}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
+                            <td align="right" valign="middle"> <a href="javascript:void(0)"><img ng-click="showmodal($event,itemphoto)" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" src="images/stockphoto_hovericon1.png" alt="#"></a></td>
                             <td align="left" valign="middle"> <a href="javascript:void(0)"><img ui-sref="stock-details({id:itemphoto.id})"  src="images/stockphoto_hovericon2.png" alt="#"></a></td>
                         </tr>
                     </table>
 
                 </div>
+
 
             </div>
 

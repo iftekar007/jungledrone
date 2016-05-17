@@ -7664,6 +7664,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
     $scope.categoryid={};
     $scope.categoryid.id=$stateParams.id;
 
+
     $scope.type1 = $stateParams.id;
 
     $scope.type='Stock Image';
@@ -7680,6 +7681,10 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         $scope.categorylist=data;
 
         $scope.categorylist.splice(0, 0, { id: 0, cat_name: 'All' });
+
+
+        console.log('type 1');
+        console.log($scope.type1);
 
         //$scope.categorylist[0].category_id='All';
       //  console.log($scope.categorylist);
@@ -7707,10 +7712,10 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         $scope.productlist=data;
     });
 
-    $scope.searchkey = '';
+   $scope.searchkey='';
     $scope.search = function(item){
 
-        if ( ((item.product_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) || ((item.product_desc.indexOf($scope.searchkey) != -1) && item.type==$scope.type)|| ((item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ) {
+        if ( ((item.catids.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ||((item.product_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) || ((item.product_desc.indexOf($scope.searchkey) != -1) && item.type==$scope.type)|| ((item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ) {
             return true;
         }
         return false;
@@ -7729,6 +7734,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
             console.log($(target).html());
             console.log($(target).attr('class'));
+            console.log($(target).attr('imgsrc'));
             $('#gallerymodal').find('h2').find('img').attr('src','');
             $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
 
@@ -9038,6 +9044,11 @@ jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieSt
     $scope.addproductsubmit=function() {
 
 
+        console.log($scope.form);
+
+
+        $scope.form.category_id=JSON.stringify($scope.form.category_id);
+
         $http({
             method  :   'POST',
             async   :   false,
@@ -9057,6 +9068,8 @@ jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieSt
 
 
 })
+
+
 jungledrone.controller('jungleproductlist',function($scope,$state,$http,$cookieStore,$rootScope,$uibModal,$sce){
     $scope.trustAsHtml=$sce.trustAsHtml;
 
@@ -9086,7 +9099,10 @@ jungledrone.controller('jungleproductlist',function($scope,$state,$http,$cookieS
     $scope.searchkey = '';
     $scope.search = function(item){
 
-        if ( (item.product_name.indexOf($scope.searchkey) != -1) || (item.product_desc.indexOf($scope.searchkey) != -1)  || (item.priority.indexOf($scope.searchkey) != -1)|| (item.status.indexOf($scope.searchkey) != -1) || (item.cat_name.indexOf($scope.searchkey) != -1)){
+
+        console.log(item)
+
+        if ( (item.product_name.indexOf($scope.searchkey) != -1) ||  (item.status.toString().indexOf($scope.searchkey) != -1) || (item.cat_name.toString().indexOf($scope.searchkey) != -1) || (item.product_desc.indexOf($scope.searchkey) != -1)  ){
             return true;
         }
         return false;
@@ -9190,16 +9206,18 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
 
 
 
+        console.log(data.category_id);
 
         $scope.form = {
             id: data.id,
 
             product_name: data.product_name,
             product_desc: data.product_desc,
-            category_id: {
+            /*category_id: {
                 id:data.category_id,
                 type:data.type,
-            },
+            },*/
+            category_id:JSON.parse(data.category_id),
             product_file: data.product_file,
             priority: data.priority,
             price: data.price,
@@ -9328,6 +9346,7 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
 
     $scope.editproductsubmit=function() {
 
+        $scope.form.category_id=JSON.stringify($scope.form.category_id);
 
         $http({
             method  :   'POST',
