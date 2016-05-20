@@ -3472,7 +3472,7 @@
 
 
 
-.newloginwrapper{ width:80%; }
+.newloginwrapper{ width:100%; }
 
 
 
@@ -4620,6 +4620,8 @@
 
 @media(max-width:480px){
 
+.newloginwrapper .nav li{ font-size:15px;}
+
 .myaccountplanblock .myaccountplanblock_textblock { background-size:26%;
 
 }
@@ -5693,6 +5695,11 @@
 
 
 @media(max-width:767px){
+
+
+.newaccountbtnwrapper .newaccountbtn{ width:250px; float:none; margin:0 auto;}
+
+.newaccountbtnwrapper span{ float:none; margin:0 auto;}
 
 
 

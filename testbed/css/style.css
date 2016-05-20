@@ -14827,15 +14827,34 @@ opacity:1;
 
 
 
-.newlogin-box .closebtn{ position:absolute; right:-19px; top:-19px; width:32px; height:32px;}
+.newlogin-box .closebtn{ position:absolute; right:-19px; top:-19px; width:32px; height:32px; z-index:9;}
 
 
 
-.newloginwrapper{ width:90%; margin:0 auto; padding-bottom:40px;}
+.newloginwrapper{ width:100%; margin:0 auto; padding-bottom:40px;}
 
+.newloginwrapper .tab-content{ width:90%; margin:0 auto;}
+
+.newloginwrapper .nav *{ border:none; border-radius:0px;}
+
+.newloginwrapper .nav li{ width:50%; padding: 12px 0 12px 5%; font-size:18px; color:#000000;  font-family:'OpenSans-Bold'; text-transform:uppercase; background:#ffffff; border-radius:0px; text-align:left;}
+
+.newloginwrapper .nav li a{ color:#000000!important;}
+
+.newloginwrapper .nav li a:hover{ background:none; color:#000000!important;}
+
+.newloginwrapper .nav .active{ background:#e3e2e2;}
+
+.newloginwrapper .nav .active a{color:#000000!important;}
+.newloginwrapper .nav-tabs > li.active > a, .newloginwrapper .nav-tabs > li.active > a:hover, .newloginwrapper .nav-tabs > li.active > a:focus{ background:none; border:none; border-radius:0px; padding:0;}
+
+.newloginwrapper .nav-tabs > li > a{ margin:0!important; line-height:inherit!important; padding:12px 0!important;}
 
 
 .newlogin-box h2{ padding:26px 0 12px 0; margin:0; font-size:18px; color:#000000;  font-family:'OpenSans-Bold'; text-transform:uppercase;}
+
+
+
 
 
 
@@ -14843,7 +14862,7 @@ opacity:1;
 
 
 
-.newlogin-box  .form-group  .form-control{ width:100%; height:70px; padding:5px 20px; background:#fff; border:solid 1px #000000; color:#000000; }
+.newlogin-box  .form-group  .form-control{ width:100%; height:70px; padding:5px 50px 5px 20px; background:#fff; border:solid 1px #000000; color:#000000; }
 
 
 
@@ -14873,6 +14892,20 @@ opacity:1;
 
 
 
+
+.newaccountbtnwrapper{ width:100%; margin:40px auto; text-align:center; margin-bottom:0px;  }
+
+.newaccountbtnwrapper .newaccountbtn{ display:block; background: #c10404 ;
+    color: #ffffff;
+    font-family: "OpenSans-Bold";
+    font-size: 16px;
+    height: 52px;
+    line-height: 52px;
+    margin:0;
+    width: 230px; float:left;  }
+	
+	.newaccountbtnwrapper span{ display:block; width:63px;   height: 52px;  font-size: 16px;
+    line-height: 52px; float:left; color:#000000;   font-family: "OpenSans-Bold"; text-transform:uppercase;}
 
 
 

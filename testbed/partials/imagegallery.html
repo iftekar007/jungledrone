@@ -35,7 +35,7 @@
      <div class="gallerytopleftsearch">
      <div class="stockphoto_selectoption">
      <select ng-model="type1" name="type" ng-change="changecategory()">
-         <option ng-repeat="item in categorylist" value="{{item.id}}" ng-selected="type1==item.id">{{item.cat_name}}</option>
+         <option ng-if="(item.type == 'Stock Image' ) || ( item.type =='Stock Video' )" ng-repeat="item in categorylist" value="{{item.id}}" ng-selected="type1==item.id">{{item.cat_name}}</option>
      </select>
      
      </div>
@@ -202,7 +202,7 @@
 
         <span ng-repeat="itemphoto  in productlist | filter:searchkey" >
 
-            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-if=" (itemphoto.cat_name.toString().indexOf('Nature') > 0 )&&( (itemphoto.type == 'Stock Image' ) || ( itemphoto.type =='Stock Video' )) "  >
+            <div class=" col-lg-3 col-md-3 col-sm-6 col-xs-12 gallerybox  galleryimgdiv" ng-if=" (itemphoto.cat_name.toString().toLowerCase().indexOf(catname.toString().toLowerCase()) > -1 || type1==0 ) && ( (itemphoto.type == 'Stock Image' ) || ( itemphoto.type =='Stock Video' )) "  >
                 <div class="  galleryblocksrc" >
 
                     <img ng-if="itemphoto.type =='Stock Video'" class="jd_newpalyicon2" alt="#" src="images/jd_newpalyicon.png">

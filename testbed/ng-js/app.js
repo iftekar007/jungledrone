@@ -85,7 +85,7 @@ jungledrone.filter('startFrom', function () {
 jungledrone.filter('htmlToPlaintext', function () {
     return function (input, start) {
         return function (text) {
-            console.log(text+'text===');
+            //console.log(text+'text===');
             return text ? String(text).replace(/<[^>]+>/gm, '') : '';
         };
     }
@@ -142,7 +142,8 @@ jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttot
 
             $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
             console.log($rootScope.userid+'userid');
-            if($rootScope.userid<1) $('.editableicon').hide();
+            console.log($rootScope.userrole+'userrole');
+            if($rootScope.userrole!=4) $('.editableicon').hide();
 
             //$rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
             $rootScope.stateIsLoading = false;
@@ -203,7 +204,7 @@ jungledrone.directive('content',['$compile','$sce','$state', function($compile,$
             //$(element).find('.editableicon').text(99);
 
             $(element).find('.editableicon').on( "click", function() {
-                console.log( $( this ).parent().attr('id') );
+                //console.log( $( this ).parent().attr('id') );
                 //if($rootScope.userid<1) $( this).hide();
                 //$(this).parent().css('display','inline-block');
 
@@ -2266,7 +2267,7 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
             $('#country').val(20);
 
         },500);
-        console.log(data);
+        //console.log(data);
 
     });
 
@@ -2505,8 +2506,8 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
             if($rootScope.contentdata[x].parentid!=0){
 
                 var z=parseInt($rootScope.contentdata[x].parentid);
-                console.log(z);
-                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+                //console.log(z);
+                //console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
 
                 $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
 
@@ -7667,7 +7668,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     $scope.type1 = $stateParams.id;
 
-    $scope.type='Stock Image';
+    //$scope.type='Stock Image';
     $http({
         method:'POST',
         async:false,
@@ -7684,19 +7685,21 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
 
         console.log('type 1');
+	//console.log(data);
         console.log($scope.type1);
 
         //$scope.categorylist[0].category_id='All';
       //  console.log($scope.categorylist);
-/*
+
         angular.forEach(data, function(value, key){
-            console.log(value.type);
-            if(value.type == "Stock Image") {
-                $scope.categorylist.push(value);
+            //console.log(value.type);
+            if(value.id == $scope.type1) {
+                $scope.catname=(value.cat_name);
             }
         });
-        console.log($scope.categorylist);
-*/
+        console.log($scope.catname);
+	console.log($scope.type);
+
     });
 
 
@@ -7715,7 +7718,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
    $scope.searchkey='';
     $scope.search = function(item){
 
-        if ( ((item.catids.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ||((item.product_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) || ((item.product_desc.indexOf($scope.searchkey) != -1) && item.type==$scope.type)|| ((item.cat_name.indexOf($scope.searchkey) != -1) && item.type==$scope.type) ) {
+        if ( ((item.catids.indexOf($scope.searchkey) != -1) ) ||((item.product_name.indexOf($scope.searchkey) != -1) ) || ((item.product_desc.indexOf($scope.searchkey) != -1) )|| ((item.cat_name.indexOf($scope.searchkey) != -1) ) ) {
             return true;
         }
         return false;
