@@ -145,7 +145,7 @@
             <!--Row with two equal columns-->
             <div class="row">
 
-                <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid==0"  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
+               <!-- <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid==0"  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
                     <span class="{{item.file_type}}_preview preview"></span>
                     <span class="{{item.file_type}}_icon"></span>
                     {{item.file_name | limitTo : 12}}
@@ -157,16 +157,18 @@
                     </div>
                 
                     <label style=" font-size:14px; color:#f30100; padding-top:10px; display:block; height:35px;" >{{item.name | limitTo : 12}}</label>
-                </div>
+                </div>-->
 
 
-                <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid >0 && (item.category_id==currentid || searchkey !='' )"  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
+                <div ng-repeat=" item in  documentlist | filter:search" ng-if="currentid >0 && ( item.cat_name.toString().toLowerCase().indexOf(currentcategoryname.toString().toLowerCase()) > -1) "  class="col-lg-2 col-md-3 col-sm-5 col-xs-12 filediv filelistdiv">
                     <span class="{{item.file_type}}_preview preview"></span>
                     <span class="{{item.file_type}}_icon"></span>
                     {{item.file_name | limitTo : 12}}
+
                     <div class="hoverfile">
                         <a class="hoverzoom" href="javascript:void(0)"></a>
                         <a class="hoverdown" href="javascript:void(0)" ng-click="addcartfilendownload(item)"  ></a>
+                        <div class="clearfix"></div>
                         <a class="hoverdownload" href="javascript:void(0)" ng-click="addcartfile(item)" ></a>
                         <a class="hoverpreview" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{{item.description}}" href="javascript:void(0)"></a>
                     </div>

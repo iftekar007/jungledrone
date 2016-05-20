@@ -85,7 +85,7 @@ jungledrone.filter('startFrom', function () {
 jungledrone.filter('htmlToPlaintext', function () {
     return function (input, start) {
         return function (text) {
-            //console.log(text+'text===');
+            console.log(text+'text===');
             return text ? String(text).replace(/<[^>]+>/gm, '') : '';
         };
     }
@@ -142,7 +142,6 @@ jungledrone.run(['$rootScope', '$state','contentservice','$cookieStore','carttot
 
             $rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
             console.log($rootScope.userid+'userid');
-            console.log($rootScope.userrole+'userrole');
             if($rootScope.userrole!=4) $('.editableicon').hide();
 
             //$rootScope.contentdata=(contentservice.getcontent('http://admin.jungledrones.com/contentlist'));
@@ -204,7 +203,7 @@ jungledrone.directive('content',['$compile','$sce','$state', function($compile,$
             //$(element).find('.editableicon').text(99);
 
             $(element).find('.editableicon').on( "click", function() {
-                //console.log( $( this ).parent().attr('id') );
+                console.log( $( this ).parent().attr('id') );
                 //if($rootScope.userid<1) $( this).hide();
                 //$(this).parent().css('display','inline-block');
 
@@ -2201,7 +2200,7 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
 
 
                 if(typeof (data.userdetails.roles[7]) != 'undefined')
-                    $state.go('index');
+                    $state.go('mydownloads',{id:0});
                 else
                     $state.go('dashboard');
 
@@ -2267,7 +2266,7 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
             $('#country').val(20);
 
         },500);
-        //console.log(data);
+        console.log(data);
 
     });
 
@@ -2506,8 +2505,8 @@ jungledrone.controller('index', function($scope,$state,$http,$cookieStore,$rootS
             if($rootScope.contentdata[x].parentid!=0){
 
                 var z=parseInt($rootScope.contentdata[x].parentid);
-                //console.log(z);
-                //console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+                console.log(z);
+                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
 
                 $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
 
@@ -4655,9 +4654,9 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
 
 
                 //console.log($rootScope.userrole);
-
+console.log(data.userdetails.roles[7]);
                 if(typeof (data.userdetails.roles[7]) != 'undefined')
-                    $state.go('index');
+                    $state.go('mydownloads',{id:0});
                 else
                     $state.go('dashboard');
 
@@ -10742,6 +10741,7 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
             if($scope.currentid==value.id) {
                 $scope.currentcategoryname=value.cat_name;
                 $scope.getcatetree(value.parent_cat);
+                console.log($scope.currentcategoryname);
             }
 
         }, log);
@@ -10787,7 +10787,7 @@ jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$
 
         }, log);
 
-        console.log($scope.cattree);
+        //console.log($scope.cattree);
 
 
     }

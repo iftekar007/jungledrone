@@ -325,12 +325,46 @@ function mydownloadlist()
     header('Access-Control-Max-Age: 1000');
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
+
+
+    $querydu = db_select('documentcategory', 'documentcategory');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    //$queryd->leftJoin('admin', 'u', 'u.user_id = doc.add_user');
+    $querydu->fields('documentcategory');
+    //$queryu->fields('u',array('fname','lname'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+    // if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+    $querydu->condition('documentcategory.status',1,'=')  ;
+    //if($_REQUEST['cat_id']>0)$queryu->condition('ca.doc_cat',$_REQUEST['cat_id'],'=')  ;
+
+    $resultdu = $querydu->execute();
+
+    $dcatlist = array();
+
+
+
+    if ($resultdu->rowCount() > 0) {
+        date_default_timezone_set('America/Dawson_Creek');
+        //echo date('m/d/Y h:s:i A',time());
+        //exit;
+        $i = 0;
+        while ($recorddu = $resultdu->fetchAssoc()) {
+
+            $dcatlist[$recorddu['id']]=$recorddu;
+
+        }
+    }
+
+
+
+
     $queryu = db_select('document', 'doc');
-    $queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
     $queryu->leftJoin('filedownloadlist', 'filed', 'filed.fileid = doc.id');
-    $queryu->fields('doc',array('id','file_name','file_url','description'));
+    $queryu->fields('doc',array('id','file_name','file_url','description','category_id'));
     $queryu->fields('filed');
-    $queryu->fields('doc_cat',array('cat_name','parent_cat'));
+    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
     $queryu->condition('doc.status',1,'=')  ;
 
 
@@ -350,6 +384,20 @@ function mydownloadlist()
     if ($resultu->rowCount() > 0) {
         $i = 0;
         while ($recordu = $resultu->fetchAssoc()) {
+
+            $category=json_decode($recordu['category_id']);
+            //print_r($category);
+            $recordu['cat_name']=' ';
+
+            foreach($category as $cat){
+
+                if(strlen($recordu['cat_name'])>5)$recordu['cat_name'].=' , '.$dcatlist[$cat->id]['cat_name'];
+                else$recordu['cat_name']=$dcatlist[$cat->id]['cat_name'];
+                $recordu['catids']=$dcatlist[$cat->id]['id'];
+
+
+
+            }
             $recordu['timedownloaded']=date('m/d/Y h:s',$recordu['timedownloaded']);
             $recordu['timeadded']=date('m/d/Y h:s',$recordu['timeadded']);
             $temparray = $recordu;
@@ -460,56 +508,75 @@ function downloadfilecart(){
 
     $fid=explode('|',$x[1]);
 
-    print_r($fid);
-    print_r($x[2]);
-    //exit;
+    //print_r($fid);
+    //print_r($x[2]);
+    if(count($fid)>1) {
+        //exit;
 
 
-    $queryu = db_select('document', 'doc');
-    //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
-    $queryu->fields('doc');
-    //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+        $queryu = db_select('document', 'doc');
+        //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+        $queryu->fields('doc');
+        //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
 
-    //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
-    //$queryu->condition('doc.id',$x[1],'=')  ;
-    $resultu = $queryu->execute();
-    $recordu = $resultu->fetchAssoc();
+        //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        //$queryu->condition('doc.id',$x[1],'=')  ;
+        $resultu = $queryu->execute();
+        $recordu = $resultu->fetchAssoc();
 
 
+        $new_folder = 'public://newfolder/';
+        file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
 
-    $new_folder = 'public://newfolder/';
-    file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
+        global $user;
 
-    global $user;
-
-$zip = new ZipArchive();
-	 $zip->open(drupal_realpath($new_folder.$x[2]."_".time().'_download.zip'), ZIPARCHIVE::CREATE );
+        $zip = new ZipArchive();
+        $zip->open(drupal_realpath($new_folder . $x[2] . "_" . time() . '_download.zip'), ZIPARCHIVE::CREATE);
 //echo drupal_realpath($new_folder.'test.zip'); exit;
 
-    while ($recordu = $resultu->fetchAssoc()) {
+        while ($recordu = $resultu->fetchAssoc()) {
 
 
-	  if(in_array($recordu['id'],$fid)){
+            if (in_array($recordu['id'], $fid)) {
 
-          $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
-          $query->values(array(@$recordu['id'],@$x[2],time()));
-          $query->execute();
+                $query = db_insert('filedownloadlist')->fields(array('fileid', 'userid', 'timedownloaded'));
+                $query->values(array(@$recordu['id'], @$x[2], time()));
+                $query->execute();
 
-          $zip->addFile("/home/jungledrones/public_html/admin/sites/default/files/".($recordu['file_name']),($recordu['file_name']));
-      }
+                $zip->addFile("/home/jungledrones/public_html/admin/sites/default/files/" . ($recordu['file_name']), ($recordu['file_name']));
+            }
 
+        }
+
+        $zip->close();
+
+        header("Content-type: application/zip");
+        header("Content-Disposition: attachment; filename=" . $x[2] . "_" . time() . "_download.zip");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        readfile(($new_folder) . $x[2] . "_" . time() . '_download.zip');
+        //sleep(5);
+        //unlink(($new_folder).$x[2]."_".time().'_download.zip');
+        exit;
+    }else{
+
+        $query = db_insert('filedownloadlist')->fields(array('fileid','userid','timedownloaded'));
+        $query->values(array(@$x[1],@$x[2],time()));
+        $query->execute();
+
+        $queryu = db_select('document', 'doc');
+        //$queryu->join('documentcategory', 'doc_cat', 'doc_cat.id = doc.category_id');
+        $queryu->fields('doc');
+        //$queryu->fields('doc_cat',array('cat_name','parent_cat'));
+
+        //if(isset($_REQUEST['filter']) && $_REQUEST['filter'] == 'status')
+        $queryu->condition('doc.id',$x[1],'=')  ;
+        $resultu = $queryu->execute();
+        $recordu = $resultu->fetchAssoc();
+
+        drupal_add_http_header('Content-disposition', 'attachment; filename=' .$recordu['file_url']);
+        readfile($recordu['file_url']);
     }
-
-	 $zip->close();
-
-    header("Content-type: application/zip");
-    header("Content-Disposition: attachment; filename=".$x[2]."_".time()."_download.zip");
-    header("Pragma: no-cache");
-    header("Expires: 0");
-    readfile(($new_folder).$x[2]."_".time().'_download.zip');
-    //sleep(5);
-    //unlink(($new_folder).$x[2]."_".time().'_download.zip');
-    exit;
 
 
 
