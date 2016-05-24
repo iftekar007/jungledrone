@@ -152,6 +152,14 @@ function document_menu()
         //'type'=>MENU_NORMAL_ITEM,
     );
 
+	 $items['getfilepreview1'] = array(
+        'title' => 'event Updates',
+        'page callback' => 'getfilepreview1',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
     return $items;
@@ -801,8 +809,109 @@ function getcattree($id=0,$junglecategorylist=array()){
 function getfilepreview(){
 
 
+
+    $new_folder = 'public://';
+    $new_folder1 = 'public://temp/conv';
+    file_prepare_directory($new_folder, FILE_CREATE_DIRECTORY);
+
+    $x=arg();
+    //print_r($x[1]);
+    //exit;
+
+    $queryu = db_select('document', 'ev');
+    $queryu->fields('ev');
+    $queryu->condition('ev.id', $x[1], '=');
+    $resultu = $queryu->execute();
+
+    date_default_timezone_set('America/Dawson_Creek');
+
+    while($recordu = $resultu->fetchAssoc()) {
+
+        $eventlist['id'] = $recordu['id'];
+        $eventlist['name'] = $recordu['name'];
+        $eventlist['file_name'] = $recordu['file_name'];
+        $eventlist['file_url'] = $recordu['file_url'];
+        $eventlist['description'] = $recordu['description'];
+        $eventlist['category_id'] = $recordu['category_id'];
+        $eventlist['status'] = $recordu['status'];
+
+        $path_parts = pathinfo($recordu['file_name']);
+        $eventlist['file_type'] = $path_parts['extension'];
+        //print_r($path_parts); exit;
+    }
+
+   /* echo drupal_realpath($new_folder);
+    echo "<br/>";
+    echo drupal_realpath($new_folder1);*/
+
+   /* global $user;
+
+    $zip = new ZipArchive();
+    $zip->open(drupal_realpath($new_folder . $x[2] . "_" . time() . '_download.zip'), ZIPARCHIVE::CREATE);*/
+
+
     if (!extension_loaded('imagick'))
         echo 'imagick not installed';
-    exec("convert  -quality 100 http://admin.jungledrones.com/sites/default/files/Review-faster-site-4-22-16-1003003961-1462283481.pdf http://admin.jungledrones.com/sites/default/files/Review-faster-site-4-22-16-1003003961-1462283481.jpeg");
+  /*  exec("convert  -quality 100 ".drupal_realpath($new_folder)."/Review-faster-site-4-22-16-1003003961-1462283481.pdf   ".drupal_realpath($new_folder1)."/Review-faster-site-4-22-16-1003003961-1462283481.jpeg");*/
+
+
+    if($eventlist['file_type']=='pdf') {
+
+        $im = new Imagick();
+
+        /*echo drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]";
+        exit;*/
+
+        //$im->setResolution(300,300);
+        $im->readimage(drupal_realpath( $new_folder.'/'. $eventlist['file_name']) . "[0]");
+        $im->setImageFormat('png');
+        header('Content-Type: image/' . $im->getImageFormat());
+        echo $im;
+    }
+    if($eventlist['file_type']=='jpeg'|| $eventlist['file_type']=='JPEG' ||$eventlist['file_type']=='jpg' ||$eventlist['file_type']=='JPG' || $eventlist['file_type']=='png'|| $eventlist['file_type']=='PNG'){
+        $img = new Imagick($new_folder.'/'. $eventlist['file_name']);
+        header('Content-Type: image/'.$img->getImageFormat());
+        echo $img;
+    } 
+
+ if($eventlist['file_type']=='docx'|| $eventlist['file_type']=='doc' || $eventlist['file_type']=='DOC' || $eventlist['file_type']=='DOCX' || $eventlist['file_type']=='csv'  || $eventlist['file_type']=='CSV' || $eventlist['file_type']=='xls' || $eventlist['file_type']=='XLS' || $eventlist['file_type']=='rtf' || $eventlist['file_type']=='RTF' || $eventlist['file_type']=='odt' || $eventlist['file_type']=='ods' || $eventlist['file_type']=='xlsx' || $eventlist['file_type']=='tsv' || $eventlist['file_type']=='txt' ){
+        
+
+
+	$output = shell_exec('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder.'/'. $eventlist['file_name']).'    -outdir  '  .drupal_realpath($new_folder1));
+
+        //print_r($output); exit;
+	$img = new Imagick();
+        $img->readimage(drupal_realpath($new_folder1).'/'. $path_parts['filename'].'.pdf[0]');
+        $img->setImageFormat('png');
+        header('Content-Type: image/'.$img->getImageFormat());
+        echo $img; 
+    }
+
+
+
 }
+
+function getfilepreview1()
+{
+	$new_folder = 'public://';
+    $new_folder1 = 'public://temp/conv';
+//echo drupal_realpath($new_folder); exit;
+
+	//
+
+//$x=('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder).'/JungleDrones-3-7-16-550528075-1462281507.docx  -outdir  '  .drupal_realpath($new_folder1).'/');
+
+//echo $command = 'unoconv -f pdf   '.drupal_realpath($new_folder1).'/JungleDrones-3-7-16-428701115-1462267563.docx';
+				//$x =exec($command); 
+
+
+//libreoffice --headless --invisible --convert-to pdf output.pdf input.docx
+
+$output = shell_exec('libreoffice --headless  --convert-to pdf  '.drupal_realpath($new_folder).'/JungleDrones-3-7-16-550528075-1462281507.docx  -outdir  '  .drupal_realpath($new_folder1).'/');
+echo "<pre>$output</pre>";
+//print_r($x);
+}
+
+
 

@@ -50,6 +50,8 @@
                       <li ng-if="userrole==4"><a ui-sref="signupuser-list"><i class="fa fa-link"></i> <span>Member Signup Leads</span></a></li>
                       <li ng-if="userrole==4"><a ui-sref="employement-list"><i class="fa fa-link"></i> <span>Employment Leads</span></a></li>
                       <li ng-if="userrole==4"><a ui-sref="pilot-list"><i class="fa fa-link"></i> <span>Pilot List</span></a></li>
+                      <li ng-if="userrole==4"><a ui-sref="contributor-list"><i class="fa fa-link"></i> <span>Contributor List</span></a></li>
+                      <li ng-if="userrole==4"><a ui-sref="generaluser-list"><i class="fa fa-link"></i> <span>General User List</span></a></li>
 
                       
                    
@@ -133,7 +135,7 @@
                  <li ng-if="userrole==4" ><a ui-sref="addcontent"><i class="fa fa-link"></i> <span>Add Content</span></a></li>
                  <li ng-if="userrole==4" ><a ui-sref="contentlist"><i class="fa fa-link"></i> <span>Content List</span></a></li>
 
-                  <li><a style="cursor: pointer" ui-sref="logout" ng-click="logout()"><i class="fa fa-link"></i> <span>Logout</span></a></li>
+                  <li><a style="cursor: pointer"  ng-click="logout()"><i class="fa fa-link"></i> <span>Logout</span></a></li>
 
           </ul><!-- /.sidebar-menu -->
         </section>

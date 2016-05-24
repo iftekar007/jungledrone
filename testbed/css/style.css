@@ -14898,7 +14898,7 @@ opacity:1;
 .newaccountbtnwrapper .newaccountbtn{ display:block; background: #c10404 ;
     color: #ffffff;
     font-family: "OpenSans-Bold";
-    font-size: 16px;
+    font-size: 14px;
     height: 52px;
     line-height: 52px;
     margin:0;
@@ -15437,7 +15437,7 @@ opacity:1;
 }
 
 
-
+.maDownloadstable { min-height:560px;}
 .maDownloadstable .row{ margin-left:0px; margin-right:0px; padding-left:0px; padding-right:0px;}
 
 
@@ -15493,7 +15493,7 @@ opacity:1;
 
 	
 
-.notificationdropdown .row{ margin-left:0px; margin-right:0px; padding:5px;  border-bottom: 1px solid #a4a4a4 !important;}	
+.notificationdropdown .row{ margin-left:0px; margin-right:0px; padding:5px;  border-bottom: 1px solid #a4a4a4 !important; cursor:pointer;}	
 
 
 
@@ -15743,3 +15743,27 @@ opacity:1;
     outline: medium none !important;
     text-decoration: none !important;
     width: auto;}
+	
+	
+	
+	
+	#tooltip2{outline:none; }
+#tooltip2 strong {line-height:30px;}
+#tooltip2:hover {text-decoration:none;} 
+#tooltip2 span {
+    z-index:10;display:none;
+    margin-top:30px; 
+    width:300px; line-height:16px;
+}
+#tooltip2:hover span{
+    display:inline; position:absolute; color:#111; right:0;
+}
+.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+    
+/*CSS3 extras*/
+#tooltip2 span
+{
+    border-radius:0;
+    
+}
+

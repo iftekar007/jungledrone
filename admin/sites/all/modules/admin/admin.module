@@ -194,7 +194,16 @@ function adminlist()
 
     if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'auditor'){
         $queryu->condition('ur.rid', 7, '=');
-    }else{
+    }
+    else if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'generaluser'){
+
+        $queryu->condition('ur.rid', 8, '=');
+    }
+    else if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'contributor'){
+        $queryu->condition('ur.rid', 9, '=');
+    }
+
+    else{
         $queryu->condition('ur.rid', 4, '=');
     }
 
@@ -271,7 +280,15 @@ function addadmin(){
 
     if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'auditor'){
         $roles[7]=' auditor';
-    }else{
+    }
+    else if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'generaluser'){
+        $roles[8]=' generaluser';
+    }
+    else if(isset($_REQUEST['type']) && $_REQUEST['type'] == 'contributor'){
+        $roles[9]=' contributor';
+    }
+
+    else{
         $roles[4]=' siteadmin';
     }
 
@@ -294,9 +311,15 @@ function addadmin(){
         $query->execute();
     }
 
-    $op = 'register_pending_approval';
-    $status = _user_mail_notify($op, $account);
-    drupal_mail('admin', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+   // $op = 'register_pending_approval';
+   // $status = _user_mail_notify($op, $account);
+    drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+    if((isset($_REQUEST['type']) && $_REQUEST['type'] == 'auditor') || (isset($_REQUEST['type']) && $_REQUEST['type'] == 'generaluser')){
+        //drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
+
+    }
+
+
     $data['status'] = 'success';
      echo json_encode($data);
     return;
@@ -390,10 +413,10 @@ function login(){
         //print_r($user->roles);
 
         $queryu = db_select('users', 'u');
-        if($user->roles[4]=='siteadmin' || $user->roles[7]=='auditor')$queryu->join('admin', 'a', 'a.user_id = u.uid');
+        if($user->roles[4]=='siteadmin' || $user->roles[7]=='auditor' || $user->roles[9]=='contributor') $queryu->join('admin', 'a', 'a.user_id = u.uid');
         if($user->roles[6]=='pilot')$queryu->join('pilot', 'p', 'p.user_id = u.uid');
         $queryu->fields('u', array('uid','created','status','login','mail'));
-        if($user->roles[4]=='siteadmin'|| $user->roles[7]=='auditor')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
+        if($user->roles[4]=='siteadmin'|| $user->roles[7]=='auditor' || $user->roles[9]=='contributor')$queryu->fields('a',array('fname','lname','phone_no','mobile_no','address','create_time'));
         if($user->roles[6]=='pilot')
             $queryu->fields('p',array('fname','lname'));
         $queryu->condition('u.uid', $user->uid, '=');

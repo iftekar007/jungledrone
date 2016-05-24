@@ -208,8 +208,31 @@
             <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        
-        
+
+              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+                  <!-- small box -->
+                  <div class="small-box bg-gray" ui-sref="general-list">
+                      <div class="inner">
+                          <h3>General User List</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="images/naicon7.png" alt="#" style="display:block; margin:14px auto; width:50px;">
+                      </div>
+                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+                  <!-- small box -->
+                  <div class="small-box bg-gray" ui-sref="contributor-list">
+                      <div class="inner">
+                          <h3>Contributor List</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="images/aicon3.png" alt="#" style="display:block; margin:14px auto; width:50px;">
+                      </div>
+                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-gray" ui-sref="logout">
