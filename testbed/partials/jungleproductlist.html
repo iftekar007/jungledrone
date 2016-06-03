@@ -38,6 +38,10 @@
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'product_desc'"></span></th>
                             <th><a ng-click="order('cat_name')" href="javascript:void(0);">Category Name</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'cat_name'"></span></th>
+                            <th><a ng-click="order('payout')" href="javascript:void(0);">Payout</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'payout'"></span></th>
+                            <th><a ng-click="order('credits')" href="javascript:void(0);">Credits</a>
+                                <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'credits'"></span></th>
 
                             <th><a ng-click="order('priority')" href="javascript:void(0);">Priority</a>
                                 <span class="sortorder" ng-class="{reverse:reverse}" ng-show="predicate === 'priority'"></span>
@@ -55,6 +59,8 @@
                             <td>{{item.product_name}}</td>
                             <td ng-bind-html="trustAsHtml(item.product_desc)"></td>
                             <td>{{item.cat_name}}</td>
+                            <td>{{item.payout}}</td>
+                            <td>{{item.credits}}</td>
 
                             <td>{{item.priority}}</td>
 

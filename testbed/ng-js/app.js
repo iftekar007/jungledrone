@@ -171,7 +171,7 @@ jungledrone.filter("sanitizelimit", ['$sce', function($sce) {
     return function(htmlCode){
         //console.log(htmlCode);
         //console.log('santize');
-        htmlCode=htmlCode.substr(0,20);
+        htmlCode=htmlCode.substr(0,100);
         return $sce.trustAsHtml(htmlCode);
     }
 }]);

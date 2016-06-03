@@ -320,9 +320,9 @@
 
 <script type="text/ng-template" id="loginmodal">
 
-    <div class="newlogin-box">
+    <div class="newlogin-box logpopup">
 
-        <a href="javascript:void(0);" ng-click="cancel()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+        <a href="javascript:void(0);" ng-click="cancel111()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
 
         <div class="newloginwrapper">
 		
@@ -602,29 +602,37 @@
 
 </script>
 
+
+
+
+
+
 <script type="text/ng-template" id="success.html">
 
     <div class="newlogin-box">
 
         <a href="javascript:void(0);" ng-click="cancel()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
 
+        <div class="newloginwrapper">
+            <div class="newaccountbtnwrapper">
+            <h2>Please check your email to activate the account!</h2>
+                </div>
+        </div>
+
+    </div>
+
+</script>
+
+<script type="text/ng-template" id="acountsuccess.html">
+
+    <div class="newlogin-box">
+
+        <a href="javascript:void(0);" ng-click="cancel123()" ><img src=images/newloginclose.png alt=#  class="closebtn"/></a>
+
         <div class="newloginwrapper" style="padding-left:5%; padding-right:5%;">
 
 
-            <h2 style="text-align:center; font-size: 24px; ">Thanks for signup</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <h2 style="text-align:center; font-size: 24px; ">Your account activation has been successfull</h2>
 
 
         </div>
@@ -632,8 +640,4 @@
     </div>
 
 </script>
-
-
-
-
 
