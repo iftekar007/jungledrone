@@ -40,7 +40,7 @@
      
      <div class="bestsellerscontain" >
       <h3>Best sellers</h3>
-      <div class="detailleftimgblock" ng-repeat="item in productlist  " ng-if="$index<4">
+      <div class="detailleftimgblock" ng-repeat="item in productlist  " ng-if="$index<4 && item.type=='General' ">
       <img ui-sref="product-details({id:item.id})" src="{{item.bestsellerp}}" alt="#">
       
       <p>Name:<br />
@@ -169,7 +169,7 @@ carton size:57*37.5*38cm</h4>-->
 
        <!-- <span ng-repeat="item in productlist">-->
 
-            <div  class="imagebox" ng-repeat="item in productlist"><img ui-sref="product-details({id:item.id})" src="{{item.productlisturl}}" alt="#"></div>
+            <div  ng-if="item.type=='General' " class="imagebox" ng-repeat="item in productlist"><img ui-sref="product-details({id:item.id})" src="{{item.productlisturl}}" alt="#"></div>
         <!--</span>-->
 
     </div>
@@ -219,7 +219,7 @@ carton size:57*37.5*38cm</h4>-->
             <div class="detailslider2">
 <div class="slider3">
 
-<div class="featured_products_block" ng-repeat="item in productlist">
+<div class="featured_products_block" ng-repeat="item in productlist" ng-if="item.type=='General' ">
 <img src="{{item.productdetailmain}}" ui-sref="product-details({id:item.id})" alt="#">
 <div class="prosubblock1">
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con">

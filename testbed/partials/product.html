@@ -48,22 +48,22 @@
        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 newproductrightcon">
       
            <!--top ITEMS menu block-->
-      <div class="newproductitemrow">
+     <!-- <div class="newproductitemrow">
            <div class="newpromenu1"><div>Sort By : <strong>PRICE</strong></div> <a href="javascript:void(0)"><img src="images/productnew-menuarrow.png" alt="#"></a>  <div class="clear"></div></div>
       
            <div class="newpromenu2"><div>SHOW : <strong>9ITEMS</strong> </div><a href="javascript:void(0)"><img src="images/productnew-menuarrow.png" alt="#"></a>  <div class="clear"></div></div>
         
            <div class="newpromenu3"><div>VIEW : </div><a href="javascript:void(0)"><img src="images/productnew-menuicon1.png" alt="#"></a> <a href="javascript:void(0)"><img src="images/productnew-menuicon2.png" alt="#"></a>  <div class="clear"></div></div>
-           <!--top ITEMS menu block end -->
+           &lt;!&ndash;top ITEMS menu block end &ndash;&gt;
            <div class="clear"></div>
            
-           </div>
+           </div>-->
         
            <!--     product block-->
        
 
            <span ng-repeat=" item in productlist ">
-               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow"  ng-if="item.category_id==catid || catid==0 ">
+               <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 newproblockrow"  ng-if="(item.cat_name.toString().toLowerCase().indexOf(catname.toString().toLowerCase()) > -1 || catid==0) && (item.type=='General') ">
 
              
                    <img src="{{item.productlisturl}}" alt="#" class="newproimgblock">
@@ -71,9 +71,10 @@
                    <div class="prosubblock1">
                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text1con"><strong>{{item.product_name | limitTo:8}}</strong></div>
                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text2con">$ {{item.price}}</div>
+
                        <div class="clear"></div>
                    </div>
-               
+
                
                    <div class="newproblockrow_hovercontain">
                        <div class="prosubblock4">

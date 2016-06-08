@@ -241,10 +241,11 @@ function cartdetail(){
         //$recordu['id']=($recordu['ca.id']);
         $recordu['cartimage'] = image_style_url('cartimage', (@$recordu['product_file']));
 
-        $cartarr[$recordu['ca.id']]=$recordu;
+        $cartarr[]=$recordu;
     }
 
     echo json_encode($cartarr);
+    //echo json_encode(count($cartarr));
 }
 
 function uploadjunglssecategoryimage(){

@@ -3317,6 +3317,66 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
     }
 
 
+
+
+
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'cartdetail',
+        data    : $.param({'user':$scope.cartuser}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+
+
+        console.log($scope.cartarray);
+
+        $scope.cartarray=data;
+        $scope.carttotalprice=0;
+
+        angular.forEach(data, function(value, key){
+            //console.log(value.type);
+            //if(value.type == "Stock Image") {
+                $scope.carttotalprice+=parseFloat(value.qty*value.price);
+            //}
+        });
+
+
+    });
+
+
+    $rootScope.updatecart=function(){
+
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'cartdetail',
+            data    : $.param({'user':$scope.cartuser}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+
+
+            console.log($scope.cartarray);
+
+            $scope.cartarray=data;
+            $scope.carttotalprice=0;
+
+            angular.forEach(data, function(value, key){
+                //console.log(value.type);
+                //if(value.type == "Stock Image") {
+                $scope.carttotalprice+=parseFloat(value.qty*value.price);
+                //}
+            });
+
+
+        });
+    }
+
+
+
 });
 jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$rootScope,Upload,contentservice) {
 
@@ -7647,6 +7707,8 @@ jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootSc
 
             $rootScope.carttotal=parseInt($rootScope.carttotal+parseInt(1));
 
+            $rootScope.updatecart();
+
 
 
         });
@@ -7740,7 +7802,7 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
 
 
-
+            $rootScope.updatecart();
 
 
             });
@@ -8020,6 +8082,13 @@ jungledrone.controller('products', function($scope,$state,$http,$cookieStore,$ro
             id: 0,
             cat_name: 'All'
         };
+
+        angular.forEach(data, function(value, key){
+            //console.log(value.type);
+            if(value.id == $stateParams.id) {
+                $scope.catname=(value.cat_name);
+            }
+        });
 
         //$scope.categorylist[0].category_id='All';
         console.log($scope.categorylist);

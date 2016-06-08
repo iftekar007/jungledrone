@@ -126,13 +126,13 @@
 
          
 
-         <div class="shoppingrow">
+         <div ng-repeat="cartitem in cartarray" ng-if="cartitem.qty>0" class="shoppingrow">
 
-            <div class="shopbox_pro"><img alt="#" src="images/events_banner_drone.png"></div>
+            <div class="shopbox_pro"><img ui-sref="product-details({id:cartitem.id})" alt="#" src="{{cartitem.cartimage}}"></div>
 
-            <div class="shopbox_name">A2b 5 Channel Nano Quadcopter 6 Axis Gyro </div>
+            <div class="shopbox_name">{{cartitem.product_name}} </div>
 
-            <div class="shopbox_price"><span>1</span> x <strong>$44.95</strong></div>
+            <div class="shopbox_price"><span>{{cartitem.qty}}</span> x <strong>${{cartitem.price}}</strong></div>
 
             <div class="shopbox_close"><img alt="#" src="images/shopclose.png"></div>
 
@@ -146,7 +146,7 @@
 
           
 
-             <div class="shoppingrow">
+          <!--   <div class="shoppingrow">
 
                  <div class="shopbox_pro"><img alt="#" src="images/events_banner_drone.png"></div>
 
@@ -158,7 +158,7 @@
 
                  <div class="clearfix"></div>
 
-             </div>
+             </div>-->
 
          
 
@@ -176,9 +176,9 @@
 
                  <div class="shoptotal1">Total</div>
 
-                 <div class="shoptotal2">2 items</div>
+                 <div class="shoptotal2">{{carttotal}} items</div>
 
-                 <div class="shoptotal3">$89.09</div>
+                 <div class="shoptotal3">${{carttotalprice}}</div>
 
            
 

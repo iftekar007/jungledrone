@@ -12430,7 +12430,7 @@ box-shadow: 3px 4px 8px -1px rgba(0,0,0,0.49); padding:16px 0; text-align:center
 
 
 
-.new_menu_block .new_menu_list .dropdown-menu .shoppingrow{ border-bottom:solid 1px #9fa2a3; padding:10px 5px; }
+.new_menu_block .new_menu_list .dropdown-menu .shoppingrow{ border-bottom:solid 1px #9fa2a3; padding:10px; }
 
 
 
@@ -12439,8 +12439,8 @@ box-shadow: 3px 4px 8px -1px rgba(0,0,0,0.49); padding:16px 0; text-align:center
 
 
 .new_menu_block .new_menu_list .dropdown-menu .shopbox_pro{     border: 1px solid #dcdcdc;
- float: left;
- width: 50px;}
+ float: left; height: 100px; overflow: hidden;
+ width: 100px;}
 
 .new_menu_block .new_menu_list .dropdown-menu .shopbox_pro img{ width:100%; }
 
@@ -12456,7 +12456,7 @@ box-shadow: 3px 4px 8px -1px rgba(0,0,0,0.49); padding:16px 0; text-align:center
 .new_menu_block .new_menu_list .dropdown-menu .shopbox_name{color: #f30100;
  float: left;
  font-family: "OpenSans-Semibold";
- font-size: 12px;
+ font-size: 14px;
  margin-left: 10px;
  width: 190px;
  word-wrap: break-word;}
@@ -12467,7 +12467,7 @@ box-shadow: 3px 4px 8px -1px rgba(0,0,0,0.49); padding:16px 0; text-align:center
 
 
 
-.new_menu_block .new_menu_list .dropdown-menu .shopbox_price{ width:100px; font-family:'OpenSans-Semibold'; font-size:14px; color:#000; float:left;  margin-left:10px;}
+.new_menu_block .new_menu_list .dropdown-menu .shopbox_price{ width:100px; font-family:'arial'; font-size:13px; color:#363535; float:left;  margin-left:10px; padding-top: 4px; font-weight: normal;}
 
 
 
@@ -15758,7 +15758,7 @@ opacity:1;
 #tooltip2:hover span{
     display:inline; position:absolute; color:#111; right:0;
 }
-.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+/*.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}*/
     
 /*CSS3 extras*/
 #tooltip2 span
@@ -15767,3 +15767,142 @@ opacity:1;
     
 }
 
+
+/*---Gallery Page-----*/
+.galleryblocktop{ margin-top:12%;}
+.galleryblocktop .divider{background-color: #e1e1e1; height: 1px; display: block; width:100%;}
+.searchgalleryblock1{height: 71px; background-color: #fff; padding-top: 14px; padding-bottom: 14px;}
+.searchgalleryblock1:after{    content: '';
+    background: url("../images/searchbottomgradient.png") repeat-x;
+    width: 100%;
+    height: 6px;
+    float: left;
+    display: block;
+    position: absolute;
+    top: 71px;}
+
+.searchgalleryblock1left{float: left;margin-left: 28px; width: 902px;}
+.searchgalleryblock1left img{display: inline-block; width: 43px; height: 43px; margin-right: 25px; float: left;}
+.searchgalleryblock1left input{display: inline-block; border: none; width: 80%; line-height: 43px; height: 43px; float: left;}
+.searchgalleryblock1left a{display: inline-block; float: left;}
+
+.searchgalleryblock1right{ float: right; width: 365px;}
+.searchgalleryblock1right .btngo{background-color: #f30100; color:#fff; border-radius: 50px; -webkit-border-radius: 50px; -moz-border-radius: 50px; border: none; font-family: 'OpenSans-Bold'; font-size: 18px; line-height: 24px; display: inline-block;float: left; padding-left: 16px; padding-right: 16px; text-transform: uppercase;}
+.searchgalleryblock1right label {
+    font-family: 'opensans-regular';
+    font-size: 16px;
+    line-height: 40px;
+    margin-left: 60px;
+    display: inline-block;
+    float: left;
+    width: 102px;
+}
+.searchgalleryblock1right input[type="radio"], .searchgalleryblock1right input[type="checkbox"] {
+    margin: 14px -17px 0;
+    margin-top: 1px \9;
+    line-height: normal;
+}
+
+
+.searchgalleryblock2{height: 67px; background-color: #f0f0f0; padding-top: 14px; padding-bottom: 14px;}
+.searchgalleryblock2left{float: left;margin-left: 28px; width:516px;}
+.searchgalleryblock2left label{display: inline-block; float: left; font-family: 'myriadpro-regular'; font-size: 16px; line-height: 36px; color:#6f6f6f;}
+.searchgalleryblock2left .dropdown{display: inline-block; float: left; margin-left: 38px; font-family: 'myriadpro-regular'; color: #424242;}
+.searchgalleryblock2left .dropdown i.fa-angle-down{margin-left: 20px;}
+.searchgalleryblock2right{ float: right; width: 532px;}
+.searchgalleryblock2right label{display: inline-block; float: left; font-family: 'opensans-regular'; font-size: 15px; line-height: 32px; margin-right: 17px; color:#5a5a5a;}
+.searchgalleryblock2right input[type="text"]{display: inline-block; float: left; width: 36px; height: 37px; background-color: #fff; border: 1px solid #b9b9b9; text-align: center;}
+.searchgalleryblock2right nav .pagination{display: inline-block; float: left; margin-left: 30px; border-left: 1px solid #aaaaaa;}
+.searchgalleryblock2right .pagenumber{color:#000;}
+.searchgalleryblock2right .pagination {
+    padding-left: 0;
+    margin: 0px 0;
+    border-radius: 0;
+    border: none;
+}
+
+.searchgalleryblock2right .pagination > li > a {
+    background: transparent;
+    color: #5a5a5a;
+    font-family: 'OPENSANS-REGULAR';
+    font-size: 15px;
+    line-height: 24px;
+}
+
+.searchgalleryblock2right .pagination > li > a:hover, .searchgalleryblock2right .pagination > li > a:active{color: #ff0000;}
+
+.searchgalleryblock2right .pagination > li > a, .pagination > li > span {
+    background-color: transparent;
+    border: 0px solid #ddd;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.galleryblock2{background-color: #f30100; color: #fff; text-align: center; padding: 18px 0px; width: 100%; display: block; margin-bottom: 12px;}
+.galleryblock2 h3{font-family: 'OPENSANS-REGULAR'; color: #fff; font-size: 20px; line-height: 24px; display: inline-block;    margin-top: 0px;  margin-bottom: 0px;}
+.galleryblock2 .btnstartnow{display: inline-block; border: 2px solid #fff; margin-left: 86px; padding: 9px 47px; text-transform: uppercase; font-family: 'MYRIADPRO-REGULAR'; font-size: 16px; background-color: #f30100; color:#fff; border-radius: 50px; -moz-border-radius: 50px; webkit-border-radius: 50px;}
+
+
+
+.galleryblock3{}
+.gallerylist{max-width: 1877px; margin-left: auto; margin-right: auto; float: none;}
+.singlegallery{display: inline-block; float: left; overflow: hidden;margin:12px;}
+.singlegallery img{width: 100%; height: 100%;display: block;}
+
+.one1{height: 181px; width: 272px;margin-left: 0px;}
+.one2{height: 181px; width: 484px;}
+.one3{height: 181px; width: 237px;}
+.one4{height: 181px; width: 271px;}
+.one5{height: 181px; width: 517px;margin-right: 0px;}
+
+.two1{height: 214px; width: 321px;margin-left: 0px;}
+.two2{height: 214px; width: 484px;}
+.two3{height: 214px; width: 319px;}
+.two4{height: 214px; width: 681px;margin-right: 0px;}
+
+.three1{height: 243px; width: 430px;margin-left: 0px;}
+.three2{height: 243px; width: 1419px;margin-right: 0px;}
+
+.four1{height: 196px; width: 295px;margin-left: 0px;}
+.four2{height: 196px; width: 130px;}
+.four3{height: 196px; width: 291px;}
+.four4{height: 196px; width: 474px;}
+.four5{height: 196px; width: 591px;margin-right: 0px;}
+
+.five1{height: 218px; width: 328px;margin-left: 0px;}
+.five2{height: 218px; width: 327px;}
+.five3{height: 218px; width: 327px;}
+.five4{height: 218px; width: 146px;}
+.five5{height: 218px; width: 653px;margin-right: 0px;}
+
+
+
+
+
+.galleryblockbottom{ background-color: #fff; padding-top: 38px; padding-bottom: 38px;}
+.galleryblockbottomwrapper{width:518px; margin-left: auto; margin-right: auto; text-align: center;}
+.galleryblockbottomwrapper label{display: inline-block; float: left; font-family: 'opensans-regular'; font-size: 15px; line-height: 32px; margin-right: 17px; color:#5a5a5a;}
+.galleryblockbottomwrapper input[type="text"]{display: inline-block; float: left; width: 36px; height: 37px; background-color: #fff; border: 1px solid #b9b9b9; text-align: center;}
+.galleryblockbottomwrapper nav .pagination{display: inline-block; float: left; margin-left: 30px; border-left: 1px solid #aaaaaa;}
+.galleryblockbottomwrapper .pagenumber{color:#000;}
+.galleryblockbottomwrapper .pagination {
+    padding-left: 0;
+    margin: 0px 0;
+    border-radius: 0;
+    border: none;
+}
+.galleryblockbottomwrapper .pagination > li > a {
+    background: transparent;
+    color: #5a5a5a;
+    font-family: 'OPENSANS-REGULAR';
+    font-size: 15px;
+    line-height: 24px;
+}
+.galleryblockbottomwrapper .pagination > li > a:hover, .galleryblockbottomwrapper .pagination > li > a:active{color: #ff0000;}
+.galleryblockbottomwrapper .pagination > li > a, .pagination > li > span {
+    background-color: transparent;
+    border: 0px solid #ddd;
+    padding-left: 15px;
+    padding-right: 15px;
+}

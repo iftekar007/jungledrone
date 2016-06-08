@@ -3999,4 +3999,9 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e73f7c', endCo
 	white-space:normal!important
 }
 }
+.callout  {
+    left: 0!important
+    position: inherit!important;
+    top: 0!important
 
+}
