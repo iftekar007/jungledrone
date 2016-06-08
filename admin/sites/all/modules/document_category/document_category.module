@@ -89,6 +89,15 @@ function document_category_menu()
         //'type'=>MENU_NORMAL_ITEM,
     );
 
+    $items['htmltestmail'] = array(
+        'title' => 'junglecategory Updates Status',
+        'page callback' => 'htmltestmail',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
 
     return $items;
 }
@@ -273,6 +282,36 @@ function documentcatupdatestatus(){
     echo "true";
 }
 
+function htmltestmail(){
+    $params = array(
+        'subject' => 'Test HTML Page',
+        'body' => "<p>Hello World</p>",
+    );
+
+    $x = drupal_mail('document_category', 'my_module_mail_example', "samsujj@gmail.com", language_default(), $params);
+    drupal_set_message("Sent e-mail to example@example.com");
+
+    var_dump($x);
+}
+
+
+function document_category_mail($key, &$message, $params){
+
+    // Set the mail content type to html to send an html e-mail (optional).
+    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+
+    // Grab the subject and body from params and add it to the message.
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body']; // Drupal 7
+    //$message['body'] = $params['body']; // Drupal 6, I think
+
+    switch ($key) {
+        case "my_module_mail_example":
+            // Make other changes here if desired...
+            break;
+    }
+
+}
 
 
 

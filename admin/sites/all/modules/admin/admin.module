@@ -122,6 +122,23 @@ function admin_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
+    $items['encrype'] = array(
+        'title' => 'encrype',
+        'page callback' => 'encrype',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
+
+    $items['test'] = array(
+        'title' => 'test',
+        'page callback' => 'test',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
 
     return $items;
@@ -160,6 +177,9 @@ function admindetails(){
         $userlist['email'] = $recordu['mail'];
         $userlist['fname'] = $recordu['fname'];
         $userlist['lname'] = $recordu['lname'];
+        if($recordu['fname']!='' && $recordu['lname']!=''){
+            $userlist['name']   = $recordu['fname'].' '.$recordu['lname'];
+        }
         $userlist['phone_no'] = $recordu['phone_no'];
         $userlist['mobile_no'] = $recordu['mobile_no'];
         $userlist['address'] = $recordu['address'];
@@ -302,27 +322,33 @@ function addadmin(){
 
     $account=user_save('', $new_user);
 
-    if($account->uid>0){
-        $query = db_insert('admin')->fields(array('user_id','email','password', 'fname', 'lname','address','phone_no','mobile_no','create_time','	last_login'));
+
+    if($account->uid>0) {
+        $query = db_insert('admin')->fields(array('user_id', 'email', 'password', 'fname', 'lname', 'address', 'phone_no', 'mobile_no', 'create_time', '	last_login'));
         //foreach ($values as $record) {
-        $query->values(array($account->uid,@$_POST['email'],'',@$_POST['fname'],@$_POST['lname'],
-            $_POST['address'],@$_POST['phone_no'],@$_POST['mobile_no'],time(),time()));
+        $query->values(array($account->uid, @$_POST['email'], '', @$_POST['fname'], @$_POST['lname'],
+            $_POST['address'], @$_POST['phone_no'], @$_POST['mobile_no'], time(), time()));
         //}
         $query->execute();
+
+        $randomdom_string = base64_encode($account->uid);
+        $link = CUSTOM_URL . '/url/' . $randomdom_string;
+
+
+        // $op = 'register_pending_approval';
+        // $status = _user_mail_notify($op, $account);
+       // drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@jungledrones.com'));
+        if ((isset($_REQUEST['type']) && $_REQUEST['type'] == 'contributor') || (isset($_REQUEST['type']) && $_REQUEST['type'] == 'generaluser')) {
+            $language = LANGUAGE_NONE;
+            $d = drupal_mail('customuser', 'signupactivationmail', "support@jungledrones.com", $language, $params = array('email' => @$_POST['email'], 'link' => $link), $from = "support@jungledrones.com", $send = TRUE);
+
+        }
+
+
+        $data['status'] = 'success';
+        echo json_encode($data);
+        return;
     }
-
-   // $op = 'register_pending_approval';
-   // $status = _user_mail_notify($op, $account);
-    drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
-    if((isset($_REQUEST['type']) && $_REQUEST['type'] == 'auditor') || (isset($_REQUEST['type']) && $_REQUEST['type'] == 'generaluser')){
-        //drupal_mail('user', 'register_admin_created', $_POST['email'], NULL, array('account' => $account), variable_get('site_mail', 'support@voortal.com'));
-
-    }
-
-
-    $data['status'] = 'success';
-     echo json_encode($data);
-    return;
 }
 function adminupdates(){
 
@@ -360,16 +386,43 @@ function updatestatus(){
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
 
     //print_r($_POST);
-    $user_fields = user_load(@intval($_POST['uid']));
-    //$user_fields = user_load(62);
-    $user_fields->status=1-intval($user_fields->status);
-    user_save($user_fields);
 
-    if($user_fields->status==1) drupal_mail('user', 'register_status_activated', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
-    else drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
-    //drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
-    //drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
-    echo "true";
+    if(isset($_POST['linktype']) && $_POST['linktype']=='front'){
+      $uid=base64_decode($_POST['uid']) ;
+    }
+    else{
+        $uid=$_POST['uid'];
+    }
+
+    $uid=intval($uid);
+    if($uid>0) {
+
+        $user_fields = user_load(@intval($uid));
+
+        //$user_fields = user_load(62);
+
+        if (isset($_POST['linktype']) && $_POST['linktype'] == 'front') {
+            $user_fields->status = 1;
+        } else {
+            $user_fields->status = 1 - intval($user_fields->status);
+        }
+        user_save($user_fields);
+
+        if ($user_fields->status == 1) {
+            // drupal_mail('user', 'register_status_activated', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+            $language = LANGUAGE_NONE;
+            drupal_mail('customuser', 'signupactive', "support@jungledrones.com", $language, $params = array('email' => @$user_fields->mail), $from = "support@jungledrones.com", $send = TRUE);
+        } else {
+            drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@jungledrones.com'));
+        }
+        //drupal_mail('user', 'register_status_blocked', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+        //drupal_mail('user', 'register_no_approval_required', $_POST['email'], NULL, array('account' => $user_fields), variable_get('site_mail', 'support@voortal.com'));
+        $data['status']='success';
+    }
+    else{
+        $data['status']='error';
+    }
+    echo json_encode($data);
 }
 
 function deleteadmin(){
@@ -647,6 +700,92 @@ function admin_mail ($key, &$message, $params) {
             //$message['body'][] = t('Hello @username,', array('@username' => $params['username']));
             $message['body'][] = "You have changed your password successfully ! -- JungleDrones team";
             break;
+
+        case "my_module_mail_example":
+            // Make other changes here if desired...
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+
+            // Grab the subject and body from params and add it to the message.
+            $message['subject'] = $params['subject'];
+            $message['body'][] = $params['body']; // Drupal 7
+
+            break;
     }
 }
 
+function customuser_mail ($key, &$message, $params) {
+    switch ($key) {
+        case 'resetsuccess1':
+            // Set headers etc
+            $message['to'] = $params['email'];
+            $message['subject'] = t('Password Change was successfull');
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+            $message['headers']['X-Mailer'] = 'Drupal';
+
+            //$message['body'][] = t('Hello @username,', array('@username' => $params['username']));
+            $message['body'][] = "You have changed your password successfully ! -- Influx IQ team";
+            break;
+
+
+        case 'signupactivationmail':
+            // Set headers etc
+            $message['to'] = $params['email'];
+            $message['subject'] = t('Account Activation Link');
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+            $message['headers']['X-Mailer'] = 'Drupal';
+            $message['body'][] = "To activate your account. Click the link  ".$params['link'];
+            break;
+
+        case 'signupactive':
+
+            // Set headers etc
+            $message['to'] = $params['email'];
+            $message['subject'] = t('Your Account Activated');
+            $message['headers']['MIME-Version'] = '1.0';
+            $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+            $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+            $message['headers']['X-Mailer'] = 'Drupal';
+
+            //$message['body'][] = t('Hello @username,', array('@username' => $params['username']));
+            $message['body'][] = "Your account have been activated successfully ! -- Jungledrones.com";
+            break;
+
+
+
+    }
+
+
+
+}
+function test(){
+    $params = array(
+        'subject' =>'Test Email',
+        'body' => "<p>Hello World</p><a style='color:red' href='https://www.google.co.in'>Click</a>",
+    );
+
+// Send out the e-mail.
+    drupal_mail('admin', 'my_module_mail_example', "iftekarkta@gmail.com", language_default(), $params);
+    drupal_set_message("Sent e-mail to example@example.com");
+}
+
+function my_module_mail($key, &$message, $params){
+
+    // Set the mail content type to html to send an html e-mail (optional).
+    $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+
+    // Grab the subject and body from params and add it to the message.
+    $message['subject'] = $params['subject'];
+    $message['body'][] = $params['body']; // Drupal 7
+    //$message['body'] = $params['body']; // Drupal 6, I think
+
+    switch ($key) {
+        case "my_module_mail_example":
+            // Make other changes here if desired...
+            break;
+    }
+
+}

@@ -212,6 +212,10 @@ function junglecategorylist()
     if(isset($_POST['type']) && $_POST['type']!=''){
         $queryu->condition('ca.type',$_POST['type'],'=')  ;
     }
+    if(isset($_POST['fonttype']) && $_POST['fonttype']=='font'){
+        $queryu->condition('ca.type','General','<>');
+    }
+
 
     if( $_REQUEST['filter']=='status'){
         $queryu->condition('ca.status',1,'=')  ;

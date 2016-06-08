@@ -691,6 +691,8 @@ function jungleproductlist()
 
             $temparray=$recordu;
             $temparray['textdesc']=strip_tags($recordu['product_desc']);
+            $temparray['payout']=floatval($recordu['payout']);
+            $temparray['credits']=floatval($recordu['credits']);
 
             $temparray['productlisturl'] = image_style_url('productlist', (@$recordu['product_file']));
             $temparray['productdetailmain'] = image_style_url('productdetailmain', (@$recordu['product_file']));
@@ -787,10 +789,14 @@ function addjungleproduct(){
     if(isset($_POST['userid']) && ($_POST['userid']!='')){
         $user_id =$_POST['userid'];
     }
+    $status=1;
+    if(isset($_REQUEST['fonttype']) && $_REQUEST['fonttype']=='font'){
+        $status=0;
+    }
 
     $query = db_insert('jungleproduct')->fields(array('product_name','product_desc','category_id','product_file','status','priority','price','payout','credits','user_id'));
         //foreach ($values as $record) {
-        $query->values(array(@$_POST['product_name'],@$_POST['product_desc'],@$_POST['category_id'],$product_file,1,@$_POST['priority'],floatval(@$_POST['price']),floatval(@$_POST['payout']),floatval(@$_POST['credits']),intval($user_id)));
+        $query->values(array(@$_POST['product_name'],@$_POST['product_desc'],@$_POST['category_id'],$product_file,$status,@$_POST['priority'],floatval(@$_POST['price']),floatval(@$_POST['payout']),floatval(@$_POST['credits']),intval($user_id)));
         //}
         $query->execute();
 
@@ -814,7 +820,7 @@ function jungleproductupdates(){
 
 
     db_update('jungleproduct')
-        ->fields(array('product_name'=>@$_POST['product_name'],'product_desc'=>@$_POST['product_desc'],'category_id'=>@$_POST['category_id'],'product_file'=>@$_POST['product_file'],'priority'=>@$_POST['priority'],'price'=>floatval(@$_POST['price']),'payout'=>floatval(@$_POST['payout']),'credits'=>floatval(@$_POST['credits'])))
+        ->fields(array('product_name'=>@$_POST['product_name'],'product_desc'=>@$_POST['product_desc'],'category_id'=>@$_POST['category_id'],'product_file'=>@$_POST['product_file'],'priority'=>@$_POST['priority'],'status'=>@$_POST['status'],'price'=>floatval(@$_POST['price']),'payout'=>floatval(@$_POST['payout']),'credits'=>floatval(@$_POST['credits'])))
         ->condition('id', intval($_POST['id']))
          ->execute();
 }

@@ -76,17 +76,25 @@
                     <div ng-show="filterResult.length > perPage" class="paginationblock">
                         <uib-pagination total-items="filterResult.length" ng-model="currentPage" items-per-page="perPage" max-size="4"></uib-pagination>
                     </div>
-                    <div ng-if="documentlist.length == 0" class="callout callout-danger">
+
+
+                    <div ng-show="documentlist.length == 0" class="callout callout-danger">
                         <h4>Sorry</h4>
 
                         <p>No document exists in system right now !!.</p>
                     </div>
 
+
+
                 </div><!-- /.box -->
 
 
 
+
+
             </div>
+
+
 
         </div>   <!-- /.row -->
     </section><!-- /.content -->

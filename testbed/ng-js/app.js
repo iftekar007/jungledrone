@@ -2306,38 +2306,46 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
         }) .success(function(data) {
 
 
-            if(data.status == 'success'){
+            if(data.status == 'success') {
 
                 $uibModalInstance.dismiss('cancel');
 
 
+                $cookieStore.put('userid', data.userdetails.id);
+                $cookieStore.put('useremail', data.userdetails.email);
+                $cookieStore.put('userfullname', data.userdetails.fname + ' ' + data.userdetails.lname);
+                $cookieStore.put('userfname', data.userdetails.fname);
+                $cookieStore.put('userlname', data.userdetails.lname);
+                $cookieStore.put('username', data.userdetails.username);
+                $cookieStore.put('userrole', data.userdetails.userrole);
 
-                $cookieStore.put('userid',data.userdetails.id);
-                $cookieStore.put('useremail',data.userdetails.email);
-                $cookieStore.put('userfullname',data.userdetails.fname+' '+data.userdetails.lname);
-                $cookieStore.put('userfname',data.userdetails.fname);
-                $cookieStore.put('userlname',data.userdetails.lname);
-                $cookieStore.put('username',data.userdetails.username);
-                $cookieStore.put('userrole',data.userdetails.userrole);
-
-                if(typeof (data.userdetails.roles[4]) != 'undefined')
-                    $cookieStore.put('userrole',4);
-                if(typeof (data.userdetails.roles[5]) != 'undefined')
-                    $cookieStore.put('userrole',5);
-                if(typeof (data.userdetails.roles[6]) != 'undefined')
-                    $cookieStore.put('userrole',6);
-                if(typeof (data.userdetails.roles[7]) != 'undefined')
-                    $cookieStore.put('userrole',7);
-                if(typeof (data.userdetails.roles[8]) != 'undefined')
-                    $cookieStore.put('userrole',8);
-                if(typeof (data.userdetails.roles[9]) != 'undefined')
-                    $cookieStore.put('userrole',9);
-
+                if (typeof (data.userdetails.roles[4]) != 'undefined')
+                    $cookieStore.put('userrole', 4);
+                if (typeof (data.userdetails.roles[5]) != 'undefined')
+                    $cookieStore.put('userrole', 5);
+                if (typeof (data.userdetails.roles[6]) != 'undefined')
+                    $cookieStore.put('userrole', 6);
+                if (typeof (data.userdetails.roles[7]) != 'undefined')
+                    $cookieStore.put('userrole', 7);
+                if (typeof (data.userdetails.roles[8]) != 'undefined')
+                    $cookieStore.put('userrole', 8);
+                if (typeof (data.userdetails.roles[9]) != 'undefined')
+                    $cookieStore.put('userrole', 9);
 
 
-                if(typeof (data.userdetails.roles[7]) != 'undefined' || typeof (data.userdetails.roles[9]) != 'undefined')
-                    $state.go('mydownloads',{id:0});
-                else
+                if (typeof (data.userdetails.roles[7]) != 'undefined' ){
+                    $state.go('mydownloads', {id: 0});
+                    return;
+                }
+
+                if (typeof (data.userdetails.roles[9]) != 'undefined' ){
+                    $state.go('myaccount-product-list', {id: 0});
+                    return;
+                }
+
+
+
+
                     $state.go('dashboard');
 
 
@@ -4829,14 +4837,25 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
                     $cookieStore.put('userrole',6);
                 if(typeof (data.userdetails.roles[7]) != 'undefined')
                     $cookieStore.put('userrole',7);
+                if(typeof (data.userdetails.roles[9]) != 'undefined')
+                    $cookieStore.put('userrole',9);
 
 
 
                 //console.log($rootScope.userrole);
-                if(typeof (data.userdetails.roles[7]) != 'undefined')
+                console.log(data.userdetails.roles);
+
+
+                /*if(typeof (data.userdetails.roles[7]) != 'undefined'){
                     $state.go('mydownloads',{id:0});
-                else
-                    $state.go('dashboard');
+                    return;
+                }
+                if(typeof (data.userdetails.roles[9]) != 'undefined'){
+                    $state.go('myaccount-product-list');
+                    return;
+                }
+
+                $state.go('dashboard');*/
 
                 /*
 
@@ -9281,7 +9300,7 @@ jungledrone.controller('jungleproductlist',function($scope,$state,$http,$cookieS
 
         console.log(item)
 
-        if ( (item.product_name.indexOf($scope.searchkey) != -1) ||  (item.status.toString().indexOf($scope.searchkey) != -1) || (item.cat_name.toString().indexOf($scope.searchkey) != -1) || (item.product_desc.indexOf($scope.searchkey) != -1)  ){
+        if ( (item.product_name.toString().indexOf($scope.searchkey) != -1) ||  (item.status.toString().indexOf($scope.searchkey) != -1) || (item.cat_name.toString().indexOf($scope.searchkey) != -1) || (item.product_desc.indexOf($scope.searchkey) != -1)  ){
             return true;
         }
         return false;
@@ -9401,6 +9420,7 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
             priority: data.priority,
             price: data.price,
             payout: data.payout,
+            status: data.status,
             credits: data.credits,
 
         }
@@ -11824,7 +11844,7 @@ jungledrone.controller('myaccountaddproduct',function($scope,$state,$http,$cooki
             method  :   'POST',
             async   :   false,
 
-            url :       $scope.adminUrl+'addjungleproduct',
+            url :       $scope.adminUrl+'addjungleproduct?fonttype=font',
             data    : $.param($scope.form),
             headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
@@ -11928,6 +11948,7 @@ $http({
         priority: data.priority,
         price: data.price,
         payout: data.payout,
+        status: 0,
         credits: data.credits,
 
     }
@@ -12060,7 +12081,7 @@ $scope.editproductsubmit=function() {
         method  :   'POST',
         async   :   false,
 
-        url :       $scope.adminUrl+'jungleproductupdates',
+        url :       $scope.adminUrl+'jungleproductupdates?fonttype=font',
         data    : $.param($scope.form),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
