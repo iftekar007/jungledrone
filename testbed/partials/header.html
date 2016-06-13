@@ -76,7 +76,7 @@
 
    <div class="container new_menu_block">
 
-     <div class="new_menu_list">
+     <div class="new_menu_list headcart">
 
 
 
@@ -92,7 +92,7 @@
 
        <a ng-if="userrole != 7 " href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">   Cart ({{carttotal}})  </a>
 
-       <a ng-if="userrole == 7 " href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">   Cart ({{filecartarr.length}})  </a>
+       <a ng-if="userrole == 7 " href="javascript:void(0);" class="dropdown-toggle sublink" data-toggle="dropdown" class="sublink">   Cart ({{cartarray.quantity})  </a>
 
 
 
@@ -107,6 +107,8 @@
        
 
          <div class="dropdown-menu">
+         
+         
 
          <h4>Shopping Bag</h4>
 
@@ -126,7 +128,7 @@
 
          
 
-         <div ng-repeat="cartitem in cartarray" ng-if="cartitem.qty>0" class="shoppingrow">
+         <div ng-repeat="cartitem in cartarray2" ng-if="cartarray2.length>0" class="shoppingrow">
 
             <div class="shopbox_pro"><img ui-sref="product-details({id:cartitem.id})" alt="#" src="{{cartitem.cartimage}}"></div>
 
@@ -134,7 +136,7 @@
 
             <div class="shopbox_price"><span>{{cartitem.qty}}</span> x <strong>${{cartitem.price}}</strong></div>
 
-            <div class="shopbox_close"><img alt="#" src="images/shopclose.png"></div>
+            <div class="shopbox_close"><a ng-click="headelcart(cartitem)"><img alt="#" src="images/shopclose.png"></a></div>
 
           <div class="clearfix"></div>
 
@@ -176,9 +178,9 @@
 
                  <div class="shoptotal1">Total</div>
 
-                 <div class="shoptotal2">{{carttotal}} items</div>
+                 <div class="shoptotal2">{{cartarray.quantity}} items</div>
 
-                 <div class="shoptotal3">${{carttotalprice}}</div>
+                 <div class="shoptotal3">${{cartarray.subtotal}}</div>
 
            
 

@@ -116,8 +116,37 @@
 
                                     <!-- <span class="errormsg">erroe msg</span>-->
                                 </div>
+                                <h6> <input type="checkbox"  class="css-checkbox" name="is_plan" ng-model="form.is_plan" value="1"/>
+                                    <label class="css-label">This product is a planned? </label>
+
+                                </h6>
+                                <div class="form-group" ng-show="form.is_plan">
+                                    <label >Plan Interval</label>
+                                    <select class="form-control"  name="plan_interval"
+                                            ng-model="form.plan_interval"
+                                            ng-required="form.is_plan"
+                                            required-message="'Plan Interval can not be blank.'"
+                                            required>
+                                        <option value="">Select Plan Interval</option>
+                                        <option value="1">Monthly</option>
+                                        <option value="2">Annually</option>
+                                        <option value="3">Daily</option>
+                                        <option></option>
+                                    </select>
 
 
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
+                                <div class="form-group" ng-show="form.is_plan">
+                                    <label >Plan Image Counter</label>
+                                    <input type="text" class="form-control"  placeholder="Plan Image Counter" name="plan_image_counter"
+                                           ng-model="form.plan_image_counter"
+                                           ng-required="form.is_plan"
+                                           required-message="'Plan Image Counter can not be blank.'"
+                                           required>
+
+                                    <!-- <span class="errormsg">erroe msg</span>-->
+                                </div>
                             </div>
 
 

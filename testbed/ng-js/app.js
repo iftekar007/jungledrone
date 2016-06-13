@@ -325,7 +325,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },
                 'content': {
                     templateUrl: 'partials/checkout.html' ,
-                    //controller: 'checkout'
+                    controller: 'checkout'
                 },
 
             }
@@ -623,11 +623,11 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
             views: {
 
                 'header': {
-                    templateUrl: 'partials/myaccount-header.html' ,
+                    templateUrl: 'partials/header.html' ,
                     controller: 'header'
                 },
                 'footer': {
-                    templateUrl: 'partials/myaccount-footer.html' ,
+                    templateUrl: 'partials/footer.html' ,
                     //controller: 'footer'
                 },
                /* 'left': {
@@ -636,11 +636,12 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
                 },*/
                 'content': {
                     templateUrl: 'partials/plans.html' ,
-                    //controller: 'checkout'
+                    controller: 'plans'
                 },
 
             }
         })
+
 
         .state('uploads',{
             url:"/uploads",
@@ -2343,7 +2344,13 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
                     return;
                 }
 
+                if(typeof($rootScope.goafterlogin) != 'undefined'){
+                    if($rootScope.goafterlogin != ''){
+                        $state.go($rootScope.goafterlogin);
+                        return
+                    }
 
+                }
 
 
                     $state.go('dashboard');
@@ -3150,6 +3157,33 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
         $rootScope.carttotal=parseInt(carttotal.getcontent('http://admin.jungledrones.com/carttotal?user='+$rootScope.cartuser));
 
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'cartdetail',
+            data    : $.param({'user':$rootScope.cartuser}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+            /*
+             $scope.cartarray=data;
+             $scope.carttotalprice=0;
+             */
+            $rootScope.cartarray=data;
+            $rootScope.cartarray2=data.cartarr;
+
+            /*
+             angular.forEach(data, function(value, key){
+             //console.log(value.type);
+             //if(value.type == "Stock Image") {
+             $scope.carttotalprice+=parseFloat(value.qty*value.price);
+             //}
+             });
+             */
+
+
+        });
+
        // console.log($rootScope.userid+'state change user id header ');
 
     },2000);
@@ -3223,7 +3257,6 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
         $rootScope.username=$cookieStore.get('username');
 
     }
-    console.log($cookieStore.get('userid'));
     $rootScope.userrole=$cookieStore.get('userrole');
 
   //  console.log($rootScope.userid+'--userid');
@@ -3299,9 +3332,6 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
             $rootScope.filenotdownloaded=data.notdownloaded;
             $rootScope.filedownloaded=data.downloaded;
             $rootScope.notdownloadcount=data.notdownloadcount;
-
-            console.log(data.notdownloaded);
-            console.log(data.downloaded);
         })
 
     }
@@ -3321,30 +3351,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
 
 
-    $http({
-        method:'POST',
-        async:false,
-        url:$scope.adminUrl+'cartdetail',
-        data    : $.param({'user':$scope.cartuser}),
-        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
-    }).success(function(data){
-
-
-        console.log($scope.cartarray);
-
-        $scope.cartarray=data;
-        $scope.carttotalprice=0;
-
-        angular.forEach(data, function(value, key){
-            //console.log(value.type);
-            //if(value.type == "Stock Image") {
-                $scope.carttotalprice+=parseFloat(value.qty*value.price);
-            //}
-        });
-
-
-    });
 
 
     $rootScope.updatecart=function(){
@@ -3361,7 +3368,11 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
             console.log($scope.cartarray);
 
-            $scope.cartarray=data;
+            //$scope.cartarray=data;
+
+            $rootScope.cartarray=data;
+            $rootScope.cartarray2=data.cartarr;
+
             $scope.carttotalprice=0;
 
             angular.forEach(data, function(value, key){
@@ -3373,6 +3384,36 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
 
         });
+    }
+
+    $rootScope.headelcart=function(val){
+
+        $scope.cartnew = $scope.cartarray.cartarr;
+
+        var idx = $scope.cartnew.indexOf(val);
+
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'deletecartbyid',
+            data    : $.param({'pid':val.pid,'userid':$scope.cartuser}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+
+            $rootScope.carttotal=parseInt($rootScope.carttotal-parseInt(val.qty));
+            // $scope.cartarray.quantity=$scope.cartarray.quantity-parseInt(val.qty);
+            // $scope.cartarray.subtotal=($scope.cartarray.subtotal-parseFloat(val.subtotal)).toFixed(2);
+            $scope.cartnew.splice(idx,1);
+
+        });
+
+
+
+
+
+
+
     }
 
 
@@ -4900,7 +4941,13 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
                 if(typeof (data.userdetails.roles[9]) != 'undefined')
                     $cookieStore.put('userrole',9);
 
+                if(typeof($rootScope.goafterlogin) != 'undefined'){
+                    if($rootScope.goafterlogin != ''){
+                        $state.go($rootScope.goafterlogin);
+                        return
+                    }
 
+                }
 
                 //console.log($rootScope.userrole);
                 console.log(data.userdetails.roles);
@@ -4939,6 +4986,9 @@ jungledrone.controller('login', function($scope,$state,$http,$cookieStore,$rootS
             }
 
         });
+
+
+
     }
 });
 
@@ -7647,7 +7697,7 @@ jungledrone.controller('services', function($compile,$scope,contentservice,$stat
 });
 
 
-jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal) {
 
 
     if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
@@ -7664,8 +7714,10 @@ jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootSc
     }).success(function(data){
 
 
+        $scope.cartarray1=data;
+        $scope.cartarray21=data.cartarr;
 
-    $scope.cartarray=data;
+   // $scope.cartarray=data;
 
 
     });
@@ -7712,7 +7764,7 @@ jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootSc
 
 
         });
-        console.log(val+'addval'+$('.qtyi'+val).val());
+       // console.log(val+'addval'+$('.qtyi'+val).val());
     }
     $scope.delqty=function(val) {
         if ($('.qtyi' + val).val() > 1) {
@@ -7740,29 +7792,327 @@ jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootSc
         }
     }
 
-        $scope.delcart=function(val){
+        $rootScope.delcart=function(val){
+
+
+            var idx = $scope.cartarray.indexOf(val);
 
             $http({
                 method:'POST',
                 async:false,
                 url:$scope.adminUrl+'deletecartbyid',
-                data    : $.param({'id':val,'userid':$scope.cartuser}),
+                data    : $.param({'pid':val.pid,'userid':$scope.cartuser}),
                 headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
             }).success(function(data){
 
-                $rootScope.carttotal=parseInt($rootScope.carttotal-parseInt(1));
-                $scope.cartarray[val].qty= 0;
+                $rootScope.carttotal=parseInt($rootScope.carttotal-parseInt(val.qty));
+               // $scope.cartarray.quantity=$scope.cartarray.quantity-parseInt(val.qty);
+               // $scope.cartarray.subtotal=($scope.cartarray.subtotal-parseFloat(val.subtotal)).toFixed(2);
+                $scope.cartarray.splice(idx,1);
 
 
 
             });
 
 
-        console.log(val+'addval'+$('.qtyi'+val).val());
+
+
+
+
+
+    }
+
+    $scope.chklogin = function(){
+        if($rootScope.userid == 0){
+
+            $rootScope.goafterlogin = 'checkout';
+
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'chkloginpopup',
+                controller: 'ModalInstanceCtrl',
+                size: 'lg',
+                scope:$scope
+            });
+        }else{
+            $state.go('checkout');
+            return
+        }
+    }
+
+});
+jungledrone.controller('checkout', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams) {
+
+
+    if($rootScope.userid == 0)
+        $scope.cartuser=$cookieStore.get('randomid');
+    else
+        $scope.cartuser=$rootScope.userid;
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'cartdetail',
+        data    : $.param({'user':$scope.cartuser}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).success(function(data){
+        $scope.cartarray1=data;
+        $scope.cartarray21=data.cartarr;
+    });
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'getPrevAddr',
+        data    : $.param({'user':$scope.cartuser}),
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).success(function(data){
+        $scope.addressList=data;
+    });
+
+    $scope.changeAddress = function(item){
+        $scope.stateList = [];
+
+        if(typeof(item) != 'undefined'){
+            $scope.billform = {
+                'billshipchk':true,
+                'userid':$rootScope.userid,
+                'prevaddress1':item.id,
+                'prevaddress':{
+                    'id':item.id
+                },
+                'address_title':item.address_title,
+                'bname':item.name,
+                'company':item.company,
+                'address':item.address,
+                'address2':item.address2,
+                'city':item.city,
+                'country':{
+                    id: item.country
+                },
+                'zip':item.zip,
+                'phone':item.phone,
+                'email':item.email
+            }
+
+
+            if(typeof(item.country) != 'undefined'){
+                $http({
+                    method:'POST',
+                    async:false,
+                    url:$scope.adminUrl+'getState',
+                    data    : $.param({'country_id':item.country}),
+                    headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+                }).success(function(data){
+                    $scope.stateList=data;
+
+                    var pstate = {
+                        'state':{
+                            id: item.state
+                        }
+                    }
+                    angular.extend($scope.billform, pstate);
+                });
+            }
+
+
+        }else{
+            $scope.billform = {
+                'billshipchk':true,
+                'userid':$rootScope.userid,
+                'company':'',
+                'address2':'',
+                'prevaddress1':''
+            }
+        }
+    }
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'getCountry',
+    }).success(function(data){
+        $scope.countryList=data;
+    });
+
+    $scope.stateList = [];
+
+    $scope.cardyear=[2016,2017,2018,2019,2020,2021,2022,2023,2024,20125,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040];
+
+    $scope.shipstateList = [];
+
+    $scope.changeCountry = function(country){
+        $scope.stateList = [];
+        if(typeof(country.id) != 'undefined'){
+            $http({
+                method:'POST',
+                async:false,
+                url:$scope.adminUrl+'getState',
+                data    : $.param({'country_id':country.id}),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function(data){
+                $scope.stateList=data;
+            });
+        }
+    }
+
+    $scope.changeCountry1 = function(country){
+        $scope.shipstateList = [];
+        if(typeof(country.id) != 'undefined'){
+            $http({
+                method:'POST',
+                async:false,
+                url:$scope.adminUrl+'getState',
+                data    : $.param({'country_id':country.id}),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function(data){
+                $scope.shipstateList=data;
+            });
+        }
+    }
+
+    $scope.billform = {
+        'userid':$rootScope.userid,
+        'company':'',
+        'address2':'',
+        'prevaddress1':'',
+        'billshipchk':true,
+    }
+
+    $scope.shipform = {
+        'userid':$rootScope.userid,
+        'company':'',
+        'address2':'',
+    }
+    $scope.shipform = {
+        'userid':$rootScope.userid,
+        'company':'',
+        'address2':'',
+    }
+
+    $scope.errormsg='';
+    $scope.checkoutsubmit = function(){
+
+        $scope.form = {
+            billform : $scope.billform,
+            shipform : $scope.shipform,
+            product_det : $scope.cartarray2,
+            subtotal : $scope.cartarray.subtotal,
+            total : $scope.cartarray.subtotal,
+            affiliate_id : $scope.aff_id,
+            cartform : $scope.cartform,
+        }
+
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'checkout',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            if(data.status=='success') {
+                $state.go('success');
+                return;
+            }
+            else{
+                $scope.errormsg = 'Transaction process failed!';
+                console.log($scope.errormsg);
+            }
+
+        });
+    }
+
+    $scope.termsValidator=function(){
+
+        if($scope.checkout.$submitted){
+
+            if(typeof ($("input[name='terms']:checked").val()) != 'undefined' )
+            {
+                $scope.terms_error=false;
+                //console.log('in true');
+                return true ;
+            }
+            else {
+                //console.log('in false');
+                $scope.terms_error=true;
+                return '';
+
+            }
+
+        }
+
     }
 
 
+
+
+
+});
+jungledrone.controller('plans', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$sce) {
+
+    $scope.trustAsHtml=$sce.trustAsHtml;
+    if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
+    else
+        $scope.cartuser=$rootScope.userid;
+
+    $http({
+        method:'POST',
+        async:false,
+        url:$scope.adminUrl+'jungleproductlist?producttype=plan',
+        headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    }).success(function(data){
+        $scope.productlist=data;
+    })
+
+    $rootScope.plantaddtocart=function(pid){
+
+        console.log($rootScope.userid+'userid..');
+
+        if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
+        else {
+            $scope.cartuser=$rootScope.userid;
+
+            $http({
+                method:'POST',
+                async:false,
+                url:$scope.adminUrl+'updatecartuser',
+                data    : $.param({'newuserid':$rootScope.userid,'olduserid':$cookieStore.get('randomid')}),
+                headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+            }).success(function(data){
+
+
+
+                $rootScope.updatecart();
+
+
+            });
+        }
+
+
+        $scope.pqty=1;
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'addtocart',
+            data    : $.param({'pid':pid,'qty':$scope.pqty,'userid':$scope.cartuser}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+
+            $rootScope.carttotal=parseInt($rootScope.carttotal+parseInt($scope.pqty));
+
+            $rootScope.cartarray=data;
+            $rootScope.cartarray2=data.cartarr;
+            $state.go('cart');
+
+        });
+
+
+
+    }
 
 });
 
@@ -7821,7 +8171,12 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
             $rootScope.carttotal=parseInt($rootScope.carttotal+parseInt($scope.pqty));
 
+            $rootScope.cartarray=data;
+            $rootScope.cartarray2=data.cartarr;
+            $('html, body').animate({ scrollTop: 0 }, 1000);
+            //$('.cartlisting').slideDown(200);
 
+            $('.headcart').addClass('open');
 
         });
 
@@ -7925,6 +8280,8 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     $scope.type1 = $stateParams.id;
 
+    $scope.perPage = 21;
+
     //$scope.type='Stock Image';
     $http({
         method:'POST',
@@ -7964,7 +8321,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
     $http({
         method:'POST',
         async:false,
-        url:$scope.adminUrl+'jungleproductlist',
+        url:$scope.adminUrl+'jungleproductlist?ptype=stockphoto',
         //data    : $.param({'type':$scope.type}),
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
@@ -9315,6 +9672,7 @@ jungledrone.controller('addproductjungle',function($scope,$state,$http,$cookieSt
 
 
         $scope.form.category_id=JSON.stringify($scope.form.category_id);
+        //$scope.form.is_plan=$scope.ModelData.is_plan;
 
         $http({
             method  :   'POST',
@@ -9491,6 +9849,9 @@ jungledrone.controller('editproductjungle', function($scope,$state,$http,$cookie
             payout: data.payout,
             status: data.status,
             credits: data.credits,
+            is_plan: data.is_plan,
+            plan_interval: data.plan_interval,
+            plan_image_counter: data.plan_image_counter,
 
         }
     });
