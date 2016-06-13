@@ -43,15 +43,16 @@
                   <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Signup User Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">
                   
-                  
+                           <li ng-if="userrole==4"><a ui-sref="contributor-list"><i class="fa fa-link"></i> <span>Contributor List</span></a></li>
+                      <li ng-if="userrole==4"><a ui-sref="generaluser-list"><i class="fa fa-link"></i> <span>Customers List</span></a></li>
+
                   
 -->
                      
                       <li ng-if="userrole==4"><a ui-sref="signupuser-list"><i class="fa fa-link"></i> <span>Member Signup Leads</span></a></li>
                       <li ng-if="userrole==4"><a ui-sref="employement-list"><i class="fa fa-link"></i> <span>Employment Leads</span></a></li>
+                      <li ng-if="userrole==4"><a ui-sref="contact-list"><i class="fa fa-link"></i> <span>Contact Leads</span></a></li>
                       <li ng-if="userrole==4"><a ui-sref="pilot-list"><i class="fa fa-link"></i> <span>Pilot List</span></a></li>
-                      <li ng-if="userrole==4"><a ui-sref="contributor-list"><i class="fa fa-link"></i> <span>Contributor List</span></a></li>
-                      <li ng-if="userrole==4"><a ui-sref="generaluser-list"><i class="fa fa-link"></i> <span>General User List</span></a></li>
 
                       
                    
@@ -63,7 +64,7 @@
                   <a href="javascript:void(0)"><i class="fa fa-link"></i> <span>Contact Manager</span> <i class="fa fa-angle-left pull-right"></i></a>
                   <ul class="treeview-menu">-->
 
-              <li ng-if="userrole==4"><a ui-sref="contact-list"><i class="fa fa-link"></i> <span>Contact Leads</span></a></li>
+
               <li ng-if="userrole==4"><a ui-sref="flight-list"><i class="fa fa-link"></i> <span>Flight List</span></a></li>
                   <!--</ul>
               </li>-->

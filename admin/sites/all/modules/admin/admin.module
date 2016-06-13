@@ -139,7 +139,14 @@ function admin_menu()
         'expanded' => TRUE,
         //'type'=>MENU_NORMAL_ITEM,
     );
-
+    $items['userchangepassword'] = array(
+        'title' => 'User Change PAssword',
+        'page callback' => 'userchangepassword',
+        'access callback' => TRUE,
+        'access arguments' => array('Anonymous Actions.'),
+        'expanded' => TRUE,
+        //'type'=>MENU_NORMAL_ITEM,
+    );
 
     return $items;
 }
@@ -676,7 +683,29 @@ function changepassword1(){
 
 
 }
+function userchangepassword()
+{
+    require_once 'includes/password.inc';
+    //$pass = user_hash_password(@$_POST['original_password']);
 
+    $user_fields = user_load(@intval($_POST['user_id']));
+    $x= user_authenticate($user_fields->name,@$_POST['original_password']);
+    //print_r($x);
+   // print_r($user_fields);
+    if($x>0 && $user_fields->status==1) {
+        //$x = user_authenticate($user_fields->name, $pass);
+        // print_r($user_fields);
+        $newpass = user_hash_password(@$_POST['password']);
+        $user_fields->pass=$newpass;
+        user_save($user_fields);
+        $data['status'] = 'success';
+    }
+    else{
+        $data['status'] = 'error';
+    }
+    //$data['userdetails'] = $userarr;
+    echo json_encode($data);
+}
 
 function admin_mail ($key, &$message, $params) {
     header('Content-type: text/html');

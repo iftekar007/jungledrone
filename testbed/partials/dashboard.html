@@ -10,7 +10,7 @@
             <small>Control Panel</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a ui-sref="index"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a target="_blank" ui-sref="index"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
           </ol>
         </section>
@@ -31,7 +31,7 @@
             <div class="icon">
               <img src="images/aicon1.png" alt="#" style="display:block; margin:18px auto; width:48px;">
             </div>
-            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="javascript:void(0);" ui-sref="index" target="_blank" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -49,7 +49,59 @@
             <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
+              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+                  <!-- small box -->
+                  <div class="small-box bg-gray" ui-sref="generaluser-list">
+                      <div class="inner">
+                          <h3>Customers List</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="images/naicon7.png" alt="#" style="display:block; margin:14px auto; width:50px;">
+                      </div>
+                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+                  <!-- small box -->
+                  <div class="small-box bg-gray" ui-sref="contributor-list">
+                      <div class="inner">
+                          <h3>Contributor List</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="images/aicon3.png" alt="#" style="display:block; margin:14px auto; width:50px;">
+                      </div>
+                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+
+                  <div class="col-lg-3 col-xs-6" ng-if="userrole==4">
+                      <!-- small box -->
+                      <div  class="small-box bg-gray" ui-sref=" auditorlist">
+                          <div class="inner">
+                              <h3>Auditor Manager</h3>
+                          </div>
+                          <div class="icon">
+                              <img src="images/naicon14.png" alt="#" style="display:block; margin:24px auto; width:48px;">
+                          </div>
+                          <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                      </div>
+                  </div>
+
+                  <!-- small box -->
+              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
+                  <div class="small-box bg-gray" ui-sref="pilot-list">
+                      <div class="inner">
+                          <h3>Pilot List</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="images/naicon7.png" alt="#" style="display:block; margin:14px auto; width:50px;">
+                      </div>
+                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                  </div>
+              </div>
+
+
+              <!-- ./col -->
         <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-gray" ui-sref="signupuser-list">
@@ -103,22 +155,10 @@
           </div>
         </div>
         <!-- ./col -->
-        <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-gray" ui-sref="pilot-list">
-            <div class="inner">
-              <h3>Pilot List</h3>
-            </div>
-            <div class="icon">
-              <img src="images/naicon7.png" alt="#" style="display:block; margin:14px auto; width:50px;">
-            </div>
-            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-6" ng-if="userrole==4 ||userrole==6" >
           <!-- small box -->
-          <div class="small-box bg-gray" ui-sref="flight-list">
+          <div class="small-box bg-gray" ui-sref="flight-list" >
             <div class="inner">
               <h3>Flight  Manager</h3>
             </div>
@@ -170,7 +210,7 @@
         
         
         
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-6" ng-if="userrole==4">
           <!-- small box -->
           <div class="small-box bg-gray" ui-sref="documentcategorylist">
             <div class="inner">
@@ -183,7 +223,7 @@
           </div>
         </div>
         
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-6" ng-if="userrole==4">
           <!-- small box -->
           <div class="small-box bg-gray" ui-sref="documentlist({id:0})">
             <div class="inner">
@@ -196,43 +236,7 @@
           </div>
         </div>
         
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-gray" ui-sref="auditorlist">
-            <div class="inner">
-              <h3>Auditor Manager</h3>
-            </div>
-            <div class="icon">
-              <img src="images/naicon14.png" alt="#" style="display:block; margin:24px auto; width:48px;">
-            </div>
-            <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
 
-              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
-                  <!-- small box -->
-                  <div class="small-box bg-gray" ui-sref="general-list">
-                      <div class="inner">
-                          <h3>General User List</h3>
-                      </div>
-                      <div class="icon">
-                          <img src="images/naicon7.png" alt="#" style="display:block; margin:14px auto; width:50px;">
-                      </div>
-                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-              </div>
-              <div ng-if="userrole==4" class="col-lg-3 col-xs-6">
-                  <!-- small box -->
-                  <div class="small-box bg-gray" ui-sref="contributor-list">
-                      <div class="inner">
-                          <h3>Contributor List</h3>
-                      </div>
-                      <div class="icon">
-                          <img src="images/aicon3.png" alt="#" style="display:block; margin:14px auto; width:50px;">
-                      </div>
-                      <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                  </div>
-              </div>
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-gray" ui-sref="logout">

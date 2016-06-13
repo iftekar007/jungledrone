@@ -3568,7 +3568,7 @@ top:30%;
 	position:absolute;
 	right:-7px;
 	top:76px;
-	z-index:9999;
+	z-index:1 ;
 	width:100%;
 }
 .new_menu_block .new_menu_list {

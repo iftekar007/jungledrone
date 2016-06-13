@@ -421,6 +421,32 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
 
             }
         })
+        .state('user-change-password',{
+                url:"/user-change-password",
+                views: {
+
+                    'admin_header': {
+                        templateUrl: 'partials/myaccount-header.html' ,
+                        controller: 'header'
+                    },
+                    'admin_footer': {
+                        templateUrl: 'partials/myaccount-footer.html' ,
+                        //controller:'footer'
+                    },
+                    'admin_left': {
+                        templateUrl: 'partials/myaccount-left.html' ,
+                        //  controller:'footer'
+                    },
+
+                    'content': {
+                        templateUrl: 'partials/user_change_password.html' ,
+                        controller: 'userchangepassword'
+                    },
+
+                }
+            }
+        )
+
         .state('mydownloads',{
             url:"/mydownloads/:id",
             views: {
@@ -2142,9 +2168,29 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
 
         $uibModalInstance.dismiss('cancel');
     };
+    $scope.cancel111 = function () {
 
+        $uibModalInstance.dismiss('cancel');
+        $state.go('index');
+    };
+    $scope.cancel123 = function () {
 
+        $uibModalInstance.dismiss('cancel');
+        $state.go('index');
+       // $state.go('home');
+    };
 
+    $rootScope.newuser=function(type){
+        $uibModalInstance.dismiss('cancel');
+        $rootScope.usertype=type;
+        $uibModal.open({
+            animation: true,
+            templateUrl: 'fontsignupmodal.html',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg',
+            scope: $rootScope
+        });
+    }
     $scope.jungleconfirmcategorydelete=function(){
         $uibModalInstance.dismiss('cancel');
         $rootScope.stateIsLoading = true;
@@ -2339,6 +2385,10 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
                     return;
                 }
 
+                if (typeof (data.userdetails.roles[8]) != 'undefined' ){
+                    $state.go('myprofile');
+                    return;
+                }
                 if (typeof (data.userdetails.roles[9]) != 'undefined' ){
                     $state.go('myaccount-product-list', {id: 0});
                     return;
@@ -2385,9 +2435,11 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
             }) .success(function(data) {
                 //$rootScope.stateIsLoading = false;
                 if(data.status == 'error'){
-                    console.log(data);
+                    //console.log(data);
                     $('.email_div').append('<label class="control-label has-error validationMessage">This email already exists.</label>');
                 }else{
+                   // $('#loginid').hide();
+                    $uibModalInstance.dismiss('cancel');
                     //console.log(1);
                     $uibModal.open({
                         animation: true,
@@ -2397,9 +2449,9 @@ jungledrone.controller('ModalInstanceCtrl', function($scope,$state,$cookieStore,
                         scope: $rootScope
                     });
 
-                    $timeout(function(){
+                   /* $timeout(function(){
                         $scope.cancel();
-                    },4000)
+                    },4000)*/
                  //   $state.go('auditorlist');
                    // return;
                 }
@@ -3010,13 +3062,13 @@ jungledrone.controller('virtualreality', function($scope,$state,$http,$cookieSto
              }*/
 
 
-            console.log(($rootScope.contentdata[x].content));
+           // console.log(($rootScope.contentdata[x].content));
             $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
             if($rootScope.contentdata[x].parentid!=0){
 
                 var z=parseInt($rootScope.contentdata[x].parentid);
-                console.log(z);
-                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+              //  console.log(z);
+               // console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
 
                 $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
 
@@ -3086,13 +3138,13 @@ jungledrone.controller('packagedelivery', function($compile,$scope,contentservic
             }*/
 
 
-            console.log(($rootScope.contentdata[x].content));
+           // console.log(($rootScope.contentdata[x].content));
             $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
             if($rootScope.contentdata[x].parentid!=0){
 
                 var z=parseInt($rootScope.contentdata[x].parentid);
-                console.log(z);
-                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+                //console.log(z);
+               // console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
 
                 $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
 
@@ -3265,6 +3317,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
         $cookieStore.remove('username');
         $cookieStore.remove('useremail');
         $cookieStore.remove('userfullname');
+        $cookieStore.remove('userrole');
 
         $rootScope.userrole=0;
         $rootScope.userfullname=0;
@@ -3275,6 +3328,8 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
 
      //   console.log('in logout');
         $rootScope.userid=0;
+
+        $('.editableicon').css('display','none');
         $state.go('index');
     }
 
@@ -3335,7 +3390,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
         })
 
     }
-    $rootScope.newuser=function(type){
+    /*$rootScope.newuser=function(type){
         $rootScope.usertype=type;
         $uibModal.open({
             animation: true,
@@ -3344,7 +3399,7 @@ jungledrone.controller('header', function($compile,$scope,contentservice,$state,
             size: 'lg',
             scope: $rootScope
         });
-    }
+    }*/
 
 
 
@@ -3623,13 +3678,13 @@ jungledrone.controller('employment', function($scope,$state,$http,$cookieStore,$
              }*/
 
 
-            console.log(($rootScope.contentdata[x].content));
+           // console.log(($rootScope.contentdata[x].content));
             $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].id]=$rootScope.contentdata[x];
             if($rootScope.contentdata[x].parentid!=0){
 
                 var z=parseInt($rootScope.contentdata[x].parentid);
-                console.log(z);
-                console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
+              //  console.log(z);
+              //  console.log($rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid);
 
                 $scope[$rootScope.contentdata[x].cname+$rootScope.contentdata[x].parentid]=$rootScope.contentdata[x];
 
@@ -11478,23 +11533,100 @@ jungledrone.controller('myprofile',function($scope,$state,$http,$cookieStore,$ro
         $scope.userid = $cookieStore.get('userid');
     }
 
+    $http({
+        method: 'POST',
+        async: false,
+        url: $scope.adminUrl + 'admindetails',
+        data: $.param({'uid': $scope.userid}),  // pass in data as strings
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(function (data) {
+        $scope.userdetails = data;
 
+    });
 
 
 })
 
-jungledrone.controller('editprofile',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams){
+jungledrone.controller('editprofile',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams) {
 
     $scope.userid = 0;
 
-    if(typeof($cookieStore.get('userid')) != 'undefined'){
+    if (typeof($cookieStore.get('userid')) != 'undefined') {
         $scope.userid = $cookieStore.get('userid');
     }
 
+    $http({
+        method: 'POST',
+        async: false,
+        url: $scope.adminUrl + 'admindetails',
+        data: $.param({'uid': $scope.userid}),  // pass in data as strings
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(function (data) {
+        $scope.userdetails = data;
+        $scope.form = {
+            uid: data.uid,
+            fname: data.fname,
+            lname: data.lname,
+            bname: data.bname,
+            email: data.email,
+            address: data.address,
+            phone_no: data.phone_no,
+            mobile_no: data.mobile_no,
+            country: data.country,
+            state: data.state,
+            gender: data.gender,
+            dob: data.dobedit,
+
+        }
 
 
+    })
+    $scope.updateinfo = function () {
 
+        $rootScope.stateIsLoading = true;
+        $http({
+            method: 'POST',
+            async: false,
+            url: $scope.adminUrl + 'adminupdates',
+            data: $.param($scope.form),  // pass in data as strings
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data) {
+            $rootScope.stateIsLoading = false;
+            $state.go('myprofile');
+            return
+        });
+    }
 })
+
+jungledrone.controller('userchangepassword', function($scope,$state,$http,$cookieStore,$rootScope) {
+    if (typeof ($cookieStore.get('userid')) != 'undefined') {
+
+        $scope.userid = $cookieStore.get('userid');
+    }
+    $scope.errormsg='';
+    $scope.form={user_id:$scope.userid}
+    $scope.changepasswordsubmit = function(){
+        $rootScope.stateIsLoading = true;
+        $http({
+            method  : 'POST',
+            async:   false,
+            url     : $scope.adminUrl+'userchangepassword',
+            data    : $.param($scope.form),  // pass in data as strings
+            headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }) .success(function(data) {
+            $rootScope.stateIsLoading = false;
+            console.log(data);
+            if(data.status == 'success'){
+                $state.go('myprofile');
+
+
+            }else{
+                $scope.errormsg = 'Old password does not exists';
+            }
+
+        });
+    }
+});
 
 jungledrone.controller('mydownloads',function($scope,$state,$http,$cookieStore,$rootScope,Upload,$sce,$uibModal,$stateParams,$filter){
 
