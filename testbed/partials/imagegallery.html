@@ -512,10 +512,10 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock1right">
                         <a class="btn btn-default btngo" href="#" role="button">Go</a>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="photo" value="photo"> Photo
+                            <input type="checkbox" id="photo" value="image" ng-click="manageftype()" ng-model="is_image"> Photo
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="videos" value="videos"> Videos
+                            <input type="checkbox" id="videos" value="video" ng-click="manageftype()" ng-model="is_video"> Videos
                         </label>
                         
                          <div class="clear"></div>
@@ -724,6 +724,9 @@
                    <div class="singlegallery_hover"> <a href="javascript:void(0)"> <img src="../images/infohover1.jpg"></a> <a href="javascript:void(0)"> <img src="../images/infohover2.jpg"></a> <a href="javascript:void(0)"> <img src="../images/infohover3.jpg"></a></div>
                    
                 <img src="{{adminUrl}}imagestamp1/{{itemphoto.id}}/{{($index%16)+1}}">
+
+                <img ng-if="itemphoto.is_video==1" src="../images/videoplayicon.png" class="videoplayicon" style="width: 40px; height: 40px; min-height: 40px; ">
+
             </div>
             
             

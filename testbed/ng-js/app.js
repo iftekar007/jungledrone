@@ -1778,7 +1778,7 @@ jungledrone.config(function($stateProvider, $urlRouterProvider,$locationProvider
 
 
         .state('stock-photo',{
-            url:"/stock-photo/:id",
+            url:"/stock-photo/:type/:id",
             views: {
 
                 'header': {
@@ -8334,8 +8334,56 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
 
     $scope.type1 = $stateParams.id;
+    $scope.ftype = $stateParams.type;
+    if($scope.ftype=='image') $scope.is_image=true;
+    if($scope.ftype=='video') $scope.is_video=true;
 
     $scope.perPage = 21;
+
+    $rootScope.manageftype=function(){
+
+
+        if($scope.is_video==true){
+            $scope.ftype=='video'
+            $scope.is_image=='';
+        }
+        if($scope.is_image==true){
+            $scope.ftype=='image'
+            $scope.is_video='';
+        }
+
+        $http({
+            method:'POST',
+            async:false,
+            url:$scope.adminUrl+'jungleproductlist?ptype=stockphoto',
+            //data    : $.param({'type':$scope.type}),
+            headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+        }).success(function(data){
+            $scope.productlist=[];
+            angular.forEach(data, function(value, key){
+                //console.log((value));
+                if(value.cat_name==$scope.catname || $scope.selectedcatid ==0 ) {
+                    if($scope.ftype=='image' && $scope.is_image==true && value.is_video==0){
+                        $scope.productlist.push(value);
+                        //$scope.is_video==false;
+                        //$scope.ftype='image'
+                        console.log('img');
+                    }
+                    if($scope.ftype=='video' && $scope.is_video==true && value.is_video==1){
+                        $scope.productlist.push(value);
+                        //$scope.ftype='video'
+                        //$scope.is_image=false;
+                        console.log('video');
+                    }
+                    //$scope.selectedcatid=value.id;
+                }
+            });
+
+            console.log($scope.productlist);
+        });
+
+    }
 
     //$scope.type='Stock Image';
     $http({
@@ -8364,11 +8412,9 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             //console.log(value.type);
             if(value.id == $scope.type1) {
                 $scope.catname=(value.cat_name);
+                $scope.selectedcatid=(value.id);
             }
         });
-        console.log($scope.catname);
-	console.log($scope.type);
-
     });
 
 
@@ -8381,7 +8427,31 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
-        $scope.productlist=data;
+        $scope.productlist=[];
+
+
+
+
+        angular.forEach(data, function(value, key){
+            //console.log((value));
+            if(value.cat_name==$scope.catname || $scope.selectedcatid ==0 ) {
+
+
+                if($scope.ftype=='image' && $scope.is_image==true && value.is_video==0){
+                    $scope.productlist.push(value);
+                    $scope.is_video==false;
+                    $scope.ftype='image'
+
+                }
+                if($scope.ftype=='video' && $scope.is_video==true && value.is_video==1){
+                    $scope.productlist.push(value);
+                    $scope.ftype='video'
+                    $scope.is_image=false;
+
+                }
+                //$scope.selectedcatid=value.id;
+            }
+        });
     });
 
    $scope.searchkey='';
