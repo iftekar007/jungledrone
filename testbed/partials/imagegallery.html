@@ -506,16 +506,19 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock1left">
                         <img src="../images/gallerysearchicon.png">
-                        <input type="text" placeholder="Search"  class="search"/>
+                        <input type="text" placeholder="Search" ng-model="searchkey" class="search"/>
                          <div class="clear"></div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock1right">
                         <a class="btn btn-default btngo" href="#" role="button">Go</a>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="photo" value="image" ng-click="manageftype()" ng-model="is_image"> Photo
+                            <input type="checkbox" id="photo"  ng-click="manageftype('image')" ng-model="is_image"> Photo
                         </label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" id="videos" value="video" ng-click="manageftype()" ng-model="is_video"> Videos
+                            <input type="checkbox" id="videos"  ng-click="manageftype('video')" ng-model="is_video"> Videos
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="all"  ng-click="manageftype('all')" ng-model="allstock"> Reset
                         </label>
                         
                          <div class="clear"></div>
@@ -527,7 +530,7 @@
             <div class="searchgalleryblock2">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchgalleryblock2left">
-                        <label>14,562 results</label>
+                        <label>{{productlist.length}} results</label>
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
                                 Sort by Relevance <span style="padding-left:10px;">&or;</span>
@@ -631,7 +634,8 @@
               </div>
               
               
-               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left"> <h2>Paris cityscape with Eiffel tower</h2>
+               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left">
+               <h2>Paris cityscape with Eiffel tower</h2>
                
                <div class="galleryinfomainimg">
                <img src="../images/gallery_newvar_img1.jpg">
@@ -721,13 +725,140 @@
 
             <div ng-repeat="itemphoto  in filterResult = (productlist | filter:searchkey) | startFrom:(currentPage-1)*perPage | limitTo:perPage " class="singlegallery one{{($index%16)+1}}">
             
-                   <div class="singlegallery_hover"> <a href="javascript:void(0)"> <img src="../images/infohover1.jpg"></a> <a href="javascript:void(0)"> <img src="../images/infohover2.jpg"></a> <a href="javascript:void(0)"> <img src="../images/infohover3.jpg"></a></div>
+                   <div class="singlegallery_hover"> <a href="javascript:void(0)"> <img src="../images/infohover1.png"></a> <a href="javascript:void(0)"> <img src="../images/infohover2.png"></a> <a href="javascript:void(0)"> <img imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pname="{{itemphoto.product_name}}" ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" ng-click="showmodal($event,itemphoto)" src="../images/infohover3.png"></a></div>
                    
                 <img src="{{adminUrl}}imagestamp1/{{itemphoto.id}}/{{($index%16)+1}}">
 
                 <img ng-if="itemphoto.is_video==1" src="../images/videoplayicon.png" class="videoplayicon" style="width: 40px; height: 40px; min-height: 40px; ">
 
+
             </div>
+
+
+
+
+
+            <div id="modalstock" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <!--    <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                            </div>-->
+                        <div class="modal-body">
+
+                            <div class="container-fluid gallerysub_info">
+                                <div class="container">
+
+                                    <div class="galleryinfoacon_btn">
+                                        <a href="javascript:void(0)"> <img src="../images/infocon_left.jpg"></a>
+                                        <a href="javascript:void(0)"> <img src="../images/infocon_right.jpg"></a>
+                                        <a href="javascript:void(0)"> <img ng-click="closemodal()" src="../images/infocon_close.jpg"></a>
+
+
+                                        <div class="clear"></div>
+
+
+                                    </div>
+
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left">
+                                        <h2>Paris cityscape with Eiffel tower</h2>
+
+                                        <div class="galleryinfomainimg">
+                                            <img src="../images/loadingpopupimg.gif">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_right">
+
+                                       <!-- <a href="javascript:void(0)" class="info1_btn1">Buy</a><br />-->
+
+                                        <!--<a href="javascript:void(0)" class="info1_btn2">Find Similar</a><br />-->
+
+                                        <a href="javascript:void(0)" class="info1_btn3">Download</a>
+
+
+                                        <div class="imagefullinfo">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">DIMENSIONS<br />
+                                                <strong stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">
+                                                {{imgsize.width}} x {{imgsize.width}} <sub>px</sub> </strong>
+
+
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">   FILE TYPE<br /> <strong class="ftypep">JPEG  </strong>
+
+
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+
+
+
+                                        <!--<span class="info2_span1">File #:  73567000</span><br />
+
+                                        <span class="info2_span2">Author:  ...................</span><br />-->
+
+                                        <span class="info2_span3">Category:  Travel > European Cities > Paris</span>
+
+
+
+                                    </div>
+
+
+                                    <div class="clear"></div>
+
+
+                                    <div class="galleryinfo_blog2">
+                                        <a href="javascript:void(0)">More From This Series </a>    <strong>|</strong>     <a href="javascript:void(0)"> <span>Similar Images</span></a>
+                                        <div class="clear"></div>
+
+                                    </div>
+
+                                    <div class="galleryinfo_blog3">
+
+                                        <img ng-repeat="itemphoto  in filterResult | limitTo:5" src="{{adminUrl}}imagestamp/{{itemphoto.id}}">
+                                        <!--<img src="../images/gallery_newvar_sub2.jpg">
+                                        <img src="../images/gallery_newvar_sub3.jpg">
+                                        <img src="../images/gallery_newvar_sub4.jpg">
+                                        <img src="../images/gallery_newvar_sub5.jpg">-->
+                                        <a href="javascript:void(0)" class="infoimgseemore">   <img src="../images/gallery_newvar_seemore.jpg"> </a>
+                                    </div>
+
+                                    <div class="galleryinfo_blog4">
+                                        <h2>KEYWORDS</h2>
+                                        <a href="javascript:void(0)">eiffel tower </a>
+                                        <a href="javascript:void(0)">france </a>
+                                        <a href="javascript:void(0)">europa</a>
+                                        <a href="javascript:void(0)"> city</a>
+                                        <a href="javascript:void(0)">architecture </a>
+                                        <a href="javascript:void(0)">landmark </a>
+                                        <a href="javascript:void(0)">skyline </a>
+
+                                        <div class="clear"></div>
+
+                                    </div>
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
             
             
             <!--<div class="singlegallery two1">

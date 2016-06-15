@@ -8326,32 +8326,46 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
 });
 jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal) {
-    // $state.go('login');
-   //  $scope.categorylist=[];
 
     $scope.categoryid={};
     $scope.categoryid.id=$stateParams.id;
-
-
     $scope.type1 = $stateParams.id;
     $scope.ftype = $stateParams.type;
     if($scope.ftype=='image') $scope.is_image=true;
     if($scope.ftype=='video') $scope.is_video=true;
-
     $scope.perPage = 21;
 
-    $rootScope.manageftype=function(){
+
+    $http({
+        method  : 'POST',
+        async:   false,
+        url     : $scope.adminUrl+'imagesizelist?filter=1',
+        // data    : $.param($scope.form),  // pass in data as strings
+        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }) .success(function(data) {
+        $scope.imagesizelist=data;
+        $rootScope.stateIsLoading = false;
 
 
-        if($scope.is_video==true){
-            $scope.ftype=='video'
-            $scope.is_image=='';
+    });
+
+
+    $rootScope.manageftype=function(val){
+        console.log($scope.is_video);
+        console.log($scope.is_image);
+
+        if(val=='video'){
+            $scope.ftype='video'
+            $scope.is_image=false;
+            $scope.allstock=false;
         }
-        if($scope.is_image==true){
-            $scope.ftype=='image'
-            $scope.is_video='';
+        if(val=='image'){
+            $scope.ftype='image'
+            $scope.is_video=false;
+            $scope.allstock=false;
         }
-
+        console.log($scope.is_video);
+        console.log($scope.is_image);
         $http({
             method:'POST',
             async:false,
@@ -8361,26 +8375,28 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
         }).success(function(data){
             $scope.productlist=[];
-            angular.forEach(data, function(value, key){
-                //console.log((value));
-                if(value.cat_name==$scope.catname || $scope.selectedcatid ==0 ) {
-                    if($scope.ftype=='image' && $scope.is_image==true && value.is_video==0){
-                        $scope.productlist.push(value);
-                        //$scope.is_video==false;
-                        //$scope.ftype='image'
-                        console.log('img');
+            if(val=='all'){
+                $scope.is_video=false;
+                $scope.is_image=false;
+                $scope.productlist=data;
+                console.log(333);
+            }
+            else {
+                angular.forEach(data, function (value, key) {
+                    //console.log((value));
+                    if (value.cat_name.toString().indexOf($scope.catname) > -1 || $scope.selectedcatid == 0) {
+                        if ($scope.ftype == 'image' && $scope.is_image == true && value.is_video == 0) {
+                            $scope.productlist.push(value);
+                            console.log('img');
+                        }
+                        if ($scope.ftype == 'video' && $scope.is_video == true && value.is_video == 1) {
+                            $scope.productlist.push(value);
+                            console.log('video');
+                        }
                     }
-                    if($scope.ftype=='video' && $scope.is_video==true && value.is_video==1){
-                        $scope.productlist.push(value);
-                        //$scope.ftype='video'
-                        //$scope.is_image=false;
-                        console.log('video');
-                    }
-                    //$scope.selectedcatid=value.id;
-                }
-            });
+                });
+            }
 
-            console.log($scope.productlist);
         });
 
     }
@@ -8394,20 +8410,10 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         headers :   { 'Content-Type': 'application/x-www-form-urlencoded' }
 
     }).success(function(data){
-
-
-        $scope.categorylist=data;
-
+       $scope.categorylist=data;
         $scope.categorylist.splice(0, 0, { id: 0, cat_name: 'All' });
-
-
         console.log('type 1');
-	//console.log(data);
         console.log($scope.type1);
-
-        //$scope.categorylist[0].category_id='All';
-      //  console.log($scope.categorylist);
-
         angular.forEach(data, function(value, key){
             //console.log(value.type);
             if(value.id == $scope.type1) {
@@ -8416,10 +8422,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             }
         });
     });
-
-
-
-    $http({
+   $http({
         method:'POST',
         async:false,
         url:$scope.adminUrl+'jungleproductlist?ptype=stockphoto',
@@ -8428,28 +8431,18 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     }).success(function(data){
         $scope.productlist=[];
-
-
-
-
         angular.forEach(data, function(value, key){
-            //console.log((value));
-            if(value.cat_name==$scope.catname || $scope.selectedcatid ==0 ) {
-
-
+            if((value.cat_name).toString().indexOf($scope.catname) > -1 || $scope.selectedcatid ==0 ) {
                 if($scope.ftype=='image' && $scope.is_image==true && value.is_video==0){
                     $scope.productlist.push(value);
-                    $scope.is_video==false;
-                    $scope.ftype='image'
-
+                    console.log('img');
                 }
                 if($scope.ftype=='video' && $scope.is_video==true && value.is_video==1){
                     $scope.productlist.push(value);
-                    $scope.ftype='video'
-                    $scope.is_image=false;
-
+                    console.log('video');
                 }
-                //$scope.selectedcatid=value.id;
+
+             console.log($scope.productlist);
             }
         });
     });
@@ -8464,6 +8457,11 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
     };
 
 
+    $rootScope.closemodal=function(){
+
+        $('#modalstock').modal('hide');
+
+    }
 
 
     $rootScope.showmodal=function($ev,item){
@@ -8472,6 +8470,8 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
         if(item.is_video == 0){
 
+
+
             var target = $ev.target || $ev.srcElement || $ev.originalTarget;
 
             console.log($(target).html());
@@ -8479,11 +8479,28 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             console.log($(target).attr('imgsrc'));
             $('#gallerymodal').find('h2').find('img').attr('src','');
             $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+            $('#modalstock').modal('show');
+            $('#modalstock').find('.gallerysub_info_left').find('h2').eq(0).text($(target).attr('pname'));
+            $('#modalstock').find('.galleryinfomainimg').find('img').eq(0).attr('src','../images/loadingpopupimg.gif');
+            $('#modalstock').find('.galleryinfomainimg').find('img').eq(0).attr('src',$(target).attr('imgsrc'));
+            $('#modalstock').find('.ftypep').text($(target).attr('ftype'));
+            $('strong[stype="2"]').hide();
+            $('strong[stype="1"]').show();
 
-            $('#gallerymodal').modal('show');
 
+            var cids=$(target).attr('catids');
+            cids=JSON.parse(cids);
+            var fulllistcats='';
+            angular.forEach(cids, function (value, key) {
+                //console.log((value));
+                if(fulllistcats.length>0)fulllistcats+=" , "+value.cat_name;
+                else fulllistcats="Category: "+value.cat_name;
 
-        }else{
+            });
+
+            $('#modalstock').find('.info2_span3').text(fulllistcats);
+
+    }else{
             $uibModal.open({
                 animation: true,
                 template: '<div style="position: relative;"><a href="javascript:void(0);" style="position: absolute; top: -17px; right: -19px; " ng-click="cancel()"><img src="images/galleryclose.png" alt="#"></a><video id="maintvVideo" volume="0" width="100%" height="100%" autoplay muted controls>\

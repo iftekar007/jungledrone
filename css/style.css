@@ -1298,7 +1298,7 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 .contactlink{  background: #f30100;
     border: 1px solid #d50e0d;
     border-radius: 5px;
-    color: #fff;
+    color: #fff!important;
     display: block;
     font-family: "OpenSans-Semibold" !important;
     font-size: 22px;
@@ -1376,4 +1376,5 @@ event_body_container_block_odd .event_body_bottom{ width:100%;}
 	pointer-events: none;
 	color: grey;
 }
+
 
