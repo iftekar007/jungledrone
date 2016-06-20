@@ -7,7 +7,7 @@
 
 /* App Module */
 
-var jungledrone = angular.module('jungledrone', ['ui.router','ngCookies','ui.bootstrap','angularValidator','ngFileUpload','ui.tinymce']);
+var jungledrone = angular.module('jungledrone', ['ui.router','ngCookies','ui.bootstrap','angularValidator','ngFileUpload','ui.tinymce','angularLazyImg']);
 
 
 
@@ -8325,7 +8325,7 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
 
 });
-jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal) {
+jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal,$compile) {
 
     $scope.categoryid={};
     $scope.categoryid.id=$stateParams.id;
@@ -8463,6 +8463,14 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     }
 
+    $scope.lazyimg='http://admin.jungledrones.com/imagestamp/96';
+
+
+    $rootScope.togglepopover=function(){
+
+        $('.popupdownload_tooltip').toggleClass('hideclass');
+
+    }
 
     $rootScope.showmodal=function($ev,item){
 
@@ -8481,11 +8489,22 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
             $('#modalstock').modal('show');
             $('#modalstock').find('.gallerysub_info_left').find('h2').eq(0).text($(target).attr('pname'));
+            //$('#modalstock').find('.galleryinfomainimg').find('img').eq(0).attr('src','../images/loadingpopupimg.gif');
             $('#modalstock').find('.galleryinfomainimg').find('img').eq(0).attr('src','../images/loadingpopupimg.gif');
-            $('#modalstock').find('.galleryinfomainimg').find('img').eq(0).attr('src',$(target).attr('imgsrc'));
+            $scope.lazyimg=$(target).attr('imgsrc');
+            $rootScope.$emit('lazyImg:refresh');
+            $rootScope.$emit('lazyImg:refresh');
+            $rootScope.$emit('lazyImg:runCheck');
+            console.log($scope.lazyimg+'---lazyimg');
+            //$compile($('#modalstock').find('.galleryinfomainimg'));
+            $('#modalstock').find('.descinfo').html($(target).attr('pdesc'));
             $('#modalstock').find('.ftypep').text($(target).attr('ftype'));
+            $('#modalstock').find('.creditsinfo').text($(target).attr('credits'));
             $('strong[stype="2"]').hide();
             $('strong[stype="1"]').show();
+            $('li[stype="2"]').hide();
+            $('li[stype="1"]').show();
+            $scope.fileid=$(target).attr('pid');
 
 
             var cids=$(target).attr('catids');
@@ -8501,7 +8520,7 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             $('#modalstock').find('.info2_span3').text(fulllistcats);
 
     }else{
-            $uibModal.open({
+           /* $uibModal.open({
                 animation: true,
                 template: '<div style="position: relative;"><a href="javascript:void(0);" style="position: absolute; top: -17px; right: -19px; " ng-click="cancel()"><img src="images/galleryclose.png" alt="#"></a><video id="maintvVideo" volume="0" width="100%" height="100%" autoplay muted controls>\
             <source src="' + item.video_url + '" type="video/mp4">\
@@ -8515,7 +8534,53 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
             setTimeout(function(){
                 $rootScope.playVideoTeaserFrom();
-            },500);
+            },500);*/
+
+
+
+
+
+            var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+
+            console.log($(target).html());
+            console.log($(target).attr('class'));
+            console.log($(target).attr('imgsrc'));
+            $('#gallerymodal').find('h2').find('img').attr('src','');
+            $('#gallerymodal').find('h2').find('img').attr('src',$(target).attr('imgsrc'));
+            $('#modalstockvideo').modal('show');
+            $('#modalstockvideo').find('.gallerysub_info_left').find('h2').eq(0).text($(target).attr('pname'));
+            //$('#modalstock').find('.galleryinfomainimg').find('img').eq(0).attr('src','../images/loadingpopupimg.gif');
+            //$('#modalstockvideo').find('.galleryinfomainimg').find('img').eq(0).attr('src','../images/loadingpopupimg.gif');
+            var srcval='http://admin.jungledrones.com/sites/default/files/'+$(target).attr('product_file');
+            //$scope.lazyimg="<source type='video/mp4' src= '"+srcval+"' </source>";
+            $('#maintvVideo').find('source').attr('src',srcval);
+            $compile($('.galleryinfomainimg'))($scope);
+            $rootScope.$emit('lazyImg:refresh');
+            $rootScope.$emit('lazyImg:refresh');
+            $rootScope.$emit('lazyImg:runCheck');
+            //console.log($scope.lazyimg+'---lazyimg');
+            //$compile($('#modalstock').find('.galleryinfomainimg'));
+            $('#modalstockvideo').find('.descinfo').html($(target).attr('pdesc'));
+            $('#modalstockvideo').find('.ftypep').text($(target).attr('ftype'));
+            $('#modalstockvideo').find('.creditsinfo').text($(target).attr('credits'));
+            $('strong[stype="2"]').hide();
+            $('strong[stype="1"]').show();
+            $('li[stype="1"]').hide();
+            $('li[stype="2"]').show();
+            $scope.fileid=$(target).attr('pid');
+
+
+            var cids=$(target).attr('catids');
+            cids=JSON.parse(cids);
+            var fulllistcats='';
+            angular.forEach(cids, function (value, key) {
+                //console.log((value));
+                if(fulllistcats.length>0)fulllistcats+=" , "+value.cat_name;
+                else fulllistcats="Category: "+value.cat_name;
+
+            });
+
+            $('#modalstockvideo').find('.info2_span3').text(fulllistcats);
 
 
         }
