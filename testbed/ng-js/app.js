@@ -7755,6 +7755,23 @@ jungledrone.controller('services', function($compile,$scope,contentservice,$stat
 jungledrone.controller('cart', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal) {
 
 
+    $rootScope.applycoupon=function(){
+
+        console.log($scope.couponcode+'---');
+        if($scope.couponcode.toString()=='123456'){
+
+            $scope.validcoupon=true;
+            $scope.invalidcoupon=false;
+            $('.couponval').text('10.00');
+        }
+        else {
+            $scope.validcoupon=false;
+            $scope.invalidcoupon=true;
+            $('.couponval').text('0.00');
+
+        }
+
+    }
     if($rootScope.userid == 0)  $scope.cartuser=$cookieStore.get('randomid');
     else
         $scope.cartuser=$rootScope.userid;
@@ -8325,7 +8342,7 @@ jungledrone.controller('productdetails', function($scope,$state,$http,$cookieSto
 
 
 });
-jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal,$compile) {
+jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$rootScope,$stateParams,$uibModal,$compile,$timeout) {
 
     $scope.categoryid={};
     $scope.categoryid.id=$stateParams.id;
@@ -8456,10 +8473,35 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
         return false;
     };
 
+    $rootScope.gotonext=function(){
+
+        //console.log($rootScope.targetval);
+        //$('#modalstock').modal('hide');
+        //$('#modalstockvideo').modal('hide');
+        console.log($($rootScope.targetval).parent().parent().parent().next().html());
+        //$($rootScope.targetval).parent().parent().find('a').eq(2).find('img').click();
+        $timeout(function() {
+            angular.element($rootScope.targetval).parent().parent().parent().next().find('a').eq(2).find('img').triggerHandler('click');
+        }, 100);
+
+    }
+    $rootScope.gotoprev=function(){
+
+        //console.log($rootScope.targetval);
+        //$('#modalstock').modal('hide');
+        //$('#modalstockvideo').modal('hide');
+        console.log($($rootScope.targetval).parent().parent().parent().prev().html());
+        //$($rootScope.targetval).parent().parent().find('a').eq(2).find('img').click();
+        $timeout(function() {
+            angular.element($rootScope.targetval).parent().parent().parent().prev().find('a').eq(2).find('img').triggerHandler('click');
+        }, 100);
+
+    }
 
     $rootScope.closemodal=function(){
 
         $('#modalstock').modal('hide');
+        $('#modalstockvideo').modal('hide');
 
     }
 
@@ -8472,15 +8514,35 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
 
     }
 
+    $rootScope.hoverOut=function(){
+
+        $('.popupdownload_tooltip').addClass('hideclass');
+
+    }
+    $rootScope.togglepopover1=function($ev){
+        console.log('-------popover1----');
+        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+        $('.popupdownload_tooltip').addClass('hideclass');
+
+        $(target).parent().parent().parent().next().toggleClass('hideclass');
+
+    }
+
     $rootScope.showmodal=function($ev,item){
 
         console.log(item);
+        var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+        $rootScope.targetval=target;
+        console.log($rootScope.targetval);
+        console.log('=======');
+        console.log(target);
 
         if(item.is_video == 0){
 
 
 
-            var target = $ev.target || $ev.srcElement || $ev.originalTarget;
+
+
 
             console.log($(target).html());
             console.log($(target).attr('class'));
@@ -8553,7 +8615,24 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             //$('#modalstockvideo').find('.galleryinfomainimg').find('img').eq(0).attr('src','../images/loadingpopupimg.gif');
             var srcval='http://admin.jungledrones.com/sites/default/files/'+$(target).attr('product_file');
             //$scope.lazyimg="<source type='video/mp4' src= '"+srcval+"' </source>";
+            console.log('src val='+srcval);
+            $('#maintvVideo').find('source').attr('src','');
             $('#maintvVideo').find('source').attr('src',srcval);
+
+            var player = document.getElementById('maintvVideo');
+
+            var mp4Vid = document.getElementById('vsource');
+
+            player.pause();
+
+            // Now simply set the 'src' property of the mp4Vid variable!!!!
+
+            mp4Vid.src = srcval;
+
+            player.load();
+            player.play();
+
+            //$('#maintvVideo').play();;
             $compile($('.galleryinfomainimg'))($scope);
             $rootScope.$emit('lazyImg:refresh');
             $rootScope.$emit('lazyImg:refresh');
@@ -8565,8 +8644,8 @@ jungledrone.controller('stockphoto', function($scope,$state,$http,$cookieStore,$
             $('#modalstockvideo').find('.creditsinfo').text($(target).attr('credits'));
             $('strong[stype="2"]').hide();
             $('strong[stype="1"]').show();
-            $('li[stype="1"]').hide();
-            $('li[stype="2"]').show();
+            $('li[stype="2"]').hide();
+            $('li[stype="1"]').show();
             $scope.fileid=$(target).attr('pid');
 
 

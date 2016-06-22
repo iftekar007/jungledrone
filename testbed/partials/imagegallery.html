@@ -1329,10 +1329,6 @@
 
                    
 
-                   
-
-                   
-
                      <span class="info2_span1">File #:  73567000</span><br />
 
 
@@ -1344,10 +1340,6 @@
                      <span class="info2_span3">Category:  Travel > European Cities > Paris</span>
 
                    
-
-                
-
-                
 
                 </div>
 
@@ -1419,19 +1411,6 @@
 
                </div>
 
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
 
              </div>
 
@@ -1446,33 +1425,31 @@
 
 
             <div ng-repeat="itemphoto  in filterResult = (productlist | filter:searchkey) | startFrom:(currentPage-1)*perPage | limitTo:perPage " class="singlegallery one{{($index%16)+1}}">
+                <div class="singlegallerywrapper">
+                   <div class="singlegallery_hover">
+                       <a href="javascript:void(0)">
+                       <img src="../images/infohover1.png"></a>
+                       <a href="javascript:void(0)">
+                           <img src="../images/infohover2.png" ng-click="togglepopover1($event)" ng-mouseleave="hoverOut()">
+                       </a>
+                       <a href="javascript:void(0)"><img imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}"  ng-click="showmodal($event,itemphoto)" product_file="{{itemphoto.product_file}}"src="../images/infohover3.png"></a></div>
+                </div>
+                <div class="popupdownload_tooltip popupdownload_tooltip_downloads hideclass">
+                    <h2>DIMENSIONS</h2>
+                    <ul>
+                        <li ng-if="(itemphoto.is_video==0 && imgsize.type==1) || (itemphoto.is_video==1 && imgsize.type==2)" stype="{{imgsize.type}}" ng-repeat="imgsize  in imagesizelist ">
+                            <strong>{{imgsize.width}} x {{imgsize.height}} </strong>
+                            <span> <a target="_blank" href="http://admin.jungledrones.com/filedownload/id/{{itemphoto.id}}/{{imgsize.style_id}}">
+                            <img src="../images/download_popimg.png" class="download_popimg"></a></span>
+                            <div style="clear:both;"></div>
+                        </li>
+                    </ul>
+                </div>
+               <img lazy-img="{{adminUrl}}imagestamp1/{{itemphoto.id}}/{{($index%16)+1}}" src="../images/loadingpopupimg.gif" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
 
-            
+                <img ng-if="itemphoto.is_video==1" src="../images/videoplayicon.png" class="videoplayicon" style="width: 40px; height: 40px; min-height: 40px; " imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
 
-                   <div class="singlegallery_hover"> <a href="javascript:void(0)"> <img src="../images/infohover1.png"></a> <a href="javascript:void(0)"> <img src="../images/infohover2.png"></a> <a href="javascript:void(0)"> <img imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}"  ng-click="showmodal($event,itemphoto)" product_file="{{itemphoto.product_file}}"src="../images/infohover3.png"></a></div>
-
-                   
-
-                <img lazy-img="{{adminUrl}}imagestamp1/{{itemphoto.id}}/{{($index%16)+1}}" src="../images/loadingpopupimg.gif">
-
-
-
-                <img ng-if="itemphoto.is_video==1" src="../images/videoplayicon.png" class="videoplayicon" style="width: 40px; height: 40px; min-height: 40px; ">
-
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
+           </div>
 
 
             <div id="modalstock" class="modal fade" role="dialog">
@@ -1505,14 +1482,11 @@
 
                                     <div class="galleryinfoacon_btn">
 
-                                        <a href="javascript:void(0)"> <img src="../images/infocon_left.jpg"></a>
+                                        <a href="javascript:void(0)"> <img ng-click="gotoprev()" src="../images/infocon_left.jpg"></a>
 
-                                        <a href="javascript:void(0)"> <img src="../images/infocon_right.jpg"></a>
+                                        <a href="javascript:void(0)"> <img ng-click="gotonext()" src="../images/infocon_right.jpg"></a>
 
                                         <a href="javascript:void(0)"> <img ng-click="closemodal()" src="../images/infocon_close.jpg"></a>
-
-
-
 
 
                                         <div class="clear"></div>
@@ -1674,16 +1648,6 @@
 
                                         <div class="thumbdivpopup" ng-repeat="itemphoto  in filterResult | limitTo:5"><img  lazy-img="{{adminUrl}}imagestamp/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)" src="../images/loadingpopupimg.gif"></div>
 
-
-
-                                        <!--<img src="../images/gallery_newvar_sub2.jpg">
-
-                                        <img src="../images/gallery_newvar_sub3.jpg">
-
-                                        <img src="../images/gallery_newvar_sub4.jpg">
-
-                                        <img src="../images/gallery_newvar_sub5.jpg">-->
-
                                         <a href="javascript:void(0)" class="infoimgseemore">    <img src="../images/gallery_newvar_seemore.jpg" lazy-img="../images/gallery_newvar_seemore.jpg"> </a>
 
                                     </div>
@@ -1710,27 +1674,10 @@
 
                                         <a href="javascript:void(0)">skyline </a>
 
-
-
                                         <div class="clear"></div>
 
 
-
                                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                 </div>
 
@@ -1738,9 +1685,7 @@
 
                         </div>
 
-
-
-                    </div>
+                   </div>
 
                 </div>
 
@@ -1749,9 +1694,7 @@
 
                 <div class="modal-dialog">
 
-
-
-                    <!-- Modal content-->
+                  <!-- Modal content-->
 
                     <div class="modal-content">
 
@@ -1759,25 +1702,19 @@
 
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-
-
                             </div>-->
 
                         <div class="modal-body">
 
-
-
-                            <div class="container-fluid gallerysub_info">
+                           <div class="container-fluid gallerysub_info">
 
                                 <div class="container">
 
+                                   <div class="galleryinfoacon_btn">
 
+                                        <a href="javascript:void(0)"> <img ng-click="gotoprev()" src="../images/infocon_left.jpg"></a>
 
-                                    <div class="galleryinfoacon_btn">
-
-                                        <a href="javascript:void(0)"> <img src="../images/infocon_left.jpg"></a>
-
-                                        <a href="javascript:void(0)"> <img src="../images/infocon_right.jpg"></a>
+                                        <a href="javascript:void(0)"> <img ng-click="gotonext()" src="../images/infocon_right.jpg"></a>
 
                                         <a href="javascript:void(0)"> <img ng-click="closemodal()" src="../images/infocon_close.jpg"></a>
 
@@ -1786,16 +1723,17 @@
 
 
                                     </div>
-
-
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left">
+                                   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallerysub_info_left">
 
                                         <h2>Paris cityscape with Eiffel tower</h2>
                                         <div class="galleryinfomainimg">
 
                                             <!--<img src="../images/loadingpopupimg.gif" lazy-img="{{lazyimg}}">-->
 
-                                            <video height="100%" width="100%" controls="" muted="" autoplay="" volume="0" id="maintvVideo">                                                          <source type="video/mp4" src= "http://admin.jungledrones.com/sites/default/files/1223396559_1461843353.mp4" </source>                                                      </video>
+                                            <video height="100%" width="100%" controls="true" muted="true" autoplay="true" volume="0" id="maintvVideo">
+                                                <source id="vsource" src="http://admin.jungledrones.com/sites/default/files/1223396559_1461843353.mp4" type="video/mp4">
+                                            </video>
+
 
                                         </div>
                                     </div>
@@ -1905,9 +1843,9 @@
 
 
 
-                                    <div class="galleryinfo_blog2">
+                                  <div class="galleryinfo_blog2">
 
-                                        <a href="javascript:void(0)">More From This Series </a>    <strong>|</strong>     <a href="javascript:void(0)"> <span>Similar Images</span></a>
+                                        <a href="javascript:void(0)">More From This Series </a>    <!--<strong>|</strong>     <a href="javascript:void(0)"> <span>Similar Images</span></a>-->
 
                                         <div class="clear"></div>
 
@@ -1921,7 +1859,16 @@
 
 
 
-                                        <div class="thumbdivpopup" ng-repeat="itemphoto  in filterResult | limitTo:5"><img  lazy-img="{{adminUrl}}imagestamp/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}"  ng-click="showmodal($event,itemphoto)" src="../images/loadingpopupimg.gif"></div>
+                                        <div class="thumbdivpopup" ng-repeat="itemphoto  in filterResult | limitTo:5"><img  lazy-img="{{adminUrl}}imagestamp/{{itemphoto.id}}" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}"  ng-click="showmodal($event,itemphoto)" src="../images/loadingpopupimg.gif">
+
+                                            <div style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;">
+
+                                                <img style="width: 40px; height: 40px; min-height: 40px; display: block; margin: 33px auto!important; " src="../images/videoplayicon.png" imgsrc="{{adminUrl}}imagestamp/{{itemphoto.id}}" pdesc="{{itemphoto.product_desc}}" pname="{{itemphoto.product_name}}"  ftype="{{itemphoto.type}}" catids="{{itemphoto.category_id}}" pid="{{itemphoto.id}}" credits="{{itemphoto.credits}}" product_file="{{itemphoto.product_file}}" ng-click="showmodal($event,itemphoto)">
+
+
+
+                                            </div>
+                                        </div>
 
 
 

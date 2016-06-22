@@ -7291,11 +7291,14 @@ color:#333;
 .singlegallery {
 	display: inline-block;
 	float: left;
-	overflow: hidden;
 	border:solid 1px #ccc;
 	margin:12px;
 	position:relative;
 }
+.singlegallerywrapper {
+	overflow: hidden;
+}
+
 .singlegallery_hover {
 	position:absolute;
 	left:0;
@@ -7735,10 +7738,10 @@ color:#333;
 }
 .imagefullinfo {
 	width:300px;
-	margin:30px 0 12px 0;
+	margin:10px 0 0px 0;
 }
 .imagefullinfo div {
-	padding: 0 0 18px 0;
+	padding: 0 0 10px 0;
 	font-size:14px;
 	color:#1e1e1e;
 	font-family:'OpenSans-Semibold';
@@ -7746,8 +7749,8 @@ color:#333;
 }
 .imagefullinfo div strong {
 	display:block;
-	padding-top:18px;
-	font-size:18px;
+	padding-top:8px;
+	font-size:16px;
 }
 .imagefullinfo div strong sub {
 	font-weight:normal;
@@ -7795,7 +7798,7 @@ color:#333;
 	.gallerysub_info_right .descinfo p{ display:inline; margin:0; padding:0;}
 	
 .galleryinfo_blog2 {
-	padding:30px 0;
+	padding:0px 0 16px 0;
 	font-size:14px;
 	color:#1e1e1e;
 	font-family:'OpenSans-Semibold';
@@ -7815,6 +7818,8 @@ color:#333;
 	clear:both;
 }
 
+.galleryinfo_blog3 .thumbdivpopup { position: relative;}
+
 
 .galleryinfo_blog3 .thumbdivpopup:nth-child(1){ width:102px; height:106px; float:left; overflow:hidden; margin-right:15px;}
 
@@ -7833,6 +7838,9 @@ color:#333;
 .popupdownload_tooltip_wrapper{ position:relative;}
 
 .popupdownload_tooltip{ width:auto; position:absolute; top:45px; left:0; border-radius:6px; border:solid 1px #bab6b6; background:#fff; z-index:9; }
+.popupdownload_tooltip_downloads{top:35px !important; left:20% !important;position:absolute; }
+
+.singlegallery-hoverflow{overflow: hidden;}
 
 .popupdownload_tooltip .popupdownload_tooltiparrow{ position:absolute; top:-12px; left:80px;}
 
